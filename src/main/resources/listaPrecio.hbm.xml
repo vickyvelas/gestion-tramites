@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="entidades.ListaPrecio" table="listaPrecio">
+
+        <id name="OID" type="string">
+            <column name="OIDListaPrecio"/>
+            <generator class="uuid2"/>
+        </id>
+
+        <property name="codListaPrecio" type="int">
+            <column name="codListaPrecio"/>
+        </property>
+
+        <property name="fechaHoraDesdeListaPrecio" column="fechaHoraDesdeListaPrecio" type="timestamp" not-null="true"/>
+    
+        <property name="fechaHoraHastaListaPrecio" column="fechaHoraHastaListaPrecio" type="timestamp" not-null="true"/>
+
+        <property name="fechaHoraBajaListaPrecio" column="fechaHoraBajaListaPrecio" type="timestamp"/>
+        
+        <bag name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
+            <key column="OIDListaPrecio" not-null="true"/>
+            <one-to-many class="entidades.DetallePrecioTipoTramite"/>
+        </bag>        
+        
+    </class>
+    
+</hibernate-mapping>
