@@ -61,6 +61,10 @@ public class Version extends Entidad {
         return transicionEstadoList;
     }
 
+    public void setTransicionEstadoList(List<TransicionEstado> transicionEstadoList) {
+        this.transicionEstadoList = transicionEstadoList;
+    }
+
     public void addTransicionEstadoList(TransicionEstado transicionEstado) {
         transicionEstadoList.add(transicionEstado);
     }
