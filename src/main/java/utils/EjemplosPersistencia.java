@@ -21,42 +21,5 @@ public class EjemplosPersistencia {
      *
      * Cualquier cosa, consultar a: minellinh@gmail.com
      */
-    public void Metodo() {
-        // Reemplazar la siguiente linea con el metodo que se desea probar.
-        crearElementos();
-    }
-
-    /**
-     * Crea un estado, un articulo con dicho estado, una reposicion con dicho estado y un detalle para esa reposicion.
-     */
-    public void crearElementos() {
-        FachadaPersistencia.getInstance().iniciarTransaccion();
-
-        Agenda primera = new Agenda();
-        primera.setAnio(2024);
-        primera.setSemana(34);
-        primera.setFechaDesdeAgenda(new Timestamp(System.currentTimeMillis()));
-        primera.setFechaHastaAgenda(new Timestamp(System.currentTimeMillis()));
-
-        FachadaPersistencia.getInstance().guardar(primera);
-
-        Consultor consultor = new Consultor();
-        consultor.setLegajoConsultor(44902);
-        consultor.setNombreApellidoConsultor("Emilio Amin");
-        consultor.setConsultorNroMaxTramite(10);
-        consultor.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
-
-        FachadaPersistencia.getInstance().guardar(consultor);
-
-        Consultor consultor2 = new Consultor();
-        consultor2.setLegajoConsultor(44903);
-        consultor2.setNombreApellidoConsultor("Marcos");
-        consultor2.setConsultorNroMaxTramite(13);
-        consultor2.setFechaHoraBajaConsultor(null);
-
-        FachadaPersistencia.getInstance().guardar(consultor2);
-        
-        FachadaPersistencia.getInstance().finalizarTransaccion();
-        
-    }
+    
 }
