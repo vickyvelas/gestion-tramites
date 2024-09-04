@@ -3,19 +3,4 @@
 
 <hibernate-mapping>
 
-    <class name="entidades.DetallePrecioTipoTramite" table="detallePrecioTipoTramite">
-
-        <id name="OID" type="string">
-            <column name="OIDDetallePrecioTipoTramite"/>
-            <generator class="uuid2"/>
-        </id>
-
-        <property name="precioTipoTramite" type="float">
-            <column name="precioTipoTramite"/>
-        </property>
-
-        <many-to-one name="tipoTramite" class="entidades.TipoTramite" column="OIDTipoTramite" not-null="true"/>
-
-    </class>
-    
 </hibernate-mapping>
