@@ -39,23 +39,7 @@ public class EjemplosPersistencia {
         primera.setFechaHastaAgenda(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(primera);
-/**
-        Consultor consultor = new Consultor();
-        consultor.setLegajoConsultor(44902);
-        consultor.setNombreApellidoConsultor("Emilio Amin");
-        consultor.setConsultorNroMaxTramite(10);
-        consultor.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
-
-        FachadaPersistencia.getInstance().guardar(consultor);
-
-        Consultor consultor2 = new Consultor();
-        consultor2.setLegajoConsultor(44903);
-        consultor2.setNombreApellidoConsultor("Marcos");
-        consultor2.setConsultorNroMaxTramite(13);
-        consultor2.setFechaHoraBajaConsultor(null);
-
-        FachadaPersistencia.getInstance().guardar(consultor2);
-     */   
+   
         FachadaPersistencia.getInstance().finalizarTransaccion();
         
     }
