@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="entidades.detallePrecioTipoTramite" table="detallePrecioTipoTramite">
+    <class name="entidades.DetallePrecioTipoTramite" table="detallePrecioTipoTramite">
         <id name="OID" type="string">
             <column name="OIDDetallePrecioTipoTramite"/>
             <generator class="uuid2"/>

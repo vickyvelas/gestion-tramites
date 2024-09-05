@@ -24,6 +24,11 @@
              <column name="fechaHoraBajaListaPrecio"/>
         </property>
         
+        <bag name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
+             <key column="OIDListaPrecio" not-null="true"/>
+             <one-to-many class="entidades.DetallePrecioTipoTramite"/>
+        </bag>
+
          
     </class>
     
