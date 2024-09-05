@@ -4,11 +4,13 @@ import java.sql.Timestamp;
 
 
 public class TramiteEstado extends Entidad{    
-     private Timestamp fechaHoraBajaTramiteEstado;
+    private Timestamp fechaHoraBajaTramiteEstado;
     private Timestamp fechaHoraDesdeTramiteEstado;
     private Timestamp fechaHoraHastaTramiteEstado;
     private int nroLineaTramiteEstado;
     private String observacionTramiteEstado;
+    private String estadoTramite;
+    
     // Constructor
     public TramiteEstado() {
     }
@@ -53,6 +55,13 @@ public class TramiteEstado extends Entidad{
         this.observacionTramiteEstado = observacionTramiteEstado;
     }
     
-    
+    public String getEstadoTramite() {
+        return estadoTramite;
+    }
+
+    // Setter
+    public void setEstadoTramite(String estadoTramite) {
+        this.estadoTramite = estadoTramite;
+    }
     
 }

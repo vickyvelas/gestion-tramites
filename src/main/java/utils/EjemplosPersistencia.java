@@ -31,7 +31,7 @@ public class EjemplosPersistencia {
      */
     public void crearElementos() {
         FachadaPersistencia.getInstance().iniciarTransaccion();
-
+/**
         Agenda primera = new Agenda();
         primera.setAnio(2024);
         primera.setSemana(34);
@@ -39,7 +39,7 @@ public class EjemplosPersistencia {
         primera.setFechaHastaAgenda(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(primera);
-/**
+
         Consultor consultor = new Consultor();
         consultor.setLegajoConsultor(44902);
         consultor.setNombreApellidoConsultor("Emilio Amin");
@@ -55,8 +55,45 @@ public class EjemplosPersistencia {
         consultor2.setFechaHoraBajaConsultor(null);
 
         FachadaPersistencia.getInstance().guardar(consultor2);
-     */   
-        FachadaPersistencia.getInstance().finalizarTransaccion();
+     
+*/
+/**
+        ListaPrecio lista1 = new ListaPrecio();
+        lista1.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
+        lista1.setFechaHoraHastaListaPrecio(new Timestamp(System.currentTimeMillis()));
+        lista1.setFechaHoraBajaListaPrecio(null);
+        
+        DetallePrecioTipoTramite detalleLista1 = new DetallePrecioTipoTramite();
+        detalleLista1.setPrecioTipoTramite(1500);
+        
+        
+        
+        Cliente cliente1=new Cliente();
+        cliente1.setCuitCliente(44567890);
+        cliente1.setDireccionCliente("Alvear 35 B");
+        cliente1.setFechaHoraAltaCliente(new Timestamp(System.currentTimeMillis()));
+        cliente1.setMailCliente("carolinaMartin@gmail.com");
+        cliente1.setFechaHoraBajaCliente(null);
+        cliente1.setNombreApellidoCliente("Carolina Martin");
+        cliente1.setTelefonoCliente(261568884);
+        
+        
+        TramiteEstado tramEstado=new TramiteEstado();
+        tramEstado.setFechaHoraBajaTramiteEstado(null);
+        tramEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        tramEstado.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        tramEstado.setNroLineaTramiteEstado(1);
+        tramEstado.setObservacionTramiteEstado("Este es el primer estado");
+        
+        
+        EstadoTramite estado = new EstadoTramite();
+        estado.setCodEstadoTramite(1);
+        estado.setFechaHoraBajaEstadoTramite(null);
+        estado.setNombreEstadoTramite("Iniciado");
+        */  
+
+        
+        
         
     }
 }

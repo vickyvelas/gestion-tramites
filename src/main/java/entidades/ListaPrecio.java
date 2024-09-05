@@ -2,12 +2,14 @@
 package entidades;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ListaPrecio extends Entidad{
         private int codListaPrecio;
         private Timestamp fechaHoraBajaListaPrecio;
         private Timestamp fechaHoraDesdeListaPrecio;
         private Timestamp fechaHoraHastaListaPrecio;
+        private List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList;
     // Constructor
     public ListaPrecio(){}
 
@@ -43,5 +45,14 @@ public class ListaPrecio extends Entidad{
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
     
+    
+    public List<DetallePrecioTipoTramite> getDetallePrecioTipoTramiteList() {
+        return detallePrecioTipoTramiteList;
+    }
+
+    
+    public void setDetallePrecioTipoTramiteList(List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList) {
+        this.detallePrecioTipoTramiteList = detallePrecioTipoTramiteList;
+    }
     
 }
