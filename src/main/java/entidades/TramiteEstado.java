@@ -63,8 +63,4 @@ public class TramiteEstado extends Entidad{
         this.estadoTramite = estadoTramite;
     }
     
-    
-
-   
-    
 }

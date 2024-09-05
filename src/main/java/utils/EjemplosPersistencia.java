@@ -55,8 +55,8 @@ public class EjemplosPersistencia {
         consultor2.setFechaHoraBajaConsultor(null);
 
         FachadaPersistencia.getInstance().guardar(consultor2);
-   
-//*/
+   */
+//
 //        CategoriaTramite cat1 = new CategoriaTramite();
 //        cat1.setCodCategoriaTramite(1);
 //        cat1.setFechaHoraBajaCategoriaTramite(null);
@@ -107,10 +107,6 @@ public class EjemplosPersistencia {
         tramEstado.setObservacionTramiteEstado("Este es el primer estado");
         FachadaPersistencia.getInstance().guardar(tramEstado);
         
-        
-        
-        
-        
-        
+     
     }
 }
