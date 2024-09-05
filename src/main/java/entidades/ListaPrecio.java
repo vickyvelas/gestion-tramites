@@ -54,5 +54,8 @@ public class ListaPrecio extends Entidad{
     public void setDetallePrecioTipoTramiteList(List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList) {
         this.detallePrecioTipoTramiteList = detallePrecioTipoTramiteList;
     }
-    
+
+      public void addDetallePrecioTipoTramiteList(DetallePrecioTipoTramite detallePrecioTipoTramite) {
+        detallePrecioTipoTramiteList.add(detallePrecioTipoTramite);
+    }    
 }

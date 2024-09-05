@@ -16,10 +16,10 @@
         
         <many-to-one name="estadoActual" class="entidades.EstadoTramite" column="OIDEstadoTramite" not-null="true"/>
         
-        <set name="estadosDestino" table="Estados_Destino" cascade="all">
+        <bag name="estadosDestino" table="Estados_Destino" cascade="all">
             <key column="OIDTransicionEstado"/>
             <many-to-many column="OIDEstadoTramite" class="entidades.EstadoTramite"/>
-        </set>
+        </bag>
         
     </class>
     

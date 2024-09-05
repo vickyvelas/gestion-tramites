@@ -34,10 +34,10 @@
         
         <many-to-one name="categoriaTramite" class="entidades.CategoriaTramite" column="OIDCategoriaTramite" not-null="true"/>
         
-        <set name="documentaciones" table="TipoTramite_Documentacion" cascade="all">
+        <bag name="documentaciones" table="TipoTramite_Documentacion" cascade="all">
             <key column="OIDTipoTramite"/>
             <many-to-many column="OIDDocumentacion" class="entidades.Documentacion"/>
-        </set>
+        </bag>
         
     </class>
     

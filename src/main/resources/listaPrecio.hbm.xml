@@ -24,10 +24,10 @@
              <column name="fechaHoraBajaListaPrecio"/>
         </property>
         
-        <set name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
+        <bag name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
              <key column="OIDListaPrecio"/>
              <one-to-many class="entidades.DetallePrecioTipoTramite"/>
-        </set>
+        </bag>
 
          
     </class>
