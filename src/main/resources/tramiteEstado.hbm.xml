@@ -29,5 +29,7 @@
          <column name="observacionTramiteEstado"/>
         </property>
         
+        <many-to-one name="estadoTramite" class="entidades.EstadoTramite" column="OIDEstadoTramite" not-null="true"/>
+        
     </class>
 </hibernate-mapping>
