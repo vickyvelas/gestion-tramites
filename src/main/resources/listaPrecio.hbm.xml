@@ -29,7 +29,7 @@
              <one-to-many class="entidades.DetallePrecioTipoTramite"/>
         </set>
 
-        <one-to-many name="detallePrecioTipoTramite" class="entidades.DetallePrecioTipoTramite" column="OIDDetallePrecioTipoTramite" />
+        <one-to-many name="detallePrecioTipoTramite" class="entidades.DetallePrecioTipoTramite" column="OIDDetallePrecioTipoTramite" not-null="true"/>
          
     </class>
     
