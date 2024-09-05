@@ -1,6 +1,7 @@
 package entidades;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ListaPrecio extends Entidad {
 
@@ -8,6 +9,7 @@ public class ListaPrecio extends Entidad {
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
     private Timestamp fechaHoraBajaListaPrecio;
+    private List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList;
 
     public ListaPrecio() {
     }
@@ -32,8 +34,8 @@ public class ListaPrecio extends Entidad {
         return fechaHoraHastaListaPrecio;
     }
     
-    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraBajaListaPrecio){
-        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
+    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio){
+        this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
     
     public Timestamp getFechaHoraBajaListaPrecio() {
@@ -43,4 +45,14 @@ public class ListaPrecio extends Entidad {
     public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
         this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
     }
+    
+    public List<DetallePrecioTipoTramite> getDetallePrecioTipoTramiteList() {
+        return detallePrecioTipoTramiteList;
+    }
+
+    
+    public void setDetallePrecioTipoTramiteList(List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList) {
+        this.detallePrecioTipoTramiteList = detallePrecioTipoTramiteList;
+    }
+    
 }
