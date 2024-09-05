@@ -9,7 +9,7 @@ public class TramiteEstado extends Entidad{
     private Timestamp fechaHoraHastaTramiteEstado;
     private int nroLineaTramiteEstado;
     private String observacionTramiteEstado;
-    private String estadoTramite;
+    private EstadoTramite estadoTramite;
     
     // Constructor
     public TramiteEstado() {
@@ -54,14 +54,17 @@ public class TramiteEstado extends Entidad{
     public void setObservacionTramiteEstado(String observacionTramiteEstado) {
         this.observacionTramiteEstado = observacionTramiteEstado;
     }
-    
-    public String getEstadoTramite() {
+
+    public EstadoTramite getEstadoTramite() {
         return estadoTramite;
     }
 
-    // Setter
-    public void setEstadoTramite(String estadoTramite) {
+    public void setEstadoTramite(EstadoTramite estadoTramite) {
         this.estadoTramite = estadoTramite;
     }
+    
+    
+
+   
     
 }

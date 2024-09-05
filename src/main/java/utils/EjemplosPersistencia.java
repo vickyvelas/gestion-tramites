@@ -31,7 +31,7 @@ public class EjemplosPersistencia {
      */
     public void crearElementos() {
         FachadaPersistencia.getInstance().iniciarTransaccion();
-/**
+  /**
         Agenda primera = new Agenda();
         primera.setAnio(2024);
         primera.setSemana(34);
@@ -55,18 +55,32 @@ public class EjemplosPersistencia {
         consultor2.setFechaHoraBajaConsultor(null);
 
         FachadaPersistencia.getInstance().guardar(consultor2);
-     
-*/
-/**
-        ListaPrecio lista1 = new ListaPrecio();
-        lista1.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
-        lista1.setFechaHoraHastaListaPrecio(new Timestamp(System.currentTimeMillis()));
-        lista1.setFechaHoraBajaListaPrecio(null);
-        
-        DetallePrecioTipoTramite detalleLista1 = new DetallePrecioTipoTramite();
-        detalleLista1.setPrecioTipoTramite(1500);
-        
-        
+   
+//*/
+//        CategoriaTramite cat1 = new CategoriaTramite();
+//        cat1.setCodCategoriaTramite(1);
+//        cat1.setFechaHoraBajaCategoriaTramite(null);
+//        cat1.setNombreCategoriaTramite("Registro civil");
+//        FachadaPersistencia.getInstance().guardar(cat1);
+//        
+//        
+//        TipoTramite tt1 = new TipoTramite();
+//        tt1.setCodTipoTramite(1);
+//        tt1.setDescripcionTipoTramite("El tramite requiere firma del escribano");
+//        tt1.setNombreTipoTramite("Escritura");
+//        tt1.setDocumentaciones(null);
+//        FachadaPersistencia.getInstance().guardar(tt1);
+//        
+//        ListaPrecio lista1 = new ListaPrecio();
+//        lista1.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
+//        lista1.setFechaHoraHastaListaPrecio(new Timestamp(System.currentTimeMillis()));
+//        lista1.setFechaHoraBajaListaPrecio(null);
+//        FachadaPersistencia.getInstance().guardar(lista1);
+//        
+//        DetallePrecioTipoTramite detalleLista1 = new DetallePrecioTipoTramite();
+//        detalleLista1.setPrecioTipoTramite(1500);
+//        detalleLista1.setTipoTramite(tt1);
+//        FachadaPersistencia.getInstance().guardar(detalleLista1);
         
         Cliente cliente1=new Cliente();
         cliente1.setCuitCliente(44567890);
@@ -76,22 +90,25 @@ public class EjemplosPersistencia {
         cliente1.setFechaHoraBajaCliente(null);
         cliente1.setNombreApellidoCliente("Carolina Martin");
         cliente1.setTelefonoCliente(261568884);
+        FachadaPersistencia.getInstance().guardar(cliente1);
         
+        EstadoTramite estado = new EstadoTramite();
+        estado.setCodEstadoTramite(1);
+        estado.setFechaHoraBajaEstadoTramite(null);
+        estado.setNombreEstadoTramite("Iniciado");
+        FachadaPersistencia.getInstance().guardar(estado);
         
         TramiteEstado tramEstado=new TramiteEstado();
         tramEstado.setFechaHoraBajaTramiteEstado(null);
         tramEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramEstado.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramEstado.setNroLineaTramiteEstado(1);
+        tramEstado.setEstadoTramite(estado);
         tramEstado.setObservacionTramiteEstado("Este es el primer estado");
+        FachadaPersistencia.getInstance().guardar(tramEstado);
         
         
-        EstadoTramite estado = new EstadoTramite();
-        estado.setCodEstadoTramite(1);
-        estado.setFechaHoraBajaEstadoTramite(null);
-        estado.setNombreEstadoTramite("Iniciado");
-        */  
-
+        
         
         
         
