@@ -5,7 +5,7 @@
     <class name="entidades.TramiteEstado" table="tramiteEstado">
         
         <id name="OID" type="string">
-         <column name="OIDListaPrecio"/>
+         <column name="OIDTramiteEstado"/>
          <generator class="uuid2"/>
         </id>
         
