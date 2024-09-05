@@ -2,5 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+    <class name="entidades.detallePrecioTipoTramite" table="detallePrecioTipoTramite">
+        <id name="OID" type="string">
+            <column name="OIDDetallePrecioTipoTramite"/>
+            <generator class="uuid2"/>
+        </id>
+
+        <property name="precioTipoTramite" type="float">
+            <column name="precioTipoTramite"/>
+        </property>
+    </class>
 
 </hibernate-mapping>
