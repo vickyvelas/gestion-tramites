@@ -11,6 +11,7 @@
         <property name="precioTipoTramite" type="float">
             <column name="precioTipoTramite"/>
         </property>
+       
     </class>
 
 </hibernate-mapping>
