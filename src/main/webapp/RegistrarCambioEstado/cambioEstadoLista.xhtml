@@ -1,15 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Trabajar con Estado"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        Trabajar con Estado
+    </ui:define>
+
+    <ui:define name="body">
+    <h:form>
+        <p:focus context="@form"/>
+            <div class="box box-primary">
+                        
+                     <div class="box-header with-border">
+                         <div id="main-buttons">
+
+                            <p:commandButton value="Agregar"  icon="fa fa-plus"  styleClass="btn-primary"/>
+                               </div>
+                      </div>
+        <!-- Tabla para mostrar la lista de Tramites -->
+         <p:separator/>
+
+                   <div class="ui-g ui-fluid">
+                   <div class="ui-g-12 ui-md-6">
+                    <p:outputPanel>
+                        <h:outputText value="Estado:"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="codFilter"  style="width:150px"
+                                     placeholder=""  onfocus="Javascript:this.focus();this.select();">
+                                        <p:ajax event="keyup" 
+                                        
+                                            update="@form:grid1"
+                                            />
+                                     
+                        </p:inputText>
+
+                    </p:outputPanel> </div>
+
+                   <div class="ui-g-12 ui-md-6">
+                   <p:outputPanel>
+                        <h:outputText value="Tipo Tramite"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="nomFilter"  style="width:150px"
+                                     placeholder="" value="#{uiabmEstadoLista.nombreFiltro}">
+                                        <p:ajax event="keyup" 
+                                            listener="#{uiabmEstadoLista.filtrar()}" 
+                                            update="@form:grid1"
+                                        />
+                                     
+                        </p:inputText>
+                    </p:outputPanel> 
+                   </div>
+                   <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>
+                             <h:outputText value="Fecha"/>
+                             <p:spacer height="10"/>
+                             <p:inputText id="fechaFilter"  style="width:150px"
+                                          placeholder="" >
+                                             <p:ajax event="keyup" 
+                                                
+                                                 update="@form:grid1"
+                                             />
+
+                             </p:inputText>
+                         </p:outputPanel> 
+                   </div>
+                   </div>
+            <p:spacer height="5"/>
+            <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="" var="tramiteConsultor" >
+
+            <p:column>
+                <f:facet name="header">Nro Tramite</f:facet>
+                <!-- numeral{Tramite.nroTramite}-->
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Tipo Tramite</f:facet>
+                <!-- numeral{TipoTramite.nombreTipoTramite}-->
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Fecha Inicio</f:facet>
+                <!-- numeral{Tramite.fechaHoraCargaTramite}-->
+            </p:column>
+
+
+            <p:column>
+                <f:facet name="header">Cuit</f:facet>
+                <!-- numeral{Cliente.cuitCliente}-->
+            </p:column>
+                
+            <p:column>
+                <f:facet name="header">Estado</f:facet>
+                <!-- numeral{EstadoTramite.nombreEstadoTramite}-->
+                
+            </p:column>
+                <!--
+            <p:column>
+                <f:facet name="header">Acciones</f:facet>
+                <p:commandButton value="Modificar" styleClass="btn-info"  disabled="#{Tramite.fechaHoraFinTramite != null}">
+                    <f:ajax render="@form"/>
+                </p:commandButton>
+                <p:spacer width="5"/>
+                <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" disabled="#{Tramite.fechaHoraFinTramite != null}">
+                   
+                    <p:confirm header="Anulación de #{estado.codigo} #{estado.nombre}" message="¿Está seguro?" icon="ui-icon-alert"/>
+                    
+                </p:commandButton>
+                
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
+                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="fa fa-check"/>
+                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                         icon="fa fa-close"/>
+                    </p:confirmDialog>
+            </p:column>
+             -->  
+
+        </p:dataTable>
+            </div>
+
+   </h:form>
+
+ </ui:define>
+    </ui:composition>
