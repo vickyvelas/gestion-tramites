@@ -68,5 +68,9 @@ public class Version extends Entidad {
     public void addTransicionEstadoList(TransicionEstado transicionEstado) {
         transicionEstadoList.add(transicionEstado);
     }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
    
 }

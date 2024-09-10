@@ -45,6 +45,10 @@ public class Consultor extends Entidad {
     public void setFechaHoraBajaConsultor(Timestamp fechaHoraBajaConsultor) {
         this.fechaHoraBajaConsultor = fechaHoraBajaConsultor;
     }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
    
 }    
 

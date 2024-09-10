@@ -1,5 +1,6 @@
 package utils;
 
+import entidades.DTOCriterio;
 import java.util.List;
 
 public class FachadaPersistencia {

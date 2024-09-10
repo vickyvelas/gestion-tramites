@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tramite extends Entidad{
+public class Tramite extends Entidad {
     private int nroTramite;
     private float precioTramite;
     private Timestamp fechaHoraCargaTramite;
@@ -18,11 +18,11 @@ public class Tramite extends Entidad{
     private EstadoTramite estadoTramite;
     private List<TramiteEstado> tramiteEstadoList = new ArrayList<>();
     private List<TramiteDocumentacion> tramiteDocumentacionList = new ArrayList<>();
-    
+
     // Constructor
     public Tramite() {
     }
-    
+
     // Getters y Setters
     public int getNroTramite() {
         return nroTramite;
@@ -79,15 +79,15 @@ public class Tramite extends Entidad{
     public void setConsultor(Consultor consultor) {
         this.consultor = consultor;
     }
-    
+
     public Cliente getCliente() {
         return cliente;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }  
-    
+    }
+
     public TipoTramite getTipoTramite() {
         return tipoTramite;
     }
@@ -95,15 +95,15 @@ public class Tramite extends Entidad{
     public void setTipoTramite(TipoTramite tipoTramite) {
         this.tipoTramite = tipoTramite;
     }
-    
+
     public Version getVersion() {
         return version;
     }
 
     public void setVersion(Version version) {
         this.version = version;
-    } 
-    
+    }
+
     public EstadoTramite getEstadoTramite() {
         return estadoTramite;
     }
@@ -111,7 +111,7 @@ public class Tramite extends Entidad{
     public void setEstadoTramite(EstadoTramite estadoTramite) {
         this.estadoTramite = estadoTramite;
     }
-    
+
     public List<TramiteEstado> getTramiteEstadoList() {
         return tramiteEstadoList;
     }
@@ -120,10 +120,10 @@ public class Tramite extends Entidad{
         this.tramiteEstadoList = tramiteEstadoList;
     }
 
-    public void addTramiteEstadoList(TramiteEstado tramiteEstado) {
+    public void addTramiteEstado(TramiteEstado tramiteEstado) {
         tramiteEstadoList.add(tramiteEstado);
     }
-      
+
     public List<TramiteDocumentacion> getTramiteDocumentacionList() {
         return tramiteDocumentacionList;
     }
@@ -132,8 +132,30 @@ public class Tramite extends Entidad{
         this.tramiteDocumentacionList = tramiteDocumentacionList;
     }
 
-    public void addTramiteDocumentacionList(TramiteDocumentacion tramiteDocumentacion) {
+    public void addTramiteDocumentacion(TramiteDocumentacion tramiteDocumentacion) {
         tramiteDocumentacionList.add(tramiteDocumentacion);
     }
-}
 
+    // Implementación de los métodos getNombre() y getDescripcion()
+    public String getNombre() {
+        return tipoTramite != null ? tipoTramite.getNombre() : "Sin nombre";
+    }
+
+    public String getDescripcion() {
+        return tipoTramite != null ? tipoTramite.getDescripcion() : "Sin descripción";
+    }
+
+    // Método adicional para verificar si el trámite ha vencido
+    public boolean isVencido() {
+        return fechaHoraVencimientoDocumentacion != null &&
+               fechaHoraVencimientoDocumentacion.before(new Timestamp(System.currentTimeMillis()));
+    }
+
+    public void addTramiteDocumentacionList(TramiteDocumentacion tramiteDocumentacion1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void addTramiteEstadoList(TramiteEstado tramiteEstado1) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}

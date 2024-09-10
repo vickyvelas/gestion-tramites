@@ -36,4 +36,12 @@ public class CategoriaTramite extends Entidad{
     public void setFechaHoraBajaCategoriaTramite(Timestamp fechaHoraBajaCategoriaTramite) {
         this.fechaHoraBajaCategoriaTramite = fechaHoraBajaCategoriaTramite;
     }
+
+    public void setId(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

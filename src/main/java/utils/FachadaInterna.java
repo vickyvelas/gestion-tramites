@@ -1,5 +1,6 @@
 package utils;
 
+import entidades.DTOCriterio;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.FlushMode;
