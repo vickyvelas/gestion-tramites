@@ -22,8 +22,8 @@
         
         <many-to-one name="tipoTramite" class="entidades.TipoTramite" column="OIDTipoTramite" not-null="true"/>
         
-        <bag name="transicionEstadoList" table="transicionEstado" cascade="none" inverse="false">
-            <key column="OIDVersion" not-null="true"/>
+        <bag name="transicionEstadoList" table="transicionEstado" cascade="save-update" inverse="false">
+            <key column="OIDVersion"/>
             <one-to-many class="entidades.TransicionEstado"/>
         </bag>
         

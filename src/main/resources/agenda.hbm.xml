@@ -22,10 +22,10 @@
 
         <property name="fechaHastaAgenda" column="fechaHastaAgenda" type="date" not-null="true"/>
 
-        <set name="consultores" table="Agenda_Consultor" cascade="all">
+        <bag name="consultores" table="Agenda_Consultor" cascade="all">
             <key column="OIDAgenda"/>
             <many-to-many column="OIDConsultor" class="entidades.Consultor"/>
-        </set>
+        </bag>
         
     </class>
     

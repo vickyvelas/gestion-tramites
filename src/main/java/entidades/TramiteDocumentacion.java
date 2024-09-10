@@ -4,7 +4,7 @@ import java.sql.Blob;
 import java.sql.Timestamp;
 
 public class TramiteDocumentacion extends Entidad {
-    private Long codTramiteDocumentacion;
+    private int codTramiteDocumentacion;
     private Blob archivo;
     private Timestamp fechaHoraEntrega;
     private Documentacion documentacion;
@@ -14,11 +14,11 @@ public class TramiteDocumentacion extends Entidad {
     }
     
     // Getters y Setters
-    public Long getCodTramiteDocumentacion() {
+    public int getCodTramiteDocumentacion() {
         return codTramiteDocumentacion;
     }
 
-    public void setCodTramiteDocumentacion(Long codTramiteDocumentacion) {
+    public void setCodTramiteDocumentacion(int codTramiteDocumentacion) {
         this.codTramiteDocumentacion = codTramiteDocumentacion;
     }
 

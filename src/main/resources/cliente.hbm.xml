@@ -3,5 +3,42 @@
 
 <hibernate-mapping>
 
-    
+    <class name="entidades.Cliente" table="cliente">
+
+         <id name="OID" type="string">
+         <column name="OIDCliente"/>
+         <generator class="uuid2"/>
+         </id>
+
+         <property name="cuitCliente" type="int" not-null="true">
+         <column name="cuitCliente"/>
+         </property>
+
+         <property name="direccionCliente" type="string" not-null="true">
+         <column name="direccionCliente"/> 
+         </property>
+         
+         <property name="fechaHoraAltaCliente" type="timestamp" not-null="true">
+             <column name="fechaHoraAltaCliente"/>
+         </property>
+         
+         <property name="fechaHoraBajaCliente" type="timestamp" >
+             <column name="fechaHoraBajaCliente"/>
+         </property>
+         
+         <property name="mailCliente" type="string" not-null="true">
+             <column name="mailCliente"/>
+         </property>
+         
+         <property name="nombreApellidoCliente" type="string" not-null="true">
+             <column name="nombreApellidoCliente"/>
+         </property>
+         
+         <property name="telefonoCliente" type="double" not-null="true">
+             <column name="telefonoCliente"/>
+         </property>
+         
+         
+         
+    </class>
 </hibernate-mapping>
