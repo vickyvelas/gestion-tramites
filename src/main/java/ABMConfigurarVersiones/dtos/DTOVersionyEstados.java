@@ -12,15 +12,15 @@ import java.util.List;
  * @author julie
  */
 public class DTOVersionyEstados {
-    private List<DTOEstadoPosible> estadosPosibles = new ArrayList();
+    private List<DTOEstadoPosible> estadosPosibleslist = new ArrayList<DTOEstadoPosible>();
     private DTOVersionOutput version;
 
     public List<DTOEstadoPosible> getEstadosPosibles() {
-        return estadosPosibles;
+        return estadosPosibleslist;
     }
 
     public void setEstadosPosibles(List<DTOEstadoPosible> estadosPosibles) {
-        this.estadosPosibles = estadosPosibles;
+        this.estadosPosibleslist = estadosPosibles;
     }
 
     public DTOVersionOutput getVersion() {
@@ -30,5 +30,7 @@ public class DTOVersionyEstados {
     public void setVersion(DTOVersionOutput version) {
         this.version = version;
     }
-    
+    public void addEstadosPosibles(DTOEstadoPosible estadosPosibles) {
+        estadosPosibleslist.add(estadosPosibles);
+    }
 }
