@@ -1,7 +1,8 @@
+
+// Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ //Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ABMConfigurarVersiones.beans;
 
 import ABMConfigurarVersiones.dtos.DTOVersionHistorial;
@@ -12,11 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
 import utils.BeansUtils;
-
+/*
 /**
  *
  * @author julie
  */
+/*
 public class UIABMVersionHLista implements Serializable{
      private ControladorABMVersion controladorABMVersion = new ControladorABMVersion();
     private int codigoFiltro=0;
@@ -70,7 +72,7 @@ public class UIABMVersionHLista implements Serializable{
         }
         return versionGrilla;
     }
-
+*/
     //public String irAgregarVersion() {
     //    BeansUtils.guardarUrlAnterior();
     //    return "abmEstado?faces-redirect=true&codigo=0"; // Usa '?faces-redirect=true' para hacer una redirección
@@ -93,4 +95,4 @@ public class UIABMVersionHLista implements Serializable{
     //}
     
     
-}
+

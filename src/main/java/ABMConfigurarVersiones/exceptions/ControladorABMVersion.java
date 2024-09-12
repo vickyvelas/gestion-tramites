@@ -6,6 +6,9 @@ package ABMConfigurarVersiones.exceptions;
 
 import ABMConfigurarVersiones.dtos.DTOVersionHistorial;
 import ABMConfigurarVersiones.dtos.DTOVersionInput;
+import ABMConfigurarVersiones.dtos.DTOVersionOutput;
+import ABMConfigurarVersiones.dtos.DTOVersionesDeTipo;
+import ABMConfigurarVersiones.dtos.DTOVersionyEstados;
 import java.util.List;
 
 /**
@@ -14,18 +17,29 @@ import java.util.List;
  */
 public class ControladorABMVersion {
     private ExpertoABMVersion expertoABMVersion = new ExpertoABMVersion();
-    public List<DTOVersionHistorial> buscarVersionHistorial(int codigo, String nombre){
-        return expertoABMVersion.buscarVersionHistorial(codigo,nombre);
+    
+    public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(){
+        return expertoABMVersion.listarTablaVersionesDeTipos();
     }
-
-    public void agregarVersion(DTOVersionInput nuevaVersionDTO) throws VersionException{
-        expertoABMVersion.agregarVersion(nuevaVersionDTO);
+            
+    public DTOVersionOutput verVersion (int codTipoTramite, int codVersion) throws VersionException{
+        return expertoABMVersion.verVersion(codTipoTramite, codVersion);
     }
-
-
-
-    public void darDeBajaVersion(int codigo) throws VersionException {
-        expertoABMVersion.darDeBajaVersion(codigo);
+   
+    public DTOVersionyEstados buscarVersionEditar (int codTipoTramite) throws VersionException{
+        return expertoABMVersion.buscarVersionEditar(codTipoTramite);
+    }
+    
+    public void nuevaVersion (DTOVersionInput datosingresados)throws VersionException{
+        expertoABMVersion.nuevaVersion(datosingresados);
+    }
+    
+    public List<DTOVersionHistorial> historialVersiones(int codigoTT){
+        return expertoABMVersion.historialVersiones(codigoTT);
+    }
+    
+    public void anularVersion(int codVersion, int codTT) throws VersionException{
+        expertoABMVersion.anularVersion(codVersion, codTT);
     }
     
 }
