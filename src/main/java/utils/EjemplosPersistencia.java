@@ -49,7 +49,7 @@ public class EjemplosPersistencia {
         consultor2.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(consultor2);
-        
+       
         Consultor consultor3 = new Consultor();
         consultor3.setLegajoConsultor(44904);
         consultor3.setNombreApellidoConsultor("Esteban Quito");
@@ -71,7 +71,7 @@ public class EjemplosPersistencia {
         
         FachadaPersistencia.getInstance().guardar(agenda);
 
-        
+         
         // Clientes -----------------------------------------------------------------------------------
         Cliente cliente1 = new Cliente();
         cliente1.setCuitCliente(20202050);
@@ -202,7 +202,7 @@ public class EjemplosPersistencia {
         version1.setFechaHoraHastaVersion(new Timestamp(System.currentTimeMillis()));
         version1.setFechaHoraBajaVersion(new Timestamp(System.currentTimeMillis()));
         version1.setTipoTramite(tipoTramite1);
-        
+       
         // TransicionEstados
         TransicionEstado transicionEstado1 = new TransicionEstado();
         transicionEstado1.setNroTransicionEstado(1);
@@ -229,8 +229,9 @@ public class EjemplosPersistencia {
         tramite1.setEstadoTramite(estado1);
         tramite1.setTipoTramite(tipoTramite1);
         tramite1.setVersion(version1);
-        
-                
+        // Guardo los cambios de Tramite
+        FachadaPersistencia.getInstance().guardar(tramite1);
+              
         // TramiteDocumentaciones 
         TramiteDocumentacion tramiteDocumentacion1 = new TramiteDocumentacion();
         tramiteDocumentacion1.setCodTramiteDocumentacion(12);
@@ -238,7 +239,10 @@ public class EjemplosPersistencia {
         tramiteDocumentacion1.setFechaHoraEntrega(null);
         tramiteDocumentacion1.setDocumentacion(documentacion1);
         
-        
+         // Guardo los TramiteDocumentacion en Tramite
+        tramite1.addTramiteDocumentacionList(tramiteDocumentacion1);
+        FachadaPersistencia.getInstance().guardar(tramiteDocumentacion1);
+         
         // TramiteEstados 
         TramiteEstado tramiteEstado1 = new TramiteEstado();
         tramiteEstado1.setNroLineaTramiteEstado(1);
@@ -247,7 +251,7 @@ public class EjemplosPersistencia {
         tramiteEstado1.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramiteEstado1.setFechaHoraBajaTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramiteEstado1.setEstadoTramite(estado1);
-        
+        tramite1.addTramiteEstadoList(tramiteEstado1);
         
         TramiteEstado tramEstado=new TramiteEstado();
         tramEstado.setFechaHoraBajaTramiteEstado(null);
@@ -256,19 +260,15 @@ public class EjemplosPersistencia {
         tramEstado.setNroLineaTramiteEstado(1);
         tramEstado.setEstadoTramite(estado2);
         tramEstado.setObservacionTramiteEstado("Este es el primer estado");
-        
+       //tramite1.addTramiteEstadoList(tramEstado);
         FachadaPersistencia.getInstance().guardar(tramEstado);
         
-        // Guardo los TramiteDocumentacion en Tramite
-        tramite1.addTramiteDocumentacionList(tramiteDocumentacion1);
-        FachadaPersistencia.getInstance().guardar(tramiteDocumentacion1);
+
         
         // Guardo los TramiteEstado en Tramite
-        tramite1.addTramiteEstadoList(tramiteEstado1);
-        FachadaPersistencia.getInstance().guardar(tramiteEstado1);
+           FachadaPersistencia.getInstance().guardar(tramiteEstado1);
         
-        // Guardo los cambios de Tramite
-        FachadaPersistencia.getInstance().guardar(tramite1);
+        
         
         FachadaPersistencia.getInstance().finalizarTransaccion();
         
