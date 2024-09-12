@@ -4,6 +4,7 @@
  */
 package ABMConfigurarVersiones.exceptions;
 
+import ABMConfigurarVersiones.dtos.DTOCodDestino;
 import ABMConfigurarVersiones.dtos.DTOEstadoActualInput;
 import ABMConfigurarVersiones.dtos.DTOEstadoActualOutput;
 import ABMConfigurarVersiones.dtos.DTOEstadoDestinoInput;
@@ -336,11 +337,70 @@ public class ExpertoABMVersion {
             throw new VersionException("Erro la version nueva esta despues de la última version. No puede haber huecos entre versiones");
             //FachadaPersistencia.getInstance().finalizarTransaccion();            
         }
+        //Significa que fechaHoraDesdeVersion(ÚltimaVersion)< fechaHoraDesdeVersion(NuevaVersion)<=fechaHoraHastaVersion(ÚltimaVersion)
+        Timestamp FHNv = nuevaV.getFechaHoraHastaVersion();
+        if(FHNv.equals(FDNv)){
+            throw new VersionException("Erro la version nueva debe tener distinta fecha desde y fehca hasta.");
+            //FachadaPersistencia.getInstance().finalizarTransaccion(); 
+        }
+        if(FHNv.before(FDNv)){
+            throw new VersionException("Erro la version nueva no puede tener una fecha desde > fehca hasta.");
+            //FachadaPersistencia.getInstance().finalizarTransaccion(); 
+        }
+//cambio la ultima version:
+        vultima.setFechaHoraHastaVersion(FDNv);
+
+//Epuezo con las validaciones de las Tranciciones
+        //Creo el dto para validar los destinos
+        List<DTOCodDestino> listDestVerif = new ArrayList();
+        List<TransicionEstado> transiciones = nuevaV.getTransicionEstadoList();
+        for(TransicionEstado trans : transiciones){
+        List<EstadoTramite> EDs = trans.getEstadosDestino();
+        for(EstadoTramite ed : EDs){
+            DTOCodDestino ced = new DTOCodDestino();
+            ced.setCodDestino(ed.getCodEstadoTramite());
+            listDestVerif.add(ced);
+        }   
+        }
         
-        
-        
-        
-        
+        //Valido la primer transicion
+        for(TransicionEstado transicion : transiciones){
+            if(transicion.getNroTransicionEstado() == 1){
+                EstadoTramite eA = transicion.getEstadoActual();
+                String estadoInicial = "Iniciado";
+                if(eA.getNombreEstadoTramite() == estadoInicial){
+                    throw new VersionException("Error, la vercion debe tener como primer estado actual el Iniciado");
+                //FachadaPersistencia.getInstance().finalizarTransaccion(); 
+                }
+                List<EstadoTramite> eDs = transicion.getEstadosDestino();
+                for(EstadoTramite ed : eDs){
+                    if(eA.getCodEstadoTramite()==ed.getCodEstadoTramite()){
+                        throw new VersionException("Error, la vercion no puede tener estados recursivos");
+                    //FachadaPersistencia.getInstance().finalizarTransaccion();     
+                    }
+                }
+            }
+            else{
+                EstadoTramite eA = transicion.getEstadoActual();
+                DTOCodDestino codeA = new DTOCodDestino();
+                codeA.setCodDestino(eA.getCodEstadoTramite());
+                if(!listDestVerif.contains(codeA)){
+                    throw new VersionException("Error, la vercion debe tener estados actuales posibles de alcanzar");
+                //FachadaPersistencia.getInstance().finalizarTransaccion(); 
+                }
+                List<EstadoTramite> eDs = transicion.getEstadosDestino();
+                for(EstadoTramite ed : eDs){
+                    if(eA.getCodEstadoTramite()==ed.getCodEstadoTramite()){
+                        throw new VersionException("Error, la vercion no puede tener estados recursivos");
+                    //FachadaPersistencia.getInstance().finalizarTransaccion();     
+                    }
+                }
+            }
+        }
+        for(TransicionEstado transicion : transiciones){
+        FachadaPersistencia.getInstance().guardar(transicion);            
+        }
+        FachadaPersistencia.getInstance().guardar(vultima);        
         FachadaPersistencia.getInstance().guardar(nuevaV);
         FachadaPersistencia.getInstance().finalizarTransaccion();
     
