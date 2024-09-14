@@ -38,7 +38,7 @@
                         <h:outputText value="Estado:"/>
                         <p:spacer height="10"/>
                         <p:inputText id="codFilter"  style="width:150px"
-                                     placeholder=""  onfocus="Javascript:this.focus();this.select();">
+                                     placeholder=""  value="#{uicambioEstadoLista.estadoFiltro}" onfocus="Javascript:this.focus();this.select();">
                                         <p:ajax event="keyup" 
                                         
                                             update="@form:grid1"
@@ -53,9 +53,9 @@
                         <h:outputText value="Tipo Tramite"/>
                         <p:spacer height="10"/>
                         <p:inputText id="nomFilter"  style="width:150px"
-                                     placeholder="" value="#{uiabmEstadoLista.nombreFiltro}">
+                                     placeholder="" value="#{uicambioEstadoLista.nombreTipoTramiteFiltro}">
                                         <p:ajax event="keyup" 
-                                            listener="#{uiabmEstadoLista.filtrar()}" 
+                                            listener="#{uicambioEstadoLista.filtrar()}" 
                                             update="@form:grid1"
                                         />
                                      
@@ -64,10 +64,10 @@
                    </div>
                    <div class="ui-g-12 ui-md-6">
                         <p:outputPanel>
-                             <h:outputText value="Fecha"/>
+                             <h:outputText value="Nro tramite"/>
                              <p:spacer height="10"/>
-                             <p:inputText id="fechaFilter"  style="width:150px"
-                                          placeholder="" >
+                             <p:inputText id="nroTramFilter"  style="width:150px"
+                                          placeholder="" value="#{uicambioEstadoLista.nroTramiteFiltro}">
                                              <p:ajax event="keyup" 
                                                 
                                                  update="@form:grid1"
@@ -78,32 +78,32 @@
                    </div>
                    </div>
             <p:spacer height="5"/>
-            <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="" var="tramiteConsultor" >
+            <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="#{uicambioEstadoLista.buscarTramitesConsultor()}" var="tramiteConsultor" >
 
             <p:column>
                 <f:facet name="header">Nro Tramite</f:facet>
-                <!-- numeral{Tramite.nroTramite}-->
+                #{tramiteConsultor.nroTramite}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Tipo Tramite</f:facet>
-                <!-- numeral{TipoTramite.nombreTipoTramite}-->
+                #{tramiteConsultor.nombreTipoTramite}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Fecha Inicio</f:facet>
-                <!-- numeral{Tramite.fechaHoraCargaTramite}-->
+                #{tramiteConsultor.fechaHoraCargaTramite}
             </p:column>
 
 
             <p:column>
                 <f:facet name="header">Cuit</f:facet>
-                <!-- numeral{Cliente.cuitCliente}-->
+                #{tramiteConsultor.cuitCliente}
             </p:column>
                 
             <p:column>
                 <f:facet name="header">Estado</f:facet>
-                <!-- numeral{EstadoTramite.nombreEstadoTramite}-->
+                #{tramiteConsultor.nombreEstadoTramite}
                 
             </p:column>
                 <!--

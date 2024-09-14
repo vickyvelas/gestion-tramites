@@ -1,11 +1,12 @@
-package DTO.D;
+package RegistrarCambioEstado.dtos;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class TramitesConsultorDTO {
 
     private int cuit;
-    private Date fechaHoraCargaTramite;
+    private Timestamp fechaHoraCargaTramite;
     private String nombreEstadoTramite;
     private String nombreTipoTramite;
     private int nroTramite;
@@ -17,10 +18,10 @@ public class TramitesConsultorDTO {
     public void setCuit(int cuit) {
         this.cuit = cuit;
     }
-    public Date getFechaHoraCargaTramite() {
+    public Timestamp getFechaHoraCargaTramite() {
         return fechaHoraCargaTramite;
     }
-    public void setFechaHoraCargaTramite(Date fechaHoraCargaTramite) {
+    public void setFechaHoraCargaTramite(Timestamp fechaHoraCargaTramite) {
         this.fechaHoraCargaTramite = fechaHoraCargaTramite;
     }
     public String getNombreEstadoTramite() {

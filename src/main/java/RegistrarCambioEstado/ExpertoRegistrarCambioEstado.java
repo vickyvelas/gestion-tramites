@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package RegistrarCambioEstado;
-import DTO.D.TramitesConsultorDTO;
+import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
+import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import entidades.EstadoTramite;
 import entidades.Tramite;
 import java.util.ArrayList;
@@ -16,22 +18,30 @@ import utils.FachadaPersistencia;
  * @author marti
  */
 public class ExpertoRegistrarCambioEstado {
-        public List<TramitesConsultorDTO> buscarTramitesConsultor(int nroTramite,String nombreTipoTramite, EstadoTramite estado){
+        public List<TramitesConsultorDTO> buscarTramitesConsultor(int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
-        if(nroTramite>0)
+        if(nroTramiteFiltro>0)
         {
             DTOCriterio unCriterio=new DTOCriterio();
             unCriterio.setAtributo("nroTramite");
             unCriterio.setOperacion("=");
-            unCriterio.setValor(nroTramite);
+            unCriterio.setValor(nroTramiteFiltro);
             lCriterio.add(unCriterio);
         }
-        if(nombreTipoTramite.trim().length()>0)
+        if(nombreTipoTramiteFiltro.trim().length()>0)
         {
             DTOCriterio unCriterio=new DTOCriterio();
             unCriterio.setAtributo("nombreTipoTramite");
             unCriterio.setOperacion("like");
-            unCriterio.setValor(nombreTipoTramite);
+            unCriterio.setValor(nombreTipoTramiteFiltro);
+            lCriterio.add(unCriterio);
+        }
+        if(estadoFiltro.trim().length()>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("estado");
+            unCriterio.setOperacion("like");
+            unCriterio.setValor(estadoFiltro);
             lCriterio.add(unCriterio);
         }
         List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
@@ -46,6 +56,33 @@ public class ExpertoRegistrarCambioEstado {
             tramitesConsultorResultado.add(tramitesConsultorDTO);
         }
         return tramitesConsultorResultado;
+    }
+
+    public void cambioEstado(TransicionDTO transicionDTO) throws cambioEstadoException{
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dtoc = new DTOCriterio();
+        dtoc.setAtributo("codEstadoTramite");
+        dtoc.setOperacion("=");
+        dtoc.setValor(transicionDTO.getCodEstadoTramite());
+        
+        criterioList.add(dtoc);
+        List lEstado=FachadaPersistencia.getInstance().buscar("EstadoTramite", criterioList);
+        
+        //hay un if si el cod ingresado existe larga excepcion. Sino
+        
+        if(lEstado.size()>0){
+            throw new cambioEstadoException("El codigo ya existe");
+        }else{
+            EstadoTramite estadoTramite = new EstadoTramite();
+            estadoTramite.setCodEstadoTramite(transicionDTO.getCodEstadoTramite());
+            estadoTramite.setNombreEstadoTramite(transicionDTO.getNombreEstadoTramite());
+            estadoTramite.setFechaHoraBajaEstadoTramite(null);
+            
+            FachadaPersistencia.getInstance().guardar(estadoTramite);
+            FachadaPersistencia.getInstance().finalizarTransaccion();
+        }
     }
         
      

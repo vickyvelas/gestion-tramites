@@ -4,10 +4,17 @@
  */
 package RegistrarCambioEstado.beans;
 
+import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
+
 /**
  *
  * @author marti
  */
-public class UIregistrarCambioEstado {
-    
+@Named("uiregistrarCambioEstado")
+@ViewScoped
+public class UIregistrarCambioEstado implements Serializable {
+    private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado = new ControladorRegistrarCambioEstado();
 }

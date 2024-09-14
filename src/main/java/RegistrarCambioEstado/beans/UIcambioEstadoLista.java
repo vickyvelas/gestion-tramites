@@ -4,10 +4,80 @@
  */
 package RegistrarCambioEstado.beans;
 
+
+import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
+import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
+import entidades.Tramite;
+import jakarta.inject.Named;
+import jakarta.faces.view.ViewScoped;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author marti
  */
-public class UIcambioEstadoLista {
+@Named("uicambioEstadoLista")
+@ViewScoped
+public class UIcambioEstadoLista implements Serializable{
+    private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado=new ControladorRegistrarCambioEstado();
+    private int nroTramiteFiltro=0;
+    private String nombreTipoTramiteFiltro="Iniciado";
+    private String estadoFiltro="algo";
+            
+    public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado(){
+        return controladorRegistrarCambioEstado;
+    }
+
+    public int getNroTramiteFiltro() {
+        return nroTramiteFiltro;
+    }
+
+    public void setNroTramiteFiltro(int nroTramiteFiltro) {
+        this.nroTramiteFiltro = nroTramiteFiltro;
+    }
+
+    public String getNombreTipoTramiteFiltro() {
+        return nombreTipoTramiteFiltro;
+    }
+
+    public void setNombreTipoTramiteFiltro(String nombreTipoTramiteFiltro) {
+        this.nombreTipoTramiteFiltro = nombreTipoTramiteFiltro;
+    }
+
+    public String getEstadoFiltro() {
+        return estadoFiltro;
+    }
+
+    public void setEstadoFiltro(String estadoFiltro) {
+        this.estadoFiltro = estadoFiltro;
+    }
+    
+    
+    public List<UIcambioEstadoGrilla> buscarTramitesConsultor(){
+        System.out.println(nroTramiteFiltro);
+        System.out.println(nombreTipoTramiteFiltro);
+        System.out.println(estadoFiltro);
+        List<UIcambioEstadoGrilla> tramitesGrilla = new ArrayList<>();
+        List<TramitesConsultorDTO> tramitesConsultorDTO = controladorRegistrarCambioEstado.buscarTramitesConsultor(nroTramiteFiltro,nombreTipoTramiteFiltro,estadoFiltro);
+        for (TramitesConsultorDTO tramiteConsultorDTO : tramitesConsultorDTO) {
+            UIcambioEstadoGrilla tramiteGrillaUI = new UIcambioEstadoGrilla();
+            tramiteGrillaUI.setNroTramite(tramiteConsultorDTO.getNroTramite());
+            tramiteGrillaUI.setNombreTipoTramite(tramiteConsultorDTO.getNombreEstadoTramite());
+            tramiteGrillaUI.setFechaInicio(tramiteConsultorDTO.getFechaHoraCargaTramite());
+            tramiteGrillaUI.setCuitCliente(tramiteConsultorDTO.getCuit());
+            tramiteGrillaUI.setEstado(tramiteConsultorDTO.getNombreEstadoTramite());
+            tramitesGrilla.add(tramiteGrillaUI);
+        }
+        return tramitesGrilla;
+    }
+    
+    
+    
+    public void filtrar(){
+    }
+    
+   
     
 }

@@ -1,6 +1,6 @@
 package DTO.D;
 
-public class dtoTransicion {
+public class TransicionDTO {
     private int codEstadoTramite;
     private String nombreEstadoTramite;
     private String observacion;
