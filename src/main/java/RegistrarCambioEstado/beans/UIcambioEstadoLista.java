@@ -23,8 +23,8 @@ import java.util.List;
 public class UIcambioEstadoLista implements Serializable{
     private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado=new ControladorRegistrarCambioEstado();
     private int nroTramiteFiltro=0;
-    private String nombreTipoTramiteFiltro="Iniciado";
-    private String estadoFiltro="algo";
+    private String nombreTipoTramiteFiltro=" ";
+    private String estadoFiltro=" ";
             
     public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado(){
         return controladorRegistrarCambioEstado;
