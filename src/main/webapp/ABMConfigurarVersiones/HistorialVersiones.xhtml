@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Historial Versiones"/> 
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        Historial Versiones
+    </ui:define>
+    
+    <ui:define name="body">
+    <h:form>
+        <p:focus context="@form"/>
+            <div class="box box-primary">
+                        
+        <!-- Tabla para mostrar la lista de Versiones-->
+         <p:separator/>
+
+            <div class="ui-g ui-fluid">
+            <p:spacer height="5"/>
+            <p:dataTable id="grid1" widgetVar="VersionH" value="#{uiabmVersionHistorialLista.irHistorialVersion(codigo)}" var="dtoVersionH" >
+
+            <p:column>
+                <f:facet name="header">Codigo Version</f:facet>
+                #{dtoVersionH.codVersion}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Fecha Desde</f:facet>
+                #{dtoVersionH.fechaDesdeVersion}
+            </p:column>
+            
+            <p:column>
+                <f:facet name="header">Fecha Hasta</f:facet>
+                #{dtoVersionH.fechaHastaVersion}
+            </p:column>
+                 
+            <p:column>
+                <f:facet name="header">Fecha Baja</f:facet>
+                #{dtoVersionH.fechaBajaVersion}
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">Acciones a version</f:facet>
+                <p:spacer width="5"/>
+                <p:commandButton value="Ver" styleClass="btn-danger"  action="#{uiabmVersionHistorialLista.irVerVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">
+                </p:commandButton>
+                <p:spacer width="5"/>
+                <p:commandButton value="Anular" styleClass="btn-info" actionListener="#{uiabmVersionHistorialLista.irAnularVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">
+                    <p:confirm header="Anulación de #{dtoVersionH.codVersion} del TipoTramite #{dtoVersionH.nombreTipoTramite}" message="¿Está seguro?" icon="ui-icon-alert"/>
+                </p:commandButton>
+                
+                    <p:confirmDialog global="true"  showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
+                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="fa fa-check" update="@form:grid1"/>
+                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                         icon="fa fa-close" update="@form:grid1"/>
+                    </p:confirmDialog>
+            </p:column>
+
+        </p:dataTable>
+            </div>
+
+   </h:form>
+        
+ </ui:define>
+    </ui:composition>

@@ -77,7 +77,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.21</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.fintrospect</groupId>
+            <artifactId>fintrospect-gson_2.11</artifactId>
+            <version>15.1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <resources>

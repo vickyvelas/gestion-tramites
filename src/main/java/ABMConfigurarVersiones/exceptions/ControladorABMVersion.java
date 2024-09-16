@@ -18,6 +18,9 @@ import java.util.List;
 public class ControladorABMVersion {
     private ExpertoABMVersion expertoABMVersion = new ExpertoABMVersion();
     
+    public List<DTOVersionesDeTipo> filtroTablaVersiones(int codtt, String nombrett){
+        return expertoABMVersion.filtroTablaVersiones(codtt, nombrett);
+    }
     public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(){
         return expertoABMVersion.listarTablaVersionesDeTipos();
     }

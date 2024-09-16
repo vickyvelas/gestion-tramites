@@ -32,6 +32,56 @@ import utils.FachadaPersistencia;
  * @author julie
  */
 public class ExpertoABMVersion {
+    public List<DTOVersionesDeTipo> filtroTablaVersiones(int codtt, String nombrett){
+        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(codtt>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("codTipoTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(codtt);
+            lCriterio.add(unCriterio);
+        }
+        if(nombrett.trim().length()>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nombreTipoTramite");
+            unCriterio.setOperacion("like");
+            unCriterio.setValor(nombrett);
+            lCriterio.add(unCriterio);
+        }
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
+        List<DTOVersionesDeTipo> lisResultado = new ArrayList<>();
+        for (Object x : objetoList) {
+            TipoTramite tt = (TipoTramite)x;
+            DTOVersionesDeTipo dtolist = new DTOVersionesDeTipo();
+            dtolist.setCodTipoTramite(tt.getCodTipoTramite());
+            dtolist.setNombreTipoTramite(tt.getNombreTipoTramite());
+            dtolist.setFechaHoraBajaTipoTramite(tt.getFechaHoraBajaTipoTramite());
+            
+            List<DTOCriterio> lCriterio2 =new ArrayList<DTOCriterio>();
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("TipoTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(tt.toString());
+            lCriterio.add(unCriterio);
+            List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio2);
+            
+            //Selecciono la de mayor fecha desde
+            List<Version> listversion = (List<Version>) objetoList2;
+            Optional<Version> ultimaVersion = listversion.stream().max(Comparator.comparing(Version::getFechaHoraDesdeVersion)); 
+            if (ultimaVersion.isPresent()){
+            Version v1 = ultimaVersion.get();     
+            dtolist.setCodVersion(v1.getCodVersion());
+            dtolist.setFechaHoraDesdeVersion(v1.getFechaHoraDesdeVersion());
+            }
+            else{
+                System.out.println("No esxisten Versiones asociadas");
+            }
+            lisResultado.add(dtolist);
+        }
+        return lisResultado;
+    }
     
     public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(){
         FachadaPersistencia.getInstance().iniciarTransaccion();
