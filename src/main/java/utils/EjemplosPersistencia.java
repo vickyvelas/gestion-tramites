@@ -100,14 +100,14 @@ public class EjemplosPersistencia {
         EstadoTramite estado1 = new EstadoTramite();
         estado1.setCodEstadoTramite(1);
         estado1.setNombreEstadoTramite("Iniciado");
-        estado1.setFechaHoraBajaEstadoTramite(new Timestamp(System.currentTimeMillis()));
+        estado1.setFechaHoraBajaEstadoTramite(null);
         
         FachadaPersistencia.getInstance().guardar(estado1);
         
         EstadoTramite estado2 = new EstadoTramite();
         estado2.setCodEstadoTramite(2);
         estado2.setNombreEstadoTramite("Etapa 1");
-        estado2.setFechaHoraBajaEstadoTramite(new Timestamp(System.currentTimeMillis()));
+        estado2.setFechaHoraBajaEstadoTramite(null);
         
         FachadaPersistencia.getInstance().guardar(estado2);
         
@@ -145,7 +145,7 @@ public class EjemplosPersistencia {
         tipoTramite1.setDescripcionTipoTramiteWeb("noseWeb");
         tipoTramite1.setMaxDiaEntrega(20);
         tipoTramite1.setNombreTipoTramite("Nuevo DNI");
-        tipoTramite1.setFechaHoraBajaTipoTramite(new Timestamp(System.currentTimeMillis()));
+        tipoTramite1.setFechaHoraBajaTipoTramite(null);
         tipoTramite1.setCategoriaTramite(categoriaTramite1);
         List lista = new ArrayList();
         lista.add(documentacion1);
@@ -197,17 +197,21 @@ public class EjemplosPersistencia {
         
         // Version ------------------------------------------------------------------------------------
         Version version1 = new Version();
-        version1.setCodVersion(25);
+        version1.setCodVersion(1);
         version1.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
-        version1.setFechaHoraHastaVersion(new Timestamp(System.currentTimeMillis()));
-        version1.setFechaHoraBajaVersion(new Timestamp(System.currentTimeMillis()));
+        Timestamp fh = Timestamp.valueOf("2070-09-15 22:06:45.0");
+        version1.setFechaHoraHastaVersion(fh);
+        version1.setFechaHoraBajaVersion(null);
         version1.setTipoTramite(tipoTramite1);
         
         // TransicionEstados
         TransicionEstado transicionEstado1 = new TransicionEstado();
         transicionEstado1.setNroTransicionEstado(1);
         transicionEstado1.setEstadoActual(estado1);
-        
+        List<EstadoTramite> destinos = new ArrayList();
+        destinos.add(estado2);
+        destinos.add(estado3);
+        transicionEstado1.setEstadosDestino(destinos);
         // Guardo los TransicionEstado en Version
         version1.addTransicionEstadoList(transicionEstado1);
         FachadaPersistencia.getInstance().guardar(transicionEstado1);

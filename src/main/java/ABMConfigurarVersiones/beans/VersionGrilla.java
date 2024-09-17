@@ -49,7 +49,7 @@ public class VersionGrilla implements Serializable {
     {
 
     }
-    public List<DTOVersionesDeTipo> ListarTipoTramiteVersion(){
+    public List<DTOVersionesDeTipo> listarTipoTramiteVersion(){
 
         List<DTOVersionesDeTipo> lisResultado = new ArrayList();
         List<DTOVersionesDeTipo> listaDto = new ArrayList();
@@ -88,15 +88,15 @@ public class VersionGrilla implements Serializable {
         return dtoeditar; 
     }
     
-    public  List<DTOVersionHistorial> irHistorialVersion(int codigo) {
+    public  String irHistorialVersion(int codigo) {
         List<DTOVersionHistorial> listResultado = controlador.historialVersiones(codigo);
         BeansUtils.guardarUrlAnterior();
-        return listResultado; // Usa '?faces-redirect=true' para hacer una redirección
+        return "/ABMConfigurarVersiones/HistorialVersiones.xhtml?faces-redirect=true"+ listResultado; // Usa '?faces-redirect=true' para hacer una redirección
     }
     public DTOVersionOutput irVerVersion(int codigo, int codigov) throws VersionException {
         DTOVersionOutput verVersion = controlador.verVersion(codigo, codigov);
         BeansUtils.guardarUrlAnterior();
         return verVersion;
     }
-
 }
+   

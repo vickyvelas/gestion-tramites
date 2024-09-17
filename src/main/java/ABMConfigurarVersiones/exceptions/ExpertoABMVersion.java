@@ -459,6 +459,7 @@ public class ExpertoABMVersion {
     public List<DTOVersionHistorial> historialVersiones(int codigoTT){
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOVersionHistorial> versionesResultado = new ArrayList<>();
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
             DTOCriterio unCriterio=new DTOCriterio();
             unCriterio.setAtributo("codTipoTramite");
@@ -466,7 +467,8 @@ public class ExpertoABMVersion {
             unCriterio.setValor(codigoTT);
             lCriterio.add(unCriterio);
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
-        TipoTramite tt = (TipoTramite)objetoList;
+        for (Object y : objetoList){
+        TipoTramite tt = (TipoTramite) y;            
         
         lCriterio.clear();
             DTOCriterio Criterio=new DTOCriterio();
@@ -476,18 +478,18 @@ public class ExpertoABMVersion {
             lCriterio.add(Criterio);
         List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio);
         
-        List<DTOVersionHistorial> versionesResultado = new ArrayList<>();
-        for (Object x : objetoList2) {
+            for (Object x : objetoList2){
             Version version = (Version) x;
             DTOVersionHistorial versionDTO = new DTOVersionHistorial();
             versionDTO.setCodVersion(version.getCodVersion());
             versionDTO.setFechaBajaVersion(version.getFechaHoraBajaVersion());
             versionDTO.setFechaDesdeVersion(version.getFechaHoraDesdeVersion());
-            versionDTO.setFechaHastaVersion(version.getFechaHoraHastaVersion());
-            TipoTramite tipoTramiteDTO = tt;
+            versionDTO.setFechaHastaVersion(version.getFechaHoraHastaVersion());            
+            TipoTramite tipoTramiteDTO =version.getTipoTramite();
             versionDTO.setCodTipoTramite(tipoTramiteDTO.getCodTipoTramite());
             versionDTO.setNombreTipoTramite(tipoTramiteDTO.getNombreTipoTramite());
             versionesResultado.add(versionDTO);
+            }            
         }
         return versionesResultado;
     }

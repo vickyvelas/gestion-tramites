@@ -56,7 +56,7 @@
                    </div>
                    </div>
             <p:spacer height="5"/>
-            <p:dataTable id="grid1" widgetVar="VersionTipoTable" value="#{uiabmVersionTTLista.listarTipoTramiteVersion}" var="dtoVersionDeTipo" >
+            <p:dataTable id="grid1" widgetVar="VersionTipoTable" value="#{uiabmVersionTTLista.listarTipoTramiteVersion()}" var="dtoVersionDeTipo" >
 
             <p:column>
                 <f:facet name="header">Código TT</f:facet>
@@ -96,7 +96,7 @@
                 <i class="fa fa-adjust"></i>
                 <span>HistorialVersiones</span>
                 </p:link>
-                <p:commandButton value="Historial" styleClass="btn-info" action="#{uiabmVersionHistorialLista.irHistorialVersion(dtoVersionDeTipo.codTipoTramite)}" disabled="#{dtoVersionDeTipo.fechaHoraBajaTipoTramite != null}">
+                <p:commandButton value="Historial" styleClass="btn-info" action="#{uiabmVersionTTLista.irHistorialVersion(dtoVersionDeTipo.codTipoTramite)}" disabled="#{dtoVersionDeTipo.fechaHoraBajaTipoTramite != null}">
                 </p:commandButton>
                 
                     <p:confirmDialog global="true"  showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
