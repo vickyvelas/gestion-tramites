@@ -5,21 +5,20 @@ import java.sql.Timestamp;
 
 public class DTOTipoTramite {
     
-    private int codCategoriaTramite;
+    private int codTipoTramite;
     private Timestamp fechaHoraBajaTipoTramite;
     private Timestamp maxDiaEntrega;
     private String nombreCategoriaTramite;
     private String nombreTipoTramite;
+
+    public int getCodTipoTramite() {
+        return codTipoTramite;
+    }
+
+    public void setCodTipoTramite(int codTipoTramite) {
+        this.codTipoTramite = codTipoTramite;
+    }
     
-
-    public int getCodCategoriaTramite() {
-        return codCategoriaTramite;
-    }
-
-    public void setCodCategoriaTramite(int codCategoriaTramite) {
-        this.codCategoriaTramite = codCategoriaTramite;
-    }
-
     public Timestamp getFechaHoraBajaTipoTramite() {
         return fechaHoraBajaTipoTramite;
     }

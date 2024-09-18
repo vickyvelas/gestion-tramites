@@ -83,4 +83,8 @@ private int codTipoTramite;
     public void setDocumentaciones(List<Documentacion> documentaciones) {
         this.documentaciones = documentaciones;
     }  
+
+    public String getNombreCategoriaTramite() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
