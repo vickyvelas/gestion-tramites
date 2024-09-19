@@ -22,5 +22,9 @@ public class ExpertoActualizarListaPrecio {
     void exportarListaPrecio(DTOListaPrecioExportar dtoListaPrecioExportar) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    void darDeBajaListaPrecio(int codigo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

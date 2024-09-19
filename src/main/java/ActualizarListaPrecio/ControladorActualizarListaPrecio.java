@@ -20,4 +20,8 @@ public class ControladorActualizarListaPrecio {
     public void exportarListaPrecio (DTOListaPrecioExportar dtoListaPrecioExportar) throws ListaPrecioException{
         expertoActualizarListaPrecio.exportarListaPrecio(dtoListaPrecioExportar);
     }
+
+    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException{
+        expertoActualizarListaPrecio.darDeBajaListaPrecio (codigo);
+    }
 }
