@@ -1,9 +1,10 @@
 package entidades;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 
-public class CategoriaTramite extends Entidad{
+public class CategoriaTramite extends Entidad implements Serializable{
     public int codCategoriaTramite;
     public String nombreCategoriaTramite;
     public Timestamp fechaHoraBajaCategoriaTramite;
