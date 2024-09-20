@@ -6,6 +6,7 @@ package RegistrarCambioEstado;
 
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import entidades.EstadoTramite;
 import java.util.List;
@@ -19,6 +20,11 @@ public class ControladorRegistrarCambioEstado {
     public List<TramitesConsultorDTO> buscarTramitesConsultor(int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
         return expertoRegistrarCambioEstado.buscarTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
     }
+    
+    public TramiteParticularDTO buscarTramiteParticular(int nroTramiteFiltro){
+        return expertoRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
+    }
+    
     public void cambioEstado(TransicionDTO  transicionDTO)throws cambioEstadoException{
         expertoRegistrarCambioEstado.cambioEstado(transicionDTO);
     }

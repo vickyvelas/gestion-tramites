@@ -5,18 +5,18 @@ import java.util.Date;
 
 public class TramitesConsultorDTO {
 
-    private int cuit;
+    private int cuitCliente;
     private Timestamp fechaHoraCargaTramite;
     private String nombreEstadoTramite;
     private String nombreTipoTramite;
     private int nroTramite;
-
+    
     //METODOS
-    public int getCuit() {
-        return cuit;
+    public int getCuitCliente() {
+        return cuitCliente;
     }
-    public void setCuit(int cuit) {
-        this.cuit = cuit;
+    public void setCuitCliente(int cuitCliente) {
+        this.cuitCliente = cuitCliente;
     }
     public Timestamp getFechaHoraCargaTramite() {
         return fechaHoraCargaTramite;

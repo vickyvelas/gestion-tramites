@@ -15,7 +15,7 @@
     </ui:define>
 
     <ui:define name="description">
-        Trabajar con Estado
+        Trabajar con Tramites
     </ui:define>
 
     <ui:define name="body">
@@ -77,7 +77,7 @@
                          </p:outputPanel> 
                    </div>
                    </div>
-            <p:spacer height="5"/>
+            <p:spacer height="6"/>
             <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="#{uicambioEstadoLista.buscarTramitesConsultor()}" var="tramiteConsultor" >
 
             <p:column>
@@ -106,27 +106,15 @@
                 #{tramiteConsultor.estado}
                 
             </p:column>
-                <!--
-            <p:column>
-                <f:facet name="header">Acciones</f:facet>
-                <p:commandButton value="Modificar" styleClass="btn-info"  disabled="#{Tramite.fechaHoraFinTramite != null}">
-                    <f:ajax render="@form"/>
-                </p:commandButton>
-                <p:spacer width="5"/>
-                <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" disabled="#{Tramite.fechaHoraFinTramite != null}">
-                   
-                    <p:confirm header="Anulación de #{estado.codigo} #{estado.nombre}" message="¿Está seguro?" icon="ui-icon-alert"/>
-                    
-                </p:commandButton>
                 
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
-                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                         icon="fa fa-check"/>
-                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
-                                         icon="fa fa-close"/>
-                    </p:confirmDialog>
-            </p:column>
-             -->  
+                <p:column> 
+                   
+                      <p:commandButton icon="pi pi-search" value="Modificar" styleClass="btn-info" action="#{uicambioEstadoLista.irATramite(tramiteConsultor.nroTramite)}">
+                    <f:ajax render="@form"/>
+                     </p:commandButton>
+                </p:column>
+                    
+    
 
         </p:dataTable>
             </div>

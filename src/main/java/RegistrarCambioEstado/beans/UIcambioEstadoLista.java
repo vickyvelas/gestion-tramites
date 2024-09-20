@@ -13,6 +13,7 @@ import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import utils.BeansUtils;
 
 /**
  *
@@ -64,9 +65,9 @@ public class UIcambioEstadoLista implements Serializable{
         for (TramitesConsultorDTO tramiteConsultorDTO : tramitesConsultorDTO) {
             UIcambioEstadoGrilla tramiteGrillaUI = new UIcambioEstadoGrilla();
             tramiteGrillaUI.setNroTramite(tramiteConsultorDTO.getNroTramite());
-            tramiteGrillaUI.setNombreTipoTramite(tramiteConsultorDTO.getNombreEstadoTramite());
+            tramiteGrillaUI.setNombreTipoTramite(tramiteConsultorDTO.getNombreTipoTramite());
             tramiteGrillaUI.setFechaInicio(tramiteConsultorDTO.getFechaHoraCargaTramite());
-            tramiteGrillaUI.setCuitCliente(tramiteConsultorDTO.getCuit());
+            tramiteGrillaUI.setCuitCliente(tramiteConsultorDTO.getCuitCliente());
             tramiteGrillaUI.setEstado(tramiteConsultorDTO.getNombreEstadoTramite());
             tramitesGrilla.add(tramiteGrillaUI);
         }
@@ -77,7 +78,11 @@ public class UIcambioEstadoLista implements Serializable{
     
     public void filtrar(){
     }
-    
+    public String irATramite(int nro) {
+        BeansUtils.guardarUrlAnterior();
+        System.out.println("hola mundo" +nro);
+        return "tramiteParticular.xhtml?faces-redirect=true&nroTramite=" + nro; // Usa '?faces-redirect=true' para hacer una redirección
+    }
    
     
 }

@@ -5,12 +5,15 @@
 package RegistrarCambioEstado.beans;
 
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
+import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
@@ -25,22 +28,106 @@ public class UItramiteParticular implements Serializable {
     private boolean insert;
     private String nombre;
     private int codigo;
+    private int codTipoTramite;
+    private Timestamp fechaHoraFinEntregaDoc;
+    private String nombreApellidoCliente;
+    private float precioTipoTramite;
+   // private TramiteParticularDTO tramiteParticularDTO;
+   // private int nroTramiteFiltro=23;
+    
+
+    public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado() {
+        return controladorRegistrarCambioEstado;
+    }
+
+    public void setControladorRegistrarCambioEstado(ControladorRegistrarCambioEstado controladorRegistrarCambioEstado) {
+        this.controladorRegistrarCambioEstado = controladorRegistrarCambioEstado;
+    }
+
+    public boolean isInsert() {
+        return insert;
+    }
+
+    public void setInsert(boolean insert) {
+        this.insert = insert;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getCodTipoTramite() {
+        return codTipoTramite;
+    }
+
+    public void setCodTipoTramite(int codTipoTramite) {
+        this.codTipoTramite = codTipoTramite;
+    }
+
+    public Timestamp getFechaHoraFinEntregaDoc() {
+        return fechaHoraFinEntregaDoc;
+    }
+
+    public void setFechaHoraFinEntregaDoc(Timestamp fechaHoraFinEntregaDoc) {
+        this.fechaHoraFinEntregaDoc = fechaHoraFinEntregaDoc;
+    }
+
+    public String getNombreApellidoCliente() {
+        return nombreApellidoCliente;
+    }
+
+    public void setNombreApellidoCliente(String nombreApellidoCliente) {
+        this.nombreApellidoCliente = nombreApellidoCliente;
+    }
+
+    public float getPrecioTipoTramite() {
+        return precioTipoTramite;
+    }
+
+    public void setPrecioTipoTramite(float precioTipoTramite) {
+        this.precioTipoTramite = precioTipoTramite;
+    }
     
     public UItramiteParticular(){
-        FacesContext facesContext = FacesContext.getCurrentInstance();
+                FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-//        
-//        int codigo = Integer.parseInt(request.getParameter("codigo"));
-//        insert=true;
-//        if(codigo > 0)
-//        {
-//            insert=false;
-//            ModificarEstadoDTO modificarEstadoDTO = controladorABMEstado.buscarEstadoAModificar(codigo);
-//            setNombre(modificarEstadoDTO.getNombre());
-//            setCodigo(modificarEstadoDTO.getCodigo());
-//        }
         
-    
+        int nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
+        System.out.println(nroTramite);
+        TramiteParticularDTO tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramite);
+        nombreApellidoCliente=tramiteParticularDTO.getNombreApellidoCliente();
     }
-}
+
+    public TramiteParticularDTO getTramiteParticularDTO() {
+        return new TramiteParticularDTO();
+    }
+
+    public void setTramiteParticularDTO(TramiteParticularDTO tramiteParticularDTO) {
+       // this.tramiteParticularDTO = tramiteParticularDTO;
+    }
+    public void setTramiteParticular(TramiteParticularDTO tramiteParticularDTO){
+       // this.tramiteParticularDTO=tramiteParticularDTO;
+    }
+            
+    
+    public void buscarTramiteParticular(int nroTramiteFiltro){
+        
+        //tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
+        
+        }
+        
+    }
+

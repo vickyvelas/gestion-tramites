@@ -5,8 +5,10 @@
 package RegistrarCambioEstado;
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import entidades.EstadoTramite;
+import entidades.ListaPrecio;
 import entidades.Tramite;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +55,34 @@ public class ExpertoRegistrarCambioEstado {
             tramitesConsultorDTO.setNombreTipoTramite(tramite.getTipoTramite().getNombreTipoTramite());
             tramitesConsultorDTO.setFechaHoraCargaTramite(tramite.getFechaHoraCargaTramite());
             tramitesConsultorDTO.setNombreEstadoTramite(tramite.getEstadoTramite().getNombreEstadoTramite());
+            tramitesConsultorDTO.setCuitCliente(tramite.getCliente().getCuitCliente());
+    
             tramitesConsultorResultado.add(tramitesConsultorDTO);
         }
         return tramitesConsultorResultado;
+    }
+    
+    public TramiteParticularDTO buscarTramiteParticular(int nroTramiteFiltro){
+        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        
+        if(nroTramiteFiltro>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nroTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(nroTramiteFiltro);
+            lCriterio.add(unCriterio);
+        }
+        Tramite tramiteEncontrado = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+        
+        TramiteParticularDTO tramiteParticularDTO = new TramiteParticularDTO();
+            tramiteParticularDTO.setCodTipoTramite(tramiteEncontrado.getTipoTramite().getCodTipoTramite());
+            tramiteParticularDTO.setFechaHoraFinEntregaDoc(tramiteEncontrado.getFechaHoraFinEntregaDocumentacion());
+            tramiteParticularDTO.setNombreApellidoCliente(tramiteEncontrado.getCliente().getNombreApellidoCliente());
+            tramiteParticularDTO.setPrecioTipoTramite(1500);
+        
+        
+        return tramiteParticularDTO;
     }
 
     public void cambioEstado(TransicionDTO transicionDTO) throws cambioEstadoException{

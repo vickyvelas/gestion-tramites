@@ -15,44 +15,151 @@
     </ui:define>
     <ui:define name="body">
         
+        <!-- 
     <h:form id="form" prependId="false">
         
         
         <p:panel styleClass="card box-teal">
-        <!-- DATOS DEL TRAMITE -->
+        DATOS DEL TRAMITE 
         <div class="ui-g ui-fluid">
                   
-  
-             <p:accordionPanel>
-                        <p:tab title="DATOS">
-                            <h:panelGrid columns="2" cellpadding="30">
-                
-                                <h:outputText value="Cliente: "/>
-                                
-                                <h:outputText value="Cuit: "/>
-                                
-                                <h:outputText value="Tipo Tramite: "/>
-                                 
-                                <h:outputText value="Codigo Tipo Tramite: "/>
-                                
-                                <h:outputText value="Estado actual: "/>
-                                
-                                <h:outputText value="Precio: "/>
-                                
-                                <h:outputText value="Fecha inicio: "/>
-                                
-                                <h:outputText value="Fecha documentacion: "/>
+       
+            
+                        <p:tab title="DATOS" >
                             
-                                <h:outputText value="Observacion: "/>
+                            <h:panelGrid id="tramiteDet" columns="2" cellpadding="30" rendered="#{uitramiteParticular.tramiteParticularDTO}">
+                                <h:outputLabel value="Cliente" />
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.nombreApellidoCliente}"/>
+                                
+                                
+                                <h:outputLabel value="Codigo Tipo Tramite:" />
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.codTipoTramite}"/>
+                                
+                                <h:outputLabel value="Fecha documentacion: " />
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.fechaHoraFinEntregaDoc}"/>
+                                
+                                <h:outputLabel value="Precio: " />
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.precioTipoTramite}"/>
+                                
+                                  estos datos se sacan del otro dto
+                                <h:outputText value="Fecha inicio: "/>
+                                <h:outputText value="Estado actual: "/>
+                               <h:outputText value="Cuit: " />
+                               <h:outputText value="Tipo Tramite: "/>
+                                <h:outputText value="Observacion: "/>  
                                 
                             </h:panelGrid>
+                           
                         </p:tab>
-                </p:accordionPanel>
+               
             
               
        </div>
         </p:panel>
+    </h:form> 
+   -->
+        
+        <div class="card">
+            <h:form id="form">
+                <!-- menu -->
+                <div class="card">
+                <p:tabMenu activeIndex="">
+                    <p:menuitem value="Datos Tramite" >
+                        <f:param name="i" value="0"/>
+                    </p:menuitem>
+
+                    <p:menuitem value="Etapas" >
+                        <f:param name="i" value="0"/>
+                    </p:menuitem>
+                </p:tabMenu>
+                </div>
+                <div class="card flex justify-content-center">
+                    <!-- mostrar datos del tramite -->
+                <p:dataViewGridItem> 
+                        <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+                                <h:outputText value="Cliente:" styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.nombreApellidoCliente}"/>
+                                   <!--
+                                <h:outputText value="Precio:" styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.precioTipoTramite}"/>
+
+
+                                <h:outputText value="Codigo Tiipo Tramite:" styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.codTipoTramite}"/>
+
+                                <h:outputText value="Fecha Documentacion" styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.fechaHoraFinEntregaDoc}"/>
+                                -->
+                                   <!-- estos datos vienen de otro dto -->
+                               <!-- <h:outputText value="Fecha inicio: " styleClass="text-secondary" />
+                                <h:outputText value="Estado actual: " styleClass="text-secondary"/>
+                                <h:outputText value="Cuit: " styleClass="text-secondary"/>
+                                <h:outputText value="Tipo Tramite: " styleClass="text-secondary"/>
+                                <h:outputText value="Observacion: " styleClass="text-secondary"/> 
+                                <p:card style="width: 75rem; margin-bottom: 2em">
+                           
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
+
+                                </p:card>
+                                -->
+                        </h:panelGrid>
+                </p:dataViewGridItem>
+                </div>
+                <!-- Tabla  historico-->
+                <div>
+                <p:dataTable id="grid1" widgetVar="TramiteParticularTable"  value="#{uicambioEstadoLista.buscarTramitesConsultor()}" var="tramiteEstado" >
+
+                    <p:column>
+                        <f:facet name="header">Nro Linea</f:facet>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Codigo</f:facet>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Estado</f:facet>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Observaciones</f:facet>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">Fecha Baja</f:facet>
+
+
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">Fecha Cambio</f:facet>
+
+
+                    </p:column>
+                    
+                    <p:column>
+                        <p:commandButton type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="pi pi-undo"/>
+                    </p:column>
+                   
+
+                </p:dataTable>
+                </div>
+                <!-- boton nuevo estado -->
+            <div class="box-header with-border" >
+                <div id="main-buttons" style="text-align: right;">
+                    <p:commandButton value="Nuevo Estado" icon="fa fa-plus"  styleClass="rounded-button btn-primary"/>
+                 </div>
+            </div>
     </h:form>
+    </div>
+   
+   
 
     </ui:define>
 

@@ -1,10 +1,11 @@
-package DTO.D;
+package RegistrarCambioEstado.dtos;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class dtoTramiteParticular {
+public class TramiteParticularDTO {
     private int codTipoTramite;
-    private Date fechaHoraFinEntregaDoc;
+    private Timestamp fechaHoraFinEntregaDoc;
     private String nombreApellidoCliente;
     private float precioTipoTramite;
 
@@ -12,7 +13,7 @@ public class dtoTramiteParticular {
     public int getCodTipoTramite() {
         return codTipoTramite;
     }
-    public Date getFechaHoraFinEntregaDoc() {
+    public Timestamp getFechaHoraFinEntregaDoc() {
         return fechaHoraFinEntregaDoc;
     }
     public String getNombreApellidoCliente() {
@@ -26,7 +27,7 @@ public class dtoTramiteParticular {
     public void setCodTipoTramite(int codTipoTramite) {
         this.codTipoTramite = codTipoTramite;
     }
-    public void setFechaHoraFinEntregaDoc(Date fechaHoraFinEntregaDoc) {
+    public void setFechaHoraFinEntregaDoc(Timestamp fechaHoraFinEntregaDoc) {
         this.fechaHoraFinEntregaDoc = fechaHoraFinEntregaDoc;
     }
     public void setNombreApellidoCliente(String nombreApellidoCliente) {
