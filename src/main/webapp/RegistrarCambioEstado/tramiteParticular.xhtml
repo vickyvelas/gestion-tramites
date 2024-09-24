@@ -79,21 +79,24 @@
                         <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
                                 <h:outputText value="Cliente:" styleClass="text-secondary"/>
                                 <h:outputText value="#{uitramiteParticular.nombreApellidoCliente}"/>
-                                   <!--
+                                
+                                <h:outputText value="Cuit: " styleClass="text-secondary"/>
+                                <h:outputText value="445566"/>
+                                   
                                 <h:outputText value="Precio:" styleClass="text-secondary"/>
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.precioTipoTramite}"/>
+                                <h:outputText value="#{uitramiteParticular.precioTipoTramite}"/>
 
 
                                 <h:outputText value="Codigo Tiipo Tramite:" styleClass="text-secondary"/>
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.codTipoTramite}"/>
+                                <h:outputText value="#{uitramiteParticular.codTipoTramite}"/>
 
                                 <h:outputText value="Fecha Documentacion" styleClass="text-secondary"/>
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.fechaHoraFinEntregaDoc}"/>
-                                -->
+                                <h:outputText value="#{uitramiteParticular.fechaHoraFinEntregaDoc}"/>
+                            
                                    <!-- estos datos vienen de otro dto -->
                                <!-- <h:outputText value="Fecha inicio: " styleClass="text-secondary" />
                                 <h:outputText value="Estado actual: " styleClass="text-secondary"/>
-                                <h:outputText value="Cuit: " styleClass="text-secondary"/>
+                                
                                 <h:outputText value="Tipo Tramite: " styleClass="text-secondary"/>
                                 <h:outputText value="Observacion: " styleClass="text-secondary"/> 
                                 <p:card style="width: 75rem; margin-bottom: 2em">
@@ -108,42 +111,44 @@
                 </div>
                 <!-- Tabla  historico-->
                 <div>
-                <p:dataTable id="grid1" widgetVar="TramiteParticularTable"  value="#{uicambioEstadoLista.buscarTramitesConsultor()}" var="tramiteEstado" >
+                    <p:dataTable id="grid1" widgetVar="TramiteParticularTable"  value="#{uiHistorico.controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite)}" var="tramiteEstado" >
 
                     <p:column>
                         <f:facet name="header">Nro Linea</f:facet>
+                        #{tramiteEstado.nroLineaTramiteEstado}
 
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">Codigo</f:facet>
-
+                          #{tramiteEstado.codEstadoTramite}
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">Estado</f:facet>
+                        #{tramiteEstado.nombreEstadoTramite}
 
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">Observaciones</f:facet>
-
+                        #{tramiteEstado.observaciones}
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">Fecha Baja</f:facet>
-
+                        #{tramiteEstado.fechaHoraBajaTramiteEstado}
 
                     </p:column>
                     
                     <p:column>
                         <f:facet name="header">Fecha Cambio</f:facet>
-
+                        #{tramiteEstado.fechaHastaTramiteEstado}
 
                     </p:column>
                     
                     <p:column>
-                        <p:commandButton type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                        <p:commandButton  styleClass="btn-material btn-primary ui-confirmdialog-yes"
                                          icon="pi pi-undo"/>
                     </p:column>
                    

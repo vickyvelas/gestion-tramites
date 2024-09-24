@@ -31,6 +31,10 @@ public class UIcambioEstadoLista implements Serializable{
         return controladorRegistrarCambioEstado;
     }
 
+   
+
+       
+
     public int getNroTramiteFiltro() {
         return nroTramiteFiltro;
     }

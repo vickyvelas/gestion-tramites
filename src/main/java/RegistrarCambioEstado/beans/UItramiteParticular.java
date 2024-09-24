@@ -5,7 +5,9 @@
 package RegistrarCambioEstado.beans;
 
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
+import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
+import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -13,6 +15,7 @@ import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -101,7 +104,7 @@ public class UItramiteParticular implements Serializable {
     }
     
     public UItramiteParticular(){
-                FacesContext facesContext = FacesContext.getCurrentInstance();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         
@@ -109,6 +112,14 @@ public class UItramiteParticular implements Serializable {
         System.out.println(nroTramite);
         TramiteParticularDTO tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramite);
         nombreApellidoCliente=tramiteParticularDTO.getNombreApellidoCliente();
+        codTipoTramite=tramiteParticularDTO.getCodTipoTramite();
+        fechaHoraFinEntregaDoc=tramiteParticularDTO.getFechaHoraFinEntregaDoc();
+        precioTipoTramite=tramiteParticularDTO.getPrecioTipoTramite();
+        
+       //NUEVO y si lo hago con la ui?
+        TramitesConsultorDTO  tramitesConsultorDTO = new TramitesConsultorDTO();
+        tramitesConsultorDTO.getCuitCliente();
+        
     }
 
     public TramiteParticularDTO getTramiteParticularDTO() {
@@ -128,6 +139,23 @@ public class UItramiteParticular implements Serializable {
         //tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
         
         }
-        
+    
+     public List<UIHistorico> buscarTramitesEstado(int nroTramite){
+        List<UIHistorico> tamiteEstadoGrilla = new ArrayList<>();
+        List<HistoricoDTO> historicosDTO = controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
+        for (HistoricoDTO HistoricoDTO : historicosDTO) {
+            UIHistorico tramEstadoGrillaUI = new UIHistorico();
+            tramEstadoGrillaUI.setCodEstadoTramite(HistoricoDTO.getCodEstadoTramite());
+            tramEstadoGrillaUI.setFechaCambio(HistoricoDTO.getFechaHastaTramiteEstado());
+            tramEstadoGrillaUI.setFechaBajaTramiteEstado(HistoricoDTO.getFechaHoraBajaTramiteEstado());
+            tramEstadoGrillaUI.setNombreEstadoTramite(HistoricoDTO.getNombreEstadoTramite());
+            tramEstadoGrillaUI.setNroLineaTramiteEstado(HistoricoDTO.getNroLineaTramiteEstado());
+            tramEstadoGrillaUI.setObservacionTramiteEstado(HistoricoDTO.getObservaciones());
+            tamiteEstadoGrilla.add(tramEstadoGrillaUI);
+        }
+        return tamiteEstadoGrilla;
+     }
+     
+     
     }
 

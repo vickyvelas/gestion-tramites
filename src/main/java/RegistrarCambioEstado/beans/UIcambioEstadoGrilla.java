@@ -4,20 +4,46 @@
  */
 package RegistrarCambioEstado.beans;
 
+import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
+import RegistrarCambioEstado.dtos.TramiteParticularDTO;
+import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import entidades.EstadoTramite;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
  * @author marti
  */
-public class UIcambioEstadoGrilla {
+@Named("uicambioEstadoGrilla")
+@ViewScoped
+public class UIcambioEstadoGrilla implements Serializable{
     
     private int nroTramite;
     private String nombreTipoTramite;
     private String estado;
     private Timestamp fechaInicio;
     private int cuitCliente;
+    
+    private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado=new ControladorRegistrarCambioEstado();
+
+
+
+    public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado() {
+        return controladorRegistrarCambioEstado;
+    }
+
+    public void setControladorRegistrarCambioEstado(ControladorRegistrarCambioEstado controladorRegistrarCambioEstado) {
+        this.controladorRegistrarCambioEstado = controladorRegistrarCambioEstado;
+    }
+
+    
 
     public int getNroTramite() {
         return nroTramite;

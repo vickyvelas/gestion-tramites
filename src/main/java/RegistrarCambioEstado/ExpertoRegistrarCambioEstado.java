@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package RegistrarCambioEstado;
+
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import entidades.EstadoTramite;
 import entidades.ListaPrecio;
 import entidades.Tramite;
+import entidades.TramiteEstado;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DTOCriterio;
@@ -83,6 +86,33 @@ public class ExpertoRegistrarCambioEstado {
         
         
         return tramiteParticularDTO;
+    }
+    
+    
+    public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
+        List<HistoricoDTO> historicoDTOResultado = new ArrayList<>();
+        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(nroTramite>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nroTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(nroTramite);
+            lCriterio.add(unCriterio);
+        }
+        List objetoList = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio);
+        for (Object x : objetoList) {
+            TramiteEstado tramiteEstado = (TramiteEstado) x;
+            HistoricoDTO historicoDTO = new HistoricoDTO();
+            historicoDTO.setNroLineaTramiteEstado(tramiteEstado.getNroLineaTramiteEstado());
+            historicoDTO.setCodEstadoTramite(tramiteEstado.getEstadoTramite().getCodEstadoTramite());
+            historicoDTO.setFechaHoraBajaTramiteEstado(tramiteEstado.getFechaHoraBajaTramiteEstado());
+            historicoDTO.setObservaciones(tramiteEstado.getObservacionTramiteEstado());
+            historicoDTO.setNombreEstadoTramite(tramiteEstado.getEstadoTramite().getNombreEstadoTramite());
+            
+            historicoDTOResultado.add(historicoDTO);
+        }
+        return historicoDTOResultado;
     }
 
     public void cambioEstado(TransicionDTO transicionDTO) throws cambioEstadoException{

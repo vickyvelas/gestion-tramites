@@ -6,6 +6,7 @@ package RegistrarCambioEstado;
 
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import entidades.EstadoTramite;
@@ -29,4 +30,7 @@ public class ControladorRegistrarCambioEstado {
         expertoRegistrarCambioEstado.cambioEstado(transicionDTO);
     }
     
+     public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
+        return expertoRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
+    }
 }
