@@ -91,7 +91,7 @@ public class VersionGrilla implements Serializable {
     public  String irHistorialVersion(int codigo) {
         //List<DTOVersionHistorial> listResultado = controlador.historialVersiones(codigo);
         BeansUtils.guardarUrlAnterior();
-        return "/ABMConfigurarVersiones/HistorialVersiones.xhtml?faces-redirect=true&tipoTramite="+ codigo+"&nombre=cristian"; // Usa '?faces-redirect=true' para hacer una redirección
+        return "/ABMConfigurarVersiones/HistorialVersiones.xhtml?faces-redirect=true&tipoTramite="+ codigo; // Usa '?faces-redirect=true' para hacer una redirección
     }
     public DTOVersionOutput irVerVersion(int codigo, int codigov) throws VersionException {
         DTOVersionOutput verVersion = controlador.verVersion(codigo, codigov);

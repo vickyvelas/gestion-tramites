@@ -26,7 +26,7 @@
 
             <div class="ui-g ui-fluid">
             <p:spacer height="5"/>
-            <p:dataTable id="grid1" widgetVar="VersionH" value="#{uiabmVersionHistorialLista.irHistorialVersion(codigo)}" var="dtoVersionH" >
+            <p:dataTable id="grid1" widgetVar="VersionH" value="#{uiabmVersionHistorialLista.listarHistorico()}" var="dtoVersionH" >
 
             <p:column>
                 <f:facet name="header">Codigo Version</f:facet>
@@ -51,7 +51,7 @@
             <p:column>
                 <f:facet name="header">Acciones a version</f:facet>
                 <p:spacer width="5"/>
-                <p:commandButton value="Ver" styleClass="btn-danger"  action="#{uiabmVersionHistorialLista.irVerVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">
+                <p:commandButton value="Ver" styleClass="btn-danger"  action="#{uiabmVersionHistorialLista.irVerVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}">
                 </p:commandButton>
                 <p:spacer width="5"/>
                 <p:commandButton value="Anular" styleClass="btn-info" actionListener="#{uiabmVersionHistorialLista.irAnularVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">

@@ -23,13 +23,31 @@ import utils.BeansUtils;
 @ViewScoped
 public class ListaHistoricoVersiones implements Serializable{
      private ControladorABMVersion controlador = new ControladorABMVersion();
+     private int codigo;
+     private String nombre;
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+     
     public ControladorABMVersion getControladorABMVersion() {
         return controlador;
     }
 
     public void setControladorABMVersion(ControladorABMVersion controladorABMVersion) {
-    //    this.controlador = controladorABMVersion;
+        this.controlador = controladorABMVersion;
     }
    
     public void irAnularVersion(int codigo, int codigov){
@@ -47,20 +65,30 @@ public class ListaHistoricoVersiones implements Serializable{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        
         int codigo = Integer.parseInt(request.getParameter("tipoTramite"));
-        String nombre= request.getParameter("nombre");
-        System.out.println("El tipo de trámite es:" + codigo);
-        System.out.println(nombre);
-        
+        //String nombre= request.getParameter("nombre");
+        //System.out.println("El tipo de trámite es:" + codigo);
+        //System.out.println(nombre);
+        setCodigo(codigo);
+    }
+
+    public List<DTOVersionHistorial> listarHistorico() {
+        List<DTOVersionHistorial> listResultado = new ArrayList();
+        List<DTOVersionHistorial> listaDto = new ArrayList();
+        listaDto = controlador.historialVersiones(getCodigo());
+        for (DTOVersionHistorial x : listaDto){
+            DTOVersionHistorial y = new DTOVersionHistorial();
+            y.setCodTipoTramite(x.getCodTipoTramite());
+            y.setCodVersion(x.getCodVersion());
+            y.setFechaBajaVersion(x.getFechaBajaVersion());
+            y.setFechaDesdeVersion(x.getFechaDesdeVersion());
+            y.setFechaHastaVersion(x.getFechaHastaVersion());
+            y.setNombreTipoTramite(x.getNombreTipoTramite());
+            listResultado.add(y);
+        }
+        return listResultado;
     }
     
-    public  List<DTOVersionHistorial> irHistorialVersion(int codigo) {
-        
-        List<DTOVersionHistorial> listResultado = new ArrayList<DTOVersionHistorial>();// controlador.historialVersiones(codigo);
-       // BeansUtils.guardarUrlAnterior();
-        return listResultado; // Usa '?faces-redirect=true' para hacer una redirección
-    }
     
         public DTOVersionOutput irVerVersion(int codigo, int codigov) throws VersionException {
         DTOVersionOutput verVersion = new DTOVersionOutput(); //controlador.verVersion(codigo, codigov);

@@ -32,7 +32,7 @@
                         <p:inputText id="codFilter"  style="width:150px"
                                      placeholder="" value="#{uiabmVersionTTLista.codigoFiltro}" onfocus="Javascript:this.focus();this.select();">
                                         <p:ajax event="keyup" 
-                                            listener="#{uiabmVersionTTLista.filtrar()}" 
+                                                listener="#{uiabmVersionTTLista.buscarTipoTramiteVersion()}" 
                                             update="@form:grid1"
                                             />
                                      
@@ -47,7 +47,7 @@
                         <p:inputText id="nomFilter"  style="width:150px"
                                      placeholder="" value="#{uiabmVersionTTLista.nombreFiltro}">
                                         <p:ajax event="keyup" 
-                                            listener="#{uiabmVersionTTLista.filtrar()}" 
+                                                listener="#{uiabmVersionTTLista.buscarTipoTramiteVersion()}" 
                                             update="@form:grid1"
                                         />
                                      
@@ -89,14 +89,10 @@
                     <f:ajax render="@form"/>
                 </p:commandButton>
                 <p:spacer width="5"/>
-                <p:commandButton value="Ver" styleClass="btn-info"  action="#{uiabmVersionTTLista.irVerVersion(dtoVersionDeTipo.codTipoTramite, dtoVersionDeTipo.codVersion)}" disabled="#{dtoVersionDeTipo.fechaHoraBajaTipoTramite != null}">
+                <p:commandButton value="Ver" styleClass="btn-info"  action="#{uiabmVersionTTLista.irVerVersion(dtoVersionDeTipo.codTipoTramite, dtoVersionDeTipo.codVersion)}">
                 </p:commandButton>
                 <p:spacer width="5"/>
-                <p:link outcome="/ABMConfigurarVersiones/HistorialVersiones.xhtml?faces-redirect=true">
-                <i class="fa fa-adjust"></i>
-                <span>HistorialVersiones</span>
-                </p:link>
-                <p:commandButton value="Historial" styleClass="btn-info" action="#{uiabmVersionTTLista.irHistorialVersion(dtoVersionDeTipo.codTipoTramite)}" disabled="#{dtoVersionDeTipo.fechaHoraBajaTipoTramite != null}">
+                <p:commandButton value="Historial" styleClass="btn-info" action="#{uiabmVersionTTLista.irHistorialVersion(dtoVersionDeTipo.codTipoTramite)}">
                 </p:commandButton>
                 
                     <p:confirmDialog global="true"  showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
