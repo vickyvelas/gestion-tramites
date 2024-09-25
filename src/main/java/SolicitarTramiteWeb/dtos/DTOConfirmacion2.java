@@ -1,10 +1,10 @@
 
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
+
 import java.sql.Timestamp;
 
-public class DTOConfirmacion2 implements Serializable {
+public class DTOConfirmacion2  {
     
     private Timestamp fechaHoraVencimientoDocumentacion;
     private String nombreApellidoConsultor;

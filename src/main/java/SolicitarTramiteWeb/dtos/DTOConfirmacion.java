@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
 
-public class DTOConfirmacion implements Serializable {
+
+public class DTOConfirmacion  {
     
     private int cuitCliente;
     private String direccionCliente;

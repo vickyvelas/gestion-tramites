@@ -1,9 +1,12 @@
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
+
+
+import entidades.EstadoTramite;
+
 import java.sql.Timestamp;
 
-public class DTOTramiteWeb implements Serializable {
+public class DTOTramiteWeb  {
     
     private int nroTramite;
     private float precioTramite;
@@ -11,6 +14,16 @@ public class DTOTramiteWeb implements Serializable {
     private Timestamp fechaHoraVencimientoDocumentacion;
     private Timestamp fechaHoraFinEntregaDocumentacion;
     private Timestamp fechaHoraFinTramite;
+    private EstadoTramite estadoTramite;
+
+    public EstadoTramite getEstadoTramite() {
+        return estadoTramite;
+    }
+
+    public void setEstadoTramite(EstadoTramite estadoTramite) {
+        this.estadoTramite = estadoTramite;
+    }
+   
 
     public int getNroTramite() {
         return nroTramite;
@@ -59,6 +72,7 @@ public class DTOTramiteWeb implements Serializable {
     public void setFechaHoraFinTramite(Timestamp fechaHoraFinTramite) {
         this.fechaHoraFinTramite = fechaHoraFinTramite;
     }
+    
     
 }
 

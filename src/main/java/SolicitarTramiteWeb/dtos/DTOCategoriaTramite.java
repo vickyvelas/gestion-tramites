@@ -1,11 +1,9 @@
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
-
-public class DTOCategoriaTramite implements Serializable {
+public class DTOCategoriaTramite  {
     
     private int codCategoriaTramite;
-    private int nombreCategoriaTramite;
+    private String nombreCategoriaTramite;
 
     public int getCodCategoriaTramite() {
         return codCategoriaTramite;
@@ -15,11 +13,11 @@ public class DTOCategoriaTramite implements Serializable {
         this.codCategoriaTramite = codCategoriaTramite;
     }
 
-    public int getNombreCategoriaTramite() {
+    public String getNombreCategoriaTramite() {
         return nombreCategoriaTramite;
     }
 
-    public void setNombreCategoriaTramite(int nombreCategoriaTramite) {
+    public void setNombreCategoriaTramite(String nombreCategoriaTramite) {
         this.nombreCategoriaTramite = nombreCategoriaTramite;
     }
            

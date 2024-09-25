@@ -1,8 +1,8 @@
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
 
-public class DTOTipoTramiteWeb implements Serializable {
+
+public class DTOTipoTramiteWeb {
     
     private int codTipoTramite;
     private String descripcionTipoTramiteWeb;

@@ -1,14 +1,34 @@
 package SolicitarTramiteWeb.dtos;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class DTOCliente implements Serializable {
+public class DTOCliente {
     
     private int cuitCliente;
     private String direccionCliente;
     private String mailCliente;
     private String nombreApellidoCliente;
     private double telefonoCliente;
+    private Timestamp fechaHoraAltaCliente;
+    private Timestamp fechaHoraBajaCliente;
+    
+
+    public Timestamp getFechaHoraAltaCliente() {
+        return fechaHoraAltaCliente;
+    }
+
+    public void setFechaHoraAltaCliente(Timestamp fechaHoraAltaCliente) {
+        this.fechaHoraAltaCliente = fechaHoraAltaCliente;
+    }
+
+    public Timestamp getFechaHoraBajaCliente() {
+        return fechaHoraBajaCliente;
+    }
+
+    public void setFechaHoraBajaCliente(Timestamp fechaHoraBajaCliente) {
+        this.fechaHoraBajaCliente = fechaHoraBajaCliente;
+    }
+    
 
     public int getCuitCliente() {
         return cuitCliente;

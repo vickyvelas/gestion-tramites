@@ -11,6 +11,8 @@ public class Cliente extends Entidad{
     private String mailCliente;
     private String nombreApellidoCliente;
     private double telefonoCliente;
+    
+    
     public Cliente(){}
 
     public int getCuitCliente() {
