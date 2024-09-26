@@ -33,4 +33,8 @@ public class ControladorRegistrarCambioEstado {
      public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
         return expertoRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
     }
+     
+     public void anularTramiteEstado(int nroLineaTramiteEstado) throws cambioEstadoException{
+         expertoRegistrarCambioEstado.anularTramiteEstado(nroLineaTramiteEstado);
+     }
 }

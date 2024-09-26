@@ -15,49 +15,7 @@
     </ui:define>
     <ui:define name="body">
         
-        <!-- 
-    <h:form id="form" prependId="false">
-        
-        
-        <p:panel styleClass="card box-teal">
-        DATOS DEL TRAMITE 
-        <div class="ui-g ui-fluid">
-                  
-       
-            
-                        <p:tab title="DATOS" >
-                            
-                            <h:panelGrid id="tramiteDet" columns="2" cellpadding="30" rendered="#{uitramiteParticular.tramiteParticularDTO}">
-                                <h:outputLabel value="Cliente" />
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.nombreApellidoCliente}"/>
-                                
-                                
-                                <h:outputLabel value="Codigo Tipo Tramite:" />
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.codTipoTramite}"/>
-                                
-                                <h:outputLabel value="Fecha documentacion: " />
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.fechaHoraFinEntregaDoc}"/>
-                                
-                                <h:outputLabel value="Precio: " />
-                                <h:outputText value="#{uitramiteParticular.tramiteParticularDTO.precioTipoTramite}"/>
-                                
-                                  estos datos se sacan del otro dto
-                                <h:outputText value="Fecha inicio: "/>
-                                <h:outputText value="Estado actual: "/>
-                               <h:outputText value="Cuit: " />
-                               <h:outputText value="Tipo Tramite: "/>
-                                <h:outputText value="Observacion: "/>  
-                                
-                            </h:panelGrid>
-                           
-                        </p:tab>
-               
-            
-              
-       </div>
-        </p:panel>
-    </h:form> 
-   -->
+
         
         <div class="card">
             <h:form id="form">
@@ -149,7 +107,13 @@
                     
                     <p:column>
                         <p:commandButton  styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                         icon="pi pi-undo"/>
+                                          icon="pi pi-undo" actionListener="#{uiHistorico.anularTramiteEstado(tramiteEstado.nroLineaTramiteEstado)}" 
+                                          disabled="#{tramiteEstado.fechaHoraBajaTramiteEstado != null }"
+                                          update="@form:grid1">
+                            <!-- no funciona la notificacion -->
+                            <!--<p:confirm header="Anulación de #{tramiteEstado.nroLineaTramiteEstado}" message="¿Está seguro?" icon="ui-icon-alert">
+                            </p:confirm>-->
+                        </p:commandButton>
                     </p:column>
                    
 

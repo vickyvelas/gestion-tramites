@@ -8,6 +8,7 @@ import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
+import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -17,6 +18,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import org.omnifaces.util.Messages;
 
 /**
  *
@@ -139,6 +141,7 @@ public class UItramiteParticular implements Serializable {
         //tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
         
         }
+    
     
      public List<UIHistorico> buscarTramitesEstado(int nroTramite){
         List<UIHistorico> tamiteEstadoGrilla = new ArrayList<>();

@@ -13,6 +13,7 @@ import entidades.EstadoTramite;
 import entidades.ListaPrecio;
 import entidades.Tramite;
 import entidades.TramiteEstado;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DTOCriterio;
@@ -107,6 +108,7 @@ public class ExpertoRegistrarCambioEstado {
             historicoDTO.setNroLineaTramiteEstado(tramiteEstado.getNroLineaTramiteEstado());
             historicoDTO.setCodEstadoTramite(tramiteEstado.getEstadoTramite().getCodEstadoTramite());
             historicoDTO.setFechaHoraBajaTramiteEstado(tramiteEstado.getFechaHoraBajaTramiteEstado());
+            historicoDTO.setFechaHastaTramiteEstado(tramiteEstado.getFechaHoraHastaTramiteEstado());
             historicoDTO.setObservaciones(tramiteEstado.getObservacionTramiteEstado());
             historicoDTO.setNombreEstadoTramite(tramiteEstado.getEstadoTramite().getNombreEstadoTramite());
             
@@ -114,6 +116,27 @@ public class ExpertoRegistrarCambioEstado {
         }
         return historicoDTOResultado;
     }
+    
+    //ANULAR BASICO BASICO
+    public void anularTramiteEstado(int nroLineaTramiteEstado) throws cambioEstadoException {
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        
+        List <DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        
+        dto.setAtributo("nroLineaTramiteEstado");
+        dto.setOperacion("=");
+        dto.setValor(nroLineaTramiteEstado);
+        
+        criterioList.add(dto);
+        
+        TramiteEstado tramiteEstadoEncontrado =(TramiteEstado) FachadaPersistencia.getInstance().buscar("TramiteEstado", criterioList).get(0);
+        tramiteEstadoEncontrado.setFechaHoraBajaTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        
+        FachadaPersistencia.getInstance().guardar(tramiteEstadoEncontrado);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
+    }
+    
 
     public void cambioEstado(TransicionDTO transicionDTO) throws cambioEstadoException{
         FachadaPersistencia.getInstance().iniciarTransaccion();

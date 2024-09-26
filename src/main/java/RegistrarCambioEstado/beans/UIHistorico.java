@@ -6,6 +6,7 @@ package RegistrarCambioEstado.beans;
 
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
+import RegistrarCambioEstado.exceptions.cambioEstadoException;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+import org.omnifaces.util.Messages;
 
 @Named("uiHistorico")
 @ViewScoped
@@ -102,7 +104,14 @@ public class UIHistorico implements Serializable{
         this.fechaCambio = fechaCambio;
     }
     
-    
+    public void anularTramiteEstado(int nroLineaTramiteEstado) {
+        try{
+            controladorRegistrarCambioEstado.anularTramiteEstado(nroLineaTramiteEstado);
+            Messages.create("Anulado").detail("Anulado").add();
+        }catch(cambioEstadoException e){
+            Messages.create("Error!").error().detail(e.getMessage()).add();
+        }
+    }
     
     
     
