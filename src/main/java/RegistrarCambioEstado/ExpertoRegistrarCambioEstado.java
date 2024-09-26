@@ -138,32 +138,34 @@ public class ExpertoRegistrarCambioEstado {
     }
     
 
-    public void cambioEstado(TransicionDTO transicionDTO) throws cambioEstadoException{
-        FachadaPersistencia.getInstance().iniciarTransaccion();
-        
-        List<DTOCriterio> criterioList = new ArrayList<>();
-        DTOCriterio dtoc = new DTOCriterio();
-        dtoc.setAtributo("codEstadoTramite");
-        dtoc.setOperacion("=");
-        dtoc.setValor(transicionDTO.getCodEstadoTramite());
-        
-        criterioList.add(dtoc);
-        List lEstado=FachadaPersistencia.getInstance().buscar("EstadoTramite", criterioList);
-        
-        //hay un if si el cod ingresado existe larga excepcion. Sino
-        
-        if(lEstado.size()>0){
-            throw new cambioEstadoException("El codigo ya existe");
-        }else{
-            EstadoTramite estadoTramite = new EstadoTramite();
-            estadoTramite.setCodEstadoTramite(transicionDTO.getCodEstadoTramite());
-            estadoTramite.setNombreEstadoTramite(transicionDTO.getNombreEstadoTramite());
-            estadoTramite.setFechaHoraBajaEstadoTramite(null);
-            
-            FachadaPersistencia.getInstance().guardar(estadoTramite);
-            FachadaPersistencia.getInstance().finalizarTransaccion();
-        }
-    }
+//    public void nuevoEstado(int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
+//        FachadaPersistencia.getInstance().iniciarTransaccion();
+//        
+//        List<DTOCriterio> criterioList = new ArrayList<>();
+//        DTOCriterio dtoc = new DTOCriterio();
+//        dtoc.setAtributo("nroLineaTramiteEstado");
+//        dtoc.setOperacion("=");
+//        dtoc.setValor(nroLineaTramiteEstado);
+//        
+//        criterioList.add(dtoc);
+//        List lEstado=FachadaPersistencia.getInstance().buscar("TramiteEstado", criterioList);
+//        
+//        //hay un if si el cod ingresado existe larga excepcion. Sino
+//        
+//        if(lEstado.size()>0){
+//            throw new cambioEstadoException("El codigo ya existe");
+//        }else{
+//            TramiteEstado tramiteEstado = new TramiteEstado();
+//            tramiteEstado.setFechaHoraBajaTramiteEstado(null);
+//            tramiteEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis());
+//            tramiteEstado.setEstadoTramite();
+//            tramiteEstado.setNroLineaTramiteEstado(nroLineaTramiteEstado);
+//            tramiteEstado.setObservacionTramiteEstado(transicionDTO.getObservacion());
+//            
+//            FachadaPersistencia.getInstance().guardar(tramiteEstado);
+//            FachadaPersistencia.getInstance().finalizarTransaccion();
+//        }
+//    }
         
      
 }

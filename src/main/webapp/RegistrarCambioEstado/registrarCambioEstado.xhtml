@@ -16,51 +16,47 @@
     </ui:define>
     <ui:define name="body">
         
-    <h:form id="form" prependId="false">
-        
-        <p:panel styleClass="box-primary card">
-        
-        <div class="ui-g ui-fluid">
-    <!-- Campo de entrada para el código del estado -->
-            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-               <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="codigo" value="Código del Estado:" />
-               </div>
-                 <div class="ui-sm-12 ui-g-11">
-                     <p:inputText id="codigo" style="width: 150px;" >
-                     </p:inputText><p:message id="codigoMSG" for="codigo"/>
+        <h:form id="form" prependId="false" >
+        <div class="card" align="center" >
+           <p:dataViewGridItem>  
+             <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+                 
+            <h:outputText value="Estado actual:" />
+            <h:outputText value="#{uiHistorico.nombreEstadoTramite}"/>
+            
+             </h:panelGrid>
+           </p:dataViewGridItem>
+            
+            <h:outputText value="Seleccione próximo estado" />
+            <!-- botones de posibles estados -->
+            <p:selectOneRadio id="line"  layout="lineDirection">
+                <f:selectItem itemLabel="Option1" itemValue="Option1"/>
+                <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+                <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+            </p:selectOneRadio>
+            <h:outputText value="Observaciones"/>
+            <div>
+                <p:inputTextarea rows="6" cols="90"/>
+            </div>
+            
+            <!-- botones de GUARDAR Y CANCELAR -->
+            <p:toolbar>
+            <p:toolbarGroup align="right">
+            <div class="box-header with-border" >
+                <div id="main-buttons">
+                    <p:commandButton value="Guardar Cambio"  styleClass="rounded-button btn-primary"/>
                  </div>
-            </div>   
-            
-    <!-- Campo de entrada filtro nombre estado-->
-            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-               <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel for="nombre" value="Nombre del Estado:" />
             </div>
-            <div class="ui-sm-12 ui-g-11"> 
-                  <p:inputText id="nombre" />
-             </div>
-            </div>  
-    
-        <!-- Campo de entrada filtro nombre estado-->
-            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-               <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel for="nombre" value="Tipo Tramite:" />
-            </div>
-            <div class="ui-sm-12 ui-g-11"> 
-                  <p:inputText id="nombreTT" />
-             </div>
-            </div> 
             
-    <!-- Botón para aplicar filtros -->
-            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-               <div class="ui-sm-12 ui-g-4">
-                <p:commandButton value="Aplicar"  icon="fa fa-check"
-                                   styleClass=" btn-primary" /> 
-                </div>
-            </div>   
-       </div>
-        </p:panel>
+            <div class="box-header with-border" >
+                <div id="main-buttons" >
+                    <p:commandButton value="Cancelar"  styleClass="rounded-button btn-primary" actionListener="#{uiHistorico.irEtapas()}"/>
+                 </div>
+            </div>
+            </p:toolbarGroup>
+             </p:toolbar>
+        </div>
+       
     </h:form>
 
     </ui:define>

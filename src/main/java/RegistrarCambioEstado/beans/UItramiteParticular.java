@@ -37,8 +37,16 @@ public class UItramiteParticular implements Serializable {
     private Timestamp fechaHoraFinEntregaDoc;
     private String nombreApellidoCliente;
     private float precioTipoTramite;
-   // private TramiteParticularDTO tramiteParticularDTO;
-   // private int nroTramiteFiltro=23;
+    private int cuitCliente;
+
+    public int getCuitCliente() {
+        return cuitCliente;
+    }
+
+    public void setCuitCliente(int cuitCliente) {
+        this.cuitCliente = cuitCliente;
+    }
+    
     
 
     public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado() {
@@ -117,10 +125,12 @@ public class UItramiteParticular implements Serializable {
         codTipoTramite=tramiteParticularDTO.getCodTipoTramite();
         fechaHoraFinEntregaDoc=tramiteParticularDTO.getFechaHoraFinEntregaDoc();
         precioTipoTramite=tramiteParticularDTO.getPrecioTipoTramite();
+       
         
        //NUEVO y si lo hago con la ui?
-        TramitesConsultorDTO  tramitesConsultorDTO = new TramitesConsultorDTO();
-        tramitesConsultorDTO.getCuitCliente();
+//        List<TramitesConsultorDTO>  tramitesConsultorDTO = controladorRegistrarCambioEstado.buscarTramitesConsultor(nroTramite, nombreApellidoCliente, nombre);
+//        cuitCliente=tramitesConsultorDTO.getCuitCliente();
+        
         
     }
 
@@ -158,6 +168,8 @@ public class UItramiteParticular implements Serializable {
         }
         return tamiteEstadoGrilla;
      }
+     
+     
      
      
     }

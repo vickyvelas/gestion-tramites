@@ -39,7 +39,7 @@
                                 <h:outputText value="#{uitramiteParticular.nombreApellidoCliente}"/>
                                 
                                 <h:outputText value="Cuit: " styleClass="text-secondary"/>
-                                <h:outputText value="445566"/>
+                                <h:outputText value="#{uitramiteParticular.cuitCliente}"/>
                                    
                                 <h:outputText value="Precio:" styleClass="text-secondary"/>
                                 <h:outputText value="#{uitramiteParticular.precioTipoTramite}"/>
@@ -122,9 +122,14 @@
                 <!-- boton nuevo estado -->
             <div class="box-header with-border" >
                 <div id="main-buttons" style="text-align: right;">
-                    <p:commandButton value="Nuevo Estado" icon="fa fa-plus"  styleClass="rounded-button btn-primary"/>
+                    <p:commandButton value="Nuevo Estado" icon="fa fa-plus"  styleClass="rounded-button btn-primary"
+                                     action="#{uiHistorico.irNuevoEstado()}"/>
+
                  </div>
             </div>
+                
+                
+                 
     </h:form>
     </div>
    

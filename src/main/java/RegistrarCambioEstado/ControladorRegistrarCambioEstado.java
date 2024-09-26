@@ -26,9 +26,9 @@ public class ControladorRegistrarCambioEstado {
         return expertoRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
     }
     
-    public void cambioEstado(TransicionDTO  transicionDTO)throws cambioEstadoException{
-        expertoRegistrarCambioEstado.cambioEstado(transicionDTO);
-    }
+//    public void nuevoEstado(int nroLineaTramiteEstado, TransicionDTO  transicionDTO)throws cambioEstadoException{
+//        expertoRegistrarCambioEstado.nuevoEstado(nroLineaTramiteEstado,transicionDTO);
+//    }
     
      public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
         return expertoRegistrarCambioEstado.buscarTramitesEstado(nroTramite);

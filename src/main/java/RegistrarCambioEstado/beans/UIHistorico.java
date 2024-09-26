@@ -14,8 +14,10 @@ import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
+import utils.BeansUtils;
 
 @Named("uiHistorico")
 @ViewScoped
@@ -39,18 +41,12 @@ public class UIHistorico implements Serializable{
     }
 
     public UIHistorico() {
-//        FacesContext facesContext = FacesContext.getCurrentInstance();
-//        ExternalContext externalContext = facesContext.getExternalContext();
-//        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-//        
-//        List<HistoricoDTO>  historicoDTO = controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
-//        for()
-//        nroLineaTramiteEstado=historicoDTO.getNroLineaTramiteEstado();
-//        codEstadoTramite=historicoDTO.getCodEstadoTramite();
-//        observacionTramiteEstado=historicoDTO.getNombreEstadoTramite();
-//        fechaBajaTramiteEstado=historicoDTO.getFechaHoraBajaTramiteEstado();
-//        nombreEstadoTramite=historicoDTO.getNombreEstadoTramite();
-//        fechaCambio=historicoDTO.getFechaHastaTramiteEstado();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        
+        
+
     }
     
     
@@ -112,6 +108,20 @@ public class UIHistorico implements Serializable{
             Messages.create("Error!").error().detail(e.getMessage()).add();
         }
     }
+    
+    public String irNuevoEstado() {
+        BeansUtils.guardarUrlAnterior();
+        
+        return "registrarCambioEstado.xhtml?faces-redirect=true" ; // Usa '?faces-redirect=true' para hacer una redirección
+    }
+    
+    //no funciona, seguramente porque necesita el nro de tramite
+    public String irEtapas(){
+         BeansUtils.guardarUrlAnterior();
+         return "tramiteParticular.xhtml?faces-redirect=true";
+    }
+    
+    
     
     
     

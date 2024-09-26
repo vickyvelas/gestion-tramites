@@ -87,6 +87,8 @@ public class UIcambioEstadoLista implements Serializable{
         System.out.println("hola mundo" +nro);
         return "tramiteParticular.xhtml?faces-redirect=true&nroTramite=" + nro; // Usa '?faces-redirect=true' para hacer una redirección
     }
+    
+    
    
     
 }
