@@ -26,6 +26,10 @@ public class EjemplosPersistencia {
         crearElementos();
     }
 
+    
+    //INTENTOOOO
+    
+    
     /**
      * Crea un estado, un articulo con dicho estado, una reposicion con dicho estado y un detalle para esa reposicion.
      */
