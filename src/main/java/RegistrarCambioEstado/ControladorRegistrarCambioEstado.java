@@ -22,13 +22,18 @@ public class ControladorRegistrarCambioEstado {
         return expertoRegistrarCambioEstado.buscarTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
     }
     
+    public TramitesConsultorDTO buscarTramiteConsultor(int nroTramiteFiltro){
+        return expertoRegistrarCambioEstado.buscarTramiteConsultor(nroTramiteFiltro);
+    }
+    
     public TramiteParticularDTO buscarTramiteParticular(int nroTramiteFiltro){
         return expertoRegistrarCambioEstado.buscarTramiteParticular(nroTramiteFiltro);
     }
     
-//    public void nuevoEstado(int nroLineaTramiteEstado, TransicionDTO  transicionDTO)throws cambioEstadoException{
-//        expertoRegistrarCambioEstado.nuevoEstado(nroLineaTramiteEstado,transicionDTO);
-//    }
+    
+    public void nuevoEstado(int nroLineaTramiteEstado, TransicionDTO  transicionDTO)throws cambioEstadoException{
+        expertoRegistrarCambioEstado.nuevoEstado(nroLineaTramiteEstado, transicionDTO);
+    }
     
      public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
         return expertoRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
@@ -37,4 +42,11 @@ public class ControladorRegistrarCambioEstado {
      public void anularTramiteEstado(int nroLineaTramiteEstado) throws cambioEstadoException{
          expertoRegistrarCambioEstado.anularTramiteEstado(nroLineaTramiteEstado);
      }
+
+    public EstadoTramite buscarEstadoTramitePorCodigo(int codEstadoTramite) {
+        return expertoRegistrarCambioEstado.buscarEstadoTramitePorCodigo(codEstadoTramite);
+    }
+     
+     
+    
 }

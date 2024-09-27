@@ -34,7 +34,7 @@
                 <div class="card flex justify-content-center">
                     <!-- mostrar datos del tramite -->
                 <p:dataViewGridItem> 
-                        <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+                    <h:panelGrid id="tramiteDet"  columns="2" style="margin: 30px" cellpadding="10">
                                 <h:outputText value="Cliente:" styleClass="text-secondary"/>
                                 <h:outputText value="#{uitramiteParticular.nombreApellidoCliente}"/>
                                 
@@ -51,11 +51,15 @@
                                 <h:outputText value="Fecha Documentacion" styleClass="text-secondary"/>
                                 <h:outputText value="#{uitramiteParticular.fechaHoraFinEntregaDoc}"/>
                             
-                                   <!-- estos datos vienen de otro dto -->
-                               <!-- <h:outputText value="Fecha inicio: " styleClass="text-secondary" />
+                                   
+                               <h:outputText value="Fecha inicio: " styleClass="text-secondary" />
+                               <h:outputText value="#{uitramiteParticular.fechaHoraCargaTramite}"/>
+                               
                                 <h:outputText value="Estado actual: " styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.nombreEstadoTramite}"/>
                                 
                                 <h:outputText value="Tipo Tramite: " styleClass="text-secondary"/>
+                                <h:outputText value="#{uitramiteParticular.nombreTipoTramite}"/>
                                 <h:outputText value="Observacion: " styleClass="text-secondary"/> 
                                 <p:card style="width: 75rem; margin-bottom: 2em">
                            
@@ -63,7 +67,7 @@
                                         quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!</p>
 
                                 </p:card>
-                                -->
+                                
                         </h:panelGrid>
                 </p:dataViewGridItem>
                 </div>
@@ -108,10 +112,10 @@
                     <p:column>
                         <p:commandButton  styleClass="btn-material btn-primary ui-confirmdialog-yes"
                                           icon="pi pi-undo" actionListener="#{uiHistorico.anularTramiteEstado(tramiteEstado.nroLineaTramiteEstado)}" 
-                                          disabled="#{tramiteEstado.fechaHoraBajaTramiteEstado != null }"
+                                          disabled="#{tramiteEstado.fechaHoraBajaTramiteEstado != null || tramiteEstado.codEstadoTramite == 1 }"
                                           update="@form:grid1">
-                            <!-- no funciona la notificacion -->
-                            <!--<p:confirm header="Anulación de #{tramiteEstado.nroLineaTramiteEstado}" message="¿Está seguro?" icon="ui-icon-alert">
+                            <!-- no funciona la notificacion 
+                            <p:confirm header="Anulación de #{tramiteEstado.nroLineaTramiteEstado}" message="¿Está seguro?" icon="ui-icon-alert">
                             </p:confirm>-->
                         </p:commandButton>
                     </p:column>

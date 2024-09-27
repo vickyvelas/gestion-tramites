@@ -7,6 +7,7 @@ package RegistrarCambioEstado.beans;
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
+import entidades.EstadoTramite;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -45,6 +46,12 @@ public class UIHistorico implements Serializable{
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         
+        
+        
+    // Obtener el nombre del estado tramite
+//    int codEstadoTramite = Integer.parseInt(request.getParameter("codEstadoTramite"));
+//    EstadoTramite estadoTramite = controladorRegistrarCambioEstado.buscarEstadoTramitePorCodigo(codEstadoTramite);
+//    this.nombreEstadoTramite = estadoTramite.getNombreEstadoTramite();
         
 
     }

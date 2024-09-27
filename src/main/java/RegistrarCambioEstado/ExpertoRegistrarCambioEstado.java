@@ -137,35 +137,90 @@ public class ExpertoRegistrarCambioEstado {
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
     
+    //busco tramite consultor para mostrar datos
+    
+    public TramitesConsultorDTO buscarTramiteConsultor(int nroTramiteFiltro){
+         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(nroTramiteFiltro>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nroTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(nroTramiteFiltro);
+            lCriterio.add(unCriterio);
+        }
+        
+        //List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
+        Tramite tramite = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+        
+        TramitesConsultorDTO tramitesConsultorResultado = new TramitesConsultorDTO();
+        
+            tramitesConsultorResultado.setNroTramite(tramite.getNroTramite());
+            tramitesConsultorResultado.setNombreTipoTramite(tramite.getTipoTramite().getNombreTipoTramite());
+            tramitesConsultorResultado.setFechaHoraCargaTramite(tramite.getFechaHoraCargaTramite());
+            tramitesConsultorResultado.setNombreEstadoTramite(tramite.getEstadoTramite().getNombreEstadoTramite());
+            tramitesConsultorResultado.setCuitCliente(tramite.getCliente().getCuitCliente());
+    
+            
+        
+        return tramitesConsultorResultado;
+    }
+    
+    //busco el Estado del Tramite
+    public EstadoTramite buscarEstadoTramitePorCodigo(int codEstadoTramite) {
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dtoc = new DTOCriterio();
+        dtoc.setAtributo("codEstadoTramite");
+        dtoc.setOperacion("=");
+        dtoc.setValor(codEstadoTramite);
 
-//    public void nuevoEstado(int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
-//        FachadaPersistencia.getInstance().iniciarTransaccion();
-//        
-//        List<DTOCriterio> criterioList = new ArrayList<>();
-//        DTOCriterio dtoc = new DTOCriterio();
-//        dtoc.setAtributo("nroLineaTramiteEstado");
-//        dtoc.setOperacion("=");
-//        dtoc.setValor(nroLineaTramiteEstado);
-//        
-//        criterioList.add(dtoc);
-//        List lEstado=FachadaPersistencia.getInstance().buscar("TramiteEstado", criterioList);
-//        
-//        //hay un if si el cod ingresado existe larga excepcion. Sino
-//        
-//        if(lEstado.size()>0){
-//            throw new cambioEstadoException("El codigo ya existe");
-//        }else{
-//            TramiteEstado tramiteEstado = new TramiteEstado();
-//            tramiteEstado.setFechaHoraBajaTramiteEstado(null);
-//            tramiteEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis());
-//            tramiteEstado.setEstadoTramite();
-//            tramiteEstado.setNroLineaTramiteEstado(nroLineaTramiteEstado);
-//            tramiteEstado.setObservacionTramiteEstado(transicionDTO.getObservacion());
-//            
-//            FachadaPersistencia.getInstance().guardar(tramiteEstado);
-//            FachadaPersistencia.getInstance().finalizarTransaccion();
-//        }
-//    }
+        criterioList.add(dtoc);
+
+        List lEstado = FachadaPersistencia.getInstance().buscar("EstadoTramite", criterioList);
+
+            if (lEstado.isEmpty()) {
+                return null;
+            } else {
+                return (EstadoTramite) lEstado.get(0);
+            }
+    }   
+    
+    //hacer el cambio de estado
+    public void nuevoEstado( int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dtoc = new DTOCriterio();
+        dtoc.setAtributo("nroLineaTramiteEstado");
+        dtoc.setOperacion("=");
+        dtoc.setValor(nroLineaTramiteEstado);
+        
+        criterioList.add(dtoc);
+        
+    
+        List lEstado=FachadaPersistencia.getInstance().buscar("TramiteEstado", criterioList);
+        
+        
+      
+            TramiteEstado tramiteEstado = new TramiteEstado();
+            tramiteEstado.setFechaHoraBajaTramiteEstado(null);
+            tramiteEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis()));
+            tramiteEstado.setNroLineaTramiteEstado(nroLineaTramiteEstado++);
+            tramiteEstado.setObservacionTramiteEstado(transicionDTO.getObservacion());
+            
+            
+            EstadoTramite estadoTramite = buscarEstadoTramitePorCodigo(transicionDTO.getCodEstadoTramite());
+            
+            tramiteEstado.setEstadoTramite(estadoTramite);
+            
+            //me faltaria hacer la relacion con el tramite
+            
+            FachadaPersistencia.getInstance().guardar(tramiteEstado);
+            FachadaPersistencia.getInstance().finalizarTransaccion();
+        
+    }
+}
+    
         
      
-}
+

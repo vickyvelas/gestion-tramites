@@ -37,8 +37,56 @@ public class UItramiteParticular implements Serializable {
     private Timestamp fechaHoraFinEntregaDoc;
     private String nombreApellidoCliente;
     private float precioTipoTramite;
+    //del dto consultor
     private int cuitCliente;
+    private Timestamp fechaHoraCargaTramite;
+    private String nombreEstadoTramite;
+    private String nombreTipoTramite;
+    private int nroTramite;
+    private String observacionTramiteEstado;
 
+    public String getObservacionTramiteEstado() {
+        return observacionTramiteEstado;
+    }
+
+    public void setObservacionTramiteEstado(String observacionTramiteEstado) {
+        this.observacionTramiteEstado = observacionTramiteEstado;
+    }
+    
+    
+    public Timestamp getFechaHoraCargaTramite() {
+        return fechaHoraCargaTramite;
+    }
+
+    public void setFechaHoraCargaTramite(Timestamp fechaHoraCargaTramite) {
+        this.fechaHoraCargaTramite = fechaHoraCargaTramite;
+    }
+
+    public String getNombreEstadoTramite() {
+        return nombreEstadoTramite;
+    }
+
+    public void setNombreEstadoTramite(String nombreEstadoTramite) {
+        this.nombreEstadoTramite = nombreEstadoTramite;
+    }
+
+    public String getNombreTipoTramite() {
+        return nombreTipoTramite;
+    }
+
+    public void setNombreTipoTramite(String nombreTipoTramite) {
+        this.nombreTipoTramite = nombreTipoTramite;
+    }
+
+    public int getNroTramite() {
+        return nroTramite;
+    }
+
+    public void setNroTramite(int nroTramite) {
+        this.nroTramite = nroTramite;
+    }
+    
+    
     public int getCuitCliente() {
         return cuitCliente;
     }
@@ -126,10 +174,15 @@ public class UItramiteParticular implements Serializable {
         fechaHoraFinEntregaDoc=tramiteParticularDTO.getFechaHoraFinEntregaDoc();
         precioTipoTramite=tramiteParticularDTO.getPrecioTipoTramite();
        
-        
-       //NUEVO y si lo hago con la ui?
-//        List<TramitesConsultorDTO>  tramitesConsultorDTO = controladorRegistrarCambioEstado.buscarTramitesConsultor(nroTramite, nombreApellidoCliente, nombre);
-//        cuitCliente=tramitesConsultorDTO.getCuitCliente();
+        TramitesConsultorDTO tramitesConsultorDTO = controladorRegistrarCambioEstado.buscarTramiteConsultor(nroTramite);
+        cuitCliente = tramitesConsultorDTO.getCuitCliente();
+        fechaHoraCargaTramite = tramitesConsultorDTO.getFechaHoraCargaTramite();
+        nombreEstadoTramite = tramitesConsultorDTO.getNombreEstadoTramite();
+        nombreTipoTramite = tramitesConsultorDTO.getNombreTipoTramite();
+        //observacionTramiteEstado = tramitesConsultorDTO.
+       
+
+       
         
         
     }

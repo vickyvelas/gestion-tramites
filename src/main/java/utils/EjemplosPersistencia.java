@@ -257,7 +257,7 @@ public class EjemplosPersistencia {
         tramEstado.setFechaHoraBajaTramiteEstado(null);
         tramEstado.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramEstado.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
-        tramEstado.setNroLineaTramiteEstado(1);
+        tramEstado.setNroLineaTramiteEstado(2);
         tramEstado.setEstadoTramite(estado2);
         tramEstado.setObservacionTramiteEstado("Este es el primer estado");
        //tramite1.addTramiteEstadoList(tramEstado);
