@@ -365,6 +365,7 @@ public class ExpertoABMVersion {
         
     //Creo nueva version
         Version nuevaV = new Version();
+        //cambiar
         nuevaV.setCodVersion(datosingresados.getCodVersion());
         nuevaV.setFechaHoraDesdeVersion(datosingresados.getFechaHoraDesdeVersion());
         nuevaV.setFechaHoraHastaVersion(datosingresados.getFechaHoraHastaVersion());
