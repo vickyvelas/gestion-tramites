@@ -13,6 +13,10 @@
         <property name="codVersion" type="int">
             <column name="codVersion"/>
         </property>
+        
+        <property name="draw" type="string">
+            <column name="draw"/>
+        </property>
 
         <property name="fechaHoraDesdeVersion" column="fechaHoraDesdeVersion" type="timestamp" not-null="true"/>
         

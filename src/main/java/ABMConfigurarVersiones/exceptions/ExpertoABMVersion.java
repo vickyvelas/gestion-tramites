@@ -241,6 +241,8 @@ public class ExpertoABMVersion {
     public DTOVersionyEstados buscarVersionEditar (int codTipoTramite) throws VersionException {
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
+        DTOVersionyEstados dtofinal = new DTOVersionyEstados();
+        dtofinal.setVersion(null);
         
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>(); 
         DTOCriterio unCriterio=new DTOCriterio();
@@ -253,7 +255,7 @@ public class ExpertoABMVersion {
         {
                 throw new VersionException("El TipoTramite NO existe");
         }
-        TipoTramite tt = (TipoTramite) objetoList;
+        TipoTramite tt = (TipoTramite) objetoList.get(0);
         
         lCriterio.clear();
         DTOCriterio Criterio1=new DTOCriterio();
@@ -268,8 +270,9 @@ public class ExpertoABMVersion {
             lCriterio.add(Criterio2);
         List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio);
         
-         DTOVersionOutput dtoVersion = new DTOVersionOutput ();
-         DTOVersionyEstados dtofinal = new DTOVersionyEstados();
+        DTOVersionOutput dtoVersion = new DTOVersionOutput ();
+         
+         
          List<DTOEstadoActualOutput> listEA = new ArrayList(); 
          
         //Selecciono la de mayor fecha desde
@@ -314,7 +317,8 @@ public class ExpertoABMVersion {
                     dtoVersion.setCodVersion(v.getCodVersion());
                     dtoVersion.setFechaHoraDesdeVersion(v.getFechaHoraDesdeVersion());
                     dtoVersion.setFechaHoraHastaVersion(v.getFechaHoraHastaVersion());
-         
+                    dtoVersion.setDraw(v.getDraw());
+                    /*
                     List<TransicionEstado> transiciones = v.getTransicionEstadoList();        
                     for(TransicionEstado x : transiciones){
                     DTOEstadoActualOutput estadoActual = new DTOEstadoActualOutput();
@@ -334,10 +338,11 @@ public class ExpertoABMVersion {
                     }
         
                     dtoVersion.setEstadosActuales(listEA);
-        
+                    */
                     dtofinal.setVersion(dtoVersion);
                 }
-        lCriterio.clear();
+         
+        lCriterio=new ArrayList<DTOCriterio>();
         DTOCriterio Criterio=new DTOCriterio();
             Criterio.setAtributo("fechaHoraBajaEstadoTramite");
             Criterio.setOperacion("=");
@@ -370,6 +375,7 @@ public class ExpertoABMVersion {
         nuevaV.setFechaHoraDesdeVersion(datosingresados.getFechaHoraDesdeVersion());
         nuevaV.setFechaHoraHastaVersion(datosingresados.getFechaHoraHastaVersion());
         nuevaV.setFechaHoraBajaVersion(null);
+        nuevaV.setDraw(datosingresados.getDraw());
         //busco el TT
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>(); 
         DTOCriterio unCriterio=new DTOCriterio();
@@ -382,7 +388,7 @@ public class ExpertoABMVersion {
         {
                 throw new VersionException("El TipoTramite NO existe");
         }
-        TipoTramite tt = (TipoTramite) objetoList;
+        TipoTramite tt = (TipoTramite) objetoList.get(0);
         nuevaV.setTipoTramite(tt);
         
         List<DTOEstadoActualInput> EAingresados = datosingresados.getEstadosActuales();
@@ -527,6 +533,8 @@ public class ExpertoABMVersion {
                 }
             }
         }
+        
+        
         for(TransicionEstado transicion : transiciones){
         FachadaPersistencia.getInstance().guardar(transicion);            
         }

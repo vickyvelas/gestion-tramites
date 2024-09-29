@@ -82,10 +82,10 @@ public class VersionGrilla implements Serializable {
         }
         return lisResultado;
     }
-    public DTOVersionyEstados irEditarVersion(int codigo) throws VersionException {
+    public String irEditarVersion(int codigo) throws VersionException {
         BeansUtils.guardarUrlAnterior();
-        DTOVersionyEstados dtoeditar = controlador.buscarVersionEditar(codigo);
-        return dtoeditar; 
+        //DTOVersionyEstados dtoeditar = controlador.buscarVersionEditar(codigo);
+        return "/ABMConfigurarVersiones/drawIU.xhtml?faces-redirect=true&codigoTipoTramite="+ codigo; 
     }
     
     public  String irHistorialVersion(int codigo) {

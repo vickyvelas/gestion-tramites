@@ -4,18 +4,28 @@
  */
 package ABMConfigurarVersiones.beans;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author julie
+ * @author Zippo
  */
-public class NodoPantalla {
+public class NodoIU {
    int codigo;
    String nombre="";
    double xpos=0;
    double ypos=0;
+
+    public List<Integer> getDestinos() {
+        return destinos;
+    }
+
+    public void setDestinos(List<Integer> destinos) {
+        this.destinos = destinos;
+    }
+
    List<Integer> destinos= new ArrayList<Integer>();
 
     public int getCodigo() {
@@ -49,9 +59,9 @@ public class NodoPantalla {
     public void setYpos(double ypos) {
         this.ypos = ypos;
     }
-    
-    public void addDestino(int destino) {
+
+
+   public void addDestino(int destino) {
         this.destinos.add(destino);
     }
-   
 }

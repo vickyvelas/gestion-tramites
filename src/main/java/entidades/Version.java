@@ -11,7 +11,16 @@ public class Version extends Entidad {
     private Timestamp fechaHoraBajaVersion;
     private TipoTramite tipoTramite;
     private List<TransicionEstado> transicionEstadoList = new ArrayList<>();
+    private String draw;
 
+    public String getDraw() {
+        return draw;
+    }
+
+    public void setDraw(String draw) {
+        this.draw = draw;
+    }
+    
     // Constructor
     public Version() {
     }

@@ -18,6 +18,16 @@ public class DTOVersionInput {
     private Timestamp fechaHoraHastaVersion;
     private int codTipoTramite;
     private List<DTOEstadoActualInput> estadosActuales = new ArrayList();
+    private String draw;
+
+    public String getDraw() {
+        return draw;
+    }
+
+    public void setDraw(String draw) {
+        this.draw = draw;
+    }
+    
     
     public int getCodVersion() {
         return codVersion;
