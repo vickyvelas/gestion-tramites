@@ -2,13 +2,19 @@ package RegistrarCambioEstado.dtos;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class TramiteParticularDTO {
     private int codTipoTramite;
     private Timestamp fechaHoraFinEntregaDoc;
     private String nombreApellidoCliente;
     private float precioTipoTramite;
-
+    
+    private List<HistoricoDTO> historicoDTOList;
+    private List<TransicionDTO> TransicionDTOList;
+    private EstadoActualDTO  estadoActualDTO;
+    
+    
     //METODOS GET
     public int getCodTipoTramite() {
         return codTipoTramite;
@@ -37,5 +43,30 @@ public class TramiteParticularDTO {
         this.precioTipoTramite = precioTipoTramite;
     }
 
+    public List<HistoricoDTO> getHistoricoDTOList() {
+        return historicoDTOList;
+    }
+
+    public void setHistoricoDTOList(List<HistoricoDTO> historicoDTOList) {
+        this.historicoDTOList = historicoDTOList;
+    }
+
+    public List<TransicionDTO> getTransicionDTOList() {
+        return TransicionDTOList;
+    }
+
+    public void setTransicionDTOList(List<TransicionDTO> TransicionDTOList) {
+        this.TransicionDTOList = TransicionDTOList;
+    }
+
+    public EstadoActualDTO getEstadoActualDTO() {
+        return estadoActualDTO;
+    }
+
+    public void setEstadoActualDTO(EstadoActualDTO estadoActualDTO) {
+        this.estadoActualDTO = estadoActualDTO;
+    }
+    
+    
 
 }

@@ -1,6 +1,6 @@
 package DTO.D;
 
-public class dtoDestinosPosibles {
+public class DestinosPosiblesDTO {
 
     private String nombreEstadoTramiteDestino;
     private int codEstadoTramite;

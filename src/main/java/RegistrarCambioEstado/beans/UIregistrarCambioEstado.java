@@ -4,8 +4,8 @@
  */
 package RegistrarCambioEstado.beans;
 
+import DTO.D.DestinosPosiblesDTO;
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
-import RegistrarCambioEstado.dtos.DestinosPosiblesDTO;
 import entidades.TramiteEstado;
 import entidades.TransicionEstado;
 import entidades.Version;
@@ -23,10 +23,22 @@ import java.util.List;
 @ViewScoped
 public class UIregistrarCambioEstado implements Serializable {
     private String nombreEstadoTramiteDestino;
+    private String nombreEstadoTramiteActual;
     private int codEstadoTramite;
-
+    private String observacionTramiteEstado;
+    
     private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado = new ControladorRegistrarCambioEstado();
 
+
+    public String getNombreEstadoTramiteActual() {
+        return nombreEstadoTramiteActual;
+    }
+
+    public void setNombreEstadoTramiteActual(String nombreEstadoTramiteActual) {
+        this.nombreEstadoTramiteActual = nombreEstadoTramiteActual;
+    }
+    
+    
     public String getNombreEstadoTramiteDestino() {
         return nombreEstadoTramiteDestino;
     }
@@ -43,6 +55,16 @@ public class UIregistrarCambioEstado implements Serializable {
         this.codEstadoTramite = codEstadoTramite;
     }
 
+    public String getObservacionTramiteEstado() {
+        return observacionTramiteEstado;
+    }
+
+    public void setObservacionTramiteEstado(String observacionTramiteEstado) {
+        this.observacionTramiteEstado = observacionTramiteEstado;
+    }
+    
+    
+
     public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado() {
         return controladorRegistrarCambioEstado;
     }
@@ -51,23 +73,14 @@ public class UIregistrarCambioEstado implements Serializable {
         this.controladorRegistrarCambioEstado = controladorRegistrarCambioEstado;
     }
     
+    public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
+      return null;  
+    }
     
-     public List<DestinosPosiblesDTO> buscarEstadosDestinos(int nroTramite, TramiteEstado tramiteEstado) {
-        List <DestinosPosiblesDTO>  destinosPosiblesDTO = new ArrayList<>();
-        List<UIregistrarCambioEstado> estadosDestinos = new ArrayList<>();
-        List<DestinosPosiblesDTO> estadosDestDTO = controladorRegistrarCambioEstado.buscarEstadosDestinos(nroTramite, tramiteEstado);
-       
-        for (DestinosPosiblesDTO estadoDestDTO : estadosDestDTO) {
-            UIregistrarCambioEstado estadoGrillaUI = new UIregistrarCambioEstado();
-            estadosDestinos.setCodEstadoTramite(estadoDestDTO.getCodEstadoTramite());
-            estadosDestinos.setNombreEstadoTramite(estadoDestDTO.getNombreEstadoTramite());
-            estadosDestinos.setFechaAlta(estadoDestDTO.getFechaAlta());
-            estadosDestinos.setFechaBaja(estadoDestDTO.getFechaBaja());
-            estadosDestinos.add(estadosDestinos);
-        }
-        return destinosPosiblesDTO ;
-         
-     }
+    
+    
+    
+     
 
 //    public String nuevoEstado(){
 //        try {

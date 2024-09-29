@@ -4,8 +4,10 @@
  */
 package RegistrarCambioEstado;
 
+import DTO.D.DestinosPosiblesDTO;
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
-import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.TransicionDTO;
+import RegistrarCambioEstado.dtos.EstadoActualDTO;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
@@ -13,6 +15,8 @@ import entidades.EstadoTramite;
 import entidades.ListaPrecio;
 import entidades.Tramite;
 import entidades.TramiteEstado;
+import entidades.TransicionEstado;
+import entidades.Version;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,7 +187,8 @@ public class ExpertoRegistrarCambioEstado {
             } else {
                 return (EstadoTramite) lEstado.get(0);
             }
-    }   
+    }  
+    
     
     //hacer el cambio de estado
     public void nuevoEstado( int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
@@ -218,6 +223,62 @@ public class ExpertoRegistrarCambioEstado {
             FachadaPersistencia.getInstance().guardar(tramiteEstado);
             FachadaPersistencia.getInstance().finalizarTransaccion();
         
+    }
+    
+    
+    // buscar posibles destinos
+    
+    public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
+        //buscar el tramite 
+        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(nroTramite>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nroTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(nroTramite);
+            lCriterio.add(unCriterio);
+        }
+        Tramite tramite = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+        
+        EstadoTramite estadoTramite=tramite.getEstadoTramite();
+        int codEstadoTramite = estadoTramite.getCodEstadoTramite();
+        
+        Version version = tramite.getVersion();
+        List<TransicionEstado> transicionesEstado = version.getTransicionEstadoList();
+        
+        EstadoActualDTO estadoActualDTO = new EstadoActualDTO();
+        
+        for(TransicionEstado transicionEstado : transicionesEstado){
+            EstadoTramite estadoTramiteActual = transicionEstado.getEstadoActual();
+            
+            //verificacion de que los codigos sean iguales
+            if (!estadoTramiteActual.equals(estadoTramite)) {
+            throw new RuntimeException("La instancia de EstadoTramite no coincide");
+            }
+            
+            String nombreEA= estadoTramiteActual.getNombreEstadoTramite();
+            
+            estadoActualDTO.setNombreEstadoTramiteActual(nombreEA);
+           
+            
+            //destinosPosibles
+            
+            List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
+            
+            for (EstadoTramite etDestino : etDestinos) {
+                    // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
+                    DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();
+                    destinosDTO.setNombreEstadoTramiteDestino(etDestino.getNombreEstadoTramite());
+                    destinosDTO.setCodEstadoTramite(etDestino.getCodEstadoTramite());
+
+                    // Añadir DTODestinosPosibles a DTOEstadoActual
+                    
+                    estadoActualDTO.getDestinosPosiblesList().add(destinosDTO);
+            }
+        }
+        
+        return null;
     }
 }
     

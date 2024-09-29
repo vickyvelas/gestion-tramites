@@ -1,4 +1,4 @@
-package DTO.D;
+package RegistrarCambioEstado.dtos;
 
 public class TransicionDTO {
     private int codEstadoTramite;

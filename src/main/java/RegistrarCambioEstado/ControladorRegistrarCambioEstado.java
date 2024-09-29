@@ -4,8 +4,9 @@
  */
 package RegistrarCambioEstado;
 
+import DTO.D.DestinosPosiblesDTO;
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
-import DTO.D.TransicionDTO;
+import RegistrarCambioEstado.dtos.TransicionDTO;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
 import RegistrarCambioEstado.dtos.TramiteParticularDTO;
 import RegistrarCambioEstado.exceptions.cambioEstadoException;
@@ -46,6 +47,10 @@ public class ControladorRegistrarCambioEstado {
     public EstadoTramite buscarEstadoTramitePorCodigo(int codEstadoTramite) {
         return expertoRegistrarCambioEstado.buscarEstadoTramitePorCodigo(codEstadoTramite);
     }
+    
+     public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
+         return expertoRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
+     }
      
      
     
