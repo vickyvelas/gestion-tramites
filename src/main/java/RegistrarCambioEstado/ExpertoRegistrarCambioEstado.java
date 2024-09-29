@@ -278,7 +278,7 @@ public class ExpertoRegistrarCambioEstado {
             }
         }
         
-        return null;
+        return estadoActualDTO.getDestinosPosiblesList(); //arreglar este retorno
     }
 }
     

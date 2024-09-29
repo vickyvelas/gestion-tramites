@@ -23,12 +23,13 @@ import java.util.List;
 @ViewScoped
 public class UIregistrarCambioEstado implements Serializable {
     private String nombreEstadoTramiteDestino;
+    
     private String nombreEstadoTramiteActual;
     private int codEstadoTramite;
     private String observacionTramiteEstado;
     
     private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado = new ControladorRegistrarCambioEstado();
-
+    
 
     public String getNombreEstadoTramiteActual() {
         return nombreEstadoTramiteActual;
@@ -73,8 +74,20 @@ public class UIregistrarCambioEstado implements Serializable {
         this.controladorRegistrarCambioEstado = controladorRegistrarCambioEstado;
     }
     
-    public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
-      return null;  
+   
+    
+    public List<UIDestinosPosibles> buscarPosiblesDestinos(int nroTramite){
+        System.out.println(nroTramite);
+        List<UIDestinosPosibles> dp = new ArrayList<>();
+        List<DestinosPosiblesDTO> destinosPosibles =controladorRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
+        
+        for(DestinosPosiblesDTO dtoDP : destinosPosibles){
+            UIDestinosPosibles destPosibleUI = new UIDestinosPosibles();
+            destPosibleUI.setCodEstadoTramiteDestino(dtoDP.getCodEstadoTramite());
+            destPosibleUI.setNombreEstadoTramiteDestino(dtoDP.getNombreEstadoTramiteDestino());
+            dp.add(destPosibleUI);
+        }
+      return dp;  
     }
     
     

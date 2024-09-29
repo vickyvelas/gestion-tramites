@@ -22,16 +22,16 @@
              <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
                  
             <h:outputText value="Estado actual:" />
-            <h:outputText value="#{uiHistorico.nombreEstadoTramite}"/>
+            <h:outputText value="#{uiregistrarCambioEstado.nombreEstadoTramiteActual}"/>
             
              </h:panelGrid>
            </p:dataViewGridItem>
             
             <h:outputText value="Seleccione próximo estado" />
             <!-- botones de posibles estados -->
-            <p:selectOneRadio id="line"  layout="lineDirection">
-                <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                <f:selectItem itemLabel="Option2" itemValue="Option2"/>
+            <p:selectOneRadio id="line"  layout="lineDirection" value="#{uiregistrarCambioEstado.buscarPosiblesDestinos(nroTramite)}">
+                <f:selectItem itemLabel="#{uiDestinosPosibles.nombreEstadoTramiteDestino}" itemValue="#{uiDestinosPosibles.codEstadoTramiteDestino}"/>
+                <f:selectItem itemLabel="Option2" itemValue="#{uiregistrarCambioEstado.nombreEstadoTramiteDestino}"/>
                 <f:selectItem itemLabel="Option3" itemValue="Option3"/>
             </p:selectOneRadio>
             <h:outputText value="Observaciones"/>

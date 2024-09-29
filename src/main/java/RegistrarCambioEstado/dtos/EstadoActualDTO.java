@@ -1,18 +1,20 @@
  package RegistrarCambioEstado.dtos;
 
 import DTO.D.DestinosPosiblesDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class EstadoActualDTO {
 
     private String nombreEstadoTramiteActual;
-    private List<DestinosPosiblesDTO> destinosPosiblesList; 
+    private List<DestinosPosiblesDTO> destinosPosiblesList = new ArrayList<>(); 
 
     // getters y setters
     public List<DestinosPosiblesDTO> getDestinosPosiblesList() {
         return destinosPosiblesList;
     }
+    
 
     public void setDestinosPosiblesList(List<DestinosPosiblesDTO> destinosPosibles) {
         this.destinosPosiblesList = destinosPosibles;

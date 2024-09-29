@@ -116,10 +116,9 @@ public class UIHistorico implements Serializable{
         }
     }
     
-    public String irNuevoEstado() {
+    public String irNuevoEstado(int nro) {
         BeansUtils.guardarUrlAnterior();
-        
-        return "registrarCambioEstado.xhtml?faces-redirect=true" ; // Usa '?faces-redirect=true' para hacer una redirección
+        return "registrarCambioEstado.xhtml?faces-redirect=true&codigo=" + nro; // Usa '?faces-redirect=true' para hacer una redirección
     }
     
     //no funciona, seguramente porque necesita el nro de tramite
