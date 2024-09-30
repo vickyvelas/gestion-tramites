@@ -8,7 +8,7 @@ public class TramiteParticularDTO {
     private Timestamp fechaHoraFinEntregaDoc;
     private String nombreApellidoCliente;
     private float precioTipoTramite;
-    
+    private String observaciones;
     private List<HistoricoDTO> historicoDTOList;
     private List<TransicionDTO> TransicionDTOList;
     private EstadoActualDTO  estadoActualDTO;
@@ -42,6 +42,16 @@ public class TramiteParticularDTO {
         this.precioTipoTramite = precioTipoTramite;
     }
 
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+    
+    
+    
     public List<HistoricoDTO> getHistoricoDTOList() {
         return historicoDTOList;
     }

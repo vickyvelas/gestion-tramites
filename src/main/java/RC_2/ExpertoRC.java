@@ -12,6 +12,8 @@ import entidades.TransicionEstado;
 import entidades.Version;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import utils.DTOCriterio;
 import utils.FachadaPersistencia;
@@ -24,19 +26,34 @@ public class ExpertoRC {
     
     
             
-    public List<TramitesConsultorDTO> obtenerTramitesConsultor(int nroTramiteFiltro){
+    public List<TramitesConsultorDTO> obtenerTramitesConsultor(int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
         
         
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
-        
+        if(nroTramiteFiltro>0)
+        {
             DTOCriterio unCriterio=new DTOCriterio();
             unCriterio.setAtributo("nroTramite");
             unCriterio.setOperacion("=");
             unCriterio.setValor(nroTramiteFiltro);
             lCriterio.add(unCriterio);
-        
- //"Tramite","consultor=+Consultor.toString()" AND fechaHoraFinEntregaDoc><null"AND"fechaHoraCargaTramite"<"fechaDesde"AND"EstadoTramite=EstadoTramite.toString()"AND"TipoTramite=TipoTramite.toString()"
-            
+        }
+        if(nombreTipoTramiteFiltro.trim().length()>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nombreTipoTramite");
+            unCriterio.setOperacion("like");
+            unCriterio.setValor(nombreTipoTramiteFiltro);
+            lCriterio.add(unCriterio);
+        }
+        if(estadoFiltro.trim().length()>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("estado");
+            unCriterio.setOperacion("like");
+            unCriterio.setValor(estadoFiltro);
+            lCriterio.add(unCriterio);
+        }
         List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
         List<TramitesConsultorDTO> tramitesConsultorResultado = new ArrayList<>();
         for (Object x : objetoList) {
@@ -51,6 +68,7 @@ public class ExpertoRC {
             tramitesConsultorResultado.add(tramitesConsultorDTO);
         }
         return tramitesConsultorResultado;
+        
         
        
     }
@@ -68,13 +86,23 @@ public class ExpertoRC {
             lCriterio.add(unCriterio);
         }
         Tramite tramiteEncontrado = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+//        
+//        for (TramiteEstado tramiteEstado : tramiteEncontrado.getTramiteEstadoList()){
+//           Timestamp fechaDesdeTE =  tramiteEstado.getFechaHoraDesdeTramiteEstado();
+//           
+//        }
         
         TramiteParticularDTO tramiteParticularDTO = new TramiteParticularDTO();
             tramiteParticularDTO.setCodTipoTramite(tramiteEncontrado.getTipoTramite().getCodTipoTramite());
             tramiteParticularDTO.setFechaHoraFinEntregaDoc(tramiteEncontrado.getFechaHoraFinEntregaDocumentacion());
             tramiteParticularDTO.setNombreApellidoCliente(tramiteEncontrado.getCliente().getNombreApellidoCliente());
-            tramiteParticularDTO.setPrecioTipoTramite(1500);
-        
+            tramiteParticularDTO.setPrecioTipoTramite(2500); //temporalmente
+            List <TramiteEstado> tramEstados = tramiteEncontrado.getTramiteEstadoList();
+            TramiteEstado tramiteEstadoMasReciente = tramEstados.stream()
+                .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
+                .orElse(null);
+            tramiteParticularDTO.setObservaciones(tramiteEstadoMasReciente.getObservacionTramiteEstado());
+         
         
         return tramiteParticularDTO;
     }
@@ -90,9 +118,12 @@ public class ExpertoRC {
             unCriterio.setValor(nroTramite);
             lCriterio.add(unCriterio);
         }
-        List objetoList = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio);
-        for (Object x : objetoList) {
-            TramiteEstado tramiteEstado = (TramiteEstado) x;
+        //List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
+        Tramite tramiteEncontrado = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+        List<TramiteEstado> tramitesEst =tramiteEncontrado.getTramiteEstadoList();
+        //List objetoList = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio);
+        for (TramiteEstado tramiteEstado : tramitesEst) {
+            //TramiteEstado tramiteEstado = (TramiteEstado) x;
             HistoricoDTO historicoDTO = new HistoricoDTO();
             historicoDTO.setNroLineaTramiteEstado(tramiteEstado.getNroLineaTramiteEstado());
             historicoDTO.setCodEstadoTramite(tramiteEstado.getEstadoTramite().getCodEstadoTramite());
@@ -106,28 +137,55 @@ public class ExpertoRC {
         return historicoDTOResultado;
     }
     
-    public void anularUltimo(int nroLineaTramiteEstado) throws exceptionRC{
+    public void anularUltimo(int nroTramite) throws exceptionRC{
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
         
         List <DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
         
-        dto.setAtributo("nroLineaTramiteEstado");
+        dto.setAtributo("nroTramite");
         dto.setOperacion("=");
-        dto.setValor(nroLineaTramiteEstado);
+        dto.setValor(nroTramite);
         
         criterioList.add(dto);
         
-        TramiteEstado tramiteEstadoEncontrado =(TramiteEstado) FachadaPersistencia.getInstance().buscar("TramiteEstado", criterioList).get(0);
-        tramiteEstadoEncontrado.setFechaHoraBajaTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        Tramite tramiteEncontrado =(Tramite) FachadaPersistencia.getInstance().buscar("Tramite", criterioList).get(0);
+        List <TramiteEstado> tramitesEstados=tramiteEncontrado.getTramiteEstadoList();
+        //busca el ultimo para anular
+        TramiteEstado tramiteEstadoMasReciente = tramitesEstados.stream()
+                .filter(tramiteEstado -> tramiteEstado.getFechaHoraBajaTramiteEstado() == null)
+                .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
+                .orElse(null);
+        //lo anula poniendole la fecha de baja y hasta
+        tramiteEstadoMasReciente.setFechaHoraBajaTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        tramiteEstadoMasReciente.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
+        //verificacion que no sea el primero
+        int nroLineaTEA=tramiteEstadoMasReciente.getNroLineaTramiteEstado();
+        if(nroLineaTEA==1){
+            System.out.println("No se puede anular el estado Iniciado");
+        }
         
-        FachadaPersistencia.getInstance().guardar(tramiteEstadoEncontrado);
+        Timestamp fechaFinTram = tramiteEncontrado.getFechaHoraFinTramite();
+        if(fechaFinTram != null){
+           tramiteEncontrado.setFechaHoraFinTramite(null);
+        }
+        //busca el anterior al anulado
+        tramiteEncontrado.getTramiteEstadoList();
+        TramiteEstado tramiteEstadoAnterior = tramitesEstados.stream()
+                .filter(tramiteEstado -> tramiteEstado.getFechaHoraBajaTramiteEstado() == null)
+                .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
+                .orElse(null);
+        
+        tramiteEstadoAnterior.setFechaHoraHastaTramiteEstado(null);
+        
+        FachadaPersistencia.getInstance().guardar(tramiteEstadoMasReciente);
+        FachadaPersistencia.getInstance().guardar(tramiteEstadoAnterior);
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
             
-    public void cambiarTramite (TransicionDTO tdto, int nroTramite){
-        
+    public TramiteParticularDTO cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
+        return null;
     }
     
     

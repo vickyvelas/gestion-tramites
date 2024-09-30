@@ -9,6 +9,7 @@ import RC_2.dto.HistoricoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TramitesConsultorDTO;
 import RC_2.dto.TransicionDTO;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class ControladorRC {
      
      
      
-    public void cambiarTramite (TransicionDTO tdto, int nroTramite){
-        expertoRC.cambiarTramite(tdto, nroTramite);
+    public TramiteParticularDTO cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
+        return expertoRC.cambiarEstadoTramite(tdto, nroTramite);
     }
     
    
@@ -55,9 +56,9 @@ public class ControladorRC {
     
     
             
-    public List<TramitesConsultorDTO> obtenerTramitesConsultor(int nroTramiteFiltro){
+    public List<TramitesConsultorDTO> obtenerTramitesConsultor( int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
        
-        return expertoRC.obtenerTramitesConsultor(nroTramiteFiltro);
+        return expertoRC.obtenerTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
     }
     
 }

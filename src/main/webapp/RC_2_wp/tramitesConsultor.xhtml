@@ -28,55 +28,39 @@
          <p:separator/>
 
                    <div class="ui-g ui-fluid">
-                       <!-- 
-                   <div class="ui-g-12 ui-md-6">
-                    <p:outputPanel>
-                        <h:outputText value="Estado:"/>
-                        <p:spacer height="10"/>
-                        <p:inputText id="codFilter"  style="width:150px"
-                                     placeholder=""  onfocus="Javascript:this.focus();this.select();">
-                                        <p:ajax event="keyup" 
-                                        
-                                            update="@form:grid1"
-                                            />
-                                     
-                        </p:inputText>
-
-                    </p:outputPanel> </div>-->
-
-            
-            <p:dataTable id="grid1" widgetVar="TramitesConsultorTable"  >
+ 
+                       <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="#{uiTramitesConsultor.obtenerTramitesConsultor()}" var="tramiteConsultor" >
 
             <p:column>
                 <f:facet name="header">Nro Tramite</f:facet>
-              <!-- num{tramiteConsultor.nroTramite}-->
+              #{tramiteConsultor.nroTramite}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Tipo Tramite</f:facet>
-              <!-- num{tramiteConsultor.nombreTipoTramite}-->
+                #{tramiteConsultor.nombreTipoTramite}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Fecha Inicio</f:facet>
-                <!-- num{tramiteConsultor.fechaInicio}-->
+                #{tramiteConsultor.fechaInicio}
             </p:column>
 
 
             <p:column>
                 <f:facet name="header">Cuit</f:facet>
-               <!-- num{tramiteConsultor.cuitCliente}-->
+               #{tramiteConsultor.cuitCliente}
             </p:column>
                 
             <p:column>
                 <f:facet name="header">Estado</f:facet>
-                <!-- num{tramiteConsultor.estado} -->  
+                #{tramiteConsultor.estado}   
                 
             </p:column>
                
                 <p:column> 
                    
-                      <p:commandButton icon="pi pi-search" styleClass="btn-info" >
+                      <p:commandButton icon="pi pi-search" styleClass="btn-info" action="#{uiTramitesConsultor.irATramite(tramiteConsultor.nroTramite)}">
                     <f:ajax render="@form"/>
                      </p:commandButton>
                 </p:column>

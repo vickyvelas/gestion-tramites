@@ -4,10 +4,10 @@
  */
 package RC_2.beans;
 
-/**
- *
- * @author marti
- */
-public class IUtramitesConsultor {
+public class UInuevoEstado {
+    private String nombreEstadoTramiteDestino;
+    private String nombreEstadoTramiteActual;
+    private int codEstadoTramite;
+    private String observacionTramiteEstado;
     
 }
