@@ -43,36 +43,7 @@
 
                     </p:outputPanel> </div>
 
-                   <div class="ui-g-12 ui-md-6">
-                   <p:outputPanel>
-                        <h:outputText value="Tipo Tramite"/>
-                        <p:spacer height="10"/>
-                        <p:inputText id="nomFilter"  style="width:150px"
-                                     placeholder="" value="#{uicambioEstadoLista.nombreTipoTramiteFiltro}" >
-                                        <p:ajax event="keyup" 
-                                            listener="#{uicambioEstadoLista.filtrar()}" 
-                                            update="@form:grid1"
-                                        />
-                                     
-                        </p:inputText>
-                    </p:outputPanel> 
-                   </div>
-                   <div class="ui-g-12 ui-md-6">
-                        <p:outputPanel>
-                             <h:outputText value="Nro tramite"/>
-                             <p:spacer height="10"/>
-                             <p:inputText id="nroTramFilter"  style="width:150px"
-                                          placeholder="" value="#{uicambioEstadoLista.nroTramiteFiltro}">
-                                             <p:ajax event="keyup" 
-                                                
-                                                 update="@form:grid1"
-                                             />
-
-                             </p:inputText>
-                         </p:outputPanel> 
-                   </div>
-                   </div>
-            <p:spacer height="6"/>
+            
             <p:dataTable id="grid1" widgetVar="TramitesConsultorTable" value="#{uicambioEstadoLista.buscarTramitesConsultor()}" var="tramiteConsultor" >
 
             <p:column>
@@ -101,7 +72,7 @@
                 #{tramiteConsultor.estado}
                 
             </p:column>
-                <!-- Boton de lupa funcionando -->
+               
                 <p:column> 
                    
                       <p:commandButton icon="pi pi-search" styleClass="btn-info" action="#{uicambioEstadoLista.irATramite(tramiteConsultor.nroTramite)}">
@@ -112,6 +83,7 @@
     
 
         </p:dataTable>
+            </div>
             </div>
 
    </h:form>

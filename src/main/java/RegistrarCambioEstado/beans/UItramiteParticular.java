@@ -44,7 +44,7 @@ public class UItramiteParticular implements Serializable {
     private String nombreTipoTramite;
     private int nroTramite;
     private String observacionTramiteEstado;
-
+   
     public String getObservacionTramiteEstado() {
         return observacionTramiteEstado;
     }
@@ -166,7 +166,7 @@ public class UItramiteParticular implements Serializable {
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         
-        int nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
+        nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
         System.out.println(nroTramite);
         TramiteParticularDTO tramiteParticularDTO = controladorRegistrarCambioEstado.buscarTramiteParticular(nroTramite);
         nombreApellidoCliente=tramiteParticularDTO.getNombreApellidoCliente();
@@ -207,7 +207,9 @@ public class UItramiteParticular implements Serializable {
     
     
      public List<UIHistorico> buscarTramitesEstado(int nroTramite){
+         
         List<UIHistorico> tamiteEstadoGrilla = new ArrayList<>();
+        /*
         List<HistoricoDTO> historicosDTO = controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
         for (HistoricoDTO HistoricoDTO : historicosDTO) {
             UIHistorico tramEstadoGrillaUI = new UIHistorico();
@@ -218,7 +220,7 @@ public class UItramiteParticular implements Serializable {
             tramEstadoGrillaUI.setNroLineaTramiteEstado(HistoricoDTO.getNroLineaTramiteEstado());
             tramEstadoGrillaUI.setObservacionTramiteEstado(HistoricoDTO.getObservaciones());
             tamiteEstadoGrilla.add(tramEstadoGrillaUI);
-        }
+        }*/
         return tamiteEstadoGrilla;
      }
      

@@ -28,12 +28,16 @@
            </p:dataViewGridItem>
             
             <h:outputText value="Seleccione próximo estado" />
-            <!-- botones de posibles estados -->
+            <!-- botones de posibles estados 
             <p:selectOneRadio id="line"  layout="lineDirection" value="#{uiregistrarCambioEstado.buscarPosiblesDestinos(nroTramite)}">
                 <f:selectItem itemLabel="#{uiDestinosPosibles.nombreEstadoTramiteDestino}" itemValue="#{uiDestinosPosibles.codEstadoTramiteDestino}"/>
-                <f:selectItem itemLabel="Option2" itemValue="#{uiregistrarCambioEstado.nombreEstadoTramiteDestino}"/>
+                <f:selectItem itemLabel="Option2" itemValue="hola"/>
                 <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+            </p:selectOneRadio>-->
+            <p:selectOneRadio id="line"  layout="lineDirection" value="#{uiregistrarCambioEstado.destinoSeleccionado}">
+                <f:selectItems value="#{uiregistrarCambioEstado.destinosPosibles}" var="destino" itemLabel="#{destino.nombreEstadoTramiteDestino}" itemValue="#{destino.codEstadoTramiteDestino}"/>
             </p:selectOneRadio>
+            
             <h:outputText value="Observaciones"/>
             <div>
                 <p:inputTextarea rows="6" cols="90"/>

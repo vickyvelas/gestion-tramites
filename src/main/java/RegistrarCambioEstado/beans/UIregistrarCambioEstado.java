@@ -9,8 +9,11 @@ import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
 import entidades.TramiteEstado;
 import entidades.TransicionEstado;
 import entidades.Version;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,32 @@ public class UIregistrarCambioEstado implements Serializable {
     private String observacionTramiteEstado;
     
     private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado = new ControladorRegistrarCambioEstado();
-    
 
+    public UIregistrarCambioEstado() {
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        
+        int nroTramite = Integer.parseInt(request.getParameter("codigo"));
+       
+    }
+    
+   
+    private UIDestinosPosibles destinoSeleccionado;
+
+    public UIDestinosPosibles getDestinoSeleccionado() {
+        return destinoSeleccionado;
+    }
+
+    public void setDestinoSeleccionado(UIDestinosPosibles destinoSeleccionado) {
+        this.destinoSeleccionado = destinoSeleccionado;
+    }
+
+    //SEGUN IA
+
+    
+    
     public String getNombreEstadoTramiteActual() {
         return nombreEstadoTramiteActual;
     }
@@ -77,8 +104,9 @@ public class UIregistrarCambioEstado implements Serializable {
    
     
     public List<UIDestinosPosibles> buscarPosiblesDestinos(int nroTramite){
+        
         System.out.println(nroTramite);
-        List<UIDestinosPosibles> dp = new ArrayList<>();
+        List<UIDestinosPosibles> dp = new ArrayList<>();/*
         List<DestinosPosiblesDTO> destinosPosibles =controladorRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
         
         for(DestinosPosiblesDTO dtoDP : destinosPosibles){
@@ -86,9 +114,10 @@ public class UIregistrarCambioEstado implements Serializable {
             destPosibleUI.setCodEstadoTramiteDestino(dtoDP.getCodEstadoTramite());
             destPosibleUI.setNombreEstadoTramiteDestino(dtoDP.getNombreEstadoTramiteDestino());
             dp.add(destPosibleUI);
-        }
+        }*/
       return dp;  
     }
+    
     
     
     

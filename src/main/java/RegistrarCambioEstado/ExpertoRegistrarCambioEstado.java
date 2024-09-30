@@ -191,7 +191,7 @@ public class ExpertoRegistrarCambioEstado {
     
     
     //hacer el cambio de estado
-    public void nuevoEstado( int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
+    public void nuevoEstado2( int nroLineaTramiteEstado,TransicionDTO transicionDTO ) throws cambioEstadoException{
         FachadaPersistencia.getInstance().iniciarTransaccion();
         
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -228,57 +228,59 @@ public class ExpertoRegistrarCambioEstado {
     
     // buscar posibles destinos
     
-    public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
+    public List<EstadoActualDTO> nuevoEstado(int nroTramite){
         //buscar el tramite 
-        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
-        if(nroTramite>0)
-        {
-            DTOCriterio unCriterio=new DTOCriterio();
-            unCriterio.setAtributo("nroTramite");
-            unCriterio.setOperacion("=");
-            unCriterio.setValor(nroTramite);
-            lCriterio.add(unCriterio);
-        }
-        Tramite tramite = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
-        
-        EstadoTramite estadoTramite=tramite.getEstadoTramite();
-        int codEstadoTramite = estadoTramite.getCodEstadoTramite();
-        
-        Version version = tramite.getVersion();
-        List<TransicionEstado> transicionesEstado = version.getTransicionEstadoList();
-        
-        EstadoActualDTO estadoActualDTO = new EstadoActualDTO();
-        
-        for(TransicionEstado transicionEstado : transicionesEstado){
-            EstadoTramite estadoTramiteActual = transicionEstado.getEstadoActual();
-            
-            //verificacion de que los codigos sean iguales
-            if (!estadoTramiteActual.equals(estadoTramite)) {
-            throw new RuntimeException("La instancia de EstadoTramite no coincide");
-            }
-            
-            String nombreEA= estadoTramiteActual.getNombreEstadoTramite();
-            
-            estadoActualDTO.setNombreEstadoTramiteActual(nombreEA);
-           
-            
-            //destinosPosibles
-            
-            List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
-            
-            for (EstadoTramite etDestino : etDestinos) {
-                    // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
-                    DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();
-                    destinosDTO.setNombreEstadoTramiteDestino(etDestino.getNombreEstadoTramite());
-                    destinosDTO.setCodEstadoTramite(etDestino.getCodEstadoTramite());
-
-                    // Añadir DTODestinosPosibles a DTOEstadoActual
-                    
-                    estadoActualDTO.getDestinosPosiblesList().add(destinosDTO);
-            }
-        }
-        
-        return estadoActualDTO.getDestinosPosiblesList(); //arreglar este retorno
+        List<EstadoActualDTO> dtoEA=new ArrayList<>();
+//        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+//        if(nroTramite>0)
+//        {
+//            DTOCriterio unCriterio=new DTOCriterio();
+//            unCriterio.setAtributo("nroTramite");
+//            unCriterio.setOperacion("=");
+//            unCriterio.setValor(nroTramite);
+//            lCriterio.add(unCriterio);
+//        }
+//        Tramite tramite = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
+//        
+//        EstadoTramite estadoTramite=tramite.getEstadoTramite();
+//        int codEstadoTramite = estadoTramite.getCodEstadoTramite();
+//        
+//        Version version = tramite.getVersion();
+//        List<TransicionEstado> transicionesEstado = version.getTransicionEstadoList();
+//        
+//        EstadoActualDTO estadoActualDTO = new EstadoActualDTO();
+//        
+//        for(TransicionEstado transicionEstado : transicionesEstado){
+//            EstadoTramite estadoTramiteActual = transicionEstado.getEstadoActual();
+//            
+//            //verificacion de que los codigos sean iguales
+//            if (!estadoTramiteActual.equals(estadoTramite)) {
+//            throw new RuntimeException("La instancia de EstadoTramite no coincide");
+//            }
+//            
+//            String nombreEA= estadoTramiteActual.getNombreEstadoTramite();
+//            
+//            estadoActualDTO.setNombreEstadoTramiteActual(nombreEA);
+//           
+//            
+//            //destinosPosibles
+//            
+//            List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
+//            
+//            for (EstadoTramite etDestino : etDestinos) {
+//                    // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
+//                    DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();
+//                    destinosDTO.setNombreEstadoTramiteDestino(etDestino.getNombreEstadoTramite());
+//                    destinosDTO.setCodEstadoTramite(etDestino.getCodEstadoTramite());
+//
+//                    // Añadir DTODestinosPosibles a DTOEstadoActual
+//                    
+//                    estadoActualDTO.getDestinosPosiblesList().add(destinosDTO);
+//            }
+//        }
+//        
+//        return estadoActualDTO.getDestinosPosiblesList(); 
+    return dtoEA;
     }
 }
     

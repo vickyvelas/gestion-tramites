@@ -71,7 +71,7 @@
                         </h:panelGrid>
                 </p:dataViewGridItem>
                 </div>
-                <!-- Tabla  historico-->
+                <!-- Tabla  historico
                 <div>
                     <p:dataTable id="grid1" widgetVar="TramiteParticularTable"  value="#{uiHistorico.controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite)}" var="tramiteEstado" >
 
@@ -114,20 +114,19 @@
                                           icon="pi pi-undo" actionListener="#{uiHistorico.anularTramiteEstado(tramiteEstado.nroLineaTramiteEstado)}" 
                                           disabled="#{tramiteEstado.fechaHoraBajaTramiteEstado != null || tramiteEstado.codEstadoTramite == 1 }"
                                           update="@form:grid1">
-                            <!-- no funciona la notificacion 
-                            <p:confirm header="Anulación de #{tramiteEstado.nroLineaTramiteEstado}" message="¿Está seguro?" icon="ui-icon-alert">
-                            </p:confirm>-->
-                        </p:commandButton>
-                    </p:column>
+                            
+                     comment   </p:commandButton>
+                    </p:column> 
                    
 
                 </p:dataTable>
-                </div>
+                </div>-->
+       
                 <!-- boton nuevo estado -->
             <div class="box-header with-border" >
                 <div id="main-buttons" style="text-align: right;">
                     <p:commandButton value="Nuevo Estado" icon="fa fa-plus"  styleClass="rounded-button btn-primary"
-                                     action="#{uiHistorico.irNuevoEstado(nroTramite)}"/>
+                                     action="#{uiHistorico.irNuevoEstado(uitramiteParticular.nroTramite)}"/>
 
                  </div>
             </div>

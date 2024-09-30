@@ -26,11 +26,11 @@ public class UIcambioEstadoLista implements Serializable{
     private int nroTramiteFiltro=0;
     private String nombreTipoTramiteFiltro=" ";
     private String estadoFiltro=" ";
-            
+      /*      
     public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado(){
         return controladorRegistrarCambioEstado;
     }
-
+*/
    
 
        

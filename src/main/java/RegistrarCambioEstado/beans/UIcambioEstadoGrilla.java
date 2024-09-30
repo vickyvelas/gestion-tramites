@@ -4,10 +4,7 @@
  */
 package RegistrarCambioEstado.beans;
 
-import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
-import RegistrarCambioEstado.dtos.TramiteParticularDTO;
-import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
-import entidades.EstadoTramite;
+
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -30,20 +27,7 @@ public class UIcambioEstadoGrilla implements Serializable{
     private String estado;
     private Timestamp fechaInicio;
     private int cuitCliente;
-    
-    private ControladorRegistrarCambioEstado controladorRegistrarCambioEstado=new ControladorRegistrarCambioEstado();
-
-
-
-    public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado() {
-        return controladorRegistrarCambioEstado;
-    }
-
-    public void setControladorRegistrarCambioEstado(ControladorRegistrarCambioEstado controladorRegistrarCambioEstado) {
-        this.controladorRegistrarCambioEstado = controladorRegistrarCambioEstado;
-    }
-
-    
+        
 
     public int getNroTramite() {
         return nroTramite;

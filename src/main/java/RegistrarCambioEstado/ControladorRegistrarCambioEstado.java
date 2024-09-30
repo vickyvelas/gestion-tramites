@@ -5,6 +5,7 @@
 package RegistrarCambioEstado;
 
 import DTO.D.DestinosPosiblesDTO;
+import RegistrarCambioEstado.dtos.EstadoActualDTO;
 import RegistrarCambioEstado.dtos.TramitesConsultorDTO;
 import RegistrarCambioEstado.dtos.TransicionDTO;
 import RegistrarCambioEstado.dtos.HistoricoDTO;
@@ -32,12 +33,12 @@ public class ControladorRegistrarCambioEstado {
     }
     
     
-    public void nuevoEstado(int nroLineaTramiteEstado, TransicionDTO  transicionDTO)throws cambioEstadoException{
-        expertoRegistrarCambioEstado.nuevoEstado(nroLineaTramiteEstado, transicionDTO);
+    public void nuevoEstado2(int nroLineaTramiteEstado, TransicionDTO  transicionDTO)throws cambioEstadoException{
+        expertoRegistrarCambioEstado.nuevoEstado2(nroLineaTramiteEstado, transicionDTO);
     }
     
-     public List<HistoricoDTO> buscarTramitesEstado(int nroTramite){
-        return expertoRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
+    public List<EstadoActualDTO> nuevoEstado(int nroTramite){
+        return expertoRegistrarCambioEstado.nuevoEstado(nroTramite);
     }
      
      public void anularTramiteEstado(int nroLineaTramiteEstado) throws cambioEstadoException{
@@ -48,9 +49,9 @@ public class ControladorRegistrarCambioEstado {
         return expertoRegistrarCambioEstado.buscarEstadoTramitePorCodigo(codEstadoTramite);
     }
     
-     public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
-         return expertoRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
-     }
+//     public List<DestinosPosiblesDTO> buscarPosiblesDestinos(int nroTramite){
+//         return expertoRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
+//     }
      
      
     
