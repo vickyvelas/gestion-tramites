@@ -1,7 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package RegistrarCambioEstado.beans;
 
 import DTO.D.DestinosPosiblesDTO;
@@ -18,10 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author marti
- */
+
 @Named("uiregistrarCambioEstado")
 @ViewScoped
 public class UIregistrarCambioEstado implements Serializable {
@@ -103,20 +98,20 @@ public class UIregistrarCambioEstado implements Serializable {
     
    
     
-    public List<UIDestinosPosibles> buscarPosiblesDestinos(int nroTramite){
-        
-        System.out.println(nroTramite);
-        List<UIDestinosPosibles> dp = new ArrayList<>();/*
-        List<DestinosPosiblesDTO> destinosPosibles =controladorRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
-        
-        for(DestinosPosiblesDTO dtoDP : destinosPosibles){
-            UIDestinosPosibles destPosibleUI = new UIDestinosPosibles();
-            destPosibleUI.setCodEstadoTramiteDestino(dtoDP.getCodEstadoTramite());
-            destPosibleUI.setNombreEstadoTramiteDestino(dtoDP.getNombreEstadoTramiteDestino());
-            dp.add(destPosibleUI);
-        }*/
-      return dp;  
-    }
+//    public List<UIDestinosPosibles> buscarPosiblesDestinos(int nroTramite){
+//        
+//        System.out.println(nroTramite);
+//        List<UIDestinosPosibles> dp = new ArrayList<>();
+//        List<DestinosPosiblesDTO> destinosPosibles =controladorRegistrarCambioEstado.buscarPosiblesDestinos(nroTramite);
+//        
+//        for(DestinosPosiblesDTO dtoDP : destinosPosibles){
+//            UIDestinosPosibles destPosibleUI = new UIDestinosPosibles();
+//            destPosibleUI.setCodEstadoTramiteDestino(dtoDP.getCodEstadoTramite());
+//            destPosibleUI.setNombreEstadoTramiteDestino(dtoDP.getNombreEstadoTramiteDestino());
+//            dp.add(destPosibleUI);
+//        }
+//      return dp;  
+//    }
     
     
     
@@ -144,3 +139,4 @@ public class UIregistrarCambioEstado implements Serializable {
     
 //    } 
 }
+ */

@@ -1,7 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package RegistrarCambioEstado.beans;
 
 import RegistrarCambioEstado.ControladorRegistrarCambioEstado;
@@ -20,10 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
 
-/**
- *
- * @author marti
- */
 
 @Named("uitramiteParticular")
 @ViewScoped
@@ -209,7 +203,7 @@ public class UItramiteParticular implements Serializable {
      public List<UIHistorico> buscarTramitesEstado(int nroTramite){
          
         List<UIHistorico> tamiteEstadoGrilla = new ArrayList<>();
-        /*
+        
         List<HistoricoDTO> historicosDTO = controladorRegistrarCambioEstado.buscarTramitesEstado(nroTramite);
         for (HistoricoDTO HistoricoDTO : historicosDTO) {
             UIHistorico tramEstadoGrillaUI = new UIHistorico();
@@ -220,7 +214,7 @@ public class UItramiteParticular implements Serializable {
             tramEstadoGrillaUI.setNroLineaTramiteEstado(HistoricoDTO.getNroLineaTramiteEstado());
             tramEstadoGrillaUI.setObservacionTramiteEstado(HistoricoDTO.getObservaciones());
             tamiteEstadoGrilla.add(tramEstadoGrillaUI);
-        }*/
+        }
         return tamiteEstadoGrilla;
      }
      
@@ -229,3 +223,4 @@ public class UItramiteParticular implements Serializable {
      
     }
 
+ */

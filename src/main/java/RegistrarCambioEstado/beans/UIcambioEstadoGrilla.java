@@ -1,7 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ 
 package RegistrarCambioEstado.beans;
 
 
@@ -14,10 +12,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-/**
- *
- * @author marti
- */
+
 @Named("uicambioEstadoGrilla")
 @ViewScoped
 public class UIcambioEstadoGrilla implements Serializable{
@@ -73,3 +68,5 @@ public class UIcambioEstadoGrilla implements Serializable{
     
     
 }
+
+ */

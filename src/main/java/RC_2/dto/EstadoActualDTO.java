@@ -1,6 +1,4 @@
  package RC_2.dto;
-
-import DTO.D.DestinosPosiblesDTO;
 import java.util.ArrayList;
 import java.util.List;
 

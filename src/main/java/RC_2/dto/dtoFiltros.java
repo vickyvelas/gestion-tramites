@@ -1,11 +1,13 @@
 package RC_2.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
+
 
 public class dtoFiltros {
 
     private int estado;
-    private Date fechaDesde;
+    private Timestamp fechaDesde;
     private int legajoConsultor;
     private int nombreTipoTramite;
     //METODOS GET Y SET
@@ -17,10 +19,10 @@ public class dtoFiltros {
     }
 
 
-    public Date getFechaDesde() {
+    public Timestamp getFechaDesde() {
         return fechaDesde;
     }
-    public void setFechaDesde(Date fechaDesde) {
+    public void setFechaDesde(Timestamp fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
 

@@ -1,7 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ 
 package RegistrarCambioEstado.beans;
 
 
@@ -15,10 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import utils.BeansUtils;
 
-/**
- *
- * @author marti
- */
+
 @Named("uicambioEstadoLista")
 @ViewScoped
 public class UIcambioEstadoLista implements Serializable{
@@ -30,7 +25,7 @@ public class UIcambioEstadoLista implements Serializable{
     public ControladorRegistrarCambioEstado getControladorRegistrarCambioEstado(){
         return controladorRegistrarCambioEstado;
     }
-*/
+
    
 
        
@@ -92,3 +87,4 @@ public class UIcambioEstadoLista implements Serializable{
    
     
 }
+ */

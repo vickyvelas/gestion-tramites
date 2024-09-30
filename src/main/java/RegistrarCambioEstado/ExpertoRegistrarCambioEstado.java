@@ -1,7 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package RegistrarCambioEstado;
 
 import DTO.D.DestinosPosiblesDTO;
@@ -23,10 +23,7 @@ import java.util.List;
 import utils.DTOCriterio;
 import utils.FachadaPersistencia;
 
-/**
- *
- * @author marti
- */
+
 public class ExpertoRegistrarCambioEstado {
         public List<TramitesConsultorDTO> buscarTramitesConsultor(int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
@@ -228,9 +225,9 @@ public class ExpertoRegistrarCambioEstado {
     
     // buscar posibles destinos
     
-    public List<EstadoActualDTO> nuevoEstado(int nroTramite){
-        //buscar el tramite 
-        List<EstadoActualDTO> dtoEA=new ArrayList<>();
+//    public List<DTO> nuevoEstado(int nroTramite){
+//        //buscar el tramite 
+//       // List<EstadoActualDTO> dtoEA=new ArrayList<>();
 //        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
 //        if(nroTramite>0)
 //        {
@@ -280,10 +277,10 @@ public class ExpertoRegistrarCambioEstado {
 //        }
 //        
 //        return estadoActualDTO.getDestinosPosiblesList(); 
-    return dtoEA;
-    }
+//   
+//    }
 }
     
-        
+   */      
      
 

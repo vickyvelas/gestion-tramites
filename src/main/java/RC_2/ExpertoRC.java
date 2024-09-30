@@ -25,6 +25,8 @@ public class ExpertoRC {
     
             
     public List<TramitesConsultorDTO> obtenerTramitesConsultor(int nroTramiteFiltro){
+        
+        
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         
             DTOCriterio unCriterio=new DTOCriterio();
@@ -33,6 +35,8 @@ public class ExpertoRC {
             unCriterio.setValor(nroTramiteFiltro);
             lCriterio.add(unCriterio);
         
+ //"Tramite","consultor=+Consultor.toString()" AND fechaHoraFinEntregaDoc><null"AND"fechaHoraCargaTramite"<"fechaDesde"AND"EstadoTramite=EstadoTramite.toString()"AND"TipoTramite=TipoTramite.toString()"
+            
         List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
         List<TramitesConsultorDTO> tramitesConsultorResultado = new ArrayList<>();
         for (Object x : objetoList) {

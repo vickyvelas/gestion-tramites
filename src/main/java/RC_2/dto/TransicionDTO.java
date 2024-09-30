@@ -1,4 +1,5 @@
 package RC_2.dto;
+
 public class TransicionDTO {
     private int codEstadoTramite;
     private String nombreEstadoTramite;
