@@ -12,12 +12,12 @@ import java.util.List;
 
 public class ControladorABMCliente {
     
-    private ExpertoABMCliente2 expertoABMCliente = new ExpertoABMCliente2();
+    private ExpertoABMCliente2 expertoABMCliente2 = new ExpertoABMCliente2();
     
     
     
-     public void eliminarCliente(int cuitCliente) throws exceptionABMCliente{
-        return expertoABMCliente2.eliminarCliente(cuitCliente);
+     public void eliminarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
+         expertoABMCliente2.eliminarCliente(cuitCliente);
     }
             
      
@@ -27,7 +27,7 @@ public class ControladorABMCliente {
         return expertoABMCliente2.obtenerDetalleCliente(cuitCliente);
     }
       public List<ListaClienteDTO> obtenerListaCliente( int cuitClienteFiltro,String nombreApellidoClienteFiltro){
-          return expertoABMListaCliente2.obtenerListaCliente(cuitClienteFiltro, nombreApellidoClienteFiltro);
+          return expertoABMCliente2.obtenerListaCliente(cuitClienteFiltro, nombreApellidoClienteFiltro);
     }
     
     
