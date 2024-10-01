@@ -17,11 +17,7 @@ import utils.BeansUtils;
 @Named("uiTramitesConsultor")
 @ViewScoped
 public class UItramitesConsultor implements Serializable{
-    private int nroTramite;
-    private String nombreTipoTramite;
-    private String estado;
-    private Timestamp fechaInicio;
-    private int cuitCliente;
+
     //filtros
     private int nroTramiteFiltro=0;
     private String nombreTipoTramiteFiltro=" ";
@@ -30,45 +26,7 @@ public class UItramitesConsultor implements Serializable{
     
     private ControladorRC controladorRegistrarCambioEstado = new ControladorRC();
 
-    public int getNroTramite() {
-        return nroTramite;
-    }
 
-    public void setNroTramite(int nroTramite) {
-        this.nroTramite = nroTramite;
-    }
-
-    public String getNombreTipoTramite() {
-        return nombreTipoTramite;
-    }
-
-    public void setNombreTipoTramite(String nombreTipoTramite) {
-        this.nombreTipoTramite = nombreTipoTramite;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public Timestamp getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(Timestamp fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public int getCuitCliente() {
-        return cuitCliente;
-    }
-
-    public void setCuitCliente(int cuitCliente) {
-        this.cuitCliente = cuitCliente;
-    }
 
     public int getNroTramiteFiltro() {
         return nroTramiteFiltro;
@@ -106,12 +64,12 @@ public class UItramitesConsultor implements Serializable{
     }
     
     
-    public List<UItramitesConsultor> obtenerTramitesConsultor( ){
+    public List<UITramitesConsultorGrilla> obtenerTramitesConsultor( ){
    
-        List<UItramitesConsultor> tramitesGrilla = new ArrayList<>();
+        List<UITramitesConsultorGrilla> tramitesGrilla = new ArrayList<>();
         List<TramitesConsultorDTO> tramitesConsultorDTO = controladorRegistrarCambioEstado.obtenerTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
         for (TramitesConsultorDTO tramiteConsultorDTO : tramitesConsultorDTO) {
-            UItramitesConsultor tramiteGrillaUI = new UItramitesConsultor();
+            UITramitesConsultorGrilla tramiteGrillaUI = new UITramitesConsultorGrilla();
             tramiteGrillaUI.setNroTramite(tramiteConsultorDTO.getNroTramite());
             tramiteGrillaUI.setNombreTipoTramite(tramiteConsultorDTO.getNombreTipoTramite());
             tramiteGrillaUI.setFechaInicio(tramiteConsultorDTO.getFechaHoraCargaTramite());

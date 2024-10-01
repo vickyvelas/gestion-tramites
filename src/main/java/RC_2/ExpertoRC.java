@@ -103,23 +103,8 @@ public class ExpertoRC {
                 .orElse(null);
             tramiteParticularDTO.setObservaciones(tramiteEstadoMasReciente.getObservacionTramiteEstado());
          
+               
         
-        return tramiteParticularDTO;
-    }
-    
-    public List<HistoricoDTO> etapas(int nroTramite){
-        List<HistoricoDTO> historicoDTOResultado = new ArrayList<>();
-        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
-        if(nroTramite>0)
-        {
-            DTOCriterio unCriterio=new DTOCriterio();
-            unCriterio.setAtributo("nroTramite");
-            unCriterio.setOperacion("=");
-            unCriterio.setValor(nroTramite);
-            lCriterio.add(unCriterio);
-        }
-        //List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
-        Tramite tramiteEncontrado = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
         List<TramiteEstado> tramitesEst =tramiteEncontrado.getTramiteEstadoList();
         //List objetoList = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio);
         for (TramiteEstado tramiteEstado : tramitesEst) {
@@ -132,11 +117,16 @@ public class ExpertoRC {
             historicoDTO.setObservaciones(tramiteEstado.getObservacionTramiteEstado());
             historicoDTO.setNombreEstadoTramite(tramiteEstado.getEstadoTramite().getNombreEstadoTramite());
             
-            historicoDTOResultado.add(historicoDTO);
+            tramiteParticularDTO.addHistoricoDTOList(historicoDTO);        
         }
-        return historicoDTOResultado;
+        return tramiteParticularDTO;
     }
     
+//    public List<HistoricoDTO> etapas(int nroTramite){
+//
+//        return historicoDTOResultado;
+//    }
+//    
     public void anularUltimo(int nroTramite) throws exceptionRC{
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -191,7 +181,7 @@ public class ExpertoRC {
     
     
             
-    public EstadoActualDTO nuevoEstado(int nroTramite){
+    public NuevoEstadoDTO nuevoEstado(int nroTramite){
         List<EstadoActualDTO> dtoEA=new ArrayList<>();
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         if(nroTramite>0)
@@ -210,7 +200,7 @@ public class ExpertoRC {
         Version version = tramite.getVersion();
         List<TransicionEstado> transicionesEstado = version.getTransicionEstadoList();
         
-        EstadoActualDTO estadoActualDTO = new EstadoActualDTO();
+        NuevoEstadoDTO estadoActualDTO = new NuevoEstadoDTO();
         
         for(TransicionEstado transicionEstado : transicionesEstado){
             EstadoTramite estadoTramiteActual = transicionEstado.getEstadoActual();
@@ -237,7 +227,7 @@ public class ExpertoRC {
 
                     // Añadir DTODestinosPosibles a DTOEstadoActual
                     
-                    estadoActualDTO.getDestinosPosiblesList().add(destinosDTO);
+                    estadoActualDTO.addDestinosPosiblesList(destinosDTO);
             }
         }
         

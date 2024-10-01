@@ -37,12 +37,9 @@ public class UITramiteParticular implements Serializable {
     private String nombreTipoTramite;
     private int nroTramite;
     private String observacionTramiteEstado;  
-    
+    List<UIHistorico>uiHistoricoList=new ArrayList<>();
     //PARA EL HISTORICO DE ESTADOS
-    private int nroLineaTramiteEstado;
-    private int codEstadoTramite;
-    private Timestamp fechaBajaTramiteEstado;
-    private Timestamp fechaCambio; //fecha Hasta de TramiteEstado
+    
     
     private ControladorRC controladorRegistrarCambioEstado = new ControladorRC();
 
@@ -66,7 +63,21 @@ public class UITramiteParticular implements Serializable {
 //        fechaHoraCargaTramite = tramitesConsultorDTO.getFechaHoraCargaTramite();
 //        nombreEstadoTramite = tramitesConsultorDTO.getNombreEstadoTramite();
 //        nombreTipoTramite = tramitesConsultorDTO.getNombreTipoTramite();
-
+         
+      
+        
+        List<HistoricoDTO> historicosDTO = tramiteParticularDTO.getHistoricoDTOList();
+        for (HistoricoDTO HistoricoDTO : historicosDTO) {
+            UIHistorico uiHistoricoDTO = new UIHistorico();
+            uiHistoricoDTO.setCodEstadoTramite(HistoricoDTO.getCodEstadoTramite());
+            uiHistoricoDTO.setFechaCambio(HistoricoDTO.getFechaHastaTramiteEstado());
+            uiHistoricoDTO.setFechaBajaTramiteEstado(HistoricoDTO.getFechaHoraBajaTramiteEstado());
+            uiHistoricoDTO.setNombreEstadoTramite(HistoricoDTO.getNombreEstadoTramite());
+            uiHistoricoDTO.setNroLineaTramiteEstado(HistoricoDTO.getNroLineaTramiteEstado());
+            uiHistoricoDTO.setObservacionTramiteEstado(HistoricoDTO.getObservaciones());
+            uiHistoricoList.add(uiHistoricoDTO);
+        }
+       
        
 
     }
@@ -151,37 +162,7 @@ public class UITramiteParticular implements Serializable {
         this.observacionTramiteEstado = observacionTramiteEstado;
     }
 
-    public int getNroLineaTramiteEstado() {
-        return nroLineaTramiteEstado;
-    }
-
-    public void setNroLineaTramiteEstado(int nroLineaTramiteEstado) {
-        this.nroLineaTramiteEstado = nroLineaTramiteEstado;
-    }
-
-    public int getCodEstadoTramite() {
-        return codEstadoTramite;
-    }
-
-    public void setCodEstadoTramite(int codEstadoTramite) {
-        this.codEstadoTramite = codEstadoTramite;
-    }
-
-    public Timestamp getFechaBajaTramiteEstado() {
-        return fechaBajaTramiteEstado;
-    }
-
-    public void setFechaBajaTramiteEstado(Timestamp fechaBajaTramiteEstado) {
-        this.fechaBajaTramiteEstado = fechaBajaTramiteEstado;
-    }
-
-    public Timestamp getFechaCambio() {
-        return fechaCambio;
-    }
-
-    public void setFechaCambio(Timestamp fechaCambio) {
-        this.fechaCambio = fechaCambio;
-    }
+  
     
     public void anularUltimo(int nroTramite) {
         try{
@@ -192,7 +173,7 @@ public class UITramiteParticular implements Serializable {
         }
     }
     
-    public String irNuevoEstado(int nroTramite) {
+    public String irNuevoEstado() {
         BeansUtils.guardarUrlAnterior();
         return "transicion.xhtml?faces-redirect=true&codigo=" + nroTramite; // Usa '?faces-redirect=true' para hacer una redirección
     }
@@ -203,22 +184,8 @@ public class UITramiteParticular implements Serializable {
 //         return "tramiteParticular.xhtml?faces-redirect=true&codigo=" + nro;
 //    }
     
-    public List<UITramiteParticular> etapas(int nroTramite){
-         
-      List<UITramiteParticular> tamiteEstadoGrilla = new ArrayList<>();
-        
-      List<HistoricoDTO> historicosDTO = controladorRegistrarCambioEstado.etapas(nroTramite);
-        for (HistoricoDTO HistoricoDTO : historicosDTO) {
-            UITramiteParticular tramEstadoGrillaUI = new UITramiteParticular();
-            tramEstadoGrillaUI.setCodEstadoTramite(HistoricoDTO.getCodEstadoTramite());
-            tramEstadoGrillaUI.setFechaCambio(HistoricoDTO.getFechaHastaTramiteEstado());
-            tramEstadoGrillaUI.setFechaBajaTramiteEstado(HistoricoDTO.getFechaHoraBajaTramiteEstado());
-            tramEstadoGrillaUI.setNombreEstadoTramite(HistoricoDTO.getNombreEstadoTramite());
-            tramEstadoGrillaUI.setNroLineaTramiteEstado(HistoricoDTO.getNroLineaTramiteEstado());
-            tramEstadoGrillaUI.setObservacionTramiteEstado(HistoricoDTO.getObservaciones());
-            tamiteEstadoGrilla.add(tramEstadoGrillaUI);
-        }
-        return tamiteEstadoGrilla;
+    public List<UIHistorico> etapas(int nroTramite){
+                return uiHistoricoList;
      }
     
 }

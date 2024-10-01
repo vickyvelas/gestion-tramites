@@ -6,6 +6,7 @@ package RC_2;
 
 import RC_2.dto.EstadoActualDTO;
 import RC_2.dto.HistoricoDTO;
+import RC_2.dto.NuevoEstadoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TramitesConsultorDTO;
 import RC_2.dto.TransicionDTO;
@@ -39,12 +40,12 @@ public class ControladorRC {
     
     public List<HistoricoDTO> etapas(int nroTramite){
       
-        return expertoRC.etapas(nroTramite);
+        return new ArrayList<HistoricoDTO>();
     }
     
     
             
-    public EstadoActualDTO nuevoEstado(int nroTramite){
+    public NuevoEstadoDTO nuevoEstado(int nroTramite){
         return expertoRC.nuevoEstado(nroTramite);
     }
             

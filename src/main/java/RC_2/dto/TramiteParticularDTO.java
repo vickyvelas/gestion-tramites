@@ -1,6 +1,7 @@
 package RC_2.dto;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TramiteParticularDTO {
@@ -9,9 +10,28 @@ public class TramiteParticularDTO {
     private String nombreApellidoCliente;
     private float precioTipoTramite;
     private String observaciones;
-    private List<HistoricoDTO> historicoDTOList;
-    private List<TransicionDTO> TransicionDTOList;
+    private List<HistoricoDTO> historicoDTOList=new ArrayList<>();
+    private List<TransicionDTO> TransicionDTOList=new ArrayList<>();
     private EstadoActualDTO  estadoActualDTO;
+   
+//    private String estadoActual;
+//
+//    public String getEstadoActual() {
+//        return estadoActual;
+//    }
+//
+//    public void setEstadoActual(String estadoActual) {
+//        this.estadoActual = estadoActual;
+//    }
+    
+    public EstadoActualDTO getEstadoActualDTO() {
+        return estadoActualDTO;
+    }
+
+    public void setEstadoActualDTO(EstadoActualDTO estadoActualDTO) {
+        this.estadoActualDTO = estadoActualDTO;
+    }
+    
     
     
     //METODOS GET
@@ -60,6 +80,9 @@ public class TramiteParticularDTO {
         this.historicoDTOList = historicoDTOList;
     }
 
+    public void addHistoricoDTOList(HistoricoDTO historicoDTO) {
+        this.historicoDTOList.add(historicoDTO);
+    }
     public List<TransicionDTO> getTransicionDTOList() {
         return TransicionDTOList;
     }
@@ -68,13 +91,6 @@ public class TramiteParticularDTO {
         this.TransicionDTOList = TransicionDTOList;
     }
 
-    public EstadoActualDTO getEstadoActualDTO() {
-        return estadoActualDTO;
-    }
-
-    public void setEstadoActualDTO(EstadoActualDTO estadoActualDTO) {
-        this.estadoActualDTO = estadoActualDTO;
-    }
     
     
 
