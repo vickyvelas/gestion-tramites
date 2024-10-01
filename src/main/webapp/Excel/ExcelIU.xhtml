@@ -1,0 +1,100 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="title">
+        Excel Leer / Escribir
+    </ui:define>
+
+
+    <ui:define name="body">
+
+        <adm:breadcrumb title="Upload"/>
+        <script>
+            PrimeFaces.locales['es'] = {
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                millisecondText: 'Milisegundo',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día',
+                today: 'Hoy',
+                now: 'Ahora',
+                clear: 'Limpiar',
+                aria: {
+                    close: 'Cerrar',
+                    previous: 'Anterior',
+                    next: 'Siguiente',
+                }
+            };
+        </script>
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h:form>
+                    <div class="field col-12 md:col-4">
+                        <p:outputLabel for="time" value="Time" />
+                        <p:datePicker id="time" value="#{uiExcelFile.fechaDesde}" showTime="true" />
+                    </div>
+
+                    <div>
+                        <p:fileUpload listener="#{uiExcelFile.handleFileUpload}" 
+                                      dragDropSupport="false" auto="true" onstart="showBar()" oncomplete="hideBar()"
+                                      mode="advanced"  multiple="false" update="messages" sizeLimit="100000000" 
+                                      />
+                    </div>
+
+                    <p:spacer height="20"/>                      
+                    <div>
+
+                        <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                         icon="pi pi-arrow-down"  styleClass="btn-success">
+                            <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+                        </p:commandButton>
+                    </div>
+                </h:form>
+
+
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="upload.xhtml">
+                <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+                </pre>
+            </p:tab>
+
+            <p:tab title="FileuploadMB.java">
+                <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.FileuploadMB')}"
+                                 escape="false"/>
+               </code>
+                </pre>
+            </p:tab>
+        </p:tabView>
+    </ui:define>
+</ui:composition>
