@@ -12,23 +12,25 @@ import java.util.List;
 
 public class ControladorABMCliente {
     
-    private ExpertoABMCliente2 expertoABMCliente2 = new ExpertoABMCliente2();
+    private ExpertoABMCliente expertoABMCliente = new ExpertoABMCliente();
     
     
     
      public void eliminarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
-         expertoABMCliente2.eliminarCliente(cuitCliente);
+         expertoABMCliente.eliminarCliente(cuitCliente);
     }
             
-     
+  public List<ListaClienteDTO> obtenerListaCliente(){
+      return expertoABMCliente.obtenerListaCliente();
+  }
      
      
     public DetalleClienteDTO obtenerDetalleCliente (int cuitCliente){
-        return expertoABMCliente2.obtenerDetalleCliente(cuitCliente);
+        return expertoABMCliente.obtenerDetalleCliente(cuitCliente);
     }
-      public List<ListaClienteDTO> obtenerListaCliente( int cuitClienteFiltro,String nombreApellidoClienteFiltro){
-          return expertoABMCliente2.obtenerListaCliente(cuitClienteFiltro, nombreApellidoClienteFiltro);
-    }
+//      public List<ListaClienteDTO> obtenerListaCliente( int cuitClienteFiltro,String nombreApellidoClienteFiltro){
+//          return expertoABMCliente.obtenerListaCliente(cuitClienteFiltro, nombreApellidoClienteFiltro);
+//    }
     
     
 }

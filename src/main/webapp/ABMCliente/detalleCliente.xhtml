@@ -25,7 +25,7 @@
                      <div class="box-header with-border">
                          <div id="main-buttons">
 
-                            <p:commandButton value="Agregar"  icon="fa fa-plus" action="#{uiabmEstadoLista.irAgregarEstado()}"   styleClass="btn-primary"/>
+                            <p:commandButton value="Agregar"  icon="fa fa-plus" action="#{uiClienteLista.irAgregarEstado()}"   styleClass="btn-primary"/>
                                </div>
                       </div>
         <!-- Tabla para mostrar la lista de artículos -->
@@ -37,9 +37,9 @@
                         <h:outputText value="Código:"/>
                         <p:spacer height="10"/>
                         <p:inputText id="codFilter"  style="width:150px"
-                                     placeholder="" value="#{uiabmEstadoLista.codigoFiltro}" onfocus="Javascript:this.focus();this.select();">
+                                     placeholder="" value="#{uiClienteLista.codigoFiltro}" onfocus="Javascript:this.focus();this.select();">
                                         <p:ajax event="keyup" 
-                                            listener="#{uiabmEstadoLista.filtrar()}" 
+                                            listener="#{uiClienteLista.filtrar()}" 
                                             update="@form:grid1"
                                             />
                                      
@@ -52,9 +52,9 @@
                         <h:outputText value="Descripción:"/>
                         <p:spacer height="10"/>
                         <p:inputText id="nomFilter"  style="width:150px"
-                                     placeholder="" value="#{uiabmEstadoLista.nombreFiltro}">
+                                     placeholder="" value="#{uiClienteLista.nombreFiltro}">
                                         <p:ajax event="keyup" 
-                                            listener="#{uiabmEstadoLista.filtrar()}" 
+                                            listener="#{uiClienteLista.filtrar()}" 
                                             update="@form:grid1"
                                         />
                                      
@@ -63,30 +63,30 @@
                    </div>
                    </div>
             <p:spacer height="5"/>
-            <p:dataTable id="grid1" widgetVar="estadoTable" value="#{uiabmEstadoLista.buscarEstados()}" var="estado" >
+            <p:dataTable id="grid1" widgetVar="estadoTable" value="#{uiClienteLista}" var="cliente" >
 
             <p:column>
                 <f:facet name="header">Código</f:facet>
-                #{estado.codigo}
+                #{cliente.codigo}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Nombre</f:facet>
-                #{estado.nombre}
+                #{cliente.nombre}
             </p:column>
 
             <p:column>
                 <f:facet name="header">Fecha Alta</f:facet>
-                #{estado.fechaAlta}
+                #{cliente.fechaAlta}
             </p:column>
 
 
             <p:column>
                 <f:facet name="header">Fecha Baja</f:facet>
-                #{estado.fechaBaja}
+                #{cliente.fechaBaja}
             </p:column>
 
-            <p:column>
+                <!-- comment  <p:column>
                 <f:facet name="header">Acciones</f:facet>
                 <p:commandButton value="Modificar" styleClass="btn-info" action="#{uiabmEstadoLista.irModificarEstado(estado.codigo)}" disabled="#{estado.fechaBaja != null}">
                     <f:ajax render="@form"/>
@@ -105,7 +105,7 @@
                                          icon="fa fa-close" update="@form:grid1"/>
                     </p:confirmDialog>
             </p:column>
-
+-->
         </p:dataTable>
             </div>
 

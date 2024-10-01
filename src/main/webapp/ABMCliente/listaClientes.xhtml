@@ -46,16 +46,31 @@
                 #{listaClientes.fechaHoraBajaCliente}
             </p:column>
 
-
-            <p:column>
-                <f:facet name="header">Cuit</f:facet>
-               #{tramiteConsultor.cuitCliente}
-            </p:column>
+                           <!-- comment 
+             <p:column>
+                <f:facet name="header">Acciones</f:facet>
+                <p:commandButton value="Modificar" styleClass="btn-info" action="{uiListaClientes.irModificarCliente()}" disabled="{estado.fechaBaja != null}">
+                    <f:ajax render="@form"/>
+                </p:commandButton>
+                <p:spacer width="5"/>
+                <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" actionListener="{uiListaClientes.darDeBajaEstado(estado.codigo)}" disabled="{estado.fechaBaja != null}">
+                   
+                    <p:confirm header="Anulación de {estado.codigo} {estado.nombre}" message="¿Está seguro?" icon="ui-icon-alert"/>
+                    
+                </p:commandButton>
                 
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
+                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="fa fa-check"/>
+                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                         icon="fa fa-close"/>
+                    </p:confirmDialog>
+            </p:column>
+                -->
                
                 <p:column> 
                    
-                      <p:commandButton icon="pi pi-search" styleClass="btn-info" action="#{uiListaClientes.irACliente(listaClientes.cuitCliente)}">
+                <p:commandButton icon="pi pi-search" styleClass="btn-info" action="#{uiListaClientes.irACliente()}">
                     <f:ajax render="@form"/>
                      </p:commandButton>
                 </p:column>

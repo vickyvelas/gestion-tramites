@@ -9,11 +9,6 @@ public class ListaClienteDTO {
     private String nombreApellidoCliente;
     private Timestamp fechaHoraBajaCliente;
 
-//    public DTOListaCliente(int cuitCliente, String nombreApellidoCliente, Timestamp fechaHoraBajaCliente) {
-//        this.cuitCliente = cuitCliente;
-//        this.nombreApellidoCliente = nombreApellidoCliente;
-//        this.fechaHoraBajaCliente = fechaHoraBajaCliente;
-//    }
 
     //Getter and Setter (METODOS)
     public int getCuitCliente() {
