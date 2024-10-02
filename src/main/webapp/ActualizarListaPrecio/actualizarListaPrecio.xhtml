@@ -32,9 +32,13 @@
                     </div>       
 
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-                        <div class="ui-sm-12 ui-g-4">
-                            <!-- Botón para agregar LP -->
-                            <p:commandButton value="Agregar" action="#{uiActualizarListaPrecioMenu.irAgregarListaPrecio()}" icon="fa fa-check" styleClass=" btn-primary" /> 
+                        <div class="card">
+                            <h:form id="frmSingle">
+                                <p:fileUpload id="upload" value="#{fileUploadView.file}"
+                                              mode="simple" skinSimple="true" auto="true"
+                                              process="@this" update="messages"
+                                              listener="#{fileUploadView.handleFileUpload}" />
+                            </h:form>
                         </div>
                     </div>   
                 </div>
