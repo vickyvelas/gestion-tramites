@@ -58,11 +58,11 @@ public class UITramiteParticular implements Serializable {
         precioTipoTramite=tramiteParticularDTO.getPrecioTipoTramite();
         observacionTramiteEstado=tramiteParticularDTO.getObservaciones();
        
-//        TramitesConsultorDTO tramitesConsultorDTO = controladorRegistrarCambioEstado.obtenerTramitesConsultor(nroTramite, nombreTipoTramite, nombreEstadoTramite);
-//        cuitCliente = tramitesConsultorDTO.getCuitCliente();
-//        fechaHoraCargaTramite = tramitesConsultorDTO.getFechaHoraCargaTramite();
-//        nombreEstadoTramite = tramitesConsultorDTO.getNombreEstadoTramite();
-//        nombreTipoTramite = tramitesConsultorDTO.getNombreTipoTramite();
+       TramitesConsultorDTO tramitesConsultorDTO = controladorRegistrarCambioEstado.buscarTramiteConsultor(nroTramite);
+       cuitCliente = tramitesConsultorDTO.getCuitCliente();
+       fechaHoraCargaTramite = tramitesConsultorDTO.getFechaHoraCargaTramite();
+       nombreEstadoTramite = tramitesConsultorDTO.getNombreEstadoTramite();
+       nombreTipoTramite = tramitesConsultorDTO.getNombreTipoTramite();
          
       
         

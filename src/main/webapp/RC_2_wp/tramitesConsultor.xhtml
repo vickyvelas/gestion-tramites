@@ -22,8 +22,55 @@
     <h:form>
         <p:focus context="@form"/>
             <div class="box box-primary">
-                        
-                    
+        <!-- FILTROS -->    
+        <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-md-6">
+                    <p:outputPanel>
+                        <h:outputText value="Estado:"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="codFilter"  style="width:150px"
+                                     placeholder="" value="#{uiTramitesConsultor.estadoFiltro}" onfocus="Javascript:this.focus();this.select();">
+                                        <p:ajax event="keyup" 
+                                            listener="#{uiTramitesConsultor.filtrar()}" 
+                                            update="@form:grid1"
+                                            />
+                                     
+                                    </p:inputText>
+
+                    </p:outputPanel> 
+                </div>
+            
+                <div class="ui-g-12 ui-md-6">
+                   <p:outputPanel>
+                        <h:outputText value="Tipo Tramite:"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="nomFilter"  style="width:150px"
+                                     placeholder="" value="#{uiTramitesConsultor.nombreTipoTramiteFiltro}">
+                                        <p:ajax event="keyup" 
+                                            listener="#{uiTramitesConsultor.filtrar()}" 
+                                            update="@form:grid1"
+                                        />
+                                     
+                        </p:inputText>
+                    </p:outputPanel> 
+                </div>
+            
+                <div class="ui-g-12 ui-md-6">
+                   <p:outputPanel>
+                        <h:outputText value="Fecha:"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="fechaFilter"  style="width:150px"
+                                     placeholder="" value="#{uiTramitesConsultor.fechaFiltro}">
+                                        <p:ajax event="keyup" 
+                                            listener="#{uiTramitesConsultor.filtrar()}" 
+                                            update="@form:grid1"
+                                        />
+                                     
+                        </p:inputText>
+                    </p:outputPanel> 
+                </div>           
+            
+        </div>
         <!-- Tabla para mostrar la lista de Tramites -->
          <p:separator/>
 

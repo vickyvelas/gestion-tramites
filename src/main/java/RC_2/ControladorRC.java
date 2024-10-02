@@ -57,9 +57,13 @@ public class ControladorRC {
     
     
             
-    public List<TramitesConsultorDTO> obtenerTramitesConsultor( int nroTramiteFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
+    public List<TramitesConsultorDTO> obtenerTramitesConsultor( Timestamp fechaFiltro,String nombreTipoTramiteFiltro, String estadoFiltro){
        
-        return expertoRC.obtenerTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
+        return expertoRC.obtenerTramitesConsultor(fechaFiltro, nombreTipoTramiteFiltro, estadoFiltro);
     }
+    
+     public TramitesConsultorDTO buscarTramiteConsultor(int nroTramiteFiltro){
+         return expertoRC.buscarTramiteConsultor(nroTramiteFiltro);
+     }
     
 }

@@ -8,13 +8,19 @@ package RC_2.beans;
 import RC_2.ControladorRC;
 import RC_2.dto.DestinosPosiblesDTO;
 import RC_2.dto.NuevoEstadoDTO;
+import RC_2.dto.TramiteParticularDTO;
+import RC_2.dto.TransicionDTO;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
 import utils.BeansUtils;
+
 @Named("uiNuevoEstado")
 @ViewScoped
 public class UInuevoEstado  implements Serializable{
@@ -24,8 +30,20 @@ public class UInuevoEstado  implements Serializable{
     private int codEstadoTramite;
     private String observacionTramiteEstado;
     private ControladorRC controladorRC = new ControladorRC();
+    private int nroTramite;
    
     private int codEstadoSeleccionado;
+    private String nombreEstadoTramiteSeleccionado;
+
+    public String getNombreEstadoTramiteSeleccionado() {
+        return nombreEstadoTramiteSeleccionado;
+    }
+
+    public void setNombreEstadoTramiteSeleccionado(String nombreEstadoTramiteSeleccionado) {
+        this.nombreEstadoTramiteSeleccionado = nombreEstadoTramiteSeleccionado;
+    }
+    
+    
 
     public List<EstadosPosiblesUI> getEstadosPosiblesUI() {
         return estadosPosiblesUI;
@@ -45,7 +63,12 @@ public class UInuevoEstado  implements Serializable{
     
     
     public UInuevoEstado() {
-          NuevoEstadoDTO nuevoEstadoDTO=controladorRC.nuevoEstado(codEstadoTramite);
+//        FacesContext facesContext = FacesContext.getCurrentInstance();
+//        ExternalContext externalContext = facesContext.getExternalContext();
+//        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+//        
+//         nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
+         NuevoEstadoDTO nuevoEstadoDTO=controladorRC.nuevoEstado(codEstadoTramite);
          nombreEstadoTramiteActual=nuevoEstadoDTO.getNombreEstadoTramiteActual();
          for (DestinosPosiblesDTO d : nuevoEstadoDTO.getDestinosPosiblesList())
          {
@@ -62,6 +85,10 @@ public class UInuevoEstado  implements Serializable{
          e.setCodEstadoTramite(2);
          e.setNombreEstadoTramiteDestino("Martina");
          estadosPosiblesUI.add(e);
+                            e = new EstadosPosiblesUI();
+        e.setCodEstadoTramite(3);
+        e.setNombreEstadoTramiteDestino("Etapa 1");
+        estadosPosiblesUI.add(e);
     }
 
    
@@ -89,12 +116,23 @@ public class UInuevoEstado  implements Serializable{
         this.observacionTramiteEstado = observacionTramiteEstado;
     }
     
-    public String guardar(){
-  
-              System.out.println(codEstadoSeleccionado); 
-              System.out.println(observacionTramiteEstado);
-            //return BeansUtils.redirectToPreviousPage();
-           return "";
+    //provisorio
+//    public String guardar(){
+//  
+//              System.out.println(codEstadoSeleccionado); 
+//              System.out.println(observacionTramiteEstado);
+//            //return BeansUtils.redirectToPreviousPage();
+//           return "";
+//    }
+    
+    
+    public String cambiarEstadoTramite (){
+        TransicionDTO transicionDTO = new TransicionDTO();
+            transicionDTO.setCodEstadoTramite(getCodEstadoSeleccionado());
+            transicionDTO.setNombreEstadoTramite(getNombreEstadoTramiteSeleccionado());
+            transicionDTO.setObservacion(getObservacionTramiteEstado());
+            controladorRC.cambiarEstadoTramite(transicionDTO, nroTramite);
+        return BeansUtils.redirectToPreviousPage();
     }
 
     

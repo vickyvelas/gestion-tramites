@@ -19,10 +19,10 @@ import utils.BeansUtils;
 public class UItramitesConsultor implements Serializable{
 
     //filtros
-    private int nroTramiteFiltro=0;
+    private int nroTramiteFiltro=0; //no se usa, no sirve
     private String nombreTipoTramiteFiltro=" ";
     private String estadoFiltro=" ";
-    private Timestamp fechaDesde;
+    private Timestamp fechaFiltro;
     
     private ControladorRC controladorRegistrarCambioEstado = new ControladorRC();
 
@@ -52,12 +52,12 @@ public class UItramitesConsultor implements Serializable{
         this.estadoFiltro = estadoFiltro;
     }
 
-    public Timestamp getFechaDesde() {
-        return fechaDesde;
+    public Timestamp getFechaFiltro() {
+        return fechaFiltro;
     }
 
-    public void setFechaDesde(Timestamp fechaDesde) {
-        this.fechaDesde = fechaDesde;
+    public void setFechaFiltro(Timestamp fechaFiltro) {
+        this.fechaFiltro = fechaFiltro;
     }
 
     public UItramitesConsultor() {
@@ -67,7 +67,7 @@ public class UItramitesConsultor implements Serializable{
     public List<UITramitesConsultorGrilla> obtenerTramitesConsultor( ){
    
         List<UITramitesConsultorGrilla> tramitesGrilla = new ArrayList<>();
-        List<TramitesConsultorDTO> tramitesConsultorDTO = controladorRegistrarCambioEstado.obtenerTramitesConsultor(nroTramiteFiltro, nombreTipoTramiteFiltro, estadoFiltro);
+        List<TramitesConsultorDTO> tramitesConsultorDTO = controladorRegistrarCambioEstado.obtenerTramitesConsultor(fechaFiltro, nombreTipoTramiteFiltro, estadoFiltro);
         for (TramitesConsultorDTO tramiteConsultorDTO : tramitesConsultorDTO) {
             UITramitesConsultorGrilla tramiteGrillaUI = new UITramitesConsultorGrilla();
             tramiteGrillaUI.setNroTramite(tramiteConsultorDTO.getNroTramite());
@@ -80,7 +80,8 @@ public class UItramitesConsultor implements Serializable{
         return tramitesGrilla;
     }
     
-    
+    public void filtrar(){
+    }
     
   
     
