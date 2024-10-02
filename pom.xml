@@ -7,7 +7,7 @@
     <artifactId>admin-starter</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>admin-starterV5</name>
+    <name>ProyectoDisenio</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

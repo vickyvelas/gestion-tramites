@@ -4,6 +4,7 @@ import ABMConfigurarVersiones.dtos.DTOEstadoActualInput;
 import ABMConfigurarVersiones.dtos.DTOEstadoDestinoInput;
 import ABMConfigurarVersiones.dtos.DTOEstadoPosible;
 import ABMConfigurarVersiones.dtos.DTOVersionInput;
+import ABMConfigurarVersiones.dtos.DTOVersionOutput;
 import ABMConfigurarVersiones.dtos.DTOVersionyEstados;
 import ABMConfigurarVersiones.exceptions.ControladorABMVersion;
 import ABMConfigurarVersiones.exceptions.VersionException;
@@ -42,8 +43,44 @@ public class UIDraw implements Serializable {
     private String titulo = "";
     private boolean editable;
     private String nodosPosibles = "";
-    private int nroVersion=0;
-    private int codigoTipoTramite=0;
+    private boolean insert;
+    private int nroVersion;
+    private int codigoTipoTramite;
+    private Timestamp fechaHoraDesdeVersion;
+    private Timestamp fechaHoraHastaVersion;
+
+    public boolean isInsert() {
+        return insert;
+    }
+
+    public void setInsert(boolean insert) {
+        this.insert = insert;
+    }
+
+    public int getCodigoTipoTramite() {
+        return codigoTipoTramite;
+    }
+
+    public void setCodigoTipoTramite(int codigoTipoTramite) {
+        this.codigoTipoTramite = codigoTipoTramite;
+    }
+
+    public Timestamp getFechaHoraDesdeVersion() {
+        return fechaHoraDesdeVersion;
+    }
+
+    public void setFechaHoraDesdeVersion(Timestamp fechaHoraDesdeVersion) {
+        this.fechaHoraDesdeVersion = fechaHoraDesdeVersion;
+    }
+
+    public Timestamp getFechaHoraHastaVersion() {
+        return fechaHoraHastaVersion;
+    }
+
+    public void setFechaHoraHastaVersion(Timestamp fechaHoraHastaVersion) {
+        this.fechaHoraHastaVersion = fechaHoraHastaVersion;
+    }
+    
     public void setNroVersion(int nroVersion) {
         this.nroVersion = nroVersion;
     }
@@ -74,52 +111,57 @@ public class UIDraw implements Serializable {
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         
         int codigo = Integer.parseInt(request.getParameter("codigoTipoTramite"));
-        System.out.println("El codigo");
         codigoTipoTramite=codigo;
+        boolean editaOve = Boolean.parseBoolean(request.getParameter("editable"));
+        editable = editaOve;
+        insert=true;
         DTOVersionyEstados versionMostrar=null;
+
         try {
             versionMostrar = controlador.buscarVersionEditar(codigo);
         } catch (VersionException ex) {
             Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
         }
-        List<NodoMenuIU> lestadosP = new ArrayList<NodoMenuIU>();    
-        List<DTOEstadoPosible> estados = versionMostrar.getEstadosPosibles();
-        for(DTOEstadoPosible x: estados){
-             NodoMenuIU unEP = new NodoMenuIU();
-             unEP.setCodigo(x.getCodEstadoTramite());
-             unEP.setNombre(x.getNombreEstadoTramite());
-             lestadosP.add(unEP);
-        }
         
-        Gson gson = new Gson();
-        nodosPosibles = gson.toJson(lestadosP);
-         List<NodoIU> lestados = new ArrayList<NodoIU>();
-        if(versionMostrar.getVersion()==null || versionMostrar.getVersion().getDraw().trim().length()==0)
-        {
-            
-           for(DTOEstadoPosible x: estados)
-           {
-               if(x.getCodEstadoTramite()==1)
-               {
-                    NodoIU unE = new NodoIU();
-                    unE.setCodigo(x.getCodEstadoTramite());
-                    unE.setNombre(x.getNombreEstadoTramite());
-                    unE.setXpos(80);
-                    unE.setYpos(80);
-                    lestados.add(unE);  
-               }
-
-           }
-           
-            
-        }
-        else
-        {
-            cargarJSON=versionMostrar.getVersion().getDraw();
-        }
-
-        titulo = "Versión 1";
-        editable = true;
+            DTOVersionOutput versionoutput =new DTOVersionOutput();
+            versionoutput = versionMostrar.getVersion();
+             setNroVersion(versionoutput.getCodVersion());
+            setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
+            setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
+            List<NodoMenuIU> lestadosP = new ArrayList<NodoMenuIU>();
+        
+            List<DTOEstadoPosible> estados = versionMostrar.getEstadosPosibles();
+                for(DTOEstadoPosible x: estados){
+                 NodoMenuIU unEP = new NodoMenuIU();
+                 unEP.setCodigo(x.getCodEstadoTramite());
+                 unEP.setNombre(x.getNombreEstadoTramite());
+                 lestadosP.add(unEP);
+                }    
+            Gson gson = new Gson();
+            nodosPosibles = gson.toJson(lestadosP);
+            List<NodoIU> lestados = new ArrayList<NodoIU>();
+        
+            if(versionMostrar.getVersion()==null || versionMostrar.getVersion().getDraw().trim().length()==0)
+            {
+                for(DTOEstadoPosible x: estados){
+                    if(x.getCodEstadoTramite()==1){
+                        NodoIU unE = new NodoIU();
+                        unE.setCodigo(x.getCodEstadoTramite());
+                        unE.setNombre(x.getNombreEstadoTramite());
+                        unE.setXpos(80);
+                        unE.setYpos(80);
+                        lestados.add(unE);  
+                    }
+                }  
+            }
+            else
+            {
+                cargarJSON=versionMostrar.getVersion().getDraw();
+            }
+             editable = true;
+        
+ 
+        titulo = "Versión";
 
         //Estados Posibles
         //Ejemplo
@@ -152,17 +194,27 @@ public class UIDraw implements Serializable {
 
     public void guardar() {
         
-        
-        DTOVersionInput vi=new DTOVersionInput();
-        vi.setCodTipoTramite(codigoTipoTramite);
-        vi.setCodVersion(2);
-        vi.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
-        Timestamp fh = Timestamp.valueOf("2070-09-15 22:06:45.0");
-        vi.setFechaHoraHastaVersion(fh);
-       
-        
+        DTOVersionInput vi = new DTOVersionInput();
+        if(!insert)
+            {
+                vi.setCodTipoTramite(codigoTipoTramite);
+                vi.setCodVersion(getNroVersion());
+                vi.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
+                 Timestamp fh = Timestamp.valueOf("2070-09-15 22:06:45.0");
+                vi.setFechaHoraHastaVersion(fh);
+            }
+            else
+            {
+                vi.setCodTipoTramite(codigoTipoTramite);
+                vi.setCodTipoTramite(codigoTipoTramite);
+                vi.setCodVersion(getNroVersion());
+                vi.setFechaHoraDesdeVersion(fechaHoraDesdeVersion);
+                vi.setFechaHoraHastaVersion(fechaHoraHastaVersion);
+            }
+            
         System.out.println(this.guardarJSON);
-        Messages.create("nroVersion").detail(""+this.nroVersion).add();
+        int nronuevo = nroVersion +1;
+        Messages.create("nronuevo").detail(""+this.nroVersion).add();
         Messages.create("Guardar").detail(this.guardarJSON).add();
         ObjectMapper objectMapper = new ObjectMapper();
         TypeFactory typeFactory = objectMapper.getTypeFactory();
@@ -201,7 +253,7 @@ public class UIDraw implements Serializable {
         Gson gson = new Gson();
         cargarJSON = gson.toJson(listaNodo);
         System.out.println(jsonArray);
-        Messages.create("Guardar 2").detail(this.guardarJSON).add();
+        Messages.create("Guardar").detail(this.guardarJSON).add();
     }
 
 }

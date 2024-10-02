@@ -85,7 +85,7 @@ public class VersionGrilla implements Serializable {
     public String irEditarVersion(int codigo) throws VersionException {
         BeansUtils.guardarUrlAnterior();
         //DTOVersionyEstados dtoeditar = controlador.buscarVersionEditar(codigo);
-        return "/ABMConfigurarVersiones/drawIU.xhtml?faces-redirect=true&codigoTipoTramite="+ codigo; 
+        return "/ABMConfigurarVersiones/drawIU.xhtml?faces-redirect=true&editable=true&codigoTipoTramite="+codigo; 
     }
     
     public  String irHistorialVersion(int codigo) {
@@ -93,10 +93,11 @@ public class VersionGrilla implements Serializable {
         BeansUtils.guardarUrlAnterior();
         return "/ABMConfigurarVersiones/HistorialVersiones.xhtml?faces-redirect=true&tipoTramite="+ codigo; // Usa '?faces-redirect=true' para hacer una redirección
     }
-    public DTOVersionOutput irVerVersion(int codigo, int codigov) throws VersionException {
-        DTOVersionOutput verVersion = controlador.verVersion(codigo, codigov);
+    public String irVerVersion(int codigo, int codigov) throws VersionException {
         BeansUtils.guardarUrlAnterior();
-        return verVersion;
+        boolean hace= false;
+        return "/ABMConfigurarVersiones/drawIU.xhtml?faces-redirect=true&editable=false&codigoTipoTramite="+codigo +"&codVersion="+codigov ;
+        //return ("no sale");
     }
 }
    

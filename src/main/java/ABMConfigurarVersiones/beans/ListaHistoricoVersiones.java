@@ -50,15 +50,13 @@ public class ListaHistoricoVersiones implements Serializable{
         this.controlador = controladorABMVersion;
     }
    
-    public void irAnularVersion(int codigo, int codigov){
-        /*
+    public void irAnularVersion(int codigov, int codigo){       
         try{
         controlador.anularVersion(codigov, codigo);
         Messages.create("Anulado").detail("Anulado").add();
         }catch (VersionException e) {
           Messages.create("Error!").error().detail(e.getMessage()).add();
-        }
-        */
+        }        
     }
 
     public ListaHistoricoVersiones() {

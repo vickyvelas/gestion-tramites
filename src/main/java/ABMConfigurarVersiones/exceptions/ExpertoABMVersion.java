@@ -182,7 +182,7 @@ public class ExpertoABMVersion {
         {
                 throw new VersionException("El TipoTramite NO existe");
         }
-        TipoTramite tt = (TipoTramite) objetoList;
+        TipoTramite tt = (TipoTramite) objetoList.get(0);
         
         lCriterio.clear();
         DTOCriterio Criterio1=new DTOCriterio();
@@ -371,7 +371,6 @@ public class ExpertoABMVersion {
     //Creo nueva version
         Version nuevaV = new Version();
         //cambiar
-        nuevaV.setCodVersion(datosingresados.getCodVersion());
         nuevaV.setFechaHoraDesdeVersion(datosingresados.getFechaHoraDesdeVersion());
         nuevaV.setFechaHoraHastaVersion(datosingresados.getFechaHoraHastaVersion());
         nuevaV.setFechaHoraBajaVersion(null);
@@ -391,6 +390,18 @@ public class ExpertoABMVersion {
         TipoTramite tt = (TipoTramite) objetoList.get(0);
         nuevaV.setTipoTramite(tt);
         
+        //codigo
+        List<DTOCriterio> lCriterio4=new ArrayList<DTOCriterio>(); 
+        DTOCriterio unCriterio4=new DTOCriterio();
+            unCriterio4.setAtributo("tipoTramite");
+            unCriterio4.setOperacion("=");
+            unCriterio4.setValor(tt);
+            lCriterio.add(unCriterio4);
+        List objetoList4 = FachadaPersistencia.getInstance().buscar("Version", lCriterio4);
+        int nuevoCod = objetoList4.size() +1 ;
+        nuevaV.setCodVersion(nuevoCod);
+        
+        //Estados y Transiciones
         List<DTOEstadoActualInput> EAingresados = datosingresados.getEstadosActuales();
         for (DTOEstadoActualInput x :EAingresados){
             TransicionEstado Transicion = new TransicionEstado();
@@ -593,7 +604,7 @@ public class ExpertoABMVersion {
             unCriterio.setValor(codTT);
             lCriterio.add(unCriterio);
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
-        TipoTramite tt = (TipoTramite)objetoList;
+        TipoTramite tt = (TipoTramite)objetoList.get(0);
         if(objetoList.size()<= 0)
         {
                 throw new VersionException("El TipoTramite NO existe");
@@ -616,7 +627,7 @@ public class ExpertoABMVersion {
             Criterio3.setValor(codVersion);
             lCriterio.add(Criterio3);
         List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio); 
-        Version versionanula = (Version) objetoList2;
+        Version versionanula = (Version) objetoList2.get(0);
         if(objetoList.size()<= 0)
         {
                 throw new VersionException("La version no se puede anular");
@@ -656,7 +667,9 @@ public class ExpertoABMVersion {
         } 
         vultima.setFechaHoraBajaVersion(new Timestamp(System.currentTimeMillis()));
         FachadaPersistencia.getInstance().guardar(vultima);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         // la guardo antes para poder despues buscar la penultima como ultima
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         //Cambio la antepenúltima version
         
         lCriterio.clear();
