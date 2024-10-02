@@ -13,11 +13,12 @@ import java.util.List;
 public class ControladorABMCliente {
     
     private ExpertoABMCliente expertoABMCliente = new ExpertoABMCliente();
-    
-    
-    
+        
      public void eliminarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
          expertoABMCliente.eliminarCliente(cuitCliente);
+         
+     public void modificarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
+         expertoABMCliente.modificarCliente();
     }
             
   public List<ListaClienteDTO> obtenerListaCliente(){

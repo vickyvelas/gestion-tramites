@@ -49,13 +49,12 @@ public class ExpertoABMCliente {
         List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
         
         //busqueda buscar("Cliente", "")
-        List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
-        DTOCriterio unCriterio=new DTOCriterio();
-            
-            lCriterio.add(unCriterio);
-         List ObjetoList = FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
+        List<DTOCriterio> lCriterio=new ArrayList<>();
+        //DTOCriterio unCriterio=new DTOCriterio(); Esto se pone asi si necesito utilizar criterio para buscar
+         //Obtengo la lista de OBJETOS(clientes) desde la fachada de persistencia    
+        List<Object> objetoList = FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
          
-         for(Object x : ObjetoList){
+         for(Object x : objetoList){
              Cliente cliente = (Cliente) x;
              ListaClienteDTO listaClienteDTO = new ListaClienteDTO();
                 listaClienteDTO.setCuitCliente(cliente.getCuitCliente());
@@ -68,6 +67,9 @@ public class ExpertoABMCliente {
         return listaClienteDTOs;
         
         
+    }
+     void modificarCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 //    public List<ListaClienteDTO> obtenerListaCliente(int cuitClienteFiltro, String nombreApellidoClienteFiltro) {
@@ -85,4 +87,6 @@ public class ExpertoABMCliente {
 //        }
 //        return listaClientes;
 //    }
+
+   
 }
