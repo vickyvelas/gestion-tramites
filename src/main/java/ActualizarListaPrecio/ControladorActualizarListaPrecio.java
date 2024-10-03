@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ControladorActualizarListaPrecio {
     private ExpertoActualizarListaPrecio expertoActualizarListaPrecio = new ExpertoActualizarListaPrecio();
-    public List<ListaPrecio> buscarEstados(int codigo, String nombre){
-        return expertoActualizarListaPrecio.buscarListaPrecio(codigo,nombre);
-    }
+//    public List<ListaPrecio> buscarEstados(int codigo, String nombre){
+//        return expertoActualizarListaPrecio.buscarListaPrecio(codigo,nombre);
+//    }
 
     public void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) throws ListaPrecioException{
         expertoActualizarListaPrecio.importarListaPrecio(dtoListaPrecioImportar);
@@ -24,4 +24,8 @@ public class ControladorActualizarListaPrecio {
     public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException{
         expertoActualizarListaPrecio.darDeBajaListaPrecio (codigo);
     }
+    
+//    public List<DTOListaPrecio> obtenerListaPrecio()throws ListaPrecioException{
+//        return expertoActualizarListaPrecio.obtenerListaPrecio();
+//    }
 }
