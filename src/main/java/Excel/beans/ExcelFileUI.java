@@ -142,7 +142,7 @@ public class ExcelFileUI implements Serializable {
                     // Messages.create(iRow +codigo+" "+nuevoPrecio).detail("").add();
                     d.setCodTipoTramite((int) codigo);
                     d.setPrecioTipoTramite((int) nuevoPrecio);
-                    lp.addDetalleLP(d);
+                    lp.addDetalleListaPrecioImportar(d);
 
                 }
                 iRow = iRow + 1;

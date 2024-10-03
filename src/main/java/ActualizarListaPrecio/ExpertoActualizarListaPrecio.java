@@ -1,5 +1,7 @@
 package ActualizarListaPrecio;
 
+import ActualizarListaPrecio.dtos.DTODetalleListaPrecioExportar;
+import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
@@ -46,12 +48,42 @@ public class ExpertoActualizarListaPrecio {
         return listadelistas;
     }
 
-    void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DTOListaPrecioImportar importarListaPrecio(ListaPrecio listaImportada, DTODetalleListaPrecioImportar detallesImportar) {
+        DTOListaPrecioImportar dtoListaPrecioImportar = new DTOListaPrecioImportar();
+        dtoListaPrecioImportar.setCodListaPrecio(listaImportada.getCodListaPrecio());
+        dtoListaPrecioImportar.setFechaHoraDesdeListaPrecio(listaImportada.getFechaHoraDesdeListaPrecio());
+        dtoListaPrecioImportar.setFechaHoraHastaListaPrecio(listaImportada.getFechaHoraHastaListaPrecio());
+        //listaImportada.add(dtoListaPrecioImportar);
+
+        for (Object x : objetoList) {
+            //DTOListaPrecioDetalleImportar dtoListaPrecioDetalleImportar = (DTOListaPrecioDetalleImportar) x;
+            DTODetalleListaPrecioImportar dtoDetalleListaPrecioImportar = new DTODetalleListaPrecioImportar();
+            dtoDetalleListaPrecioImportar.setCodTipoTramite(detallesImportar.getCodTipoTramite());
+            //dtoDetalleListaPrecioImportar.setNombreTipoTramite(detallesImportar.getNombreTipoTramite());
+            dtoDetalleListaPrecioImportar.setPrecioTipoTramite(detallesImportar.getPrecioTipoTramite());
+            detallesImportar.add(dtoDetalleListaPrecioImportar);
+            listaImportada.add(detallesImportar)
+        }
+        return listaImportada;
     }
 
-    void exportarListaPrecio(DTOListaPrecioExportar dtoListaPrecioExportar) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public DTOListaPrecioExportar exportarListaPrecio(ListaPrecio listaExportada, DTODetalleListaPrecioExportar detallesExportar) {
+        DTOListaPrecioExportar dtoListaPrecioExportar = new DTOListaPrecioExportar();
+        dtoListaPrecioExportar.setCodListaPrecio(listaExportada.getCodListaPrecio());
+        dtoListaPrecioExportar.setFechaHoraDesdeListaPrecio(listaExportada.getFechaHoraDesdeListaPrecio());
+        dtoListaPrecioExportar.setFechaHoraHastaListaPrecio(listaExportada.getFechaHoraHastaListaPrecio());
+        //listaExportada.add(dtoListaPrecioExportar);
+
+        for (Object x : objetoList) {
+            //DTODetalleListaPrecioExportar dtoDetalleListaPrecioExportar = (DTODetalleListaPrecioExportar) x;
+            DTODetalleListaPrecioExportar dtoDetalleListaPrecioExportar = new DTODetalleListaPrecioExportar();
+            dtoDetalleListaPrecioExportar.setCodTipoTramite(detallesExportar.getCodTipoTramite());
+            dtoDetalleListaPrecioExportar.setNombreTipoTramite(detallesExportar.getNombreTipoTramite());
+            dtoDetalleListaPrecioExportar.setPrecioTipoTramite(detallesExportar.getPrecioTipoTramite());
+            detallesExportar.add(dtoDetalleListaPrecioExportar);
+            listaExportada.add(detallesExportar)
+        }
+        return listaExportada;
     }
 
     void darDeBajaListaPrecio(int codigo) {

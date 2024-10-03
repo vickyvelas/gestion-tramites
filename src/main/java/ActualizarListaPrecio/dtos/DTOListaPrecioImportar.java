@@ -9,42 +9,45 @@ import java.util.List;
  * @author Admin
  */
 public class DTOListaPrecioImportar {
+
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
-    private List <DTODetalleListaPrecioImportar> detalleLP=new ArrayList<>();
+    private List<DTODetalleListaPrecioImportar> detalleListaPrecioImportar = new ArrayList<>();
 
-    public List<DTODetalleListaPrecioImportar> getDetalleLP() {
-        return detalleLP;
+    public List<DTODetalleListaPrecioImportar> getDetalleListaPrecioImportar() {
+        return detalleListaPrecioImportar;
     }
 
-    public void setDetalleLP(List<DTODetalleListaPrecioImportar> detalleLP) {
-        this.detalleLP = detalleLP;
+    public void setDetalleListaPrecioImportar(List<DTODetalleListaPrecioImportar> detalleListaPrecioImportar) {
+        this.detalleListaPrecioImportar = detalleListaPrecioImportar;
     }
-    public void addDetalleLP(DTODetalleListaPrecioImportar detalleLP) {
-        this.detalleLP.add(detalleLP);
+
+    public void addDetalleListaPrecioImportar(DTODetalleListaPrecioImportar detalleListaPrecioImportar) {
+        this.detalleListaPrecioImportar.add(detalleListaPrecioImportar);
     }
-    public int getCodListaPrecio(){
+
+    public int getCodListaPrecio() {
         return codListaPrecio;
     }
-    
-    public void setCodListaPrecio (int codListaPrecio){
+
+    public void setCodListaPrecio(int codListaPrecio) {
         this.codListaPrecio = codListaPrecio;
     }
-    
-    public Timestamp getFechaHoraDesdeListaPrecio(){
+
+    public Timestamp getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
-    
-    public void setFechaHoraDesdeListaPrecio (Timestamp fechaHoraDesdeListaPrecio){
+
+    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
-    
-    public Timestamp getFechaHoraHastaListaPrecio(){
+
+    public Timestamp getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
-    
-    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio){
+
+    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
 

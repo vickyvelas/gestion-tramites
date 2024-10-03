@@ -9,26 +9,23 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class ControladorActualizarListaPrecio {
-    
+
     private ExpertoActualizarListaPrecio expertoActualizarListaPrecio = new ExpertoActualizarListaPrecio();
-    
-    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual)throws ListaPrecioException{
+
+    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual) throws ListaPrecioException {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
     }
 
-    public void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) throws ListaPrecioException{
+    public void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) throws ListaPrecioException {
         expertoActualizarListaPrecio.importarListaPrecio(dtoListaPrecioImportar);
     }
-    
-    public void exportarListaPrecio (DTOListaPrecioExportar dtoListaPrecioExportar) throws ListaPrecioException{
+
+    public void exportarListaPrecio(DTOListaPrecioExportar dtoListaPrecioExportar) throws ListaPrecioException {
         expertoActualizarListaPrecio.exportarListaPrecio(dtoListaPrecioExportar);
     }
 
-    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException{
-        expertoActualizarListaPrecio.darDeBajaListaPrecio (codigo);
+    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException {
+        expertoActualizarListaPrecio.darDeBajaListaPrecio(codigo);
     }
-    
-//    public List<DTOListaPrecio> obtenerListaPrecio()throws ListaPrecioException{
-//        return expertoActualizarListaPrecio.obtenerListaPrecio();
-//    }
+
 }
