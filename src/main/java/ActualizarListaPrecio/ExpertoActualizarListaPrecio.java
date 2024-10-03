@@ -6,9 +6,12 @@ import ActualizarListaPrecio.dtos.DTOListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import entidades.Cliente;
+import entidades.DetallePrecioTipoTramite;
 import entidades.ListaPrecio;
+import entidades.TipoTramite;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import utils.DTOCriterio;
 import utils.FachadaPersistencia;
@@ -27,11 +30,11 @@ public class ExpertoActualizarListaPrecio {
         //DTOCriterio unCriterio=new DTOCriterio(); Esto se pone asi si necesito utilizar criterio para buscar
         List<DTOCriterio> lCriterio = new ArrayList<DTOCriterio>();
 
-        if (fechaHoraHastaListaPrecio < fechaActual) {
+        if (fechaActual != null) {
             DTOCriterio unCriterio = new DTOCriterio();
             unCriterio.setAtributo("fechaHoraHastaListaPrecio");
-            unCriterio.setOperacion("=");
-            unCriterio.setValor(0);
+            unCriterio.setOperacion(">");
+            unCriterio.setValor(fechaActual);
             lCriterio.add(unCriterio);
         }
         //Obtengo la lista de OBJETOS(listas de precios) desde la fachada de persistencia    
@@ -48,42 +51,68 @@ public class ExpertoActualizarListaPrecio {
         return listadelistas;
     }
 
-    public DTOListaPrecioImportar importarListaPrecio(ListaPrecio listaImportada, DTODetalleListaPrecioImportar detallesImportar) {
-        DTOListaPrecioImportar dtoListaPrecioImportar = new DTOListaPrecioImportar();
-        dtoListaPrecioImportar.setCodListaPrecio(listaImportada.getCodListaPrecio());
-        dtoListaPrecioImportar.setFechaHoraDesdeListaPrecio(listaImportada.getFechaHoraDesdeListaPrecio());
-        dtoListaPrecioImportar.setFechaHoraHastaListaPrecio(listaImportada.getFechaHoraHastaListaPrecio());
+    public DTOListaPrecioImportar importarListaPrecio( DTODetalleListaPrecioImportar detallesImportar) {
+       
+        List<DTOCriterio> lCriterio=new ArrayList<>();
+        
+        List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
+        for (Object x : objetoList) {
+            ListaPrecio listaPrecio = (ListaPrecio) x;
+            listaPrecio.getFechaHoraDesdeListaPrecio();
+            
+            //SELECCIONAR LA QUE TENGA MAYOR FECHA
+            
+            
+        }
+        
+        
+        
+//        DTOListaPrecioImportar dtoListaPrecioImportar = new DTOListaPrecioImportar();
+//        dtoListaPrecioImportar.setCodListaPrecio(listaImportada.getCodListaPrecio());
+//        dtoListaPrecioImportar.setFechaHoraDesdeListaPrecio(listaImportada.getFechaHoraDesdeListaPrecio());
+//        dtoListaPrecioImportar.setFechaHoraHastaListaPrecio(listaImportada.getFechaHoraHastaListaPrecio());
         //listaImportada.add(dtoListaPrecioImportar);
 
         for (Object x : objetoList) {
+            
             //DTOListaPrecioDetalleImportar dtoListaPrecioDetalleImportar = (DTOListaPrecioDetalleImportar) x;
             DTODetalleListaPrecioImportar dtoDetalleListaPrecioImportar = new DTODetalleListaPrecioImportar();
             dtoDetalleListaPrecioImportar.setCodTipoTramite(detallesImportar.getCodTipoTramite());
             //dtoDetalleListaPrecioImportar.setNombreTipoTramite(detallesImportar.getNombreTipoTramite());
             dtoDetalleListaPrecioImportar.setPrecioTipoTramite(detallesImportar.getPrecioTipoTramite());
             detallesImportar.add(dtoDetalleListaPrecioImportar);
-            listaImportada.add(detallesImportar)
+            listaImportada.add(detallesImportar);
         }
         return listaImportada;
     }
 
-    public DTOListaPrecioExportar exportarListaPrecio(ListaPrecio listaExportada, DTODetalleListaPrecioExportar detallesExportar) {
-        DTOListaPrecioExportar dtoListaPrecioExportar = new DTOListaPrecioExportar();
-        dtoListaPrecioExportar.setCodListaPrecio(listaExportada.getCodListaPrecio());
-        dtoListaPrecioExportar.setFechaHoraDesdeListaPrecio(listaExportada.getFechaHoraDesdeListaPrecio());
-        dtoListaPrecioExportar.setFechaHoraHastaListaPrecio(listaExportada.getFechaHoraHastaListaPrecio());
-        //listaExportada.add(dtoListaPrecioExportar);
+    public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
+        
+        List<DTOCriterio> lCriterio = new ArrayList<DTOCriterio>();
+        DTOCriterio unCriterio = new DTOCriterio();
+            unCriterio.setAtributo("codListaPrecio");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(codListaPrecio);
+        ListaPrecio lp = (ListaPrecio) FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio).get(0);
 
-        for (Object x : objetoList) {
-            //DTODetalleListaPrecioExportar dtoDetalleListaPrecioExportar = (DTODetalleListaPrecioExportar) x;
+        DTOListaPrecioExportar dtoListaPrecioExportar = new DTOListaPrecioExportar();
+                dtoListaPrecioExportar.setCodListaPrecio(lp.getCodListaPrecio());
+                dtoListaPrecioExportar.setFechaHoraDesdeListaPrecio(lp.getFechaHoraDesdeListaPrecio());
+                dtoListaPrecioExportar.setFechaHoraHastaListaPrecio(lp.getFechaHoraHastaListaPrecio());
+        List<DetallePrecioTipoTramite> listDet = lp.getDetallePrecioTipoTramiteList();
+
+        for (DetallePrecioTipoTramite detlp : listDet) {
+            
+               TipoTramite tt=  detlp.getTipoTramite();
+
             DTODetalleListaPrecioExportar dtoDetalleListaPrecioExportar = new DTODetalleListaPrecioExportar();
-            dtoDetalleListaPrecioExportar.setCodTipoTramite(detallesExportar.getCodTipoTramite());
-            dtoDetalleListaPrecioExportar.setNombreTipoTramite(detallesExportar.getNombreTipoTramite());
-            dtoDetalleListaPrecioExportar.setPrecioTipoTramite(detallesExportar.getPrecioTipoTramite());
-            detallesExportar.add(dtoDetalleListaPrecioExportar);
-            listaExportada.add(detallesExportar)
+            dtoDetalleListaPrecioExportar.setCodTipoTramite(tt.getCodTipoTramite());
+            dtoDetalleListaPrecioExportar.setNombreTipoTramite(tt.getNombreTipoTramite());
+            dtoDetalleListaPrecioExportar.setPrecioTipoTramite(detlp.getPrecioTipoTramite());
+//            dtlp.add(dtoDetalleListaPrecioExportar);
+//            lp.add(detlp);
         }
-        return listaExportada;
+        return dtoListaPrecioExportar;
     }
 
     void darDeBajaListaPrecio(int codigo) {
