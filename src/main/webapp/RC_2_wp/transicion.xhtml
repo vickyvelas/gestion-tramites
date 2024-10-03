@@ -20,6 +20,14 @@
         <div class="card" align="center" >
            <p:dataViewGridItem>  
              <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+             <h:outputText value="Nombre TipoTramite:" />
+            <h:outputText value="#{uiNuevoEstado.nombreTipoTramite}"/> 
+            
+             <h:outputText value="Tramite nro:" />
+             <h:outputText value="#{uiNuevoEstado.nroTramite}"/> 
+             
+              <h:outputText value="Cliente:" />
+              <h:outputText value="#{uiNuevoEstado.nombreApellidoCliente}"/> 
                  
             <h:outputText value="Estado actual:" />
             <h:outputText value="#{uiNuevoEstado.nombreEstadoTramiteActual}"/> 

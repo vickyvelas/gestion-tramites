@@ -23,8 +23,25 @@ public class UItramitesConsultor implements Serializable{
     private String nombreTipoTramiteFiltro=" ";
     private String estadoFiltro=" ";
     private Timestamp fechaFiltro;
-    
+    private int legajoConsultor;
+    private String nombreConsultor;
     private ControladorRC controladorRegistrarCambioEstado = new ControladorRC();
+
+    public int getLegajoConsultor() {
+        return legajoConsultor;
+    }
+
+    public void setLegajoConsultor(int legajoConsultor) {
+        this.legajoConsultor = legajoConsultor;
+    }
+
+    public String getNombreConsultor() {
+        return nombreConsultor;
+    }
+
+    public void setNombreConsultor(String nombreConsultor) {
+        this.nombreConsultor = nombreConsultor;
+    }
 
 
 
