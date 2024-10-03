@@ -104,7 +104,7 @@ public class UIDraw implements Serializable {
         this.titulo = titulo;
     }
 
-    public UIDraw()  {
+    public UIDraw() throws VersionException  {
         //Diagrama
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
@@ -116,19 +116,19 @@ public class UIDraw implements Serializable {
         editable = editaOve;
         insert=true;
         DTOVersionyEstados versionMostrar=null;
-
+        DTOVersionOutput versionoutput =null;
+        if(editable == true){
         try {
             versionMostrar = controlador.buscarVersionEditar(codigo);
-        } catch (VersionException ex) {
-            Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-            DTOVersionOutput versionoutput =new DTOVersionOutput();
             versionoutput = versionMostrar.getVersion();
-             setNroVersion(versionoutput.getCodVersion());
-            setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
-            setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
-            List<NodoMenuIU> lestadosP = new ArrayList<NodoMenuIU>();
+        } catch (VersionException ex) {
+            Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);   
+        }
+        versionoutput = versionMostrar.getVersion();
+        setNroVersion(versionoutput.getCodVersion());
+        setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
+        setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
+        List<NodoMenuIU> lestadosP = new ArrayList<NodoMenuIU>();
         
             List<DTOEstadoPosible> estados = versionMostrar.getEstadosPosibles();
                 for(DTOEstadoPosible x: estados){
@@ -141,7 +141,7 @@ public class UIDraw implements Serializable {
             nodosPosibles = gson.toJson(lestadosP);
             List<NodoIU> lestados = new ArrayList<NodoIU>();
         
-            if(versionMostrar.getVersion()==null || versionMostrar.getVersion().getDraw().trim().length()==0)
+            if(versionoutput==null || versionoutput.getDraw().trim().length()==0)
             {
                 for(DTOEstadoPosible x: estados){
                     if(x.getCodEstadoTramite()==1){
@@ -158,13 +158,35 @@ public class UIDraw implements Serializable {
             {
                 cargarJSON=versionMostrar.getVersion().getDraw();
             }
-             editable = true;
-        
- 
-        titulo = "Versión";
-
-        //Estados Posibles
-        //Ejemplo
+        editable = true;
+        }
+        else{
+            int codver = Integer.parseInt(request.getParameter("codVersion"));
+            nroVersion = codver;
+            versionoutput = controlador.verVersion(codigoTipoTramite, nroVersion);
+            
+            List<NodoIU> lestados = new ArrayList<NodoIU>();
+            if(versionoutput==null || versionoutput.getDraw().trim().length()==0)
+            {
+            //throw new VersionException("No hay version para visualizar");
+                       NodoIU unE = new NodoIU();
+                        unE.setCodigo(1);
+                        unE.setNombre("nada");
+                        unE.setXpos(80);
+                        unE.setYpos(80);
+                        lestados.add(unE);  
+                     
+            }
+            else
+            {
+                setNroVersion(versionoutput.getCodVersion());
+                setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
+                setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
+                cargarJSON=versionoutput.getDraw();
+            }
+            editable = false;
+        }
+       titulo = "Versión";
 
     }
 
@@ -195,26 +217,14 @@ public class UIDraw implements Serializable {
     public void guardar() {
         
         DTOVersionInput vi = new DTOVersionInput();
-        if(!insert)
-            {
-                vi.setCodTipoTramite(codigoTipoTramite);
-                vi.setCodVersion(getNroVersion());
-                vi.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
-                 Timestamp fh = Timestamp.valueOf("2070-09-15 22:06:45.0");
-                vi.setFechaHoraHastaVersion(fh);
-            }
-            else
-            {
-                vi.setCodTipoTramite(codigoTipoTramite);
+        
                 vi.setCodTipoTramite(codigoTipoTramite);
                 vi.setCodVersion(getNroVersion());
                 vi.setFechaHoraDesdeVersion(fechaHoraDesdeVersion);
                 vi.setFechaHoraHastaVersion(fechaHoraHastaVersion);
-            }
             
         System.out.println(this.guardarJSON);
-        int nronuevo = nroVersion +1;
-        Messages.create("nronuevo").detail(""+this.nroVersion).add();
+        Messages.create("nroVersion").detail(""+this.nroVersion).add();
         Messages.create("Guardar").detail(this.guardarJSON).add();
         ObjectMapper objectMapper = new ObjectMapper();
         TypeFactory typeFactory = objectMapper.getTypeFactory();
@@ -226,9 +236,7 @@ public class UIDraw implements Serializable {
         } catch (JsonProcessingException ex) {
             Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
             Messages.create(ex.getMessage()).error().add();
-        } catch (IOException ex) {
-            Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         for(NodoIU n:listaNodo)
         {
             DTOEstadoActualInput ei=new DTOEstadoActualInput();

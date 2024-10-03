@@ -201,10 +201,7 @@ public class ExpertoABMVersion {
                 throw new VersionException("La Version NO existe");
         }
         
-        Version v = new Version();
-        for (Object i: objetoList2){  
-        v = (Version)i;
-        }
+        Version v = (Version) objetoList2.get(0);
         
         DTOVersionOutput dtoVersion = new DTOVersionOutput ();
         
@@ -212,6 +209,7 @@ public class ExpertoABMVersion {
         dtoVersion.setCodVersion(v.getCodVersion());
         dtoVersion.setFechaHoraDesdeVersion(v.getFechaHoraDesdeVersion());
         dtoVersion.setFechaHoraHastaVersion(v.getFechaHoraHastaVersion());
+        dtoVersion.setDraw(v.getDraw());
         
         List<TransicionEstado> transiciones = v.getTransicionEstadoList();
         List<DTOEstadoActualOutput> listEA = new ArrayList();
