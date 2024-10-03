@@ -10,28 +10,28 @@ public class DTOListaPrecioExportar {
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
-    
-    public int getCodListaPrecio(){
+
+    public int getCodListaPrecio() {
         return codListaPrecio;
     }
-    
-    public void setCodListaPrecio (int codListaPrecio){
+
+    public void setCodListaPrecio(int codListaPrecio) {
         this.codListaPrecio = codListaPrecio;
     }
-    
-    public Timestamp getFechaHoraDesdeListaPrecio(){
+
+    public Timestamp getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
-    
-    public void setFechaHoraDesdeListaPrecio (Timestamp fechaHoraDesdeListaPrecio){
+
+    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
-    
-    public Timestamp getFechaHoraHastaListaPrecio(){
+
+    public Timestamp getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
-    
-    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio){
+
+    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
     

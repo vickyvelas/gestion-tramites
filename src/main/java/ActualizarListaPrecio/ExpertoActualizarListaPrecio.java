@@ -5,6 +5,7 @@ import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import entidades.Cliente;
 import entidades.ListaPrecio;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import utils.DTOCriterio;
@@ -16,8 +17,29 @@ import utils.FachadaPersistencia;
  */
 public class ExpertoActualizarListaPrecio {
 
-    List<DTOListaPrecio> obtenerListaPrecio(int codigo, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual){
+        //lista que devuelve el metodo
+        List<DTOListaPrecio> listadelistas = new ArrayList<>();
+        
+        //busqueda buscar("ListaPrecio", "")
+        List<DTOCriterio> lCriterio=new ArrayList<>();
+        //DTOCriterio unCriterio=new DTOCriterio(); Esto se pone asi si necesito utilizar criterio para buscar
+         //Obtengo la lista de OBJETOS(listas de precios) desde la fachada de persistencia    
+        List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
+         
+         for(Object x : objetoList){
+             ListaPrecio listaPrecio = (ListaPrecio) x;
+             DTOListaPrecio dtoListaPrecio = new DTOListaPrecio();
+                dtoListaPrecio.setCodListaPrecio(listaPrecio.getCodListaPrecio());
+                dtoListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecio.getFechaHoraDesdeListaPrecio());
+                dtoListaPrecio.setFechaHoraHastaListaPrecio(listaPrecio.getFechaHoraHastaListaPrecio());
+                listadelistas.add(dtoListaPrecio);
+         }
+         
+         
+        return listadelistas;
+        
+        
     }
 
     void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) {
@@ -440,4 +462,4 @@ public class ExpertoRC {
             
 
     
-}
+}*/
