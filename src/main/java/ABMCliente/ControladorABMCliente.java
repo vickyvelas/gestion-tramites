@@ -16,10 +16,11 @@ public class ControladorABMCliente {
         
      public void eliminarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
          expertoABMCliente.eliminarCliente(cuitCliente);
+     }
          
      public void modificarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
-         expertoABMCliente.modificarCliente();
-    }
+         expertoABMCliente.modificarCliente(cuitCliente);
+     }
             
   public List<ListaClienteDTO> obtenerListaCliente(){
       return expertoABMCliente.obtenerListaCliente();

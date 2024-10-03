@@ -68,7 +68,8 @@ public class ExpertoABMCliente {
         
         
     }
-     void modificarCliente() {
+     public void modificarCliente(int cuitCliente)throws Exception {
+         //Logica para modificar cliente
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
