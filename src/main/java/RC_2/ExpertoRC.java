@@ -143,10 +143,10 @@ public class ExpertoRC {
                 .orElse(null);
             tramiteParticularDTO.setObservaciones(tramiteEstadoMasReciente.getObservacionTramiteEstado());
          
-               
+         List<DTOCriterio> lCriterio2=new ArrayList<DTOCriterio>();
         
-        List<TramiteEstado> tramitesEst =tramiteEncontrado.getTramiteEstadoList();
-        //List tramitesEst = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio);
+        //List<TramiteEstado> tramitesEst =tramiteEncontrado.getTramiteEstadoList();
+        List tramitesEst = FachadaPersistencia.getInstance().buscar("TramiteEstado", lCriterio2);
         for (Object x : tramitesEst) {
             TramiteEstado tramiteEstado = (TramiteEstado) x;
             HistoricoDTO historicoDTO = new HistoricoDTO();
