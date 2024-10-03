@@ -10,7 +10,6 @@ import RC_2.dto.NuevoEstadoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TramitesConsultorDTO;
 import RC_2.dto.TransicionDTO;
-import entidades.TramiteEstado;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;

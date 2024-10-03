@@ -23,28 +23,9 @@ public class UItramitesConsultor implements Serializable{
     private String nombreTipoTramiteFiltro=" ";
     private String estadoFiltro=" ";
     private Timestamp fechaFiltro;
-    private int legajoConsultor;
-    private String nombreConsultor;
     
     private ControladorRC controladorRegistrarCambioEstado = new ControladorRC();
 
-    public int getLegajoConsultor() {
-        return legajoConsultor;
-    }
-
-    public void setLegajoConsultor(int legajoConsultor) {
-        this.legajoConsultor = legajoConsultor;
-    }
-
-    public String getNombreConsultor() {
-        return nombreConsultor;
-    }
-
-    public void setNombreConsultor(String nombreConsultor) {
-        this.nombreConsultor = nombreConsultor;
-    }
-    
-    
 
 
     public int getNroTramiteFiltro() {
@@ -80,13 +61,6 @@ public class UItramitesConsultor implements Serializable{
     }
 
     public UItramitesConsultor() {
-        List<TramitesConsultorDTO> tramitesConsultorDTO = controladorRegistrarCambioEstado.obtenerTramitesConsultor(fechaFiltro, nombreTipoTramiteFiltro, estadoFiltro);
-        for(TramitesConsultorDTO tramiteConsultorDTO: tramitesConsultorDTO){
-              legajoConsultor = tramiteConsultorDTO.getLegajoConsultor();
-              nombreConsultor=tramiteConsultorDTO.getNombreConsultor();
-        }
-      
-        
     }
     
     
@@ -101,7 +75,6 @@ public class UItramitesConsultor implements Serializable{
             tramiteGrillaUI.setFechaInicio(tramiteConsultorDTO.getFechaHoraCargaTramite());
             tramiteGrillaUI.setCuitCliente(tramiteConsultorDTO.getCuitCliente());
             tramiteGrillaUI.setEstado(tramiteConsultorDTO.getNombreEstadoTramite());
-           
             tramitesGrilla.add(tramiteGrillaUI);
         }
         return tramitesGrilla;
