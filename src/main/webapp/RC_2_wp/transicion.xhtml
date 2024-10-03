@@ -19,7 +19,18 @@
         <h:form id="form" prependId="false" >
         <div class="card" align="center" >
            <p:dataViewGridItem>  
-             <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+               <h:panelGrid id="tramiteDet" style="margin: 30px" cellpadding="30">
+                <!-- contexto -->
+                   
+            <h:outputText value="Nombre TipoTramite:" />
+            <h:outputText value="#{uiNuevoEstado.nombreTipoTramite}"/> 
+            
+             <h:outputText value="Tramite nro:" />
+             <h:outputText value="#{uiNuevoEstado.nroTramite}"/> 
+             
+              <h:outputText value="Cliente:" />
+              <h:outputText value="#{uiNuevoEstado.nombreApellidoCliente}"/> 
+                 
                  
             <h:outputText value="Estado actual:" />
             <h:outputText value="#{uiNuevoEstado.nombreEstadoTramiteActual}"/> 
@@ -34,11 +45,14 @@
             <p:selectOneRadio id="estadoNuevo" value="#{uiNuevoEstado.codEstadoSeleccionado}" layout="grid" columns="3" styleClass="grid-radio">
                 <f:selectItems value="#{uiNuevoEstado.estadosPosiblesUI}" var="estado" itemLabel="#{estado.nombreEstadoTramiteDestino}" itemValue="#{estado.codEstadoTramite}"/>
            </p:selectOneRadio>
-            <h:outputText value="Observaciones"/>
-            
+            <h:outputText value="Observaciones" />
+                   
             <div>
-                <p:inputTextarea rows="6" cols="90"/>
+                <p:inputTextarea rows="6" cols="90" value="#{uiNuevoEstado.observacionTramiteEstado}"/>
+               
             </div>
+            
+         
             
             <!-- botones de GUARDAR Y CANCELAR -->
             <p:toolbar>

@@ -10,12 +10,14 @@ import RC_2.dto.DestinosPosiblesDTO;
 import RC_2.dto.NuevoEstadoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TransicionDTO;
+import entidades.TramiteEstado;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
@@ -31,7 +33,8 @@ public class UInuevoEstado  implements Serializable{
     private String observacionTramiteEstado;
     private ControladorRC controladorRC = new ControladorRC();
     private int nroTramite;
-   
+    private String nombreTipoTramite;
+    private String nombreApellidoCliente;
     private int codEstadoSeleccionado;
     private String nombreEstadoTramiteSeleccionado;
 
@@ -41,6 +44,30 @@ public class UInuevoEstado  implements Serializable{
 
     public void setNombreEstadoTramiteSeleccionado(String nombreEstadoTramiteSeleccionado) {
         this.nombreEstadoTramiteSeleccionado = nombreEstadoTramiteSeleccionado;
+    }
+
+    public int getNroTramite() {
+        return nroTramite;
+    }
+
+    public void setNroTramite(int nroTramite) {
+        this.nroTramite = nroTramite;
+    }
+
+    public String getNombreTipoTramite() {
+        return nombreTipoTramite;
+    }
+
+    public void setNombreTipoTramite(String nombreTipoTramite) {
+        this.nombreTipoTramite = nombreTipoTramite;
+    }
+
+    public String getNombreApellidoCliente() {
+        return nombreApellidoCliente;
+    }
+
+    public void setNombreApellidoCliente(String nombreApellidoCliente) {
+        this.nombreApellidoCliente = nombreApellidoCliente;
     }
     
     
@@ -68,8 +95,12 @@ public class UInuevoEstado  implements Serializable{
 //        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 //        
 //         nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
-         NuevoEstadoDTO nuevoEstadoDTO=controladorRC.nuevoEstado(codEstadoTramite);
+         NuevoEstadoDTO nuevoEstadoDTO=controladorRC.nuevoEstado(nroTramite);
          nombreEstadoTramiteActual=nuevoEstadoDTO.getNombreEstadoTramiteActual();
+         observacionTramiteEstado=nuevoEstadoDTO.getObservacionTramiteEstado();
+         nombreApellidoCliente=nuevoEstadoDTO.getNombreApellidoCliente();
+         nombreTipoTramite=nuevoEstadoDTO.getNombreTipoTramite();
+         nroTramite=nuevoEstadoDTO.getNroTramite();
          for (DestinosPosiblesDTO d : nuevoEstadoDTO.getDestinosPosiblesList())
          {
          EstadosPosiblesUI e = new EstadosPosiblesUI();
@@ -89,6 +120,7 @@ public class UInuevoEstado  implements Serializable{
         e.setCodEstadoTramite(3);
         e.setNombreEstadoTramiteDestino("Etapa 1");
         estadosPosiblesUI.add(e);
+        
     }
 
    
@@ -132,6 +164,7 @@ public class UInuevoEstado  implements Serializable{
             transicionDTO.setNombreEstadoTramite(getNombreEstadoTramiteSeleccionado());
             transicionDTO.setObservacion(getObservacionTramiteEstado());
             controladorRC.cambiarEstadoTramite(transicionDTO, nroTramite);
+
         return BeansUtils.redirectToPreviousPage();
     }
 
