@@ -14,101 +14,45 @@
     </ui:define>
 
     <ui:define name="description">
-        Trabajar con Cliente
+        Datos del Cliente: #{uiDetalleCliente.nombreApellidoCliente}
     </ui:define>
 
     <ui:define name="body">
     <h:form>
         <p:focus context="@form"/>
             <div class="box box-primary">
-                        
+                
+        <div class="formgrid grid">
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+               <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel  value="Nombre Apellido Cliwnte:" />
+            </div>
+            <div class="ui-sm-12 ui-g-11"> 
+                <p:inputText id="nombre" value="#{uiDetalleCliente.nombreApellidoCliente}" />
+             </div>
+        </div>
+                   
+                   
+                       
+            
+<!-- BOTONEES -->
                      <div class="box-header with-border">
                          <div id="main-buttons">
 
-                            <p:commandButton value="Agregar"  icon="fa fa-plus" action="#{uiClienteLista.irAgregarEstado()}"   styleClass="btn-primary"/>
-                               </div>
+                            <p:commandButton value="Guardar Cambios"     styleClass="btn-primary"/>
+                         </div>
                       </div>
-        <!-- Tabla para mostrar la lista de artículos -->
-         <p:separator/>
-
-                   <div class="ui-g ui-fluid">
-                   <div class="ui-g-12 ui-md-6">
-                    <p:outputPanel>
-                        <h:outputText value="Código:"/>
-                        <p:spacer height="10"/>
-                        <p:inputText id="codFilter"  style="width:150px"
-                                     placeholder="" value="#{uiClienteLista.codigoFiltro}" onfocus="Javascript:this.focus();this.select();">
-                                        <p:ajax event="keyup" 
-                                            listener="#{uiClienteLista.filtrar()}" 
-                                            update="@form:grid1"
-                                            />
-                                     
-                                    </p:inputText>
-
-                    </p:outputPanel> </div>
-
-                   <div class="ui-g-12 ui-md-6">
-                   <p:outputPanel>
-                        <h:outputText value="Descripción:"/>
-                        <p:spacer height="10"/>
-                        <p:inputText id="nomFilter"  style="width:150px"
-                                     placeholder="" value="#{uiClienteLista.nombreFiltro}">
-                                        <p:ajax event="keyup" 
-                                            listener="#{uiClienteLista.filtrar()}" 
-                                            update="@form:grid1"
-                                        />
-                                     
-                        </p:inputText>
-                    </p:outputPanel> 
-                   </div>
-                   </div>
-            <p:spacer height="5"/>
-            <p:dataTable id="grid1" widgetVar="estadoTable" value="#{uiClienteLista}" var="cliente" >
-
-            <p:column>
-                <f:facet name="header">Código</f:facet>
-                #{cliente.codigo}
-            </p:column>
-
-            <p:column>
-                <f:facet name="header">Nombre</f:facet>
-                #{cliente.nombre}
-            </p:column>
-
-            <p:column>
-                <f:facet name="header">Fecha Alta</f:facet>
-                #{cliente.fechaAlta}
-            </p:column>
-
-
-            <p:column>
-                <f:facet name="header">Fecha Baja</f:facet>
-                #{cliente.fechaBaja}
-            </p:column>
-
-                <!-- comment  <p:column>
-                <f:facet name="header">Acciones</f:facet>
-                <p:commandButton value="Modificar" styleClass="btn-info" action="#{uiabmEstadoLista.irModificarEstado(estado.codigo)}" disabled="#{estado.fechaBaja != null}">
-                    <f:ajax render="@form"/>
-                </p:commandButton>
-                <p:spacer width="5"/>
-                <p:commandButton value="Eliminar" styleClass="btn-danger"  actionListener="#{uiabmEstadoLista.darDeBajaEstado(estado.codigo)}" disabled="#{estado.fechaBaja != null}" update="@form:grid1">
-                   
-                    <p:confirm header="Anulación de #{estado.codigo} #{estado.nombre}" message="¿Está seguro?" icon="ui-icon-alert"/>
-                    
-                </p:commandButton>
                 
-                    <p:confirmDialog global="true"  showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
-                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                         icon="fa fa-check" update="@form:grid1"/>
-                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
-                                         icon="fa fa-close" update="@form:grid1"/>
-                    </p:confirmDialog>
-            </p:column>
--->
-        </p:dataTable>
-            </div>
+                  <div class="box-header with-border">
+                         <div id="main-buttons">
 
+                            <p:commandButton value="Cancelar"    styleClass="btn-primary"/>
+                         </div>
+                   </div>
+                
+  
+            </div>
+ </div>
    </h:form>
 
  </ui:define>

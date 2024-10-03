@@ -7,7 +7,7 @@ public class DetalleClienteDTO {
     private String nombreApellidoCliente;
     private String direccion;
     private String mailCliente;
-    private int telefonoCliente;
+    private double telefonoCliente;
 
 //constructor
 //    public DTODetalleCliente(int cuitCliente, String nombreApellidoCliente, String direccion, String mailCliente, int telefonoCliente) {
@@ -51,11 +51,11 @@ public class DetalleClienteDTO {
         this.mailCliente = mailCliente;
     }
 
-    public int getTelefonoCliente() {
+    public double getTelefonoCliente() {
         return telefonoCliente;
     }
 
-    public void setTelefonoCliente(int telefonoCliente) {
+    public void setTelefonoCliente(double telefonoCliente) {
         this.telefonoCliente = telefonoCliente;
     }
         

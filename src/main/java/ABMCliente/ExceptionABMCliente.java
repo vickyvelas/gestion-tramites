@@ -8,6 +8,6 @@ package ABMCliente;
  *
  * @author Dell
  */
-class exceptionABMCliente extends Exception {
+class ExceptionABMCliente extends Exception {
     
 }

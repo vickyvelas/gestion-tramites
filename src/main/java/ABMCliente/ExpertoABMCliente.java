@@ -23,25 +23,83 @@ import utils.FachadaPersistencia;
 public class ExpertoABMCliente {
      private List<DetalleClienteDTO> clientes = new ArrayList<>();
     
-    public void eliminarCliente(int cuitCliente) throws Exception {
-        // Lógica para eliminar un cliente
-        for (DetalleClienteDTO cliente : clientes) {
-            if (cliente.getCuitCliente() == cuitCliente) {
-                clientes.remove(cliente);
-                return;
-            }
+    public void eliminarCliente(int cuitCliente) throws ExceptionABMCliente {
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List <DTOCriterio> lCriterio = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("cuitCliente");
+            dto.setOperacion("=");
+            dto.setValor(cuitCliente);
+            
+            lCriterio.add(dto);
+            
+        Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
+        Timestamp fechaBaja = clienteEncontrado.getFechaHoraBajaCliente();
+        
+        if(fechaBaja == null){
+            clienteEncontrado.setFechaHoraBajaCliente(new Timestamp(System.currentTimeMillis()));
         }
-        throw new Exception("Cliente no encontrado");
+        FachadaPersistencia.getInstance().guardar(clienteEncontrado);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
+        
     }
     
     public DetalleClienteDTO obtenerDetalleCliente(int cuitCliente) {
-        // Lógica para obtener el detalle del cliente
-        for (DetalleClienteDTO cliente : clientes) {
-            if (cliente.getCuitCliente() == cuitCliente) {
-                return cliente;
-            }
+        //muestra detalles
+        
+        
+         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(cuitCliente>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("cuitCliente");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(cuitCliente);
+            lCriterio.add(unCriterio);
         }
-        return null;
+//        if(nombreApellidoCliente.trim().length()>0)
+//        {
+//            DTOCriterio unCriterio=new DTOCriterio();
+//            unCriterio.setAtributo("nombreApellidoCliente");
+//            unCriterio.setOperacion("like");
+//            unCriterio.setValor(nombreApellidoCliente);
+//            lCriterio.add(unCriterio);
+//        }
+        //falta criterio fecha
+        
+        //buscar un solo cliente 
+        Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
+        
+        DetalleClienteDTO detalleClienteDTO = new DetalleClienteDTO();
+            detalleClienteDTO.setCuitCliente(cuitCliente);
+            detalleClienteDTO.setNombreApellidoCliente(clienteEncontrado.getNombreApellidoCliente());
+            detalleClienteDTO.setDireccion(clienteEncontrado.getDireccionCliente());
+            detalleClienteDTO.setMailCliente(clienteEncontrado.getMailCliente());
+            detalleClienteDTO.setTelefonoCliente(clienteEncontrado.getTelefonoCliente());
+      
+        return detalleClienteDTO;
+    }
+    
+    public void modificarCliente(int cuitCliente, DetalleClienteDTO detalleClienteDTO)throws ExceptionABMCliente {
+        //literalmente modifica la instancia cliente
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List <DTOCriterio> lCriterio = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        
+        dto.setAtributo("cuitCliente");
+        dto.setOperacion("=");
+        dto.setValor(cuitCliente);
+        lCriterio.add(dto);
+        
+         Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
+        
+         clienteEncontrado.setDireccionCliente(detalleClienteDTO.getDireccion());
+         clienteEncontrado.setMailCliente(detalleClienteDTO.getMailCliente());
+         clienteEncontrado.setNombreApellidoCliente(detalleClienteDTO.getNombreApellidoCliente());
+         clienteEncontrado.setTelefonoCliente(detalleClienteDTO.getTelefonoCliente());
+         
+         FachadaPersistencia.getInstance().guardar(clienteEncontrado);
+         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
     
     public List<ListaClienteDTO> obtenerListaCliente(){
@@ -68,10 +126,7 @@ public class ExpertoABMCliente {
         
         
     }
-     public void modificarCliente(int cuitCliente)throws Exception {
-         //Logica para modificar cliente
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
+     
     
 //    public List<ListaClienteDTO> obtenerListaCliente(int cuitClienteFiltro, String nombreApellidoClienteFiltro) {
 //        // Lógica para obtener la lista de clientes

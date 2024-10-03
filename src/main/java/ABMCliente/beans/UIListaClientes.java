@@ -55,7 +55,7 @@ public class UIListaClientes implements Serializable{
     
     public String irACliente(){
          BeansUtils.guardarUrlAnterior();
-         return "detalleCliente.xhtml?faces-redirect=true";
+         return "detalleCliente.xhtml?faces-redirect=true&codigo=" + cuitCliente;
     }
     
     

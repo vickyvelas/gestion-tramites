@@ -14,12 +14,12 @@ public class ControladorABMCliente {
     
     private ExpertoABMCliente expertoABMCliente = new ExpertoABMCliente();
         
-     public void eliminarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
+     public void eliminarCliente(int cuitCliente) throws Exception, ExceptionABMCliente{
          expertoABMCliente.eliminarCliente(cuitCliente);
      }
          
-     public void modificarCliente(int cuitCliente) throws Exception, exceptionABMCliente{
-         expertoABMCliente.modificarCliente(cuitCliente);
+     public void modificarCliente(int cuitCliente, DetalleClienteDTO detalleClienteDTO) throws ExceptionABMCliente{
+         expertoABMCliente.modificarCliente(cuitCliente, detalleClienteDTO);
      }
             
   public List<ListaClienteDTO> obtenerListaCliente(){
