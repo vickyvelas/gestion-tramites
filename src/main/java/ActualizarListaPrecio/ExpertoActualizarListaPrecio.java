@@ -17,29 +17,33 @@ import utils.FachadaPersistencia;
  */
 public class ExpertoActualizarListaPrecio {
 
-    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual){
+    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual) {
         //lista que devuelve el metodo
         List<DTOListaPrecio> listadelistas = new ArrayList<>();
-        
-        //busqueda buscar("ListaPrecio", "")
-        List<DTOCriterio> lCriterio=new ArrayList<>();
+
+        //busqueda buscar("ListaPrecio", "fechaHoraHastaListaPrecio=>fechaActual")
         //DTOCriterio unCriterio=new DTOCriterio(); Esto se pone asi si necesito utilizar criterio para buscar
-         //Obtengo la lista de OBJETOS(listas de precios) desde la fachada de persistencia    
+        List<DTOCriterio> lCriterio = new ArrayList<DTOCriterio>();
+
+        if (fechaHoraHastaListaPrecio < fechaActual) {
+            DTOCriterio unCriterio = new DTOCriterio();
+            unCriterio.setAtributo("fechaHoraHastaListaPrecio");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(0);
+            lCriterio.add(unCriterio);
+        }
+        //Obtengo la lista de OBJETOS(listas de precios) desde la fachada de persistencia    
         List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
-         
-         for(Object x : objetoList){
-             ListaPrecio listaPrecio = (ListaPrecio) x;
-             DTOListaPrecio dtoListaPrecio = new DTOListaPrecio();
-                dtoListaPrecio.setCodListaPrecio(listaPrecio.getCodListaPrecio());
-                dtoListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecio.getFechaHoraDesdeListaPrecio());
-                dtoListaPrecio.setFechaHoraHastaListaPrecio(listaPrecio.getFechaHoraHastaListaPrecio());
-                listadelistas.add(dtoListaPrecio);
-         }
-         
-         
+
+        for (Object x : objetoList) {
+            ListaPrecio listaPrecio = (ListaPrecio) x;
+            DTOListaPrecio dtoListaPrecio = new DTOListaPrecio();
+            dtoListaPrecio.setCodListaPrecio(listaPrecio.getCodListaPrecio());
+            dtoListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecio.getFechaHoraDesdeListaPrecio());
+            dtoListaPrecio.setFechaHoraHastaListaPrecio(listaPrecio.getFechaHoraHastaListaPrecio());
+            listadelistas.add(dtoListaPrecio);
+        }
         return listadelistas;
-        
-        
     }
 
     void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) {
@@ -53,7 +57,7 @@ public class ExpertoActualizarListaPrecio {
     void darDeBajaListaPrecio(int codigo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
 
 /*
