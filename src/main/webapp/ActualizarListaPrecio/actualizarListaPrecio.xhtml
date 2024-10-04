@@ -11,7 +11,7 @@
         <ui:param name="renderFormAsterisks" value="true"/>
     </ui:define>
     <ui:define name="title">
-        ImportarListaPrecio
+        Importar Lista de Precio
     </ui:define>
     <ui:define name="body">
 
@@ -20,17 +20,43 @@
             <p:panel styleClass="box-primary card">
                 <!-- Campo de entrada para el codListaPrecio -->
                 <div class="ui-g ui-fluid">
+                    
+                    
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+
+                        
+                            <p:outputLabel  value="Codigo Lista de Precio:" />
+                            <p:inputText  value="222" style="width: 150px;" /> >
+
+                        
+                    </div>      
+                    
+                    
+                    
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="codigo" value="codListaPrecio:" />
+                            <p:outputLabel for="fechaDesde" value="Fecha Desde" />
                         </div>
                         <div class="ui-sm-12 ui-g-11">
-                            <p:inputText id="codigo" value="#{uiActualizarListaPrecio.codListaPrecio}" style="width: 150px;" disabled="#{uiActualizarListaPrecio.insert}" >
+                            <p:inputText id="fechaDesde"  style="width: 150px;"  >
 
-                            </p:inputText><p:message id="codigoMSG" for="codigo"/>
+                            </p:inputText><p:message id="fechaDesdeMSG" for="fechaDesde"/>
                         </div>
-                    </div>       
+                    </div>  
 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel for="fechaHasta" value="Fecha Hasta" />
+                        </div>
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:inputText id="fechaHasta" style="width: 150px;"  >
+
+                            </p:inputText><p:message id="fechaHastaMSG" for="fechaHasta"/>
+                        </div>
+                    </div>  
+                    
+                    
+                    
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="card">
                             <h:form id="frmSingle">
@@ -40,7 +66,22 @@
                                               listener="#{fileUploadView.handleFileUpload}" />
                             </h:form>
                         </div>
-                    </div>   
+                    </div>
+                    
+                    <!-- BOTONES -->
+                    
+                    <div class="box-header with-border">                    
+                    <div id="main-buttons">
+                        <p:commandButton value="Subir"    styleClass="btn-primary"/>
+                    </div>                    
+                    </div>
+                    
+                    <div class="box-header with-border">                    
+                    <div id="main-buttons">
+                        <p:commandButton value="Cancelar"    styleClass="btn-primary"/>
+                    </div>                    
+                </div>
+                    
                 </div>
             </p:panel>
 
