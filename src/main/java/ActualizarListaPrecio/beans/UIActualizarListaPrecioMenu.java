@@ -1,6 +1,7 @@
 package ActualizarListaPrecio.beans;
 import utils.BeansUtils;
 import ActualizarListaPrecio.ControladorActualizarListaPrecio;
+import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import ActualizarListaPrecio.exceptions.ListaPrecioException;
 import jakarta.annotation.ManagedBean;
@@ -9,6 +10,7 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,50 +22,54 @@ import org.primefaces.PrimeFaces;
 public class UIActualizarListaPrecioMenu implements Serializable {
 
     private ControladorActualizarListaPrecio controladorActualizarListaPrecio = new ControladorActualizarListaPrecio();
-    private int codigoFiltro=0;
-    private String nombreFiltro="";
+    private Timestamp fechaFiltro;
 
-    public ControladorActualizarListaPrecio getControladorActualizarListaPrecio() {
-        return controladorActualizarListaPrecio;
+    public UIActualizarListaPrecioMenu() {
+        List<UIActualizarListaPrecioGrilla> listaPrecioGrilla = new ArrayList<>();
+        List<DTOListaPrecioExportar> listapreciosDTO = controladorActualizarListaPrecio.obtenerListaPrecio(fechaFiltro);
+        for (DTOListaPrecioExportar listaprecioDTO : listapreciosDTO) {
+            UIActualizarListaPrecioGrilla listaprecioGrillaUI = new UIActualizarListaPrecioGrilla();
+            listaprecioGrillaUI.setCodListaPrecio(listaprecioDTO.getCodListaPrecio());
+            listaprecioGrillaUI.setFechaDesde(listaprecioDTO.getFechaHoraDesdeListaPrecio());
+            listaprecioGrillaUI.setFechaHasta(listaprecioDTO.getFechaHoraHastaListaPrecio());
+            //listaprecioGrillaUI.setFechaBaja(listaprecioDTO.);
+                //no lo planteamos en la secuencia
+            listaPrecioGrilla.add(listaprecioGrillaUI);
+        }
+    }
+    
+    
+    
+
+    public Timestamp getFechaFiltro() {
+        return fechaFiltro;
     }
 
-    public void setControladorActualizarListaPrecio(ControladorActualizarListaPrecio controladorActualizarListaPrecio) {
-        this.controladorActualizarListaPrecio = controladorActualizarListaPrecio;
+    public void setFechaFiltro(Timestamp fechaFiltro) {
+        this.fechaFiltro = fechaFiltro;
     }
 
-    public int getCodigoFiltro() {
-        return codigoFiltro;
-    }
-
-    public void setCodigoFiltro(int codigoFiltro) {
-        this.codigoFiltro = codigoFiltro;
-    }
-
-    public String getNombreFiltro() {
-        return nombreFiltro;
-    }
-
-    public void setNombreFiltro(String descripcionFiltro) {
-        this.nombreFiltro = descripcionFiltro;
-    }
+   
+    
+   
     public void filtrar()
     {
 
     }
 
     public List<UIActualizarListaPrecioGrilla> buscarListaPrecio(){
-        System.out.println(codigoFiltro);
-        System.out.println(nombreFiltro);
+        
         List<UIActualizarListaPrecioGrilla> listaPrecioGrilla = new ArrayList<>();
-        //List<DTOListaPrecioImportar> listapreciosDTO = controladorActualizarListaPrecio.buscarListaPrecio(codigoFiltro,nombreFiltro);
-//        for (DTOListaPrecioImportar listaprecioDTO : listapreciosDTO) {
-//            UIActualizarListaPrecioGrilla listaprecioGrillaUI = new UIActualizarListaPrecioGrilla();
- /*           listaprecioGrillaUI.setCodigo(listaprecioDTO.getCodigo());
-            listaprecioGrillaUI.setNombre(listaprecioDTO.getNombre());
-            listaprecioGrillaUI.setFechaAlta(listaprecioDTO.getFechaAlta());
-            listaprecioGrillaUI.setFechaBaja(listaprecioDTO.getFechaBaja());
-            listaPrecioGrilla.add(listaprecioGrillaUI);*/
-        //}
+        List<DTOListaPrecioExportar> listapreciosDTO = controladorActualizarListaPrecio.obtenerListaPrecio(fechaFiltro);
+        for (DTOListaPrecioExportar listaprecioDTO : listapreciosDTO) {
+            UIActualizarListaPrecioGrilla listaprecioGrillaUI = new UIActualizarListaPrecioGrilla();
+            listaprecioGrillaUI.setCodListaPrecio(listaprecioDTO.getCodListaPrecio());
+            listaprecioGrillaUI.setFechaDesde(listaprecioDTO.getFechaHoraDesdeListaPrecio());
+            listaprecioGrillaUI.setFechaHasta(listaprecioDTO.getFechaHoraHastaListaPrecio());
+            //listaprecioGrillaUI.setFechaBaja(listaprecioDTO.);
+                //no lo planteamos en la secuencia
+            listaPrecioGrilla.add(listaprecioGrillaUI);
+        }
         return listaPrecioGrilla;
     }
 

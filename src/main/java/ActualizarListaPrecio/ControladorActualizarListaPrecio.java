@@ -1,7 +1,6 @@
 package ActualizarListaPrecio;
 
 import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.exceptions.ListaPrecioException;
@@ -13,7 +12,7 @@ public class ControladorActualizarListaPrecio {
 
     private ExpertoActualizarListaPrecio expertoActualizarListaPrecio = new ExpertoActualizarListaPrecio();
 
-    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual) throws ListaPrecioException {
+    public List<DTOListaPrecioExportar> obtenerListaPrecio(Timestamp fechaActual) {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
     }
 

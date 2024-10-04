@@ -2,7 +2,6 @@ package ActualizarListaPrecio;
 
 import ActualizarListaPrecio.dtos.DTODetalleListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import entidades.Cliente;
@@ -22,9 +21,9 @@ import utils.FachadaPersistencia;
  */
 public class ExpertoActualizarListaPrecio {
 
-    public List<DTOListaPrecio> obtenerListaPrecio(Timestamp fechaActual) {
+    public List<DTOListaPrecioExportar> obtenerListaPrecio(Timestamp fechaActual) {
         //lista que devuelve el metodo
-        List<DTOListaPrecio> listadelistas = new ArrayList<>();
+        List<DTOListaPrecioExportar> listadelistas = new ArrayList<>();
 
     
         List<DTOCriterio> lCriterio = new ArrayList<DTOCriterio>();
@@ -41,7 +40,7 @@ public class ExpertoActualizarListaPrecio {
 
         for (Object x : objetoList) {
             ListaPrecio listaPrecio = (ListaPrecio) x;
-            DTOListaPrecio dtoListaPrecio = new DTOListaPrecio();
+            DTOListaPrecioExportar dtoListaPrecio = new DTOListaPrecioExportar();
             dtoListaPrecio.setCodListaPrecio(listaPrecio.getCodListaPrecio());
             dtoListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecio.getFechaHoraDesdeListaPrecio());
             dtoListaPrecio.setFechaHoraHastaListaPrecio(listaPrecio.getFechaHoraHastaListaPrecio());
@@ -126,7 +125,7 @@ public class ExpertoActualizarListaPrecio {
         
         
   
-        return null;
+        return null; //arreglar retorno
     }
 
     public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {

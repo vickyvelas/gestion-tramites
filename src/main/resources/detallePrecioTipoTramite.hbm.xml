@@ -12,7 +12,7 @@
             <column name="precioTipoTramite"/>
         </property>
         
-        <many-to-one name="tipoTramite" class="entidades.TipoTramite" column="OIDTipoTramite" not-null="true"/>
+        <many-to-one name="tipoTramite" class="entidades.TipoTramite" column="OIDTipoTramite"/>
        
     </class>
 
