@@ -1,5 +1,6 @@
 package ActualizarListaPrecio;
 
+import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
@@ -16,12 +17,12 @@ public class ControladorActualizarListaPrecio {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
     }
 
-    public void importarListaPrecio(DTOListaPrecioImportar dtoListaPrecioImportar) throws ListaPrecioException {
-        expertoActualizarListaPrecio.importarListaPrecio(dtoListaPrecioImportar);
+    public DTOListaPrecioImportar importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO, DTODetalleListaPrecioImportar detallesImportar) {
+       return expertoActualizarListaPrecio.importarListaPrecio(listaPrecioImportarDTO, detallesImportar);
     }
 
-    public void exportarListaPrecio(DTOListaPrecioExportar dtoListaPrecioExportar) throws ListaPrecioException {
-        expertoActualizarListaPrecio.exportarListaPrecio(dtoListaPrecioExportar);
+   public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
+         return expertoActualizarListaPrecio.exportarListaPrecio(codListaPrecio);
     }
 
     public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException {
