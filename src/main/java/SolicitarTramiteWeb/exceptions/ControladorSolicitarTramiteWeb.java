@@ -4,6 +4,7 @@ import SolicitarTramiteWeb.dtos.DTOCategoriaTramite;
 import SolicitarTramiteWeb.dtos.DTOCliente;
 import SolicitarTramiteWeb.dtos.DTOTipoTramiteWeb;
 import SolicitarTramiteWeb.dtos.DTOTramiteWeb;
+import java.util.List;
 
 public class ControladorSolicitarTramiteWeb {
     private ExpertoSolicitarTramiteWeb expertoSolicitarTramiteWeb = new ExpertoSolicitarTramiteWeb();
@@ -11,15 +12,15 @@ public class ControladorSolicitarTramiteWeb {
     /*  public DTOCategoriaTramite elegirCategoriaTramite(String nombreCategoriaTramite){
        return expertoSolicitarTramiteWeb.elegirCategoriaTramite(nombreCategoriaTramite);
    }
-    
-    public DTOCategoriaTramite obtenerCategoriaTramite(){
+    */
+    public List<DTOCategoriaTramite> obtenerCategoriaTramite(){
        return expertoSolicitarTramiteWeb.obtenerCategoriaTramite();
    }
   
-    public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
+   public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
       return expertoSolicitarTramiteWeb.elegirTipoTramite(nombreTipoTramite);  
    }
-    */
+   
     public DTOCliente obtenerCliente(int cuitCliente) {
       return expertoSolicitarTramiteWeb.obtenerCliente(cuitCliente);
    }

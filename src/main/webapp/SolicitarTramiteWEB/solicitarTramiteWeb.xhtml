@@ -11,7 +11,7 @@
         <ui:param name="renderFormAsterisks" value="true"/>
     </ui:define>
     <ui:define name="title">
-        Agregar Estado
+        Nuevo Tramite
     </ui:define>
     <ui:define name="body">
 <style>
@@ -41,6 +41,48 @@
         width: 33%;
         padding: 4px;
     }
+    
+    
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+
+    .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    border: 2px solid #0094ff;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .card img {
+        width: 50px;
+        margin-bottom: 10px;
+    }
 </style>
 
 <div class="card">
@@ -49,8 +91,8 @@
         <p:growl id="growl" sticky="true" showDetail="true"/>
 
         <p:wizard flowListener="#{uiSolicitarTramiteWeb.onFlowProcess}">
-            <p:tab id="nuevoTramite" title="Nuevo Tramite">
-                <p:panel header="Nuevo Tramite">
+            <p:tab id="validaciondeid" title="Validacion de Identidad">
+                <p:panel header="Validacion de Identidad">
                    
                      <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4"
                                          layout="grid" styleClass="ui-fluid">
@@ -64,36 +106,96 @@
             </p:tab>
 
             <p:tab id="datosCliente" title="Confirme sus Datos">
-                <p:panel header="Confirme Sus Datose">
+                <p:panel header="Confirme Sus Datos">
                    
                      <p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-4"
                                          layout="grid" styleClass="ui-fluid">
                         <p:outputLabel value="Nombre" for="nombre"/>
-                        <h:outputText id="nombre" value="#{uiSolicitarTramiteWeb.nombreApellidoCliente}"
+                        <h:outputText id="nombre" value="#{uiSolicitarTramiteWeb.nombreApellidoCliente}" />
+                        <p:outputLabel value="Direccion" for="direccion"/>
+                        <h:outputText id="direccion" value="#{uiSolicitarTramiteWeb.direccionCliente}"/>
+                        <p:outputLabel value="Mail" for="mail"/>        
+                        <h:outputText id="mail" value="#{uiSolicitarTramiteWeb.mailCliente}"
+                                     
                                             />
 
                     </p:panelGrid>
                 </p:panel>
             </p:tab>
 
-            <p:tab id="contact" title="Contact">
-                <p:panel header="Contact Information">
-                    <p:messages/>
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                        <h:outputText value="Email: *"/>
-                        <p:inputText value="#{userWizard.user.email}" required="true" label="Email"/>
-
-                        <h:outputText value="Phone: "/>
-                        <p:inputText value="#{userWizard.user.phone}"/>
-
-                        <h:outputText value="Additional Info: "/>
-                        <p:inputText value="#{userWizard.user.info}"/>
-                    </h:panelGrid>
+            <p:tab id="categ" title="Seleccion de Categoria">
+                <p:panel header="Seleccionar Categoria">
+       <body>
+           
+           
+              
+           
+    <div class="containerr">
+        
+        <div class="grid">
+            <div class="cardd">
+                <img src="../images/solicitud.jpg" alt="" style="width:150px"/>
+                <p>Solicitud</p>
+            </div>
+       
+            <div class="cardd">
+                <img src="../images/renovacion.jpg" alt="" style="width:150px"/>
+                <p>Renovación</p>
+            </div>
+            
+            <div class="cardd">
+                <img src="../images/denuncia.png" alt="" style="width:150px"/>
+                <p>Denuncia</p>
+            </div>
+            
+            <div class="cardd">
+                <img src="../images/automotor1.jpg" alt="" style="width:150px"/>
+                <p>Automotor</p>
+            </div>
+        </div>
+        </div>
+        
+    
+</body>
                 </p:panel>
             </p:tab>
 
-            <p:tab id="confirm" title="Confirmation">
-                <p:panel header="Confirmation">
+            
+            <p:tab id="tramite" title="Seleccionar Tipo de Tramite">
+                <p:panel header="Seleccionar Tipo de Tramite">
+           
+                    <div class="container">
+      
+        <div class="grid">
+            <div class="card">
+                <img src="../images/licencia.png" alt="Renovacion de Licencia" style="width:300px; height:100px;"/>
+                <p>Renovacion de Licencia</p>
+            </div>
+            <div class="card">
+                <img src="icon2.png" alt="Renovación de Carnet"/>
+                <p>Renovacion de Carnet</p>
+            </div>
+            <div class="card">
+                <img src="icon3.png" alt="Renovacion de DNI"/>
+                <p>Renovacion de DNI</p>
+            </div>
+            <div class="card">
+                <img src="icon1.png" alt="Renovacion de Pasaporte"/>
+                <p>Renovacion de Pasaporte</p>
+            </div>
+        </div>
+        
+    </div>
+                </p:panel>
+            </p:tab>
+            
+            
+            
+            
+            
+            
+            <p:tab id="docum" title="Documentacion">
+                <p:panel header="Documentacion a presentar">
                     <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
                         <h:panelGrid columns="2" columnClasses="label, value">
                             <h:outputText value="Firstname: "/>
@@ -142,3 +244,5 @@
             </ui:define>
 
     </ui:composition >
+
+   

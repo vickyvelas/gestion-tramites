@@ -1,5 +1,6 @@
 package SolicitarTramiteWeb.beans;
 
+import SolicitarTramiteWeb.dtos.DTOCategoriaTramite;
 import SolicitarTramiteWeb.dtos.DTOCliente;
 import SolicitarTramiteWeb.exceptions.ControladorSolicitarTramiteWeb;
 import com.google.gson.Gson;
@@ -24,7 +25,37 @@ public class UISolicitarTramiteWeb implements Serializable {
     private String cuitCliente;
     private String direccionCliente;
     private String nombreApellidoCliente;
+    private String mailCliente;
     private Timestamp fechaHoraBajaCliente;
+    private int codCategoriaTramite;
+    private String nombreCategoriaTramite;
+
+    public int getCodCategoriaTramite() {
+        return codCategoriaTramite;
+    }
+
+    public void setCodCategoriaTramite(int codCategoriaTramite) {
+        this.codCategoriaTramite = codCategoriaTramite;
+    }
+
+    public String getNombreCategoriaTramite() {
+        return nombreCategoriaTramite;
+    }
+
+    public void setNombreCategoriaTramite(String nombreCategoriaTramite) {
+        this.nombreCategoriaTramite = nombreCategoriaTramite;
+    }
+    
+    
+    
+
+    public String getMailCliente() {
+        return mailCliente;
+    }
+
+    public void setMailCliente(String mailCliente) {
+        this.mailCliente = mailCliente;
+    }
 
     public String getCuitCliente() {
         return cuitCliente;
@@ -53,19 +84,23 @@ public class UISolicitarTramiteWeb implements Serializable {
  
     public String onFlowProcess(FlowEvent event) {
         DTOCliente dtoC;
-        if(event.getOldStep().compareTo("nuevoTramite")==0)
+        if(event.getOldStep().compareTo("validaciondeid")==0)
         {
             int cuitInt=Integer.parseInt(cuitCliente);
             dtoC=controladorSolicitarTramiteWeb.obtenerCliente(cuitInt);
            if(dtoC.getCuitCliente()>0)
            {
             this.nombreApellidoCliente=dtoC.getNombreApellidoCliente();
+            this.direccionCliente=dtoC.getDireccionCliente();
+            this.mailCliente=dtoC.getMailCliente();
+            
             return event.getNewStep();
+            
            }
            else
            {
                this.nombreApellidoCliente="";
-               Messages.create("El cliente no existe").fatal().add();
+               Messages.create("No se encontró el cliente ingresado").fatal().add();
                return event.getOldStep();        
            }
         }
@@ -75,6 +110,25 @@ public class UISolicitarTramiteWeb implements Serializable {
     
             return event.getNewStep();
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 /*
     public Timestamp getFechaHoraBajaCliente() {
