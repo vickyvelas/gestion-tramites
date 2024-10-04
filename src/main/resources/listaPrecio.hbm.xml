@@ -28,6 +28,11 @@
              <key column="OIDListaPrecio"/>
              <one-to-many class="entidades.DetallePrecioTipoTramite"/>
         </bag>
+        
+<!--        <list name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
+            <key column="OIDListaPrecio"/>
+            <one-to-many class="entidades.DetallePrecioTipoTramite"/>
+        </list>-->
 
          
     </class>
