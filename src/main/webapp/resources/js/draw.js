@@ -26,6 +26,7 @@
     var isSelE1=false;
     var nameE1="";
     var eposibles = window.parent.document.getElementById("eposibles");
+    //verrrrrr
     j=eposibles.getHTML();
     var titulo = window.parent.document.getElementById("titulo").getHTML();
     document.getElementById('liTitulo').innerText=titulo
@@ -68,7 +69,7 @@
     }
     else{
         
-        document.getElementById("btn-export").remove();
+        //document.getElementById("btn-export").remove();
         seleccion.remove()
         //document.getElementById("drawflow").style.width="100vw";
         editor.editor_mode='view'

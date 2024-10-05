@@ -210,7 +210,7 @@ public class ExpertoABMVersion {
         dtoVersion.setFechaHoraDesdeVersion(v.getFechaHoraDesdeVersion());
         dtoVersion.setFechaHoraHastaVersion(v.getFechaHoraHastaVersion());
         dtoVersion.setDraw(v.getDraw());
-        
+        /*
         List<TransicionEstado> transiciones = v.getTransicionEstadoList();
         List<DTOEstadoActualOutput> listEA = new ArrayList();
         
@@ -232,7 +232,7 @@ public class ExpertoABMVersion {
         }
         
         dtoVersion.setEstadosActuales(listEA);
-        
+        */
         return dtoVersion;
     }
     
@@ -494,7 +494,7 @@ public class ExpertoABMVersion {
         }
 //cambio la ultima version:
         vultima.setFechaHoraHastaVersion(FDNv);
-
+        
 //Epuezo con las validaciones de las Tranciciones
         //Creo el dto para validar los destinos
         List<DTOCodDestino> listDestVerif = new ArrayList();
@@ -657,7 +657,7 @@ public class ExpertoABMVersion {
                     }
                 }    
         Version vultima = (Version)ultVersion;
-        
+        Timestamp FHUV = vultima.getFechaHoraHastaVersion();
         int codvu = vultima.getCodVersion();
         int codva = versionanula.getCodVersion();
         if(codvu != codva){
@@ -694,7 +694,7 @@ public class ExpertoABMVersion {
                     }
                 }
         Version penulVer = penultVersion;
-        Timestamp FHUV = vultima.getFechaHoraHastaVersion();
+        
         penulVer.setFechaHoraHastaVersion(FHUV);
         
         FachadaPersistencia.getInstance().guardar(penulVer);

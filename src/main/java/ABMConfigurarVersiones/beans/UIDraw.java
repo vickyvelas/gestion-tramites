@@ -26,7 +26,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,10 +116,11 @@ public class UIDraw implements Serializable {
         codigoTipoTramite=codigo;
         boolean editaOve = Boolean.parseBoolean(request.getParameter("editable"));
         editable = editaOve;
-        insert=true;
+       
+        
         DTOVersionyEstados versionMostrar=null;
         DTOVersionOutput versionoutput =null;
-        if(editable == true){
+            insert=true;
         try {
             versionMostrar = controlador.buscarVersionEditar(codigo);
             versionoutput = versionMostrar.getVersion();
@@ -159,33 +162,7 @@ public class UIDraw implements Serializable {
                 cargarJSON=versionMostrar.getVersion().getDraw();
             }
         editable = true;
-        }
-        else{
-            int codver = Integer.parseInt(request.getParameter("codVersion"));
-            nroVersion = codver;
-            versionoutput = controlador.verVersion(codigoTipoTramite, nroVersion);
-            
-            List<NodoIU> lestados = new ArrayList<NodoIU>();
-            if(versionoutput==null || versionoutput.getDraw().trim().length()==0)
-            {
-            //throw new VersionException("No hay version para visualizar");
-                       NodoIU unE = new NodoIU();
-                        unE.setCodigo(1);
-                        unE.setNombre("nada");
-                        unE.setXpos(80);
-                        unE.setYpos(80);
-                        lestados.add(unE);  
-                     
-            }
-            else
-            {
-                setNroVersion(versionoutput.getCodVersion());
-                setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
-                setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
-                cargarJSON=versionoutput.getDraw();
-            }
-            editable = false;
-        }
+       
        titulo = "Versión";
 
     }
@@ -217,11 +194,23 @@ public class UIDraw implements Serializable {
     public void guardar() {
         
         DTOVersionInput vi = new DTOVersionInput();
-        
+        Timestamp fh = (Timestamp) fechaHoraHastaVersion;
+        /*try {
+            String dateString = (String)fechaHoraHastaVersion.;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+            Date parsedDate = dateFormat.parse(dateString);
+            Timestamp timestamp = new Timestamp(parsedDate.getTime());
+            System.out.println("Timestamp: " + timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+*/
+        Timestamp fd = (Timestamp)fechaHoraDesdeVersion;
+       
                 vi.setCodTipoTramite(codigoTipoTramite);
                 vi.setCodVersion(getNroVersion());
-                vi.setFechaHoraDesdeVersion(fechaHoraDesdeVersion);
-                vi.setFechaHoraHastaVersion(fechaHoraHastaVersion);
+                vi.setFechaHoraDesdeVersion(fd);
+                vi.setFechaHoraHastaVersion(fh);
             
         System.out.println(this.guardarJSON);
         Messages.create("nroVersion").detail(""+this.nroVersion).add();
@@ -263,5 +252,6 @@ public class UIDraw implements Serializable {
         System.out.println(jsonArray);
         Messages.create("Guardar").detail(this.guardarJSON).add();
     }
+        
 
 }

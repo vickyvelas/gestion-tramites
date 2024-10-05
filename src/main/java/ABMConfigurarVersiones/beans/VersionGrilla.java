@@ -95,8 +95,8 @@ public class VersionGrilla implements Serializable {
     }
     public String irVerVersion(int codigo, int codigov) throws VersionException {
         BeansUtils.guardarUrlAnterior();
-        boolean hace= false;
-        return "/ABMConfigurarVersiones/drawIU.xhtml?faces-redirect=true&editable=false&codigoTipoTramite="+codigo +"&codVersion="+codigov ;
+       
+        return "/ABMConfigurarVersiones/verVersion.xhtml?faces-redirect=true&editable=false&codigoTipoTramite="+codigo+"&codVersion="+codigov;
         //return ("no sale");
     }
 }

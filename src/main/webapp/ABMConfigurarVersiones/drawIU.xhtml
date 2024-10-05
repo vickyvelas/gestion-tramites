@@ -38,7 +38,7 @@
                           <p:outputLabel for="fechaHoraDesdeVersion" value="Fecha Desde Versión:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11"> 
-                          <p:inputText id="fechaHoraDesdeVersion" value="#{uiDraw.fechaHoraDesdeVersion}" disabled="#{uiDraw.insert}" >
+                          <p:inputText id="fechaHoraDesdeVersion" value="#{uiDraw.fechaHoraDesdeVersion}" disabled="#{!uiDraw.insert}" >
                           <p:message id="fechaHoraDesdeVersionMSG" for="fechaHoraDesdeVersion"/> 
                           </p:inputText>
                         </div>
@@ -48,7 +48,7 @@
                           <p:outputLabel for="fechaHoraHastaVersion" value="Fecha Hasta Versión:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11"> 
-                          <p:inputText id="fechaHoraHastaVersion" value="#{uiDraw.fechaHoraHastaVersion}" disabled="#{uiDraw.insert}" >
+                          <p:inputText id="fechaHoraHastaVersion" value="#{uiDraw.fechaHoraHastaVersion}" disabled="#{!uiDraw.insert}" >
                           <p:message id="fechaHoraHastaVersionMSG" for="fechaHoraHastaVersion"/> 
                           </p:inputText>
                         </div>

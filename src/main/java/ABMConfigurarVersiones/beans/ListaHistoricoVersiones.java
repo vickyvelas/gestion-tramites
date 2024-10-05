@@ -88,10 +88,10 @@ public class ListaHistoricoVersiones implements Serializable{
     }
     
     
-        public DTOVersionOutput irVerVersion(int codigo, int codigov) throws VersionException {
-        DTOVersionOutput verVersion = new DTOVersionOutput(); //controlador.verVersion(codigo, codigov);
+        public String irVerVersion(int codigo, int codigov) throws VersionException {
+        return "/ABMConfigurarVersiones/verVersion.xhtml?faces-redirect=true&editable=false&codigoTipoTramite="+codigo+"&codVersion="+codigov;
+        //controlador.verVersion(codigo, codigov);
         //BeansUtils.guardarUrlAnterior();
-        return verVersion;
     }
 }
     
