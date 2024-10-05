@@ -4,32 +4,32 @@
 <hibernate-mapping>
     <class name="entidades.ListaPrecio" table="listaPrecio">
         <id name="OID" type="string">
-         <column name="OIDListaPrecio"/>
-         <generator class="uuid2"/>
+            <column name="OIDListaPrecio"/>
+            <generator class="uuid2"/>
         </id>
         
         <property name="codListaPrecio" type="int" not-null="true">
-         <column name="codListaPrecio"/>
+            <column name="codListaPrecio"/>
         </property>
         
         <property name="fechaHoraDesdeListaPrecio" type="timestamp" not-null="true">
-             <column name="fechaHoraDesdeListaPrecio"/>
+            <column name="fechaHoraDesdeListaPrecio"/>
         </property>
         
         <property name="fechaHoraHastaListaPrecio" type="timestamp" not-null="true">
-             <column name="fechaHoraHastaListaPrecio"/>
+            <column name="fechaHoraHastaListaPrecio"/>
         </property>
         
         <property name="fechaHoraBajaListaPrecio" type="timestamp">
-             <column name="fechaHoraBajaListaPrecio"/>
+            <column name="fechaHoraBajaListaPrecio"/>
         </property>
         
         <bag name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
-             <key column="OIDListaPrecio"/>
-             <one-to-many class="entidades.DetallePrecioTipoTramite"/>
+            <key column="OIDListaPrecio"/>
+            <one-to-many class="entidades.DetallePrecioTipoTramite"/>
         </bag>
         
-<!--        <list name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
+        <!--        <list name="detallePrecioTipoTramiteList" table="detallePrecioTipoTramite" cascade="none" inverse="false">
             <key column="OIDListaPrecio"/>
             <one-to-many class="entidades.DetallePrecioTipoTramite"/>
         </list>-->

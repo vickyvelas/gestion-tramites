@@ -84,14 +84,14 @@ public class UIActualizarListaPrecioMenu implements Serializable {
         return "actualizarListaPrecio?faces-redirect=true&codigo=" + codigo; // Usa '?faces-redirect=true' para hacer una redirección
     }
 
-    public void darDeBajaListaPrecio(int codigo){
-        try {
-            controladorActualizarListaPrecio.darDeBajaListaPrecio(codigo);
-            Messages.create("Anulado").detail("Anulado").add();
-                    
-        } catch (ListaPrecioException e) {
-            Messages.create("Error!").error().detail(e.getMessage()).add();
-        }
-    }
-    
+//    public void darDeBajaListaPrecio(int codigo){
+//        try {
+//            controladorActualizarListaPrecio.darDeBajaListaPrecio(codigo);
+//            Messages.create("Anulado").detail("Anulado").add();
+//                    
+//        } catch (ListaPrecioException e) {
+//            Messages.create("Error!").error().detail(e.getMessage()).add();
+//        }
+//    }
+//    
 }

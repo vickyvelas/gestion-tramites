@@ -23,9 +23,9 @@ public class ControladorActualizarListaPrecio {
    public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
          return expertoActualizarListaPrecio.exportarListaPrecio(codListaPrecio);
     }
-
-    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException {
-        expertoActualizarListaPrecio.darDeBajaListaPrecio(codigo);
-    }
+//no está en la secuencia
+//    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException {
+//        expertoActualizarListaPrecio.darDeBajaListaPrecio(codigo);
+//    }
 
 }

@@ -61,14 +61,14 @@ public class UIActualizarListaPrecioGrilla {
     public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
-
-    public Timestamp getFechaHoraBajaListaPrecio() {
-        return fechaHoraBajaListaPrecio;
-    }
-
-    public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
-        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
-    }
+//no está en la secuencia
+//    public Timestamp getFechaHoraBajaListaPrecio() {
+//        return fechaHoraBajaListaPrecio;
+//    }
+//
+//    public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
+//        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
+//    }
     
      private Date fechaDesde = new Date();
     private Date fechaHasta;
