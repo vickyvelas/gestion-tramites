@@ -647,15 +647,24 @@ public class ExpertoABMVersion {
         List objetoList3 = FachadaPersistencia.getInstance().buscar("Version", lCriterio); 
         //Selecciono la de mayor fecha desde
         List<Version> listversion = (List<Version>) objetoList3;
+        if(listversion.get(0).getCodVersion() == versionanula.getCodVersion()){
+               throw new VersionException("La version no se puede anular porque es la única");
+        }
+        int i;
+        int p;
+        List<Integer> ordenFd = new ArrayList();
         Version ultVersion=null;
-            for(int i=0;i<listversion.size();i++){
+            for(i=0;i<listversion.size();i++){
                 if(ultVersion==null){ ultVersion=listversion.get(i);}
                 else{
                     if(ultVersion.getFechaHoraDesdeVersion().compareTo(listversion.get(i).getFechaHoraDesdeVersion())<0){
                         ultVersion=listversion.get(i);
+                        p= i;
+                        ordenFd.add(ultVersion.getCodVersion());
                         }
                     }
-                }    
+                }   
+            
         Version vultima = (Version)ultVersion;
         Timestamp FHUV = vultima.getFechaHoraHastaVersion();
         int codvu = vultima.getCodVersion();
@@ -664,12 +673,26 @@ public class ExpertoABMVersion {
             throw new VersionException("Existen versiones futuras. Solo se puede anular la última futura.");
         } 
         vultima.setFechaHoraBajaVersion(new Timestamp(System.currentTimeMillis()));
+        listversion.remove(vultima);
+        Version penultima=null;
+            for(int j=0;j<(listversion.size());j++){
+                if(penultima==null){ penultima=listversion.get(j);}
+                else{
+                    if(penultima.getFechaHoraDesdeVersion().compareTo(listversion.get(j).getFechaHoraDesdeVersion())<0){
+                        penultima=listversion.get(j);
+                        }
+                    }
+                } 
+        penultima.setFechaHoraHastaVersion(vultima.getFechaHoraHastaVersion());
+        
+        
         FachadaPersistencia.getInstance().guardar(vultima);
+        FachadaPersistencia.getInstance().guardar(penultima);
         FachadaPersistencia.getInstance().finalizarTransaccion();
         // la guardo antes para poder despues buscar la penultima como ultima
         FachadaPersistencia.getInstance().iniciarTransaccion();
         //Cambio la antepenúltima version
-        
+        /*
         lCriterio.clear();
         DTOCriterio Cri1=new DTOCriterio();
             Cri1.setAtributo("tipoTramite");
@@ -685,11 +708,11 @@ public class ExpertoABMVersion {
         //Selecciono la de mayor fecha desde
         List<Version> listversion2 = (List<Version>) objetoList4;
         Version penultVersion=null;
-            for(int i=0;i<listversion.size();i++){
-                if(penultVersion==null){ penultVersion=listversion.get(i);}
+            for(int j=0;j<listversion.size();j++){
+                if(penultVersion==null){ penultVersion=listversion.get(j);}
                 else{
-                    if(penultVersion.getFechaHoraDesdeVersion().compareTo(listversion.get(i).getFechaHoraDesdeVersion())<0){
-                        penultVersion=listversion.get(i);
+                    if(penultVersion.getFechaHoraDesdeVersion().compareTo(listversion.get(j).getFechaHoraDesdeVersion())<0){
+                        penultVersion=listversion.get(j);
                         }
                     }
                 }
@@ -699,5 +722,6 @@ public class ExpertoABMVersion {
         
         FachadaPersistencia.getInstance().guardar(penulVer);
         FachadaPersistencia.getInstance().finalizarTransaccion();
+*/
     }
 }
