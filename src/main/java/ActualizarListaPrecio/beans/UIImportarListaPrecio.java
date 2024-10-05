@@ -32,7 +32,7 @@ import org.primefaces.model.file.UploadedFile;
  *
  * @author arode
  */
-public class UIActualizarListaPrecioGrilla {
+public class UIImportarListaPrecio {
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
@@ -54,7 +54,7 @@ public class UIActualizarListaPrecioGrilla {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
     
-        public Timestamp getFechaHoraHastaListaPrecio() {
+    public Timestamp getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
 
@@ -70,7 +70,7 @@ public class UIActualizarListaPrecioGrilla {
 //        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
 //    }
     
-     private Date fechaDesde = new Date();
+    private Date fechaDesde = new Date();
     private Date fechaHasta;
     DTOListaPrecioImportar lp;
     private UploadedFile file;
@@ -92,14 +92,11 @@ public class UIActualizarListaPrecioGrilla {
         this.fechaHasta = fechaHasta;
     }
 
-
-
-    public UIActualizarListaPrecioGrilla() {
+    public UIImportarListaPrecio() {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date();
         System.out.println("Hora actual: " + dateFormat.format(date));
         fechaDesde = date;
-
     }
 
     public StreamedContent getFileD() {
@@ -143,59 +140,5 @@ public class UIActualizarListaPrecioGrilla {
 
     public void setFile(UploadedFile file) {
         this.file = file;
-    }
-
-    public void handleFileUpload(FileUploadEvent event) {
-        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): " + event.getFile().getSize() / 1024f);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-
-        try {
-
-            InputStream inp = event.getFile().getInputStream();
-
-            Workbook wb = WorkbookFactory.create(inp);
-            Sheet sheet = wb.getSheetAt(0);
-            lp = new DTOListaPrecioImportar();
-            int iRow = 1;
-            Row row = sheet.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-            while (row != null) {
-                Cell cell = row.getCell(0);
-                double codigo = cell.getNumericCellValue();
-                double nuevoPrecio = 0;
-                DTODetalleListaPrecioImportar d = new DTODetalleListaPrecioImportar();
-                if (codigo > 0) {
-                    System.out.println(codigo);
-                    cell = row.getCell(3);
-                    nuevoPrecio = cell.getNumericCellValue();
-                    // Messages.create(iRow +codigo+" "+nuevoPrecio).detail("").add();
-                    d.setCodTipoTramite((int) codigo);
-                    d.setPrecioTipoTramite((int) nuevoPrecio);
-                    lp.addDetalleListaPrecioImportar(d);
-
-                }
-                iRow = iRow + 1;
-                row = sheet.getRow(iRow);
-            }
-            Gson gson = new Gson();
-            System.out.println(gson.toJson(lp));
-            Messages.create(gson.toJson(lp)).detail("").add();
-            /*
-          if (cell!=null && cell.getCellType()==CellType.STRING){
-            String value = cell.getStringCellValue();
-            Messages.create(iRow +"String").detail(value).add();
-            System.out.println(iRow + "Valor de la celda es " + value);
-          }
-          if (cell!=null && cell.getCellType()==CellType.NUMERIC ){
-            double value = cell.getNumericCellValue();
-            Messages.create(iRow +"Numero").detail(Double(value).toString()).add();
-          }
-
-          iRow++;  
-          row = sheet.getRow(iRow);
-         } */
-        } catch (Exception ex) {
-            Logger.getLogger(ExcelFileUI.class.getName()).log(Level.SEVERE, null, ex);
-            Messages.create(ex.getMessage()).error().add();
-        }
     }
 }
