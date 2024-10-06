@@ -4,10 +4,11 @@
  */
 package ListaPreciov2;
 
-import ActualizarListaPrecio.dtos.DTODetalleListaPrecioExportar;
-import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
+
+import ListaPreciov2.dtos.DTODetalleListaPrecioExportar;
+import ListaPreciov2.dtos.DTOListaPrecioImportar;
+import ListaPreciov2.dtos.DTODetalleListaPrecioImportar;
+import ListaPreciov2.dtos.DTOListaPrecioExportar;
 import entidades.DetallePrecioTipoTramite;
 import entidades.ListaPrecio;
 import entidades.TipoTramite;

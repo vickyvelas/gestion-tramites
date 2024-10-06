@@ -4,10 +4,54 @@
  */
 package ListaPreciov2.beans;
 
-/**
- *
- * @author marti
- */
-public class UIActualizarLP {
+import ListaPreciov2.ControladorLP;
+import ListaPreciov2.dtos.DTOListaPrecioExportar;
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+@Named("uiActualizarLP")
+@ViewScoped
+
+public class UIActualizarLP implements Serializable {
+    private Timestamp fechaDesde;
+    private ControladorLP controladorLP = new ControladorLP();
+
+    public UIActualizarLP() {
+    }
+    
+    
+    
+    public Timestamp getFechaDesde() {
+        return fechaDesde;
+    }
+
+    public void setFechaDesde(Timestamp fechaDesde) {
+        this.fechaDesde = fechaDesde;
+    }
+    
+    
+    public List<UIActualizarLPGrilla> obtenerListaPrecio() {
+       List<UIActualizarLPGrilla> listaPreciogrilla = new ArrayList<>();
+       List<DTOListaPrecioExportar> dtoListasPreciosExportar = controladorLP.obtenerListaPrecio(fechaDesde);
+       for (DTOListaPrecioExportar dtoListaPrecioExportar : dtoListasPreciosExportar ){
+           UIActualizarLPGrilla uiActualizarLPGrilla = new UIActualizarLPGrilla();
+           uiActualizarLPGrilla.setCodListaPrecio(dtoListaPrecioExportar.getCodListaPrecio());
+           uiActualizarLPGrilla.setFechaHoraDesdeListaPrecio(dtoListaPrecioExportar.getFechaHoraDesdeListaPrecio());
+           uiActualizarLPGrilla.setFechaHoraHastaListaPrecio(dtoListaPrecioExportar.getFechaHoraHastaListaPrecio());
+           listaPreciogrilla.add(uiActualizarLPGrilla);
+       }
+      
+       return listaPreciogrilla;
+    }
+    
+    
+    public void filtrar(){
+    }
+    
+    
     
 }

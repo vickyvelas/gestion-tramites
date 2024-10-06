@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ListaPreciov2;
+import ListaPreciov2.dtos.DTODetalleListaPrecioExportar;
+import ListaPreciov2.dtos.DTOListaPrecioImportar;
+import ListaPreciov2.dtos.DTODetalleListaPrecioImportar;
+import ListaPreciov2.dtos.DTOListaPrecioExportar;
+import entidades.DetallePrecioTipoTramite;
 
-import ActualizarListaPrecio.ExpertoActualizarListaPrecio;
-import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @author marti
  */
 public class ControladorLP {
-    private ExpertoActualizarListaPrecio expertoActualizarListaPrecio = new ExpertoActualizarListaPrecio();
+    private ExpertoLP expertoActualizarListaPrecio = new ExpertoLP();
 
     public List<DTOListaPrecioExportar> obtenerListaPrecio(Timestamp fechaActual) {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
