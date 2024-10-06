@@ -1,32 +1,6 @@
 package ActualizarListaPrecio.beans;
 
-import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
-import Excel.beans.ExcelFileUI;
-import com.google.gson.Gson;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.omnifaces.util.Messages;
-import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-import org.primefaces.model.file.UploadedFile;
 
 /**
  *
@@ -61,84 +35,12 @@ public class UIImportarListaPrecio {
     public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
-//no está en la secuencia
-//    public Timestamp getFechaHoraBajaListaPrecio() {
-//        return fechaHoraBajaListaPrecio;
-//    }
-//
-//    public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
-//        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
-//    }
     
-    private Date fechaDesde = new Date();
-    private Date fechaHasta;
-    DTOListaPrecioImportar lp;
-    private UploadedFile file;
-    private StreamedContent fileD;
-    
-    public Date getFechaDesde() {
-        return fechaDesde;
+    public Timestamp getFechaHoraBajaListaPrecio() {
+        return fechaHoraBajaListaPrecio;
     }
 
-    public void setFechaDesde(Date fechaDesde) {
-        this.fechaDesde = fechaDesde;
-    }
-
-    public Date getFechaHasta() {
-        return fechaHasta;
-    }
-
-    public void setFechaHasta(Date fechaHasta) {
-        this.fechaHasta = fechaHasta;
-    }
-
-    public UIImportarListaPrecio() {
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        Date date = new Date();
-        System.out.println("Hora actual: " + dateFormat.format(date));
-        fechaDesde = date;
-    }
-
-    public StreamedContent getFileD() {
-        try {
-            Workbook libro = new XSSFWorkbook();
-            final String nombreArchivo = "./tmp.xlsx";
-            Sheet hoja = libro.createSheet("Hoja 1");
-
-            for (int j = 0; j < 2; j++) {
-                Row primeraFila = hoja.createRow(j);
-                for (int i = 0; i < 10; i++) {
-                    Cell primeraCelda = primeraFila.createCell(i);
-                    primeraCelda.setCellValue("Yo voy en la celda" + i + " y fila" + j);
-                }
-            }
-            FileOutputStream outputStream;
-
-            outputStream = new FileOutputStream(nombreArchivo);
-            libro.write(outputStream);
-            libro.close();
-            InputStream ie = new FileInputStream(nombreArchivo);
-            fileD = DefaultStreamedContent.builder()
-                    .name("archivo.xlsx")
-                    .contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    .stream(() -> ie)
-                    .build();
-        } catch (IOException ex) {
-            Logger.getLogger(ExcelFileUI.class.getName()).log(Level.SEVERE, null, ex);
-            Messages.create(ex.getMessage()).error().add();
-        }
-        return fileD;
-    }
-
-    public void setFileD(StreamedContent fileD) {
-        this.fileD = fileD;
-    }
-
-    public UploadedFile getFile() {
-        return file;
-    }
-
-    public void setFile(UploadedFile file) {
-        this.file = file;
+    public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
+        this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
     }
 }

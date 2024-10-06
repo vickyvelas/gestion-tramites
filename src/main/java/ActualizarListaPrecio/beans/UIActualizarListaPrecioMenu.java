@@ -2,11 +2,7 @@ package ActualizarListaPrecio.beans;
 
 import ActualizarListaPrecio.ControladorActualizarListaPrecio;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
-import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import ActualizarListaPrecio.exceptions.ListaPrecioException;
-import jakarta.annotation.ManagedBean;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -14,7 +10,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import org.omnifaces.util.Messages;
-import org.primefaces.PrimeFaces;
 import utils.BeansUtils;
 
 @Named("uiActualizarListaPrecioMenu")
@@ -65,8 +60,8 @@ public class UIActualizarListaPrecioMenu implements Serializable {
         for (DTOListaPrecioExportar listaprecioDTO : listapreciosDTO) {
             UIImportarListaPrecio listaprecioGrillaUI = new UIImportarListaPrecio();
             listaprecioGrillaUI.setCodListaPrecio(listaprecioDTO.getCodListaPrecio());
-            listaprecioGrillaUI.setFechaDesde(listaprecioDTO.getFechaHoraDesdeListaPrecio());
-            listaprecioGrillaUI.setFechaHasta(listaprecioDTO.getFechaHoraHastaListaPrecio());
+            listaprecioGrillaUI.setFechaHoraDesdeListaPrecio(listaprecioDTO.getFechaHoraDesdeListaPrecio());
+            listaprecioGrillaUI.setFechaHoraHastaListaPrecio(listaprecioDTO.getFechaHoraHastaListaPrecio());
             listaPrecioGrilla.add(listaprecioGrillaUI);
         }
         return listaPrecioGrilla;
@@ -82,16 +77,14 @@ public class UIActualizarListaPrecioMenu implements Serializable {
         return "actualizarListaPrecio?faces-redirect=true&codigo=" + codigo; // Usa '?faces-redirect=true' para hacer una redirección
     }
 
-//    PARA CONSULTAR
-//
-//    public void darDeBajaListaPrecio(int codigo) {
-//        try {
-//            controladorActualizarListaPrecio.darDeBajaListaPrecio(codigo);
-//            Messages.create("Anulado").detail("Anulado").add();
-//        } catch (ListaPrecioException e) {
-//            Messages.create("Error!").error().detail(e.getMessage()).add();
-//        }
-//    }
+    public void darDeBajaListaPrecio(int codListaPrecio) {
+        try {
+            controladorActualizarListaPrecio.darDeBajaListaPrecio(codListaPrecio);
+            Messages.create("Anulado").detail("Anulado").add();
+        } catch (ListaPrecioException e) {
+            Messages.create("Error!").error().detail(e.getMessage()).add();
+        }
+    }
     
     
     

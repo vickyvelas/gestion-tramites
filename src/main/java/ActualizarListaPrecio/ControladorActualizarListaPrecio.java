@@ -1,5 +1,6 @@
 package ActualizarListaPrecio;
 
+import ABMEstado.exceptions.EstadoException;
 import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
@@ -23,9 +24,9 @@ public class ControladorActualizarListaPrecio {
    public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
          return expertoActualizarListaPrecio.exportarListaPrecio(codListaPrecio);
     }
-//no está en la secuencia
-//    public void darDeBajaListaPrecio(int codigo) throws ListaPrecioException {
-//        expertoActualizarListaPrecio.darDeBajaListaPrecio(codigo);
-//    }
+   
+    public void darDeBajaListaPrecio(int codListaPrecio) throws ListaPrecioException {
+        expertoActualizarListaPrecio.darDeBajaListaPrecio(codListaPrecio);
+    }
 
 }

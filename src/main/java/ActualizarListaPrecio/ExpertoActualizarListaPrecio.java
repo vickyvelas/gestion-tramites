@@ -176,6 +176,7 @@ import ActualizarListaPrecio.dtos.DTODetalleListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTODetalleListaPrecioImportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioExportar;
 import ActualizarListaPrecio.dtos.DTOListaPrecioImportar;
+import ActualizarListaPrecio.exceptions.ListaPrecioException;
 import entidades.DetallePrecioTipoTramite;
 import entidades.ListaPrecio;
 import entidades.TipoTramite;
@@ -339,7 +340,42 @@ public class ExpertoActualizarListaPrecio {
         }
         return dtoListaPrecioExportar;
     }
-    
-    
+
+     public void darDeBajaListaPrecio(int codListaPrecio) throws ListaPrecioException {
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+
+        dto.setAtributo("codListaPrecio");
+        dto.setOperacion("=");
+        dto.setValor(codListaPrecio);
+
+        criterioList.add(dto);
+
+        ListaPrecio listaPrecioEncontrada = (ListaPrecio) FachadaPersistencia.getInstance().buscar("ListaPrecio", criterioList).get(0);
+
+        criterioList.clear();
+        dto = new DTOCriterio();
+
+        dto.setAtributo("estado");
+        dto.setOperacion("=");
+        dto.setValor(listaPrecioEncontrada);
+
+        criterioList.add(dto);
+
+        DTOCriterio dto2 = new DTOCriterio();
+
+        dto2.setAtributo("fechaHoraBajaListaPrecio");
+        dto2.setOperacion("=");
+        dto2.setValor(null);
+
+        criterioList.add(dto2);
+
+        listaPrecioEncontrada.setFechaHoraBajaListaPrecio(new Timestamp(System.currentTimeMillis()));
+
+        FachadaPersistencia.getInstance().guardar(listaPrecioEncontrada);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
+    }
 }
 
