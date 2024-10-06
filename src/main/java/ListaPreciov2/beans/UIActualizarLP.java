@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import utils.BeansUtils;
 
 @Named("uiActualizarLP")
 @ViewScoped
@@ -50,6 +51,11 @@ public class UIActualizarLP implements Serializable {
     
     
     public void filtrar(){
+    }
+    
+    public String irAImportar() {
+        BeansUtils.guardarUrlAnterior();
+        return "importarLP.xhtml?faces-redirect=true"; // Usa '?faces-redirect=true' para hacer una redirección
     }
     
     
