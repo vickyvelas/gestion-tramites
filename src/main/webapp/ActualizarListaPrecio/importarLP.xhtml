@@ -18,10 +18,13 @@
         <h:form id="form" prependId="false">
 
             <p:panel styleClass="box-primary card">
-                <!-- Campo de entrada para el codListaPrecio -->
+                
                 <div class="ui-g ui-fluid">
-                    <p:outputLabel  value="Codigo Lista de Precio:" />
-                    <p:inputText  value="222" style="width: 150px;" /> 
+                    
+                    <h:outputText value="Codigo Lista:" styleClass="text-secondary"/>
+                    <h:outputText value="125"/>
+                    
+                    <!-- Ingresos de fechas -->
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
                             <p:outputLabel for="fechaDesde" value="Fecha Desde" />
@@ -43,16 +46,16 @@
                             </p:inputText><p:message id="fechaHastaMSG" for="fechaHasta"/>
                         </div>
                     </div>
-                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                   <!-- <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="card">
                             <h:form id="frmSingle">
-                                <p:fileUpload id="upload" value="#{fileUploadView.file}"
+                                <p:fileUpload id="upload" value="{fileUploadView.file}"
                                               mode="simple" skinSimple="true" auto="true"
                                               process="@this" update="messages"
-                                              listener="#{fileUploadView.handleFileUpload}" />
+                                              listener="{fileUploadView.handleFileUpload}" />
                             </h:form>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- BOTONES -->
 
@@ -75,4 +78,4 @@
 
     </ui:define>
 
-</ui:composition 
+</ui:composition >
