@@ -14,7 +14,7 @@
         Importar Lista de Precio
     </ui:define>
     <ui:define name="body">
-        
+        <!-- PARA INGRESO DE FECHAS -->
         <script>
             PrimeFaces.locales['es'] = {
                 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -94,17 +94,21 @@
 
                     <!-- BOTONES -->
 
-                    <div class="box-header with-border">                    
-                        <div id="main-buttons">
-                            <p:commandButton value="Subir"    styleClass="btn-primary"/>
-                        </div>                    
-                    </div>
+                    <p:toolbar>
+                        <p:toolbarGroup align="right">
+                        <div class="box-header with-border" >
+                            <div id="main-buttons">
+                                <p:commandButton value="Guardar Cambio"  styleClass="rounded-button btn-primary"/>
+                             </div>
+                        </div>
 
-                    <div class="box-header with-border">                    
-                        <div id="main-buttons">
-                            <p:commandButton value="Cancelar"    styleClass="btn-primary"/>
-                        </div>                    
-                    </div>
+                        <div class="box-header with-border" >
+                            <div id="main-buttons" >
+                                <p:commandButton value="Cancelar"  styleClass="rounded-button btn-primary" />
+                             </div>
+                        </div>
+                        </p:toolbarGroup>
+                     </p:toolbar>
 
                 
             </p:panel>
