@@ -69,7 +69,7 @@ public class ExcelFileUI implements Serializable{
                 libro.close();
                 InputStream ie=new FileInputStream(nombreArchivo) ;   
                 fileD = DefaultStreamedContent.builder()
-                    .name("archivo.xlsx")
+                    .name("ListaPrecio.xlsx")
                     .contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                     .stream(() ->ie)
                     .build();

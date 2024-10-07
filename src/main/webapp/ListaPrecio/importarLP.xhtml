@@ -109,12 +109,48 @@
                         </div>
                         </p:toolbarGroup>
                      </p:toolbar>
+                    <!-- EXCEL -->
+                    <div>
+                        <p:fileUpload listener="#{uiExcelFile.handleFileUpload}" 
+                                  dragDropSupport="false" auto="true" onstart="showBar()" oncomplete="hideBar()"
+                                   mode="advanced"  multiple="false" update="messages" sizeLimit="100000000" 
+                                  />
+                    </div>
+                                          
+                    <p:spacer height="20"/>                      
+                    <div>
 
+                           <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                              icon="pi pi-arrow-down"  styleClass="btn-success">
+                                 <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+                          </p:commandButton>
+                    </div>
                 
             </p:panel>
 
         </h:form>
 
+    </ui:define>
+    
+    <ui:define name="code">
+        <p:tabView>
+            <p:tab title="upload.xhtml">
+           <pre>
+               <code class="language-html">
+                   <h:outputText value="#{sourceCodeMB.getPageSource()}" escape="true"/>
+               </code>
+           </pre>
+            </p:tab>
+
+            <p:tab title="FileuploadMB.java">
+              <pre>
+               <code class="language-java">
+                   <h:outputText value="#{sourceCodeMB.getJavaSource('com.github.adminfaces.showcase.bean.FileuploadMB')}"
+                                 escape="false"/>
+               </code>
+             </pre>
+            </p:tab>
+        </p:tabView>
     </ui:define>
 
 </ui:composition >
