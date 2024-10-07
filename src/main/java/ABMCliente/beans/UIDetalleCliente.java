@@ -16,24 +16,21 @@ import java.io.Serializable;
 @Named("uiDetalleCliente")
 @ViewScoped
 public class UIDetalleCliente implements Serializable{
-    
+    private boolean insert;
     private int cuitCliente;
     private String nombreApellidoCliente;
     private String direccion;
     private String mailCliente;
     private double telefonoCliente;
     private ControladorABMCliente controladorABMCliente = new ControladorABMCliente();
-
-    public UIDetalleCliente() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        
-        cuitCliente = Integer.parseInt(request.getParameter("cuitCliente"));
-        
-        DetalleClienteDTO  detalleClienteDTO =controladorABMCliente.obtenerDetalleCliente(cuitCliente);
-             nombreApellidoCliente=detalleClienteDTO.getNombreApellidoCliente();
     
+    public boolean isInsert() {
+        return insert;
+    }
+
+    //getter and setter
+    public void setInsert(boolean insert) {    
+        this.insert = insert;
     }
 
     public int getCuitCliente() {
@@ -75,7 +72,37 @@ public class UIDetalleCliente implements Serializable{
     public void setTelefonoCliente(double telefonoCliente) {
         this.telefonoCliente = telefonoCliente;
     }
+
+    public ControladorABMCliente getControladorABMCliente() {
+        return controladorABMCliente;
+    }
+
+    public void setControladorABMCliente(ControladorABMCliente controladorABMCliente) {
+        this.controladorABMCliente = controladorABMCliente;
+    }
     
     
+        public UIDetalleCliente() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        
+        int cuitCliente = Integer.parseInt(request.getParameter("cuitCliente"));
+        insert = true;
+        if(cuitCliente>0)
+        {
+            insert=false;
+            
+        }
+        DetalleClienteDTO  detalleClienteDTO =controladorABMCliente.obtenerDetalleCliente(cuitCliente, nombreApellidoCliente);
+        setNombreApellidoCliente(detalleClienteDTO.getNombreApellidoCliente());
+        setCuitCliente(detalleClienteDTO.getCuitCliente());
+        }
+    }
     
+    public String agregarCliente(){
+
 }
+    
+    
+

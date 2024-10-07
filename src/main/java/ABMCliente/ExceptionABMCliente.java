@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ABMCliente;
 
 /**
  *
  * @author Dell
  */
-class ExceptionABMCliente extends Exception {
-    
+public class ExceptionABMCliente extends Exception {
+    public ExceptionABMCliente(String mensaje){
+  super(mensaje);
+    }
 }

@@ -3,7 +3,7 @@ package ABMCliente.dtos;
 import java.sql.Timestamp;
 
 public class DetalleClienteDTO {
-  private int cuitCliente;
+    private int cuitCliente;
     private String nombreApellidoCliente;
     private String direccion;
     private String mailCliente;
