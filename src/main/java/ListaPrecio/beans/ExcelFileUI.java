@@ -33,19 +33,14 @@ import org.primefaces.model.StreamedContent;
 @Named("uiExcelFile")
 @ViewScoped
 @Model
-public class ExcelFileUI implements Serializable{
+public class ExcelFileUI implements Serializable {
 
     private UploadedFile file;
 
     private StreamedContent fileD;
 
- 
-
     public ExcelFileUI() {
-      
-        
 
-        
     }
 
     public StreamedContent getFileD() {
@@ -53,29 +48,27 @@ public class ExcelFileUI implements Serializable{
             Workbook libro = new XSSFWorkbook();
             final String nombreArchivo = "./tmp.xlsx";
             Sheet hoja = libro.createSheet("Hoja 1");
-            for(int j=0;j<2;j++)
-            {
+            for (int j = 0; j < 2; j++) {
                 Row primeraFila = hoja.createRow(j);
-                for (int i=0;i<10;i++)
-                {
+                for (int i = 0; i < 10; i++) {
                     Cell primeraCelda = primeraFila.createCell(i);
-                    primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
+                    primeraCelda.setCellValue("Yo voy en la celda" + i + " y fila" + j);
                 }
             }
             FileOutputStream outputStream;
-         
-                outputStream = new FileOutputStream(nombreArchivo);
-                libro.write(outputStream);
-                libro.close();
-                InputStream ie=new FileInputStream(nombreArchivo) ;   
-                fileD = DefaultStreamedContent.builder()
+
+            outputStream = new FileOutputStream(nombreArchivo);
+            libro.write(outputStream);
+            libro.close();
+            InputStream ie = new FileInputStream(nombreArchivo);
+            fileD = DefaultStreamedContent.builder()
                     .name("ListaPrecio.xlsx")
                     .contentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                    .stream(() ->ie)
+                    .stream(() -> ie)
                     .build();
         } catch (IOException ex) {
             Logger.getLogger(ExcelFileUI.class.getName()).log(Level.SEVERE, null, ex);
-                   Messages.create(ex.getMessage()).error().add();
+            Messages.create(ex.getMessage()).error().add();
         }
         return fileD;
     }
@@ -83,7 +76,7 @@ public class ExcelFileUI implements Serializable{
     public void setFileD(StreamedContent fileD) {
         this.fileD = fileD;
     }
-    
+
     public UploadedFile getFile() {
         return file;
     }
@@ -93,40 +86,37 @@ public class ExcelFileUI implements Serializable{
     }
 
     public void handleFileUpload(FileUploadEvent event) {
-        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): "+event.getFile().getSize()/1024f);
+        FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded. Size (KB): " + event.getFile().getSize() / 1024f);
         FacesContext.getCurrentInstance().addMessage(null, message);
-        
-         try {
-             
-             
-          InputStream inp=event.getFile().getInputStream();
-                
-       
 
- 
-         Workbook wb = WorkbookFactory.create(inp);
-        Sheet sheet = wb.getSheetAt(0);
-        int iRow=0;
-        Row row = sheet.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-      while(row!=null) 
-      {
-          Cell cell = row.getCell(0);  
-          if (cell!=null && cell.getCellType()==CellType.STRING){
-            String value = cell.getStringCellValue();
-            Messages.create(iRow +"String").detail(value).add();
-            System.out.println(iRow + "Valor de la celda es " + value);
-          }
-          if (cell!=null && cell.getCellType()==CellType.NUMERIC ){
-            double value = cell.getNumericCellValue();
-            Messages.create(iRow +"Numero").detail(Double(value).toString()).add();
-          }
+        try {
 
-          iRow++;  
-          row = sheet.getRow(iRow);
-         } 
+            InputStream inp = event.getFile().getInputStream();
+
+            Workbook wb = WorkbookFactory.create(inp);
+            Sheet sheet = wb.getSheetAt(0);
+            int iRow = 0;
+            Row row = sheet.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
+            System.out.println(row.getCell(0));
+//      while(row!=null) 
+//      {
+//          Cell cell = row.getCell(0);  
+//          if (cell!=null && cell.getCellType()==CellType.STRING){
+//            String value = cell.getStringCellValue();
+//            Messages.create(iRow +"String").detail(value).add();
+//            System.out.println(iRow + "Valor de la celda es " + value);
+//          }
+//          if (cell!=null && cell.getCellType()==CellType.NUMERIC ){
+//            double value = cell.getNumericCellValue();
+//            Messages.create(iRow +"Numero").detail(Double(value).toString()).add();
+//          }
+//
+//          iRow++;  
+//          row = sheet.getRow(iRow);
+//         } 
         } catch (Exception ex) {
             Logger.getLogger(ExcelFileUI.class.getName()).log(Level.SEVERE, null, ex);
-               Messages.create(ex.getMessage()).error().add();
+            Messages.create(ex.getMessage()).error().add();
         }
     }
 }
