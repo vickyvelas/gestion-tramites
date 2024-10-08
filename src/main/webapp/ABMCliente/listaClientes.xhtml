@@ -21,67 +21,92 @@
     <ui:define name="body">
     <h:form>
         <p:focus context="@form"/>
-            <div class="box box-primary">
-                        
+        <!-- BOTÓN PARA AGREGAR CLIENTE -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div id="main-buttons">
+                    <p:commandButton value="Agregar Cliente" icon="fa fa-plus" action="#{uiListaClientes.irAgregarCliente()}" styleClass="btn-primary"/>
+                </div>
+            </div>
+                
+         <p:separator/> 
+         <!-- FILTRO SEGÚN CUIT -->
+         <div class="ui-g ui-fluid">
+            <div class="ui-g-12 ui-md-6">
+               <p:outputPanel>
+                   <h:outputText value="CUIT:"/>
+                   <p:spacer height="10"/>
+                   <p:inputText id="cuitFilter" style="width:150px" value="#{uiListaClientes.cuitClienteFiltro}">
+                       <p:ajax event="keyup" listener="#{uiListaClientes.filtrar()}" update="@form:grid1"/>
+                   </p:inputText>
+               </p:outputPanel>
+            </div>
+             
+             <!-- FILTRO POR NOMBRE -->
+              <div class="ui-g-12 ui-md-6">
+                    <p:outputPanel>
+                        <h:outputText value="Apellido y Nombre:"/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="nombreFilter" style="width:150px" value="#{uiListaClientes.nombreApellidoClienteFiltro}">
+                            <p:ajax event="keyup" listener="#{uiListaClientes.filtrar()}" update="@form:grid1"/>
+                        </p:inputText>
+                    </p:outputPanel>
+                </div>
+         </div>
+
                     
         <!-- Tabla para mostrar la lista de Clientes -->
-         <p:separator/>
-
-                   <div class="ui-g ui-fluid">
+            <p:spacer height="5"/>
  
-                       <p:dataTable id="grid1" widgetVar="ListaClientesTable" value="#{uiListaClientes.obtenerListaCliente()}" var="listaClientes" >
+            <p:dataTable id="grid1" widgetVar="ListaClientesTable" value="#{uiListaClientes.obtenerListaCliente()}" var="listaClientes" >
 
-            <p:column>
-                <f:facet name="header">CUIT</f:facet>
-              #{listaClientes.cuitCliente}
-            </p:column>
+                <p:column>
+                    <f:facet name="header">CUIT</f:facet>
+                    #{listaClientes.cuitCliente}
+                </p:column>
 
-            <p:column>
-                <f:facet name="header">Apellido y Nombre</f:facet>
-                #{listaClientes.nombreApellidoCliente}
-            </p:column>
+                <p:column>
+                    <f:facet name="header">Apellido y Nombre</f:facet>
+                    #{listaClientes.nombreApellidoCliente}
+                </p:column>
 
-            <p:column>
-                <f:facet name="header">Fecha Baja</f:facet>
-                #{listaClientes.fechaHoraBajaCliente}
-            </p:column>
+                <p:column>
+                    <f:facet name="header">Fecha Baja</f:facet>
+                    #{listaClientes.fechaHoraBajaCliente}
+                </p:column>
 
-                           <!-- comment 
-             <p:column>
-                <f:facet name="header">Acciones</f:facet>
-                <p:commandButton value="Modificar" styleClass="btn-info" action="{uiListaClientes.irModificarCliente()}" disabled="{estado.fechaBaja != null}">
-                    <f:ajax render="@form"/>
-                </p:commandButton>
-                <p:spacer width="5"/>
-                <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" actionListener="{uiListaClientes.darDeBajaEstado(estado.codigo)}" disabled="{estado.fechaBaja != null}">
+            <!-- Colocamos los botones de Modificar y Eliminar -->              
+                <p:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <p:commandButton value="Modificar" styleClass="btn-info" action="#{uiListaClientes.irModificarCliente(cliente.cuitCliente)}" disabled="#{cliente.fechaHoraBajaCliente != null}">
+                        <f:ajax render="@form"/>
+                    </p:commandButton>
+                    <p:spacer width="5"/>
+                    <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" actionListener="#{uiListaClientes.eliminarCliente(cliente.cuitCliente)}" disabled="#{cliente.fechaHoraBajaCliente != null}" >
                    
-                    <p:confirm header="Anulación de {estado.codigo} {estado.nombre}" message="¿Está seguro?" icon="ui-icon-alert"/>
+                       <p:confirm header="Anulación de #{cliente.cuitCliente} #{cliente.nombreApellidoCliente}" message="¿Está seguro?" icon="ui-icon-alert"/>
                     
-                </p:commandButton>
+                    </p:commandButton>
                 
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
                         <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                         icon="fa fa-check"/>
+                                         icon="fa fa-check" update="@form:grid1"/>
                         <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
-                                         icon="fa fa-close"/>
+                                         icon="fa fa-close" update="@form:grid1"/>
                     </p:confirmDialog>
-            </p:column>
-                -->
+                </p:column>
                
-                <p:column> 
+      <!--  <p:column> 
                    
-                    <p:commandButton icon="pi pi-search" styleClass="btn-info" action="#{uiListaClientes.irACliente(listaClientes.cuitCliente)}">
+                    <p:commandButton icon="pi pi-search" styleClass="btn-info" action="{uiListaClientes.irACliente(listaClientes.cuitCliente)}">
                     
                      </p:commandButton>
-                </p:column>
-                    
-    
+            </p:column>
+                             --> 
+                
+          </p:dataTable>
+        </div>
 
-        </p:dataTable>
-            </div>
-            </div>
-
-   </h:form>
-
- </ui:define>
-    </ui:composition>
+    </h:form>
+    </ui:define>
+</ui:composition>

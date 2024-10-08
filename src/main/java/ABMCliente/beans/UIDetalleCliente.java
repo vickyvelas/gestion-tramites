@@ -5,13 +5,17 @@
 package ABMCliente.beans;
 
 import ABMCliente.ControladorABMCliente;
+import ABMCliente.ExceptionABMCliente;
 import ABMCliente.dtos.DetalleClienteDTO;
+import ABMCliente.dtos.DetalleClienteDTOIn;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
+import org.omnifaces.util.Messages;
+import utils.BeansUtils;
 
 @Named("uiDetalleCliente")
 @ViewScoped
@@ -87,20 +91,47 @@ public class UIDetalleCliente implements Serializable{
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
         
-        int cuitCliente = Integer.parseInt(request.getParameter("cuitCliente"));
+        int cuitCliente = Integer.parseInt(request.getParameter("cuit"));
         insert = true;
         if(cuitCliente>0)
         {
             insert=false;
-            
-        }
-        DetalleClienteDTO  detalleClienteDTO =controladorABMCliente.obtenerDetalleCliente(cuitCliente, nombreApellidoCliente);
-        setNombreApellidoCliente(detalleClienteDTO.getNombreApellidoCliente());
-        setCuitCliente(detalleClienteDTO.getCuitCliente());
+            DetalleClienteDTO  detalleClienteDTO =controladorABMCliente.obtenerDetalleCliente(cuitCliente);
+            setNombreApellidoCliente(detalleClienteDTO.getNombreApellidoCliente());
+            setCuitCliente(detalleClienteDTO.getCuitCliente());
         }
     }
     
     public String agregarCliente(){
+        try{
+            if(!insert)
+            {
+                DetalleClienteDTOIn detalleClienteDTOIn = new DetalleClienteDTOIn();
+                detalleClienteDTOIn.setCuitCliente(getCuitCliente());
+                detalleClienteDTOIn.setNombreApellidoCliente(getNombreApellidoCliente());
+                controladorABMCliente.modificarCliente(cuitCliente, detalleClienteDTOIn);
+                return BeansUtils.redirectToPreviousPage();
+            }
+            else
+            {
+            DetalleClienteDTO detalleClienteDTO = new DetalleClienteDTO();
+            detalleClienteDTO.setCuitCliente(getCuitCliente());
+            detalleClienteDTO.setNombreApellidoCliente(getNombreApellidoCliente());
+            detalleClienteDTO.setDireccion(getDireccion());
+            detalleClienteDTO.setMailCliente(getMailCliente());
+            detalleClienteDTO.setTelefonoCliente(getTelefonoCliente());
+            controladorABMCliente.agregarCliente(detalleClienteDTO);
+            
+            }
+            return BeansUtils.redirectToPreviousPage();
+            
+        }
+        catch (ExceptionABMCliente e){
+            Messages.create(e.getMessage()).fatal().add();
+            return "";
+        }
+    }
+        
 
 }
     

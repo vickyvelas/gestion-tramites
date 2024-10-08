@@ -112,7 +112,7 @@ public class ExpertoABMCliente {
 //     * @param nombreApellidoCliente
 //     * @return
 //     */
-    public DetalleClienteDTO obtenerDetalleCliente(int cuitCliente, String nombreApellidoCliente) {
+    public DetalleClienteDTO obtenerDetalleCliente(int cuitCliente) {
         //muestra detalles
         List<DTOCriterio> lCriterio=new ArrayList<>();
         if(cuitCliente>0){
@@ -122,13 +122,13 @@ public class ExpertoABMCliente {
             unCriterio.setValor(cuitCliente);
             lCriterio.add(unCriterio);
         }
-        if(nombreApellidoCliente.trim().length()>0){
-            DTOCriterio unCriterio=new DTOCriterio();
-            unCriterio.setAtributo("nombreApellidoCliente");
-            unCriterio.setOperacion("like");
-            unCriterio.setValor(nombreApellidoCliente);
-            lCriterio.add(unCriterio);
-        }
+//        if(nombreApellidoCliente.trim().length()>0){
+//            DTOCriterio unCriterio=new DTOCriterio();
+//            unCriterio.setAtributo("nombreApellidoCliente");
+//            unCriterio.setOperacion("like");
+//            unCriterio.setValor(nombreApellidoCliente);
+//            lCriterio.add(unCriterio);
+//        }
         //falta criterio fecha
         
         //Nos de el primer cliente según lo marcado arriba 

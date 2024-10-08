@@ -32,8 +32,8 @@ public class ControladorABMCliente {
      }
      
      
-    public DetalleClienteDTO obtenerDetalleCliente (int cuitCliente,  String nombreApellidoCliente){
-        return expertoABMCliente.obtenerDetalleCliente(cuitCliente, nombreApellidoCliente);
+    public DetalleClienteDTO obtenerDetalleCliente (int cuitCliente){
+        return expertoABMCliente.obtenerDetalleCliente(cuitCliente);
     }
 //      public List<ListaClienteDTO> obtenerListaCliente( int cuitClienteFiltro,String nombreApellidoClienteFiltro){
 //          return expertoABMCliente.obtenerListaCliente(cuitClienteFiltro, nombreApellidoClienteFiltro);
