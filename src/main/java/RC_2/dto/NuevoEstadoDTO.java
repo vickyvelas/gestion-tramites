@@ -15,13 +15,14 @@ public class NuevoEstadoDTO {
     private int nroTramite;
     private String nombreApellidoCliente;
     private String nombreTipoTramite;
-     private String observacionTramiteEstado;
+    private String observacionTramiteEstado;
      
     
     private List<DestinosPosiblesDTO> destinosPosiblesList = new ArrayList<>(); 
     
     
-     private String nombreEstadoTramiteActual;
+     
+    private String nombreEstadoTramiteActual;
 
     public int getNroTramite() {
         return nroTramite;
@@ -75,6 +76,8 @@ public class NuevoEstadoDTO {
     public void setNombreEstadoTramiteActual(String nombreEstadoTramiteActual) {
         this.nombreEstadoTramiteActual = nombreEstadoTramiteActual;
     }
+    
+    
      
      
     

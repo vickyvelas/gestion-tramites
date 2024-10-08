@@ -175,7 +175,7 @@ public class UITramiteParticular implements Serializable {
     
     public String irNuevoEstado() {
         BeansUtils.guardarUrlAnterior();
-        return "transicion.xhtml?faces-redirect=true&codigo=" + nroTramite; // Usa '?faces-redirect=true' para hacer una redirección
+        return "transicion.xhtml?faces-redirect=true&nroTramite=" + nroTramite; // Usa '?faces-redirect=true' para hacer una redirección
     }
     
     

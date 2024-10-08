@@ -72,12 +72,8 @@ public class UInuevoEstado  implements Serializable{
     
     
 
-    public List<EstadosPosiblesUI> getEstadosPosiblesUI() {
+    public List<EstadosPosiblesUI> estadosPosibles() {
         return estadosPosiblesUI;
-    }
-
-    public void setEstadosPosiblesUI(List<EstadosPosiblesUI> estadosPosiblesUI) {
-        this.estadosPosiblesUI = estadosPosiblesUI;
     }
 
     public int getCodEstadoSeleccionado() {
@@ -90,36 +86,44 @@ public class UInuevoEstado  implements Serializable{
     
     
     public UInuevoEstado() {
-//        FacesContext facesContext = FacesContext.getCurrentInstance();
-//        ExternalContext externalContext = facesContext.getExternalContext();
-//        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-//        
-//         nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+        
+         nroTramite = Integer.parseInt(request.getParameter("nroTramite"));
          NuevoEstadoDTO nuevoEstadoDTO=controladorRC.nuevoEstado(nroTramite);
          nombreEstadoTramiteActual=nuevoEstadoDTO.getNombreEstadoTramiteActual();
          observacionTramiteEstado=nuevoEstadoDTO.getObservacionTramiteEstado();
          nombreApellidoCliente=nuevoEstadoDTO.getNombreApellidoCliente();
          nombreTipoTramite=nuevoEstadoDTO.getNombreTipoTramite();
          nroTramite=nuevoEstadoDTO.getNroTramite();
+         System.out.println(nuevoEstadoDTO.getDestinosPosiblesList());
          for (DestinosPosiblesDTO d : nuevoEstadoDTO.getDestinosPosiblesList())
          {
+         
          EstadosPosiblesUI e = new EstadosPosiblesUI();
          e.setCodEstadoTramite(d.getCodEstadoTramite());
          e.setNombreEstadoTramiteDestino(d.getNombreEstadoTramiteDestino());
          estadosPosiblesUI.add(e);
+         
+         //nombreEstadoTramiteDestino.add(e.getNombreEstadoTramiteDestino());
+         
         }
-                  EstadosPosiblesUI e = new EstadosPosiblesUI();
-         e.setCodEstadoTramite(1);
-         e.setNombreEstadoTramiteDestino("Cristian");
-         estadosPosiblesUI.add(e);
-                           e = new EstadosPosiblesUI();
-         e.setCodEstadoTramite(2);
-         e.setNombreEstadoTramiteDestino("Martina");
-         estadosPosiblesUI.add(e);
-                            e = new EstadosPosiblesUI();
-        e.setCodEstadoTramite(3);
-        e.setNombreEstadoTramiteDestino("Etapa 1");
-        estadosPosiblesUI.add(e);
+        
+         
+         
+//                  EstadosPosiblesUI e = new EstadosPosiblesUI();
+//         e.setCodEstadoTramite(1);
+//         e.setNombreEstadoTramiteDestino("Cristian");
+//         estadosPosiblesUI.add(e);
+//                           e = new EstadosPosiblesUI();
+//         e.setCodEstadoTramite(2);
+//         e.setNombreEstadoTramiteDestino("Martina");
+//         estadosPosiblesUI.add(e);
+//                            e = new EstadosPosiblesUI();
+//        e.setCodEstadoTramite(3);
+//        e.setNombreEstadoTramiteDestino("Etapa 1");
+//        estadosPosiblesUI.add(e);
         
     }
 
@@ -167,6 +171,8 @@ public class UInuevoEstado  implements Serializable{
 
         return BeansUtils.redirectToPreviousPage();
     }
+    
+    
 
     
     

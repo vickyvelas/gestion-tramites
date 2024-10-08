@@ -162,11 +162,7 @@ public class ExpertoRC {
         return tramiteParticularDTO;
     }
     
-//    public List<HistoricoDTO> etapas(int nroTramite){
-//
-//        return historicoDTOResultado;
-//    }
-//    
+  
     public void anularUltimo(int nroTramite) throws exceptionRC{
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -214,7 +210,8 @@ public class ExpertoRC {
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
             
-    public TramiteParticularDTO cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
+    public void cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         List <DTOCriterio> criterioList = new ArrayList<>();
         //busco tramite x nro
         DTOCriterio dto = new DTOCriterio();
@@ -263,8 +260,8 @@ public class ExpertoRC {
         tramiteEncontrado.setEstadoTramite(estadoTramiteEncontrado);
             
          
-        
-        return null;
+        FachadaPersistencia.getInstance().guardar(tramiteEstadoNuevo);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
     }
     
     
@@ -293,33 +290,31 @@ public class ExpertoRC {
         estadoActualDTO.setNombreApellidoCliente(tramite.getCliente().getNombreApellidoCliente());
         estadoActualDTO.setNroTramite(tramite.getNroTramite());
         estadoActualDTO.setNombreTipoTramite(tramite.getTipoTramite().getNombreTipoTramite());
+        EstadoTramite estadoTramiteActual = tramite.getEstadoTramite();
         for(TransicionEstado transicionEstado : transicionesEstado){
-            EstadoTramite estadoTramiteActual = transicionEstado.getEstadoActual();
+            if(estadoTramiteActual.getCodEstadoTramite()==transicionEstado.getEstadoActual().getCodEstadoTramite())
+            {
             
-            //verificacion de que los codigos sean iguales
-            if (!estadoTramiteActual.equals(estadoTramite)) {
-            throw new RuntimeException("La instancia de EstadoTramite no coincide");
-            }
             
-            String nombreEA= estadoTramiteActual.getNombreEstadoTramite();
-            
-            estadoActualDTO.setNombreEstadoTramiteActual(nombreEA);
-           
-            
-            //destinosPosibles
-            
-            List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
-            
-            for (EstadoTramite etDestino : etDestinos) {
-                    // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
-                    DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();
-                    destinosDTO.setNombreEstadoTramiteDestino(etDestino.getNombreEstadoTramite());
-                    destinosDTO.setCodEstadoTramite(etDestino.getCodEstadoTramite());
+                List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
 
-                    // Añadir DTODestinosPosibles a DTOEstadoActual
-                    
-                    estadoActualDTO.addDestinosPosiblesList(destinosDTO);
+                for (EstadoTramite etDestino : etDestinos) {
+                        // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
+                        DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();
+                        destinosDTO.setNombreEstadoTramiteDestino(etDestino.getNombreEstadoTramite());
+                        destinosDTO.setCodEstadoTramite(etDestino.getCodEstadoTramite());
+
+                        // Añadir DTODestinosPosibles a DTOEstadoActual
+
+                        estadoActualDTO.addDestinosPosiblesList(destinosDTO);
+                }
             }
+//            SI DEVUELVE LISTA VACIA FIN AL TRAMITE, copiar lo de arriba antes dle bucle y el if de abajo
+//            if(etDestinos==null){
+//                tramite.setFechaHoraFinTramite(new Timestamp(System.currentTimeMillis()));
+//                System.out.println("El tramite finalizo");
+//            }
+            //}
         }
         
         return estadoActualDTO;

@@ -40,7 +40,7 @@
        
             
             <p:selectOneRadio id="estadoNuevo" value="#{uiNuevoEstado.codEstadoSeleccionado}" layout="grid" columns="3" styleClass="grid-radio">
-                <f:selectItems value="#{uiNuevoEstado.estadosPosiblesUI}" var="estado" itemLabel="#{estado.nombreEstadoTramiteDestino}" itemValue="#{estado.codEstadoTramite}"/>
+                <f:selectItems value="#{uiNuevoEstado.estadosPosibles()}" var="estado" itemLabel="#{estado.nombreEstadoTramiteDestino}" itemValue="#{estado.codEstadoTramite}"/>
            </p:selectOneRadio>
             <h:outputText value="Observaciones"/>
             

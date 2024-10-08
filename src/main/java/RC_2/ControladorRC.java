@@ -10,6 +10,7 @@ import RC_2.dto.NuevoEstadoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TramitesConsultorDTO;
 import RC_2.dto.TransicionDTO;
+import entidades.TramiteEstado;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,8 @@ public class ControladorRC {
      
      
      
-    public TramiteParticularDTO cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
-        return expertoRC.cambiarEstadoTramite(tdto, nroTramite);
+    public void cambiarEstadoTramite (TransicionDTO tdto, int nroTramite){
+         expertoRC.cambiarEstadoTramite(tdto, nroTramite);
     }
     
    
