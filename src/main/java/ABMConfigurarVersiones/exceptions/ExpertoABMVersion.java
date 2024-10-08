@@ -132,6 +132,11 @@ public class ExpertoABMVersion {
                     unCriterio.setOperacion("=");
                     unCriterio.setValor(tt);
                     lCriterio2.add(unCriterio);
+                    DTOCriterio unCriterio2=new DTOCriterio();
+                    unCriterio2.setAtributo("fechaHoraBajaVersion");
+                    unCriterio2.setOperacion("=");
+                    unCriterio2.setValor(null);
+                    lCriterio2.add(unCriterio2);
                     List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio2);
 
                     //Selecciono la de mayor fecha desde
@@ -286,6 +291,7 @@ public class ExpertoABMVersion {
                 }
                 if(ultVersion==null)
                    {
+                    dtoVersion.setCodTipoTramite(tt.getCodTipoTramite());
                     dtoVersion.setCodVersion(0);
                     dtoVersion.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
                     Timestamp fh = Timestamp.valueOf("2070-09-15 22:06:45.0");
@@ -306,7 +312,10 @@ public class ExpertoABMVersion {
                       estadoA.setEstadosDestino(null);
                       listEA.add(estadoA);
                       dtoVersion.setEstadosActuales(listEA);
+                      String draw = "[{\"codigo\":1,\"nombre\":\"Iniciado\",\"xpos\":80,\"ypos\":80s,\"destinos\":[]}]";
+                      dtoVersion.setDraw(draw);
                       dtofinal.setVersion(dtoVersion);
+                      
                    }
                 else
                    { Version v = ultVersion;

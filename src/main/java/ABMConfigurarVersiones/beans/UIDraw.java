@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,8 +49,8 @@ public class UIDraw implements Serializable {
     private boolean insert;
     private int nroVersion;
     private int codigoTipoTramite;
-    private Timestamp fechaHoraDesdeVersion;
-    private Timestamp fechaHoraHastaVersion;
+    private String fechaHoraDesdeVersion;
+    private String fechaHoraHastaVersion;
 
     public boolean isInsert() {
         return insert;
@@ -67,19 +68,19 @@ public class UIDraw implements Serializable {
         this.codigoTipoTramite = codigoTipoTramite;
     }
 
-    public Timestamp getFechaHoraDesdeVersion() {
+    public String getFechaHoraDesdeVersion() {
         return fechaHoraDesdeVersion;
     }
 
-    public void setFechaHoraDesdeVersion(Timestamp fechaHoraDesdeVersion) {
+    public void setFechaHoraDesdeVersion(String fechaHoraDesdeVersion) {
         this.fechaHoraDesdeVersion = fechaHoraDesdeVersion;
     }
 
-    public Timestamp getFechaHoraHastaVersion() {
+    public String getFechaHoraHastaVersion() {
         return fechaHoraHastaVersion;
     }
 
-    public void setFechaHoraHastaVersion(Timestamp fechaHoraHastaVersion) {
+    public void setFechaHoraHastaVersion(String fechaHoraHastaVersion) {
         this.fechaHoraHastaVersion = fechaHoraHastaVersion;
     }
     
@@ -129,8 +130,17 @@ public class UIDraw implements Serializable {
         }
         versionoutput = versionMostrar.getVersion();
         setNroVersion(versionoutput.getCodVersion());
-        setFechaHoraDesdeVersion(versionoutput.getFechaHoraDesdeVersion());
-        setFechaHoraHastaVersion(versionoutput.getFechaHoraHastaVersion());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        
+        Timestamp fechaDesde = versionoutput.getFechaHoraDesdeVersion();
+        
+        fechaHoraDesdeVersion = sdf.format(fechaDesde);
+        
+        Timestamp fechaHasta = versionoutput.getFechaHoraHastaVersion();
+        
+        fechaHoraHastaVersion = sdf.format(fechaHasta);
+
         List<NodoMenuIU> lestadosP = new ArrayList<NodoMenuIU>();
         
             List<DTOEstadoPosible> estados = versionMostrar.getEstadosPosibles();
@@ -194,34 +204,37 @@ public class UIDraw implements Serializable {
     public void guardar() {
         
         DTOVersionInput vi = new DTOVersionInput();
-        Timestamp fh = (Timestamp) fechaHoraHastaVersion;
-        /*try {
-            String dateString = (String)fechaHoraHastaVersion.;
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-            Date parsedDate = dateFormat.parse(dateString);
-            Timestamp timestamp = new Timestamp(parsedDate.getTime());
-            System.out.println("Timestamp: " + timestamp);
-        } catch (Exception e) {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            // Convertir el string a java.util.Date
+            java.util.Date parsedDate = dateFormat.parse(fechaHoraDesdeVersion);
+            // Convertir java.util.Date a java.sql.Timestamp
+            Timestamp fd = new Timestamp(parsedDate.getTime());
+            //lo asigno 
+            vi.setFechaHoraDesdeVersion(fd);
+            //Los mismo para la hasta
+            java.util.Date parsedDate2 = dateFormat.parse(fechaHoraHastaVersion);
+            Timestamp fh = new Timestamp(parsedDate2.getTime()); 
+            vi.setFechaHoraHastaVersion(fh);
+            
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-*/
-        Timestamp fd = (Timestamp)fechaHoraDesdeVersion;
-       
-                vi.setCodTipoTramite(codigoTipoTramite);
-                vi.setCodVersion(getNroVersion());
-                vi.setFechaHoraDesdeVersion(fd);
-                vi.setFechaHoraHastaVersion(fh);
+              vi.setCodTipoTramite(codigoTipoTramite);
+              vi.setCodVersion(getNroVersion());
             
-        System.out.println(this.guardarJSON);
-        Messages.create("nroVersion").detail(""+this.nroVersion).add();
-        Messages.create("Guardar").detail(this.guardarJSON).add();
+        //System.out.println(this.guardarJSON);
+        //Messages.create("nroVersion").detail(""+this.nroVersion).add();
+        //Messages.create("Guardar").detail(this.guardarJSON).add();
         ObjectMapper objectMapper = new ObjectMapper();
         TypeFactory typeFactory = objectMapper.getTypeFactory();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         List<NodoIU> listaNodo = new ArrayList();
         try {
             listaNodo = objectMapper.readValue(this.guardarJSON, typeFactory.constructCollectionType(List.class, NodoIU.class));
-            System.out.println(listaNodo.toString());
+           // System.out.println(listaNodo.toString());
         } catch (JsonProcessingException ex) {
             Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
             Messages.create(ex.getMessage()).error().add();
@@ -240,8 +253,12 @@ public class UIDraw implements Serializable {
         vi.setDraw(this.guardarJSON);
         try {
             controlador.nuevaVersion(vi);
+            System.out.println("Guardado con Éxito");
         } catch (VersionException ex) {
             Logger.getLogger(UIDraw.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            Messages.create("Error!").error().detail(ex.getMessage()).add();
+            
         }
         //listaNodo tiene los nodos
         //para comprobar
@@ -250,7 +267,8 @@ public class UIDraw implements Serializable {
         Gson gson = new Gson();
         cargarJSON = gson.toJson(listaNodo);
         System.out.println(jsonArray);
-        Messages.create("Guardar").detail(this.guardarJSON).add();
+        //Messages.create("Guardar").detail(this.guardarJSON).add();
+        System.out.println("Guardado con Éxito");
     }
         
 
