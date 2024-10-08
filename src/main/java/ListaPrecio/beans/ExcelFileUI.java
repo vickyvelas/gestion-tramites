@@ -1,5 +1,8 @@
 package ListaPrecio.beans;
 
+import ListaPrecio.ControladorLP;
+import ListaPrecio.dtos.DTODetalleListaPrecioExportar;
+import ListaPrecio.dtos.DTOListaPrecioExportar;
 import static com.sun.tools.javac.jvm.PoolConstant.LoadableConstant.Double;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -16,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.*;
@@ -39,22 +43,65 @@ public class ExcelFileUI implements Serializable {
 
     private StreamedContent fileD;
 
+    private int codListaPrecio;
+
+    private ControladorLP controladorLP = new ControladorLP();
+
     public ExcelFileUI() {
+
+        codListaPrecio = 2;
 
     }
 
     public StreamedContent getFileD() {
+        DTOListaPrecioExportar dtoListaPrecioExportar = controladorLP.exportarListaPrecio(codListaPrecio);
+        List<DTODetalleListaPrecioExportar> detallesListaPrecio = dtoListaPrecioExportar.getDetalleListaPrecioExportar();
+
         try {
             Workbook libro = new XSSFWorkbook();
+
             final String nombreArchivo = "./tmp.xlsx";
             Sheet hoja = libro.createSheet("Hoja 1");
-            for (int j = 0; j < 2; j++) {
-                Row primeraFila = hoja.createRow(j);
-                for (int i = 0; i < 10; i++) {
-                    Cell primeraCelda = primeraFila.createCell(i);
-                    primeraCelda.setCellValue("Yo voy en la celda" + i + " y fila" + j);
-                }
+
+            int nFila = 0;
+            int nColumna = 0;
+            Row fila;
+            Cell celda;
+            fila = hoja.createRow(nFila);
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("Cod");
+            nColumna++;
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("nombre");
+            nColumna++;
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("precio");
+
+            int j = 0;
+            for (DTODetalleListaPrecioExportar detalleLPE : detallesListaPrecio) {
+                nColumna = 0;
+                nFila++;
+                fila = hoja.createRow(nFila);
+                celda = fila.createCell(nColumna);
+                celda.setCellValue(detalleLPE.getCodTipoTramite());
+                nColumna++;
+                celda = fila.createCell(nColumna);
+                celda.setCellValue(detalleLPE.getNombreTipoTramite());
+                nColumna++;
+                celda = fila.createCell(nColumna);
+                celda.setCellValue(detalleLPE.getPrecioTipoTramite());
+
             }
+//            for(int j=0;j<2;j++)
+//            {
+//                Row primeraFila = hoja.createRow(j);
+//                for (int i=0;i<10;i++)
+//                {
+//                    Cell primeraCelda = primeraFila.createCell(i);
+//                   // primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
+//                   
+//                }
+//            }*/
             FileOutputStream outputStream;
 
             outputStream = new FileOutputStream(nombreArchivo);
@@ -97,23 +144,21 @@ public class ExcelFileUI implements Serializable {
             Sheet sheet = wb.getSheetAt(0);
             int iRow = 0;
             Row row = sheet.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
-            System.out.println(row.getCell(0));
-//      while(row!=null) 
-//      {
-//          Cell cell = row.getCell(0);  
-//          if (cell!=null && cell.getCellType()==CellType.STRING){
-//            String value = cell.getStringCellValue();
-//            Messages.create(iRow +"String").detail(value).add();
-//            System.out.println(iRow + "Valor de la celda es " + value);
-//          }
-//          if (cell!=null && cell.getCellType()==CellType.NUMERIC ){
-//            double value = cell.getNumericCellValue();
-//            Messages.create(iRow +"Numero").detail(Double(value).toString()).add();
-//          }
-//
-//          iRow++;  
-//          row = sheet.getRow(iRow);
-//         } 
+            while (row != null) {
+                Cell cell = row.getCell(0);
+                if (cell != null && cell.getCellType() == CellType.STRING) {
+                    String value = cell.getStringCellValue();
+                    Messages.create(iRow + "String").detail(value).add();
+                    System.out.println(iRow + "Valor de la celda es " + value);
+                }
+                if (cell != null && cell.getCellType() == CellType.NUMERIC) {
+                    double value = cell.getNumericCellValue();
+                    Messages.create(iRow + "Numero").detail(Double(value).toString()).add();
+                }
+
+                iRow++;
+                row = sheet.getRow(iRow);
+            }
         } catch (Exception ex) {
             Logger.getLogger(ExcelFileUI.class.getName()).log(Level.SEVERE, null, ex);
             Messages.create(ex.getMessage()).error().add();
