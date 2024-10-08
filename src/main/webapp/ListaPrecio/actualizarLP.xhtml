@@ -102,10 +102,18 @@
                             <f:ajax render="@form"/>
                         </p:commandButton>
                         
-                        <p:spacer width="5"/>
+                        <!--<p:spacer width="5"/>
                         <p:commandButton value="Exportar" styleClass="btn-info" >
                             <f:ajax render="@form"/>
-                        </p:commandButton>
+                        </p:commandButton>-->
+                        
+                        <div>
+
+                           <p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                              icon="pi pi-arrow-down"  styleClass="btn-success">
+                                 <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+                          </p:commandButton>
+                         </div>
 
                         
                     </p:column> 

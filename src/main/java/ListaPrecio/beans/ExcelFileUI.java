@@ -1,5 +1,8 @@
 package ListaPrecio.beans;
 
+import ListaPrecio.ControladorLP;
+import ListaPrecio.dtos.DTODetalleListaPrecioExportar;
+import ListaPrecio.dtos.DTOListaPrecioExportar;
 import static com.sun.tools.javac.jvm.PoolConstant.LoadableConstant.Double;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -16,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.*;
@@ -30,6 +34,7 @@ import org.omnifaces.util.Messages;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
+
 @Named("uiExcelFile")
 @ViewScoped
 @Model
@@ -38,30 +43,59 @@ public class ExcelFileUI implements Serializable{
     private UploadedFile file;
 
     private StreamedContent fileD;
-
- 
+    
+    private int codListaPrecio;
+    
+    private ControladorLP controladorLP = new ControladorLP();
 
     public ExcelFileUI() {
       
         
-
+        codListaPrecio=2;
         
     }
 
     public StreamedContent getFileD() {
+        DTOListaPrecioExportar dtoListaPrecioExportar = controladorLP.exportarListaPrecio(codListaPrecio);
+        List<DTODetalleListaPrecioExportar> detallesListaPrecio = dtoListaPrecioExportar.getDetalleListaPrecioExportar();
+        
         try {
             Workbook libro = new XSSFWorkbook();
+            
             final String nombreArchivo = "./tmp.xlsx";
             Sheet hoja = libro.createSheet("Hoja 1");
-            for(int j=0;j<2;j++)
-            {
-                Row primeraFila = hoja.createRow(j);
-                for (int i=0;i<10;i++)
-                {
-                    Cell primeraCelda = primeraFila.createCell(i);
-                    primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
-                }
-            }
+                
+            
+            
+            
+               
+//            int j=0;
+//            for(DTODetalleListaPrecioExportar detalleLPE :detallesListaPrecio ){
+//                
+//                Row primeraFila = hoja.createRow(j);
+//                 primeraFila.createCell(0).setCellValue("Tipo Tramite");
+//                Row segundaFila = hoja.createRow(j);
+//                 segundaFila.createCell(0).setCellValue("Precio");
+//                    for (int i=0;i<10;i++){
+//                        Cell primeraCelda = primeraFila.createCell(i);
+//                       // primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
+//                       primeraCelda.setCellValue(detalleLPE.getNombreTipoTramite());
+//                       
+//                       Cell segundaCelda=segundaFila.createCell(i);
+//                       segundaCelda.setCellValue(detalleLPE.getPrecioTipoTramite());
+//                    }
+//                j++;
+//            }
+//            for(int j=0;j<2;j++)
+//            {
+//                Row primeraFila = hoja.createRow(j);
+//                for (int i=0;i<10;i++)
+//                {
+//                    Cell primeraCelda = primeraFila.createCell(i);
+//                   // primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
+//                   
+//                }
+//            }
             FileOutputStream outputStream;
          
                 outputStream = new FileOutputStream(nombreArchivo);
