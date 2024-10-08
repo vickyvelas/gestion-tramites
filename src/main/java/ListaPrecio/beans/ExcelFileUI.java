@@ -64,28 +64,36 @@ public class ExcelFileUI implements Serializable{
             
             final String nombreArchivo = "./tmp.xlsx";
             Sheet hoja = libro.createSheet("Hoja 1");
-                
+   
+            int nFila=0;
+            int nColumna=0;
+            Row fila;
+            Cell celda;
+            fila = hoja.createRow(nFila);
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("Cod");
+            nColumna++;
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("nombre");
+            nColumna++;
+            celda = fila.createCell(nColumna);
+            celda.setCellValue("precio");
             
-            
-            
-               
-//            int j=0;
-//            for(DTODetalleListaPrecioExportar detalleLPE :detallesListaPrecio ){
-//                
-//                Row primeraFila = hoja.createRow(j);
-//                 primeraFila.createCell(0).setCellValue("Tipo Tramite");
-//                Row segundaFila = hoja.createRow(j);
-//                 segundaFila.createCell(0).setCellValue("Precio");
-//                    for (int i=0;i<10;i++){
-//                        Cell primeraCelda = primeraFila.createCell(i);
-//                       // primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
-//                       primeraCelda.setCellValue(detalleLPE.getNombreTipoTramite());
-//                       
-//                       Cell segundaCelda=segundaFila.createCell(i);
-//                       segundaCelda.setCellValue(detalleLPE.getPrecioTipoTramite());
-//                    }
-//                j++;
-//            }
+            int j=0;
+            for(DTODetalleListaPrecioExportar detalleLPE :detallesListaPrecio ){
+                    nColumna=0;
+                    nFila++;
+                    fila = hoja.createRow(nFila);
+                    celda = fila.createCell(nColumna);
+                    celda.setCellValue(detalleLPE.getCodTipoTramite());
+                    nColumna++;
+                    celda = fila.createCell(nColumna);
+                    celda.setCellValue(detalleLPE.getNombreTipoTramite());
+                    nColumna++;
+                    celda = fila.createCell(nColumna);
+                    celda.setCellValue(detalleLPE.getPrecioTipoTramite());
+          
+            }
 //            for(int j=0;j<2;j++)
 //            {
 //                Row primeraFila = hoja.createRow(j);
@@ -95,7 +103,7 @@ public class ExcelFileUI implements Serializable{
 //                   // primeraCelda.setCellValue("Yo voy en la celda"+i+" y fila"+j);
 //                   
 //                }
-//            }
+//            }*/
             FileOutputStream outputStream;
          
                 outputStream = new FileOutputStream(nombreArchivo);
