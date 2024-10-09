@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!--<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
     <ui:define name="metadata">
-        <ui:param name="title" value="Trabajar con Listas de Precio"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        <ui:param name="title" value="Trabajar con Listas de Precio"/>  Automatic create breadCrumb and page title when param 'title' is provided.  
 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
@@ -62,11 +62,11 @@
                         <p:commandButton value="Importar"  action="#{uiActualizarLP.irAImportar()}" icon="fa fa-plus"   styleClass="btn-primary"/>
                     </div>                    
                 </div>
-                <!-- Tabla para mostrar la lista de precio -->
+                Tabla para mostrar la lista de precio 
                 <p:separator/>
 
                 <div class="ui-g ui-fluid">
-                
+
                     <div class="ui-g-12 ui-md-6">
                         <p:outputPanel>
                             <p:spacer height="10"/>                            
@@ -82,45 +82,128 @@
 
                     <p:column>
                         <f:facet name="header">Código</f:facet>
-                            #{listaPrecio.codListaPrecio}
-                    </p:column>
+#{listaPrecio.codListaPrecio}
+</p:column>
 
-                    <p:column>
-                        <f:facet name="header">Fecha Desde</f:facet>
-                            #{listaPrecio.fechaHoraDesdeListaPrecio}
-                    </p:column>
+<p:column>
+<f:facet name="header">Fecha Desde</f:facet>
+#{listaPrecio.fechaHoraDesdeListaPrecio}
+</p:column>
 
-                    <p:column>
-                        <f:facet name="header">Fecha Hasta</f:facet>
-                            #{listaPrecio.fechaHoraHastaListaPrecio}
-                    </p:column>
+<p:column>
+<f:facet name="header">Fecha Hasta</f:facet>
+#{listaPrecio.fechaHoraHastaListaPrecio}
+</p:column>
 
 
-                <p:column>
-                        <f:facet name="header">Acciones</f:facet>
-                        <p:commandButton value="Modificar" styleClass="btn-info" >
-                            <f:ajax render="@form"/>
-                        </p:commandButton>
-                        
-                        <!--<p:spacer width="5"/>
-                        <p:commandButton value="Exportar" styleClass="btn-info" >
-                            <f:ajax render="@form"/>
-                        </p:commandButton>-->
-                        
-                        <div>
+<p:column>
+<f:facet name="header">Acciones</f:facet>
+<p:commandButton value="Modificar" styleClass="btn-info" >
+<f:ajax render="@form"/>
+</p:commandButton>
 
-                           <p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
-                              icon="pi pi-arrow-down"  styleClass="btn-success">
-                                 <p:fileDownload value="#{uiExcelFile.fileD}"/> 
-                          </p:commandButton>
-                         </div>
+<p:spacer width="5"/>
+<p:commandButton value="Exportar" styleClass="btn-info" >
+<f:ajax render="@form"/>
+</p:commandButton>
 
-                        
-                    </p:column> 
+<div>
 
-                </p:dataTable>
-            </div>
+<p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                 icon="pi pi-arrow-down"  styleClass="btn-success">
+    <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+</p:commandButton>
+</div>
 
+
+</p:column> 
+
+</p:dataTable>
+</div>
+
+</h:form>
+
+</ui:define>
+</ui:composition>-->
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Listas de Precios"/> 
+    </ui:define>
+
+    <ui:define name="description">
+        Trabajar con Listas de Precios
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <div id="main-buttons">
+                        <p:commandButton value="Importar"  icon="fa fa-plus" action="#{uiActualizarLP.irAImportar()}" styleClass="btn-primary"/>
+                    </div>
+                </div>
+                <!--Tabla para mostrar la lista de precios -->
+                <p:separator/>
+
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>
+                            <h:outputText value="Filtrar por Fecha:"/>
+                            <p:spacer height="10"/>
+                            <p:datePicker id="fechaFilter" 
+                                        value="#{uiActualizarLP.fechaDesde}" 
+                                        pattern="dd/MM/yyyy"
+                                        placeholder="Selecciona una fecha" 
+                                        onfocus="Javascript:this.focus();this.select();" showTime="true">
+                                <p:ajax event="dateSelect"
+                                        listener="#{uiActualizarLP.filtrar()}" 
+                                        update="@form:grid1" />
+                            </p:datePicker>
+                        </p:outputPanel>
+                    </div> 
+
+                    <p:spacer height="5"/>
+                    <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio" lazy="true">
+
+
+                        <!--Columna: nroConfiguración -->
+                        <p:column>
+                            <f:facet name="header">Código</f:facet>
+                                #{listaPrecio.codListaPrecio}
+                        </p:column>
+
+                        <!--Columna: Fecha Desde -->
+                        <p:column>
+                            <f:facet name="header">Fecha Desde</f:facet>
+                                #{listaprecio.fechaHoraDesdeListaPrecio}
+                        </p:column>
+
+                        <!--Columna: Fecha Hasta -->
+                        <p:column>
+                            <f:facet name="header">Fecha Hasta</f:facet>
+                                #{listaprecio.fechaHoraHastaListaPrecio}
+                        </p:column>
+
+                        <!--Columna: Acciones -->
+                        <p:column>
+                            <f:facet name="header">Acciones</f:facet>
+                            <!--Botón para exportar a Excel -->
+                            <p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="pi pi-arrow-down"  styleClass="btn-success">
+                                <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+                            </p:commandButton>
+                            <p:spacer width="5"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </div> 
+
+            </div> 
         </h:form>
 
     </ui:define>
