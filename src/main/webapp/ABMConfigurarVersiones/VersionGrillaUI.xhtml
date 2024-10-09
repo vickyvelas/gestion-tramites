@@ -78,7 +78,7 @@
                     <f:ajax render="@form"/>
                 </p:commandButton>
                 <p:spacer width="5"/>
-                <p:commandButton value="Ver" styleClass="btn-info"  action="#{uiabmVersionTTLista.irVerVersion(dtoVersionDeTipo.codTipoTramite, dtoVersionDeTipo.codVersion)}">
+                <p:commandButton value="Ver" styleClass="btn-info"  action="#{uiabmVersionTTLista.irVerVersion(dtoVersionDeTipo.codTipoTramite, dtoVersionDeTipo.codVersion)}" disabled="#{dtoVersionDeTipo.fechaHoraBajaTipoTramite != null}">
                 </p:commandButton>
                 <p:spacer width="5"/>
                 <p:commandButton value="Historial" styleClass="btn-info" action="#{uiabmVersionTTLista.irHistorialVersion(dtoVersionDeTipo.codTipoTramite)}">
