@@ -1,16 +1,16 @@
 package entidades;
 
 public class DetallePrecioTipoTramite extends Entidad{
-    private float precioTipoTramite;
+    private double precioTipoTramite;
     private TipoTramite tipoTramite;
     
     public DetallePrecioTipoTramite() {}
 
-    public float getPrecioTipoTramite() {
+    public double getPrecioTipoTramite() {
         return precioTipoTramite;
     }
 
-    public void setPrecioTipoTramite(float precioTipoTramite) {
+    public void setPrecioTipoTramite(double precioTipoTramite) {
         this.precioTipoTramite = precioTipoTramite;
     }
     

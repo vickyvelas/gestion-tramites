@@ -10,7 +10,7 @@ package ListaPrecio.dtos;
  */
 public class DTODetalleListaPrecioImportar {
     private int codTipoTramite;
-    private float precioTipoTramite;
+    private double precioTipoTramite;
     
     public int getCodTipotramite(){
         return codTipoTramite;
@@ -20,11 +20,11 @@ public class DTODetalleListaPrecioImportar {
         this.codTipoTramite = codTipoTramite;
     }
     
-    public float getPrecioTipoTramite(){
+    public double getPrecioTipoTramite(){
         return precioTipoTramite;
     }
     
-    public void setPrecioTipoTramite (float precioTipoTramite){
+    public void setPrecioTipoTramite (double precioTipoTramite){
         this.precioTipoTramite = precioTipoTramite;
     }
 }

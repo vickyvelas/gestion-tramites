@@ -53,8 +53,10 @@ public class ExpertoLP {
         return listadelistas;
     }
 
-    public DTOListaPrecioImportar importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO, DTODetalleListaPrecioImportar detallesImportar) {
+    public void importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO ) {
        
+        
+        
         List<DTOCriterio> lCriterio=new ArrayList<>();
         
         List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
@@ -68,8 +70,9 @@ public class ExpertoLP {
         listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
 
         // Guardar cambios
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         FachadaPersistencia.getInstance().guardar(listaPrecioAnterior);
-        
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         
         //CREAR NUEVA LISTA PRECIO
         
@@ -131,15 +134,13 @@ public class ExpertoLP {
                             }
                     }
                 }
-                
+                 FachadaPersistencia.getInstance().iniciarTransaccion();;
                  FachadaPersistencia.getInstance().guardar(nuevaListaPrecio);
-                 
+                 FachadaPersistencia.getInstance().finalizarTransaccion();
                 
         }
         
-        
-  
-        return null; //arreglar retorno
+      
     }
 
     public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {

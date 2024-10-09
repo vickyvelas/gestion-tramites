@@ -21,6 +21,7 @@ public class UIImportarLP implements Serializable{
     private Timestamp fechaHoraHastaListaPrecio;
 
     public UIImportarLP() {
+        
     }
     
     

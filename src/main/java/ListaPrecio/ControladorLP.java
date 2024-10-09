@@ -21,8 +21,8 @@ public class ControladorLP {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
     }
 
-    public DTOListaPrecioImportar importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO, DTODetalleListaPrecioImportar detallesImportar) {
-       return expertoActualizarListaPrecio.importarListaPrecio(listaPrecioImportarDTO, detallesImportar);
+    public void importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO) {
+        expertoActualizarListaPrecio.importarListaPrecio(listaPrecioImportarDTO);
     }
 
    public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {

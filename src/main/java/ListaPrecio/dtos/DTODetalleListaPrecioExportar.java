@@ -11,7 +11,7 @@ package ListaPrecio.dtos;
 public class DTODetalleListaPrecioExportar {
       private int codTipoTramite;
     private String nombreTipoTramite;
-    private float precioTipoTramite;
+    private double precioTipoTramite;
 
     public int getCodTipoTramite() {
         return codTipoTramite;
@@ -29,11 +29,11 @@ public class DTODetalleListaPrecioExportar {
         this.nombreTipoTramite = nombreTipoTramite;
     }
 
-    public float getPrecioTipoTramite() {
+    public double getPrecioTipoTramite() {
         return precioTipoTramite;
     }
 
-    public void setPrecioTipoTramite(float precioTipoTramite) {
+    public void setPrecioTipoTramite(double precioTipoTramite) {
         this.precioTipoTramite = precioTipoTramite;
     }
 }
