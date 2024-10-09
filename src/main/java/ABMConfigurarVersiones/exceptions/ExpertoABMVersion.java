@@ -21,6 +21,7 @@ import entidades.TransicionEstado;
 import entidades.Version;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -42,14 +43,14 @@ public class ExpertoABMVersion {
             unCriterio.setValor(codtt);
             lCriterio.add(unCriterio);
         }
-        if(nombrett.trim().length()>0)
+        /*if(nombrett.trim().length()>0)
         {
             DTOCriterio unCriterio=new DTOCriterio();
             unCriterio.setAtributo("nombreTipoTramite");
             unCriterio.setOperacion("like");
-            unCriterio.setValor(nombrett);
+            unCriterio.setValor('%'+nombrett+'%');
             lCriterio.add(unCriterio);
-        }
+        }*/
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
         List<DTOVersionesDeTipo> lisResultado = new ArrayList<>();
         for (Object x : objetoList) {
@@ -111,9 +112,25 @@ public class ExpertoABMVersion {
         return lisResultado;
     }
     
-    public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(){
+    public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(int codtt, String nombrett){
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
+        if(codtt>0)
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("codTipoTramite");
+            unCriterio.setOperacion("=");
+            unCriterio.setValor(codtt);
+            lCriterio.add(unCriterio);
+        }
+        if(nombrett != null && nombrett.trim().isEmpty())
+        {
+            DTOCriterio unCriterio=new DTOCriterio();
+            unCriterio.setAtributo("nombreTipoTramite");
+            unCriterio.setOperacion("like");
+            unCriterio.setValor("%"+nombrett+"%");
+            lCriterio.add(unCriterio);
+        }
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
 
         List<DTOVersionesDeTipo> dtoLista = new ArrayList();
@@ -562,7 +579,7 @@ public class ExpertoABMVersion {
     
     }  
    
-    public List<DTOVersionHistorial> historialVersiones(int codigoTT){
+    public List<DTOVersionHistorial> historialVersiones(int codigoTT, int codigoV){
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOVersionHistorial> versionesResultado = new ArrayList<>();
@@ -582,6 +599,16 @@ public class ExpertoABMVersion {
             Criterio.setOperacion("=");
             Criterio.setValor(tt);
             lCriterio.add(Criterio);
+            
+        if(codigoV>0)
+        {
+            
+            DTOCriterio unCriterio2=new DTOCriterio();
+            unCriterio2.setAtributo("codVersion");
+            unCriterio2.setOperacion("=");
+            unCriterio2.setValor(codigoV);
+            lCriterio.add(unCriterio2);
+        }
         List objetoList2 = FachadaPersistencia.getInstance().buscar("Version", lCriterio);
         
             for (Object x : objetoList2){
@@ -597,6 +624,26 @@ public class ExpertoABMVersion {
             versionesResultado.add(versionDTO);
             }            
         }
+       // List<DTOVersionHistorial> versionROrden = new ArrayList();
+        //versionROrden =null;
+        versionesResultado.sort(Comparator.comparingInt(DTOVersionHistorial :: getCodVersion).reversed());
+        //Ordeno la lista
+       /* for(int i=0; i<versionesResultado.size(); i++){
+          if(versionROrden==null){ versionROrden.add(versionesResultado.get(i));}
+            else{
+                if(versionROrden.get(i-1).getCodVersion().compare(versionROrden.get(i).getCodVersion())<0)
+                {
+                                ultVersion=listversion.get(i);
+                }
+            }  
+        }
+        Collections.sort(versionesResultado, new Comparator<Version>(){
+            @Override
+            public int compare(Version v1, Version v2) {
+                // Comparar por código en orden descendente
+                return Integer.compare(v2.getCodVersion(), v1.getCodVersion());
+            }
+        });*/
         return versionesResultado;
     }
     

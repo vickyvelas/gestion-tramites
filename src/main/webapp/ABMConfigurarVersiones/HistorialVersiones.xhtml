@@ -23,7 +23,17 @@
                         
         <!-- Tabla para mostrar la lista de Versiones-->
          <p:separator/>
-
+                <div class="ui-g ui-fluid">
+                   <div class="ui-g-12 ui-md-6">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar por código de Tipo Version:  "/>
+                        <p:spacer height="10"/>
+                        <p:inputText id="codFilter"  style="width:150px" value="#{uiabmVersionHistorialLista.codigoV}" >
+                            <p:ajax event="keyup" listener="#{uiabmVersionHistorialLista.listarHistorico()}" update="@form:grid1"/>
+                        </p:inputText>
+                    </p:outputPanel> </div>
+                </div>
+                    
             <div class="ui-g ui-fluid">
             <p:spacer height="5"/>
             <p:dataTable id="grid1" widgetVar="VersionH" value="#{uiabmVersionHistorialLista.listarHistorico()}" var="dtoVersionH" >

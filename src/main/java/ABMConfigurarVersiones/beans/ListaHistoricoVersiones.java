@@ -25,6 +25,15 @@ public class ListaHistoricoVersiones implements Serializable{
      private ControladorABMVersion controlador = new ControladorABMVersion();
      private int codigo;
      private String nombre;
+     private int codigoV;
+
+    public int getCodigoV() {
+        return codigoV;
+    }
+
+    public void setCodigoV(int codigoV) {
+        this.codigoV = codigoV;
+    }
 
     public String getNombre() {
         return nombre;
@@ -71,9 +80,10 @@ public class ListaHistoricoVersiones implements Serializable{
     }
 
     public List<DTOVersionHistorial> listarHistorico() {
+        
         List<DTOVersionHistorial> listResultado = new ArrayList();
         List<DTOVersionHistorial> listaDto = new ArrayList();
-        listaDto = controlador.historialVersiones(getCodigo());
+        listaDto = controlador.historialVersiones(codigo,codigoV);
         for (DTOVersionHistorial x : listaDto){
             DTOVersionHistorial y = new DTOVersionHistorial();
             y.setCodTipoTramite(x.getCodTipoTramite());

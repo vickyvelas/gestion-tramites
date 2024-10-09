@@ -21,8 +21,8 @@ public class ControladorABMVersion {
     public List<DTOVersionesDeTipo> filtroTablaVersiones(int codtt, String nombrett){
         return expertoABMVersion.filtroTablaVersiones(codtt, nombrett);
     }
-    public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(){
-        return expertoABMVersion.listarTablaVersionesDeTipos();
+    public List<DTOVersionesDeTipo> listarTablaVersionesDeTipos(int codtt, String nombrett){
+        return expertoABMVersion.listarTablaVersionesDeTipos(codtt, nombrett);
     }
             
     public DTOVersionOutput verVersion (int codTipoTramite, int codVersion) throws VersionException{
@@ -37,8 +37,8 @@ public class ControladorABMVersion {
         expertoABMVersion.nuevaVersion(datosingresados);
     }
     
-    public List<DTOVersionHistorial> historialVersiones(int codigoTT){
-        return expertoABMVersion.historialVersiones(codigoTT);
+    public List<DTOVersionHistorial> historialVersiones(int codigoTT, int codv){
+        return expertoABMVersion.historialVersiones(codigoTT, codv);
     }
     
     public void anularVersion(int codVersion, int codTT) throws VersionException{

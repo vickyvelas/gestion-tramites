@@ -23,38 +23,27 @@
                         
         <!-- Tabla para mostrar la lista de Versiones y Tipos Tramite-->
          <p:separator/>
-
-                   <div class="ui-g ui-fluid">
+                <div class="ui-g ui-fluid">
                    <div class="ui-g-12 ui-md-6">
                     <p:outputPanel>
-                        <h:outputText value="Código:"/>
+                        <h:outputText value="Buscar por código de Tipo Tramite:  "/>
                         <p:spacer height="10"/>
-                        <p:inputText id="codFilter"  style="width:150px"
-                                     placeholder="" value="#{uiabmVersionTTLista.codigoFiltro}" onfocus="Javascript:this.focus();this.select();">
-                                        <p:ajax event="keyup" 
-                                                listener="#{uiabmVersionTTLista.buscarTipoTramiteVersion()}" 
-                                            update="@form:grid1"
-                                            />
-                                     
-                                    </p:inputText>
-
+                        <p:inputText id="codFilter"  style="width:150px" value="#{uiabmVersionTTLista.codigoFiltro}" >
+                            <p:ajax event="keyup" listener="#{uiabmVersionTTLista.listarTipoTramiteVersion()}" update="@form:grid1"/>
+                        </p:inputText>
                     </p:outputPanel> </div>
-
+                    <!-- el otro filtro q no funciona
                    <div class="ui-g-12 ui-md-6">
                    <p:outputPanel>
-                        <h:outputText value="Descripción:"/>
+                        <h:outputText value="Buscar por nombre de Tipo Tramite:"/>
                         <p:spacer height="10"/>
-                        <p:inputText id="nomFilter"  style="width:150px"
-                                     placeholder="" value="#{uiabmVersionTTLista.nombreFiltro}">
-                                        <p:ajax event="keyup" 
-                                                listener="#{uiabmVersionTTLista.buscarTipoTramiteVersion()}" 
-                                            update="@form:grid1"
-                                        />
-                                     
+                        <p:inputText id="nomFilter"  style="width:150px" placeholder="" value="#{uiabmVersionTTLista.nombreFiltro}">
+                            <p:ajax event="keyup" listener="#{uiabmVersionTTLista.listarTipoTramiteVersion()}" update="@form:grid1"/>
                         </p:inputText>
                     </p:outputPanel> 
                    </div>
-                   </div>
+                     -->
+                </div>
             <p:spacer height="5"/>
             <p:dataTable id="grid1" widgetVar="VersionTipoTable" value="#{uiabmVersionTTLista.listarTipoTramiteVersion()}" var="dtoVersionDeTipo" >
 

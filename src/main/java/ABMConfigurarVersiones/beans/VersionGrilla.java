@@ -45,15 +45,11 @@ public class VersionGrilla implements Serializable {
         this.nombreFiltro = nombreFiltro;
     }
     
-     public void filtrar()
-    {
-
-    }
     public List<DTOVersionesDeTipo> listarTipoTramiteVersion(){
 
         List<DTOVersionesDeTipo> lisResultado = new ArrayList();
         List<DTOVersionesDeTipo> listaDto = new ArrayList();
-        listaDto = controlador.listarTablaVersionesDeTipos();
+        listaDto = controlador.listarTablaVersionesDeTipos(codigoFiltro, nombreFiltro);
         for (DTOVersionesDeTipo x: listaDto){
             DTOVersionesDeTipo y = new DTOVersionesDeTipo();
             y.setCodTipoTramite(x.getCodTipoTramite());
@@ -65,12 +61,14 @@ public class VersionGrilla implements Serializable {
         }
         return lisResultado;
     }
-    public List<DTOVersionesDeTipo> buscarTipoTramiteVersion(){
+    /*
+    public List<DTOVersionesDeTipo> filtroTipoTramite(){
         System.out.println(codigoFiltro);
         System.out.println(nombreFiltro);
         List<DTOVersionesDeTipo> lisResultado = new ArrayList();
         List<DTOVersionesDeTipo> listaDto = new ArrayList();
         listaDto = controlador.filtroTablaVersiones(codigoFiltro, nombreFiltro);
+        if(listaDto != null){
         for (DTOVersionesDeTipo x: listaDto){
             DTOVersionesDeTipo y = new DTOVersionesDeTipo();
             y.setCodTipoTramite(x.getCodTipoTramite());
@@ -80,8 +78,9 @@ public class VersionGrilla implements Serializable {
             y.setNombreTipoTramite(x.getNombreTipoTramite());
             lisResultado.add(y);
         }
+        }
         return lisResultado;
-    }
+    }*/
     public String irEditarVersion(int codigo) throws VersionException {
         BeansUtils.guardarUrlAnterior();
         //DTOVersionyEstados dtoeditar = controlador.buscarVersionEditar(codigo);
@@ -99,5 +98,6 @@ public class VersionGrilla implements Serializable {
         return "/ABMConfigurarVersiones/verVersion.xhtml?faces-redirect=true&editable=false&codigoTipoTramite="+codigo+"&codVersion="+codigov;
         //return ("no sale");
     }
+   
 }
    
