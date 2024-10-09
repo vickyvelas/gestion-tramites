@@ -1,11 +1,11 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:adm="http://github.com/adminfaces"
                 template="#{layoutMB.template}">
     <ui:define name="metadata">
-        <ui:param name="title" value="Trabajar con Listas de Precio"/>  Automatic create breadCrumb and page title when param 'title' is provided.  
+        <ui:param name="title" value="Trabajar con Listas de Precio"/>
 
         <style type="text/css">
             .ui-datatable .ui-datatable-header {
@@ -20,39 +20,7 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Upload"/>
-        <script>
-            PrimeFaces.locales['es'] = {
-                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
-                weekHeader: 'Semana',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                timeOnlyTitle: 'Sólo hora',
-                timeText: 'Tiempo',
-                hourText: 'Hora',
-                minuteText: 'Minuto',
-                secondText: 'Segundo',
-                millisecondText: 'Milisegundo',
-                ampm: false,
-                month: 'Mes',
-                week: 'Semana',
-                day: 'Día',
-                allDayText: 'Todo el día',
-                today: 'Hoy',
-                now: 'Ahora',
-                clear: 'Limpiar',
-                aria: {
-                    close: 'Cerrar',
-                    previous: 'Anterior',
-                    next: 'Siguiente',
-                }
-            };
-        </script>
+       
         <h:form>
             <p:focus context="@form"/>
             <div class="box box-primary">
@@ -62,71 +30,64 @@
                         <p:commandButton value="Importar"  action="#{uiActualizarLP.irAImportar()}" icon="fa fa-plus"   styleClass="btn-primary"/>
                     </div>                    
                 </div>
-                Tabla para mostrar la lista de precio 
+<!--                Tabla para mostrar la lista de precio -->
                 <p:separator/>
 
                 <div class="ui-g ui-fluid">
-
                     <div class="ui-g-12 ui-md-6">
                         <p:outputPanel>
-                            <p:spacer height="10"/>                            
-                            <div class="field col-12 md:col-4">
-                                <p:outputLabel for="time" value="Fecha" />
-                                <p:datePicker id="time" value="#{uiActualizarLP.fechaDesde}" showTime="true" />
-                            </div>
-                        </p:outputPanel> 
+                            <h:outputText value=""/>
+                            <p:datePicker id="fechaFilter" 
+                                          value="#{uiActualizarLP.fechaDesde}" 
+                                          pattern="dd/MM/yyyy"
+                                          placeholder="Selecciona una fecha" 
+                                          onfocus="Javascript:this.focus();this.select();" showTime="true">
+                                <p:ajax event="dateSelect"
+                                        listener="#{uiActualizarLP.filtrar()}" 
+                                        update="@form:grid1" />
+                            </p:datePicker>
+                        </p:outputPanel>
                     </div>
                 </div>
-                <p:spacer height="5"/>
                 <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio" >
 
                     <p:column>
                         <f:facet name="header">Código</f:facet>
-#{listaPrecio.codListaPrecio}
-</p:column>
+                            #{listaPrecio.codListaPrecio}
+                    </p:column>
 
-<p:column>
-<f:facet name="header">Fecha Desde</f:facet>
-#{listaPrecio.fechaHoraDesdeListaPrecio}
-</p:column>
+                    <p:column>
+                        <f:facet name="header">Fecha Desde</f:facet>
+                            #{listaPrecio.fechaHoraDesdeListaPrecio}
+                    </p:column>
 
-<p:column>
-<f:facet name="header">Fecha Hasta</f:facet>
-#{listaPrecio.fechaHoraHastaListaPrecio}
-</p:column>
-
-
-<p:column>
-<f:facet name="header">Acciones</f:facet>
-<p:commandButton value="Modificar" styleClass="btn-info" >
-<f:ajax render="@form"/>
-</p:commandButton>
-
-<p:spacer width="5"/>
-<p:commandButton value="Exportar" styleClass="btn-info" >
-<f:ajax render="@form"/>
-</p:commandButton>
-
-<div>
-
-<p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
-                 icon="pi pi-arrow-down"  styleClass="btn-success">
-    <p:fileDownload value="#{uiExcelFile.fileD}"/> 
-</p:commandButton>
-</div>
+                    <p:column>
+                        <f:facet name="header">Fecha Hasta</f:facet>
+                            #{listaPrecio.fechaHoraHastaListaPrecio}
+                    </p:column>
 
 
-</p:column> 
+                    <p:column>
+                        <f:facet name="header">Acciones</f:facet>
+                        <div>
+                            <p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+                                             icon="pi pi-arrow-down"  styleClass="btn-success">
+                                <p:fileDownload value="#{uiExcelFile.fileD}"/> 
+                            </p:commandButton>
+                        </div>
 
-</p:dataTable>
-</div>
 
-</h:form>
+                    </p:column> 
 
-</ui:define>
-</ui:composition>-->
+                </p:dataTable>
+            </div>
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+<!--<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 template="#{layoutMB.template}">
@@ -147,14 +108,13 @@
                         <p:commandButton value="Importar"  icon="fa fa-plus" action="#{uiActualizarLP.irAImportar()}" styleClass="btn-primary"/>
                     </div>
                 </div>
-                <!--Tabla para mostrar la lista de precios -->
+                Tabla para mostrar la lista de precios 
                 <p:separator/>
 
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12 ui-md-6">
                         <p:outputPanel>
-                            <h:outputText value="Filtrar por Fecha:"/>
-                            <p:spacer height="10"/>
+                            <h:outputText value=""/>
                             <p:datePicker id="fechaFilter" 
                                         value="#{uiActualizarLP.fechaDesde}" 
                                         pattern="dd/MM/yyyy"
@@ -166,45 +126,41 @@
                             </p:datePicker>
                         </p:outputPanel>
                     </div> 
-
-                    <p:spacer height="5"/>
                     <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio" lazy="true">
 
-
-                        <!--Columna: nroConfiguración -->
+                        Columna: nroConfiguración 
                         <p:column>
                             <f:facet name="header">Código</f:facet>
-                                #{listaPrecio.codListaPrecio}
-                        </p:column>
+#{listaPrecio.codListaPrecio}
+</p:column>
 
-                        <!--Columna: Fecha Desde -->
-                        <p:column>
-                            <f:facet name="header">Fecha Desde</f:facet>
-                                #{listaprecio.fechaHoraDesdeListaPrecio}
-                        </p:column>
+Columna: Fecha Desde 
+<p:column>
+<f:facet name="header">Fecha Desde</f:facet>
+#{listaprecio.fechaHoraDesdeListaPrecio}
+</p:column>
 
-                        <!--Columna: Fecha Hasta -->
-                        <p:column>
-                            <f:facet name="header">Fecha Hasta</f:facet>
-                                #{listaprecio.fechaHoraHastaListaPrecio}
-                        </p:column>
+Columna: Fecha Hasta 
+<p:column>
+<f:facet name="header">Fecha Hasta</f:facet>
+#{listaprecio.fechaHoraHastaListaPrecio}
+</p:column>
 
-                        <!--Columna: Acciones -->
-                        <p:column>
-                            <f:facet name="header">Acciones</f:facet>
-                            <!--Botón para exportar a Excel -->
-                            <p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
-                                             icon="pi pi-arrow-down"  styleClass="btn-success">
-                                <p:fileDownload value="#{uiExcelFile.fileD}"/> 
-                            </p:commandButton>
-                            <p:spacer width="5"/>
-                        </p:column>
+Columna: Acciones 
+<p:column>
+<f:facet name="header">Acciones</f:facet>
+Botón para exportar a Excel 
+<p:commandButton value="Exportar" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);"
+             icon="pi pi-arrow-down"  styleClass="btn-success">
+<p:fileDownload value="#{uiExcelFile.fileD}"/> 
+</p:commandButton>
+</p:column>
 
-                    </p:dataTable>
-                </div> 
+</p:dataTable>
+</div> 
 
-            </div> 
-        </h:form>
+</div> 
+</h:form>
 
-    </ui:define>
-</ui:composition>
+</ui:define>
+</ui:composition>-->
