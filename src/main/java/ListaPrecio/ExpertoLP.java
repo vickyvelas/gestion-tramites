@@ -57,97 +57,117 @@ public class ExpertoLP {
     public void importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO ) {
        
         
-        
+          
         List<DTOCriterio> lCriterio=new ArrayList<>();
         
         List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
-        List<ListaPrecio> listaPreciosConMayorFechaDesde = new ArrayList<>();
-            Timestamp fechaDesdeMayor = null;
-
-           
-        ListaPrecio listaPrecioAnterior = objetoList.stream()
-                
-                .map(x -> (ListaPrecio) x)
-                .max(Comparator.comparing(ListaPrecio::getFechaHoraDesdeListaPrecio))
-                .orElse(null);
-        
-        
-        // Modificar instancia de ListaPrecio con fechaHoraHastaListaPrecio igual a fechaHoraDesdeListaPrecio del dto
-        listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
-
-        // Guardar cambios
-        FachadaPersistencia.getInstance().iniciarTransaccion();
-        FachadaPersistencia.getInstance().guardar(listaPrecioAnterior);
-        FachadaPersistencia.getInstance().finalizarTransaccion();
-        
-        //CREAR NUEVA LISTA PRECIO
-        
-        ListaPrecio nuevaListaPrecio = new ListaPrecio();
-            nuevaListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecioAnterior.getFechaHoraHastaListaPrecio());
-            nuevaListaPrecio.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraHastaListaPrecio()); 
-            
-            
-        //BUSCAR TIPOS TRAMITES
-      
-            DTOCriterio unCriterio = new DTOCriterio();
-            unCriterio.setAtributo("fechaHoraBajaTipoTramite");
-            unCriterio.setOperacion("!=");
-            unCriterio.setValor(null);
-            lCriterio.add(unCriterio);
-        List<Object> objetoListTT = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
-        
-        for(Object tt: objetoListTT){
-            TipoTramite tipoTramite = (TipoTramite)  tt;
-            
-            DetallePrecioTipoTramite  nuevodetallePrecioTipoTramite = new DetallePrecioTipoTramite ();
-                nuevodetallePrecioTipoTramite.setTipoTramite(tipoTramite);
-                nuevodetallePrecioTipoTramite.setPrecioTipoTramite(0);
-                
-                //obtengo detalles
-               List<DTODetalleListaPrecioImportar> listaDetalles=  listaPrecioImportarDTO.getDetalleListaPrecioImportar();
-                boolean isEncontrado = false;
-                for(DTODetalleListaPrecioImportar detImpdto : listaDetalles){
-                    
-                    int codTT = tipoTramite.getCodTipoTramite();
-                    int codTTdto= detImpdto.getCodTipotramite();
-                    
-                    //ver que los codigos sean iguales
-                    if(codTT == codTTdto){
-                        
-                        nuevodetallePrecioTipoTramite.setPrecioTipoTramite(detImpdto.getPrecioTipoTramite());
-                        isEncontrado=true;
-                    }
-                    
-                    
-                    if(isEncontrado=false){
-                        //lista de detalles anterior
-                        List<DetallePrecioTipoTramite> listaDetallesAnt =listaPrecioAnterior.getDetallePrecioTipoTramiteList();
-                        
-                            for(DetallePrecioTipoTramite detImp : listaDetallesAnt){
-                                TipoTramite ttAnterior = detImp.getTipoTramite();
-                               int codTTA = tipoTramite.getCodTipoTramite();
-                               if (codTTA==codTTdto){
-                                   
-                                   nuevodetallePrecioTipoTramite.setPrecioTipoTramite(detImp.getPrecioTipoTramite());
-                                   
-                               }
-                               //añadir el nuevo detalle a la lista de precios nueva
-                               nuevaListaPrecio.addDetallePrecioTipoTramiteList(nuevodetallePrecioTipoTramite);
-                               
-                               //guardo el detalle? o queda automatico con la lista?
-                               //FachadaPersistencia.getInstance().guardar(nuevodetallePrecioTipoTramite);
-                                
-                            }
-                    }
-                }
-                 FachadaPersistencia.getInstance().iniciarTransaccion();
-                 FachadaPersistencia.getInstance().guardar(nuevaListaPrecio);
-                 FachadaPersistencia.getInstance().finalizarTransaccion();
-                
-        }
-        
-      
-    }
+//        ListaPrecio listaPrecioAnterior = new ListaPrecio();
+//        for(Object l : objetoList){
+//        for(int i=0;objetoList.size();i++)
+//            ListaPrecio lp = (ListaPrecio) l;
+//            if(lp.getFechaHoraDesdeListaPrecio().compareTo(objetoList).get(0).getFechaHoraDesdeListaPrecio()<0){
+//                
+//            }
+//            
+//        }
+//   [4,8,3]
+//        isPrimero=True
+//        valor=0
+//        bucle
+//                   if primero
+//                           valor=valorActual
+//                            isPrimero=False
+//                   
+//                    else
+//                            if valor<valorActual
+//                                    valor=ValorActual
+//         fin bucle
+//       
+//
+//           
+//        ListaPrecio listaPrecioAnterior = objetoList.stream()
+//                
+//                .map(x -> (ListaPrecio) x)
+//                .max(Comparator.comparing(ListaPrecio::getFechaHoraDesdeListaPrecio))
+//                .orElse(null);
+//        
+//        
+//        // Modificar instancia de ListaPrecio con fechaHoraHastaListaPrecio igual a fechaHoraDesdeListaPrecio del dto
+//        listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
+//
+//        // Guardar cambios
+//        FachadaPersistencia.getInstance().iniciarTransaccion();
+//        FachadaPersistencia.getInstance().guardar(listaPrecioAnterior);
+//        FachadaPersistencia.getInstance().finalizarTransaccion();
+//        
+//        //CREAR NUEVA LISTA PRECIO
+//        
+//        ListaPrecio nuevaListaPrecio = new ListaPrecio();
+//            nuevaListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecioAnterior.getFechaHoraHastaListaPrecio());
+//            nuevaListaPrecio.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraHastaListaPrecio()); 
+//            
+//            
+//        //BUSCAR TIPOS TRAMITES
+//      
+//            DTOCriterio unCriterio = new DTOCriterio();
+//            unCriterio.setAtributo("fechaHoraBajaTipoTramite");
+//            unCriterio.setOperacion("!=");
+//            unCriterio.setValor(null);
+//            lCriterio.add(unCriterio);
+//        List<Object> objetoListTT = FachadaPersistencia.getInstance().buscar("TipoTramite", lCriterio);
+//        
+//        for(Object tt: objetoListTT){
+//            TipoTramite tipoTramite = (TipoTramite)  tt;
+//            
+//            DetallePrecioTipoTramite  nuevodetallePrecioTipoTramite = new DetallePrecioTipoTramite ();
+//                nuevodetallePrecioTipoTramite.setTipoTramite(tipoTramite);
+//                nuevodetallePrecioTipoTramite.setPrecioTipoTramite(0);
+//                
+//                //obtengo detalles
+//               List<DTODetalleListaPrecioImportar> listaDetalles=  listaPrecioImportarDTO.getDetalleListaPrecioImportar();
+//                boolean isEncontrado = false;
+//                for(DTODetalleListaPrecioImportar detImpdto : listaDetalles){
+//                    
+//                    int codTT = tipoTramite.getCodTipoTramite();
+//                    int codTTdto= detImpdto.getCodTipotramite();
+//                    
+//                    //ver que los codigos sean iguales
+//                    if(codTT == codTTdto){
+//                        
+//                        nuevodetallePrecioTipoTramite.setPrecioTipoTramite(detImpdto.getPrecioTipoTramite());
+//                        isEncontrado=true;
+//                    }
+//                    
+//                    
+//                    if(isEncontrado=false){
+//                        //lista de detalles anterior
+//                        List<DetallePrecioTipoTramite> listaDetallesAnt =listaPrecioAnterior.getDetallePrecioTipoTramiteList();
+//                        
+//                            for(DetallePrecioTipoTramite detImp : listaDetallesAnt){
+//                                TipoTramite ttAnterior = detImp.getTipoTramite();
+//                               int codTTA = tipoTramite.getCodTipoTramite();
+//                               if (codTTA==codTTdto){
+//                                   
+//                                   nuevodetallePrecioTipoTramite.setPrecioTipoTramite(detImp.getPrecioTipoTramite());
+//                                   
+//                               }
+//                               //añadir el nuevo detalle a la lista de precios nueva
+//                               nuevaListaPrecio.addDetallePrecioTipoTramiteList(nuevodetallePrecioTipoTramite);
+//                               
+//                               //guardo el detalle? o queda automatico con la lista?
+//                               //FachadaPersistencia.getInstance().guardar(nuevodetallePrecioTipoTramite);
+//                                
+//                            }
+//                    }
+//                }
+//                 FachadaPersistencia.getInstance().iniciarTransaccion();
+//                 FachadaPersistencia.getInstance().guardar(nuevaListaPrecio);
+//                 FachadaPersistencia.getInstance().finalizarTransaccion();
+//                
+//        }
+//        
+//      
+  }
 
     public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
         

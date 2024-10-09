@@ -34,6 +34,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.omnifaces.util.Messages;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -143,7 +144,7 @@ public class ExcelFileUI implements Serializable{
 
                 Workbook wb = WorkbookFactory.create(inp);
                 Sheet sheet = wb.getSheetAt(0);//obtiene la primer hoja
-                int iRow=1; //antes era 0 
+                int iRow=6; //antes era 0 
                 Row row = sheet.getRow(iRow); //En qué fila empezar ya dependerá también de si tenemos, por ejemplo, el título de cada columna en la primera fila
               while(row!=null) 
               {
@@ -158,14 +159,22 @@ public class ExcelFileUI implements Serializable{
                  
                  
             Cell cellCodTramite = row.getCell(0);
-            Cell cellPrecio = row.getCell(1);
+            Cell cellPrecio = row.getCell(3);
 
             if (cellCodTramite != null && cellCodTramite.getCellType() == CellType.NUMERIC) {
-                detalle.setCodTipoTramite((int) cellCodTramite.getNumericCellValue());
-                System.out.println(detalle.getCodTipotramite());
+                if(cellCodTramite.getNumericCellValue()>0)
+                {
+                    detalle.setCodTipoTramite((int) cellCodTramite.getNumericCellValue());
+                    System.out.println(detalle.getCodTipotramite());
+                }
+                else
+                {
+                    break;
+                }
+                
             }
 
-            if (cellPrecio != null && cellPrecio.getCellType() == CellType.NUMERIC) {
+            if (cellPrecio != null && (cellPrecio.getCellType() == CellType.NUMERIC || cellPrecio.getCellType() == CellType.FORMULA)) {
                 detalle.setPrecioTipoTramite(cellPrecio.getNumericCellValue());
                 System.out.println(detalle.getPrecioTipoTramite());
             }
@@ -175,8 +184,6 @@ public class ExcelFileUI implements Serializable{
 //                    Messages.create(iRow +"String").detail(value).add();
 //                    System.out.println(iRow + "Valor de la celda es " + value);
 //                  }
-//                  //PARA PRECIO
-//                  if (cellPrecio!=null && cellPrecio.getCellType()==CellType.NUMERIC ){
 //                    //double value = cell.getNumericCellValue();
 //                    //cast para q acepte float
 //                    double value = cellPrecio.getNumericCellValue();

@@ -4,10 +4,13 @@
  */
 package ListaPrecio.beans;
 
+import ListaPrecio.ControladorLP;
+import ListaPrecio.dtos.DTOListaPrecioImportar;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import utils.BeansUtils;
 
 @Named("uiImportatLP")
 @ViewScoped
@@ -19,6 +22,8 @@ public class UIImportarLP implements Serializable{
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
+    
+    private ControladorLP  controladorLP = new ControladorLP();
 
     public UIImportarLP() {
         
@@ -48,6 +53,18 @@ public class UIImportarLP implements Serializable{
 
     public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
+    }
+    
+    public String importar(){
+        DTOListaPrecioImportar listaPrecioImportar = new DTOListaPrecioImportar();
+            listaPrecioImportar.setCodListaPrecio(getCodListaPrecio());
+            listaPrecioImportar.setFechaHoraDesdeListaPrecio(getFechaHoraDesdeListaPrecio());
+            listaPrecioImportar.setFechaHoraHastaListaPrecio(getFechaHoraHastaListaPrecio());
+//            ExcelFileUI excel = new ExcelFileUI();
+//            listaPrecioImportar.setDetalleListaPrecioImportar(excel.handleFileUpload(event).));
+            
+            controladorLP.importarListaPrecio(listaPrecioImportar);
+            return BeansUtils.redirectToPreviousPage();
     }
     
 }

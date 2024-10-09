@@ -117,7 +117,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    
                 </configuration>
             </plugin>
             <plugin>
@@ -128,7 +127,6 @@
                     <argLine>
                         --add-opens=java.base/java.lang=ALL-UNNAMED
                         --add-opens=java.base/java.util=ALL-UNNAMED
-                         
                     </argLine>
                 </configuration>
             </plugin>
