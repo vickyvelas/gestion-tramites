@@ -20,7 +20,7 @@
 
     <ui:define name="body">
         <adm:breadcrumb title="Upload"/>
-       
+
         <h:form>
             <p:focus context="@form"/>
             <div class="box box-primary">
@@ -30,7 +30,7 @@
                         <p:commandButton value="Importar"  action="#{uiActualizarLP.irAImportar()}" icon="fa fa-plus"   styleClass="btn-primary"/>
                     </div>                    
                 </div>
-<!--                Tabla para mostrar la lista de precio -->
+                <!--                Tabla para mostrar la lista de precio -->
                 <p:separator/>
 
                 <div class="ui-g ui-fluid">
@@ -49,8 +49,7 @@
                         </p:outputPanel>
                     </div>
                 </div>
-                <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio" >
-
+                <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio">
                     <p:column>
                         <f:facet name="header">Código</f:facet>
                             #{listaPrecio.codListaPrecio}
@@ -58,12 +57,16 @@
 
                     <p:column>
                         <f:facet name="header">Fecha Desde</f:facet>
-                            #{listaPrecio.fechaHoraDesdeListaPrecio}
+                        <h:outputText value="#{listaPrecio.fechaHoraDesdeListaPrecio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">Fecha Hasta</f:facet>
-                            #{listaPrecio.fechaHoraHastaListaPrecio}
+                        <h:outputText value="#{listaPrecio.fechaHoraHastaListaPrecio}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                        </h:outputText>
                     </p:column>
 
 

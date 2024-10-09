@@ -11,6 +11,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import utils.BeansUtils;
 
@@ -23,23 +24,26 @@ import utils.BeansUtils;
 
 public class UIActualizarLP implements Serializable {
 
-    private Timestamp fechaDesde;
+    private Date fechaDesde;
     private ControladorLP controladorLP = new ControladorLP();
 
     public UIActualizarLP() {
     }
 
-    public Timestamp getFechaDesde() {
+    public Date getFechaDesde() {
         return fechaDesde;
     }
 
-    public void setFechaDesde(Timestamp fechaDesde) {
+    public void setFechaDesde(Date fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
 
     public List<UIActualizarLPGrilla> obtenerListaPrecio() {
+        // Convertir Date a Timestamp antes de usarlo
+        Timestamp fechaDesdeTS = (fechaDesde != null) ? new Timestamp(fechaDesde.getTime()) : null;
+        
         List<UIActualizarLPGrilla> listaPreciogrilla = new ArrayList<>();
-        List<DTOListaPrecioExportar> dtoListasPreciosExportar = controladorLP.obtenerListaPrecio(fechaDesde);
+        List<DTOListaPrecioExportar> dtoListasPreciosExportar = controladorLP.obtenerListaPrecio(fechaDesdeTS);
         for (DTOListaPrecioExportar dtoListaPrecioExportar : dtoListasPreciosExportar) {
             UIActualizarLPGrilla uiActualizarLPGrilla = new UIActualizarLPGrilla();
             uiActualizarLPGrilla.setCodListaPrecio(dtoListaPrecioExportar.getCodListaPrecio());
@@ -52,12 +56,29 @@ public class UIActualizarLP implements Serializable {
     }
 
     public void filtrar() {
+        // Convertir Date a Timestamp antes de usarlo
+        Timestamp fechaDesdeTS = (fechaDesde != null) ? new Timestamp(fechaDesde.getTime()) : null;
+
+        // Obtener la lista de precios filtrada por la fecha seleccionada
+        List<DTOListaPrecioExportar> dtoListasPreciosExportar = controladorLP.obtenerListaPrecio(fechaDesdeTS);
+
+        // Crear una nueva lista para la grilla de UI
+        listaPreciogrillaFiltrada = new ArrayList<>();
+        for (DTOListaPrecioExportar dtoListaPrecioExportar : dtoListasPreciosExportar) {
+            UIActualizarLPGrilla uiActualizarLPGrilla = new UIActualizarLPGrilla();
+            uiActualizarLPGrilla.setCodListaPrecio(dtoListaPrecioExportar.getCodListaPrecio());
+            uiActualizarLPGrilla.setFechaHoraDesdeListaPrecio(dtoListaPrecioExportar.getFechaHoraDesdeListaPrecio());
+            uiActualizarLPGrilla.setFechaHoraHastaListaPrecio(dtoListaPrecioExportar.getFechaHoraHastaListaPrecio());
+            listaPreciogrillaFiltrada.add(uiActualizarLPGrilla);
+        }
     }
 
-    public java.util.Date convertir(java.sql.Timestamp fecha) {
-        return new java.util.Date(fecha.getTime());
-    }
+    private List<UIActualizarLPGrilla> listaPreciogrillaFiltrada;
 
+    public List<UIActualizarLPGrilla> getListaPreciogrillaFiltrada() {
+        return listaPreciogrillaFiltrada;
+    }
+    
     public String irAImportar() {
         BeansUtils.guardarUrlAnterior();
         return "importarLP.xhtml?faces-redirect=true"; // Usa '?faces-redirect=true' para hacer una redirección
