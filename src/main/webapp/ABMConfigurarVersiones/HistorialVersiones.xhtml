@@ -61,10 +61,10 @@
             <p:column>
                 <f:facet name="header">Acciones a version</f:facet>
                 <p:spacer width="5"/>
-                <p:commandButton value="Ver" styleClass="btn-danger"  action="#{uiabmVersionHistorialLista.irVerVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}">
+                <p:commandButton value="Ver" styleClass="btn-info"  action="#{uiabmVersionHistorialLista.irVerVersion(dtoVersionH.codTipoTramite, dtoVersionH.codVersion)}">
                 </p:commandButton>
                 <p:spacer width="5"/>
-                <p:commandButton value="Anular" styleClass="btn-info" actionListener="#{uiabmVersionHistorialLista.irAnularVersion(dtoVersionH.codVersion, dtoVersionH.codTipoTramite)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">
+                <p:commandButton value="Anular" styleClass="btn-danger" actionListener="#{uiabmVersionHistorialLista.irAnularVersion(dtoVersionH.codVersion, dtoVersionH.codTipoTramite)}" disabled="#{dtoVersionH.fechaBajaVersion != null}">
                     <p:confirm header="Anulación de #{dtoVersionH.codVersion} del TipoTramite #{dtoVersionH.nombreTipoTramite}" message="¿Está seguro?" icon="ui-icon-alert"/>
                 </p:commandButton>
                 

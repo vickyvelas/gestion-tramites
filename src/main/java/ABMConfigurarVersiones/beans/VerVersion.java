@@ -190,8 +190,8 @@ public class VerVersion implements Serializable{
     }
      
      public String irFinalizar() {
-         return "/ABMConfigurarVersiones/VersionGrilla.xhtml?faces-redirect=true";
-     }
+         return "/ABMConfigurarVersiones/VersionGrillaUI.xhtml?faces-redirect=true";
+              }
 }
      
      
