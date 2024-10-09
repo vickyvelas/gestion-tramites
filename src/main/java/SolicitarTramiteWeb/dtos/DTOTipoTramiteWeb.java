@@ -7,7 +7,9 @@ public class DTOTipoTramiteWeb {
     private int codTipoTramite;
     private String descripcionTipoTramiteWeb;
     private String nombreTipoTramite;
+    
 
+   
     public int getCodTipoTramite() {
         return codTipoTramite;
     }

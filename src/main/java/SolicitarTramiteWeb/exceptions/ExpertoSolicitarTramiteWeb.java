@@ -63,6 +63,7 @@ public class ExpertoSolicitarTramiteWeb {
         List<DTOCriterio> criterio = new ArrayList<>();
         
         DTOCriterio dto = new DTOCriterio();
+        
         dto.setAtributo("fechaHoraBajaCategoriaTramite");
         dto.setOperacion("=");
         dto.setValor(null);
@@ -70,8 +71,8 @@ public class ExpertoSolicitarTramiteWeb {
             
             
         
-        
         List objetoList = FachadaPersistencia.getInstance().buscar("CategoriaTramite", criterio);
+        
         List<DTOCategoriaTramite> categoria = new ArrayList<>();
         for (Object x : objetoList) {
             CategoriaTramite categ = (CategoriaTramite) x;
@@ -84,7 +85,126 @@ public class ExpertoSolicitarTramiteWeb {
         return categoria;
     }
         
-        public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
+        /*
+        public List<DTOCategoriaTramite> elegirCategoriaTramite(String nombreCategoriaTramite) {
+           
+            CategoriaTramite categ;
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+
+        dto.setAtributo("nombreCategoriaTramite");
+        dto.setOperacion("=");
+        dto.setValor(nombreCategoriaTramite);
+
+        criterioList.add(dto);
+
+        try {
+
+            categ = (CategoriaTramite) FachadaPersistencia.getInstance().buscar("CategoriaTramite", criterioList).get(0);
+            DTOCategoriaTramite DTOcategoriatramite = new DTOCategoriaTramite();
+            DTOcategoriatramite.setNombreCategoriaTramite(categ.getNombreCategoriaTramite());
+           } catch (Exception e) {
+            System.out.println("No se pudo recuperar la categoria --- " + e.toString());
+        }
+        
+        List<DTOCriterio> acriterio = new ArrayList<>();
+        
+        DTOCriterio dto4 = new DTOCriterio();
+        
+
+        dto4.setAtributo("CategoriaTramite");
+        dto4.setOperacion("=");
+        dto4.setValor(null);
+        criterioList.add(dto);
+        
+        DTOCriterio dto2  = new DTOCriterio();
+
+        dto2.setAtributo("fechaHoraBajaCliente");
+        dto2.setOperacion("=");
+        dto2.setValor(null);
+        criterioList.add(dto2);
+        
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", acriterio);
+        
+        List<DTOCategoriaTramite> categoria = new ArrayList<>();
+        for (Object x : objetoList) {
+            CategoriaTramite categ1 = (CategoriaTramite) x;
+            DTOCategoriaTramite DTOcategoriatramite = new DTOCategoriaTramite();
+            DTOcategoriatramite.setCodCategoriaTramite(categ1.getCodCategoriaTramite());
+            DTOcategoriatramite.setNombreCategoriaTramite(categ1.getNombreCategoriaTramite());
+            categoria.add(DTOcategoriatramite);
+            
+            }
+        return categoria;
+    }
+     */
+        /*
+            List<DTOCriterio> ocriterio = new ArrayList<>();
+            
+            DTOCriterio dto3 = new DTOCriterio();
+            // Primero busco nombre Categ
+            dto3.setAtributo("nombreCategoriaTramite");
+            dto3.setOperacion("=");
+            dto3.setValor(nombreCategoriaTramite);
+            ocriterio.add(dto3);
+            
+            CategoriaTramite nmbcateg = (CategoriaTramite) FachadaPersistencia.getInstance().buscar("CategoriaTramite", ocriterio).get(0);
+            
+            ocriterio.clear();
+
+            dto3.setAtributo("estado");
+            dto3.setOperacion("=");
+            dto3.setValor(nmbcateg);
+
+            criterioList.add(dto);
+       //List objetoList = FachadaPersistencia.getInstance().buscar("CategoriaTramite", ocriterio);
+   //List lCliente=FachadaPersistencia.getInstance().buscar("Cliente", criterioList);
+        System.out.println("Tamaño:"+objetoList.size());  
+        if(objetoList.size()> 0)
+        {
+            
+            TipoTramite t=(TipoTramite) objetoList.get(0);
+            dtoc.setCodTipoTramite(codTipoTramite);
+            dtoc.setNombreTipoTramite(nombreTipoTramite);
+            dtoc.setDescripcion(c.getDireccionCliente());
+            
+        }
+       
+            
+            List<DTOCriterio> lcriterio = new ArrayList<>();
+            DTOCriterio dtotip = new DTOCriterio();
+            
+            dtotip.setAtributo("nombreCategoriaTramite");
+            dtotip.setOperacion("=");
+            dtotip.setValor("Renovacion");
+            ocriterio.add(dto3);
+            
+            
+  
+        }
+   /*
+        List<DTOCategoriaTramite> categoria = new ArrayList<>();
+        for (Object x : objetoList) {
+            CategoriaTramite categ = (CategoriaTramite) x;
+            DTOCategoriaTramite DTOcategoriatramite = new DTOCategoriaTramite();
+            DTOcategoriatramite.setNombreCategoriaTramite(categ.getNombreCategoriaTramite());
+            categoria.add(DTOcategoriatramite);
+            
+            
+            TipoTramite tipotra = (TipoTramite) x;
+            DTOTipoTramiteWeb dtw=new DTOTipoTramiteWeb();
+            dtw.setCodTipoTramite(0);
+            dtw.setDescripcionTipoTramiteWeb(tipotra.getDescripcionTipoTramiteWeb());
+            dtw.setNombreTipoTramite(tipotra.getNombreTipoTramite());
+        }
+            return categoria;
+            
+          
+          
+        }
+        */
+      /*
+     // public DTOTipoTramiteWeb elegirCategoriaTramite(String nombreCategoriaTramite) {
             DTOTipoTramiteWeb dtotp=new DTOTipoTramiteWeb();
             
             List<DTOCriterio> rcriterio = new ArrayList<>();
@@ -95,10 +215,11 @@ public class ExpertoSolicitarTramiteWeb {
         dto.setValor("Renovacion");
         rcriterio.add(dto);
         
-       
-           // TipoTramite t=(TipoTramite) nomb;
-            dtotp.setNombreTipoTramite(nombreTipoTramite);
-        
+       if(rcriterio.size()> 0)
+               {
+          // TipoTramite t=(TipoTramite)rcriterio.get(0);
+            dtotp.setNombreTipoTramite(t.getNombreTipoTramite());
+        }
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTramite", rcriterio);
         List<DTOCategoriaTramite> categoria = new ArrayList<>();
         for (Object x : objetoList) {
@@ -112,41 +233,11 @@ public class ExpertoSolicitarTramiteWeb {
         return dtotp;
         }
         
-        
-     
+        */
     
-
-    /*
-
+}
    
     
-    // Método para elegir un tipo de trámite por nombre
-    public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
-        // Lógica para elegir el tipo de trámite
-        DTOTipoTramiteWeb tipoTramite = new DTOTipoTramiteWeb();
-        // Ejemplo: setear valores o consultar el tipo de trámite
-        tipoTramite.setNombreTipoTramite(nombreTipoTramite);
-        return tipoTramite;
-    }
-    
-    
-    /*
-    // Método para solicitar un trámite
-    public DTOTramiteWeb solicitarTramite() {
-        // Lógica para solicitar el trámite
-        DTOTramiteWeb tramite = new DTOTramiteWeb();
-        // Ejemplo: creación del trámite
-        tramite.setEstadoTramite();
-        return tramite;
-    }
-
-
-    DTOCliente ingresarDatos(int cuitCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-     */
-}
-
 
 
 

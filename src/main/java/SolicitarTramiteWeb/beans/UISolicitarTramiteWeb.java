@@ -2,6 +2,7 @@ package SolicitarTramiteWeb.beans;
 
 import SolicitarTramiteWeb.dtos.DTOCategoriaTramite;
 import SolicitarTramiteWeb.dtos.DTOCliente;
+import SolicitarTramiteWeb.dtos.DTOTipoTramiteWeb;
 import SolicitarTramiteWeb.exceptions.ControladorSolicitarTramiteWeb;
 import com.google.gson.Gson;
 import entidades.EstadoTramite;
@@ -12,7 +13,10 @@ import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import org.omnifaces.util.Messages;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.FlowEvent;
 
 @Named("uiSolicitarTramiteWeb")
@@ -32,6 +36,14 @@ public class UISolicitarTramiteWeb implements Serializable {
 
     public int getCodCategoriaTramite() {
         return codCategoriaTramite;
+    }
+
+    public Timestamp getFechaHoraBajaCliente() {
+        return fechaHoraBajaCliente;
+    }
+
+    public void setFechaHoraBajaCliente(Timestamp fechaHoraBajaCliente) {
+        this.fechaHoraBajaCliente = fechaHoraBajaCliente;
     }
 
     public void setCodCategoriaTramite(int codCategoriaTramite) {
@@ -80,10 +92,51 @@ public class UISolicitarTramiteWeb implements Serializable {
     public void setNombreApellidoCliente(String nombreApellidoCliente) {
         this.nombreApellidoCliente = nombreApellidoCliente;
     }
-   
+    
+    
+    public List<UIDatosCategoria> obtenerCategorias()
+    {
+         List<UIDatosCategoria> lc=new ArrayList<>();
+         UIDatosCategoria dc;
+         List<DTOCategoriaTramite> a=controladorSolicitarTramiteWeb.obtenerCategoriaTramite();
+         for (DTOCategoriaTramite unC: a)
+         {
+         dc=new UIDatosCategoria();
+         //dc.setNombre(Integer.toString(unC.getCodCategoriaTramite()));
+         dc.setCodigo((unC.getCodCategoriaTramite()));
+         dc.setNombre(unC.getNombreCategoriaTramite());
+         lc.add(dc);
+         }
+         return lc;
+                
+    }
  
+    /*
+    public List<UITipoTramite> elegirCategorias()
+    {
+         List<UITipoTramite> lc=new ArrayList<>();
+         UITipoTramite dc;
+         List<DTOCategoriaTramite> a=controladorSolicitarTramiteWeb.elegirCategoriaTramite(nombreCategoriaTramite);
+         for (DTOCategoriaTramite unT: a)
+         {
+         dc=new UITipoTramite();
+         dc.setCodigo((unT.getCodTipoTramite()));
+         dc.setNombre(unT.getNombreTipoTramite());
+         dc.setDescripcion(unT.getDescripcionTipoTramiteWeb());
+         lc.add(dc);
+         }
+         return lc;
+                
+    }
+    
+    */
+    
+    
+    
+    
     public String onFlowProcess(FlowEvent event) {
         DTOCliente dtoC;
+        PrimeFaces.current().executeScript("a=$(\".ui-dataview-header\");a.css('visibility', 'hidden');a.css('height', '0');");
         if(event.getOldStep().compareTo("validaciondeid")==0)
         {
             int cuitInt=Integer.parseInt(cuitCliente);

@@ -16,11 +16,16 @@ public class ControladorSolicitarTramiteWeb {
     public List<DTOCategoriaTramite> obtenerCategoriaTramite(){
        return expertoSolicitarTramiteWeb.obtenerCategoriaTramite();
    }
-  
-   public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
+    /*
+    public List<DTOCategoriaTramite> elegirCategoriaTramite(String nombreCategoriaTramite) {
+      return expertoSolicitarTramiteWeb.elegirCategoriaTramite(nombreCategoriaTramite);  
+   }
+  */
+    
+  /* public DTOTipoTramiteWeb elegirTipoTramite(String nombreTipoTramite) {
       return expertoSolicitarTramiteWeb.elegirTipoTramite(nombreTipoTramite);  
    }
-   
+  */ 
     public DTOCliente obtenerCliente(int cuitCliente) {
       return expertoSolicitarTramiteWeb.obtenerCliente(cuitCliente);
    }

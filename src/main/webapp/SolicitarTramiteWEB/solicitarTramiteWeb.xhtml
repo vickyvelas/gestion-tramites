@@ -125,41 +125,25 @@
 
             <p:tab id="categ" title="Seleccion de Categoria">
                 <p:panel header="Seleccionar Categoria">
-       <body>
-           
-           
-              
-           
-    <div class="containerr">
-        
-        <div class="grid">
-            <div class="cardd">
-                <img src="../images/solicitud.jpg" alt="" style="width:150px"/>
-                <p>Solicitud</p>
-            </div>
-       
-            <div class="cardd">
-                <img src="../images/renovacion.jpg" alt="" style="width:150px"/>
-                <p>Renovación</p>
-            </div>
-            
-            <div class="cardd">
-                <img src="../images/denuncia.png" alt="" style="width:150px"/>
-                <p>Denuncia</p>
-            </div>
-            
-            <div class="cardd">
-                <img src="../images/automotor1.jpg" alt="" style="width:150px"/>
-                <p>Automotor</p>
-            </div>
-        </div>
-        </div>
-        
-    
-</body>
+                    <p:dataView var="categoria" value="#{uiSolicitarTramiteWeb.obtenerCategorias()}"                       
+                                            layout="grid" paginatorAlwaysVisible="false"
+                       >
+                        <p:dataViewGridItem>
+  
+                            
+                            <p:panel header="#{categoria.nombre}"  styleClass="card">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                   
+                                    <h:outputText
+                                        value="#{categoria.codigo}"/>
+                                </h:panelGrid>
+                            </p:panel>  
+                        </p:dataViewGridItem>    
+                    </p:dataView>
                 </p:panel>
             </p:tab>
 
+            
             
             <p:tab id="tramite" title="Seleccionar Tipo de Tramite">
                 <p:panel header="Seleccionar Tipo de Tramite">
@@ -238,7 +222,11 @@
                 </p:panel>
             </p:tab>
         </p:wizard>
+        <script>
+  
+        a=$(".ui-dataview-header");a.css('visibility', 'hidden');a.css('height', '0');
 
+</script>
     </h:form>
 </div>
             </ui:define>
