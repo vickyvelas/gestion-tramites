@@ -22,18 +22,18 @@ import utils.FachadaPersistencia;
  * @author Dell
  */
 public class ExpertoABMCliente {
-     private List<DetalleClienteDTO> clientes = new ArrayList<>();
+     //private List<DetalleClienteDTO> clientes = new ArrayList<>();
     
     //Metodo para buscar Clientes
     public List<ListaClienteDTO> obtenerListaCliente(int cuitCliente, String nombreApellidoCliente){
         //lista que devuelve el metodo
-        List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
+        //List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
         
         //busqueda buscar("Cliente", "") trae todos los clientes
         List<DTOCriterio> lCriterio=new ArrayList<>();
         //DTOCriterio unCriterio=new DTOCriterio(); Esto se pone asi si necesito utilizar criterio para buscar
          //Obtengo la lista de OBJETOS(clientes) desde la fachada de persistencia    
-        List<Object> objetoList= FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
+        //List<Object> objetoList= FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
         
         if(cuitCliente>0) {
             DTOCriterio unCriterio= new DTOCriterio();
@@ -50,9 +50,9 @@ public class ExpertoABMCliente {
             unCriterio.setValor(nombreApellidoCliente);
             lCriterio.add(unCriterio);
         }
-        //Me larga error esto, como que ya esta declarado un poco mas arriba
-//        List objetoList= FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
-//        List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
+//        Me larga error esto, como que ya esta declarado un poco mas arriba
+        List<Object> objetoList= FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
+        //List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
 
          for(Object x : objetoList){
              Cliente cliente = (Cliente) x;

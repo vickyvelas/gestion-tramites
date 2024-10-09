@@ -81,11 +81,15 @@
                     <p:commandButton value="Modificar" styleClass="btn-info" action="#{uiListaClientes.irModificarCliente(cliente.cuitCliente)}" disabled="#{cliente.fechaHoraBajaCliente != null}">
                         <f:ajax render="@form"/>
                     </p:commandButton>
+                    
                     <p:spacer width="5"/>
                     <p:commandButton value="Eliminar" styleClass="btn-danger" update="@form" actionListener="#{uiListaClientes.eliminarCliente(cliente.cuitCliente)}" disabled="#{cliente.fechaHoraBajaCliente != null}" >
                    
                        <p:confirm header="Anulación de #{cliente.cuitCliente} #{cliente.nombreApellidoCliente}" message="¿Está seguro?" icon="ui-icon-alert"/>
-                    
+                       <p:column headerText="Fecha Baja"> <!-- según chatgpt verificamos si lee correctamente -->
+                        #{cliente.fechaHoraBajaCliente} <!-- esta es la segunda linea -->
+                        </p:column> <!-- tercera -->
+                       
                     </p:commandButton>
                 
                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">

@@ -21,16 +21,61 @@
     <h:form>
         <p:focus context="@form"/>
             <div class="box box-primary">
-                
+               
         <div class="formgrid grid">
-            <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
-               <div class="ui-sm-12 ui-g-11">
+            <!-- Campo para NOMBRE Y APELLIDO --> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
                           <p:outputLabel  value="Apellido y Nombre:" />
+                        </div>
+                
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="nombre" value="#{uiDetalleCliente.nombreApellidoCliente}" />
+                    </div>
+                    </div>
+             <!-- Campo para CUIT -->
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel  value="CUIT:" />
+                        </div>
+                
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="cuit" value="#{uiDetalleCliente.cuitCliente}" />
+                    </div>
+                    </div>
+             
+          <!-- Campo para DIRECCION -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                       <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel  value="Dirección:" />
+                       </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="direccion" value="#{uiDetalleCliente.direccion}" />
+                    </div>
+                    </div>
+          
+          <!-- Campo para MAIL -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel  value="Mail:" />
+                        </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="mail" value="#{uiDetalleCliente.mailCliente}" />
+                    </div>
+                    </div>
+          <!-- Campo para TELEFONO -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel  value="Teléfono:" />
+                        </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                        <p:inputText id="telefono" value="#{uiDetalleCliente.telefonoCliente}" />
+                    </div>
+                    </div>
             </div>
-            <div class="ui-sm-12 ui-g-11"> 
-                <p:inputText id="nombre" value="#{uiDetalleCliente.nombreApellidoCliente}" />
-             </div>
-        </div>
                    
                    
                        
@@ -52,7 +97,6 @@
                 
   
             </div>
- </div>
    </h:form>
 
  </ui:define>
