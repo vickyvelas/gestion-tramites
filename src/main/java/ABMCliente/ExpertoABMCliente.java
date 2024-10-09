@@ -52,7 +52,7 @@ public class ExpertoABMCliente {
         }
 //        Me larga error esto, como que ya esta declarado un poco mas arriba
         List<Object> objetoList= FachadaPersistencia.getInstance().buscar("Cliente", lCriterio);
-        //List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
+        List<ListaClienteDTO> listaClienteDTOs = new ArrayList<>();
 
          for(Object x : objetoList){
              Cliente cliente = (Cliente) x;
