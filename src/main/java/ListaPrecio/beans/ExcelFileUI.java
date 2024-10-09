@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -149,45 +150,63 @@ public class ExcelFileUI implements Serializable{
                   //crea 1 detalle
                   DTODetalleListaPrecioImportar detalle = new DTODetalleListaPrecioImportar();
 
-                  Cell cellCodTramite = row.getCell(0);
-                  
-//                  Cell cellNombreTT = row.getCell(1);  
-                  
-                  Cell cellPrecio = row.getCell(2);
+//                 Cell cellCodTramite = row.getCell(0);
+//                  
+//                 Cell cellNombreTT = row.getCell(1);  
+//                  
+//                 Cell cellPrecio = row.getCell(2);
+                 
+                 
+            Cell cellCodTramite = row.getCell(0);
+            Cell cellPrecio = row.getCell(1);
+
+            if (cellCodTramite != null && cellCodTramite.getCellType() == CellType.NUMERIC) {
+                detalle.setCodTipoTramite((int) cellCodTramite.getNumericCellValue());
+                System.out.println(detalle.getCodTipotramite());
+            }
+
+            if (cellPrecio != null && cellPrecio.getCellType() == CellType.NUMERIC) {
+                detalle.setPrecioTipoTramite(cellPrecio.getNumericCellValue());
+                System.out.println(detalle.getPrecioTipoTramite());
+            }
                   
 //                  if (cellNombreTT!=null && cellNombreTT.getCellType()==CellType.STRING){
 //                    String value = cellNombreTT.getStringCellValue();
 //                    Messages.create(iRow +"String").detail(value).add();
 //                    System.out.println(iRow + "Valor de la celda es " + value);
 //                  }
-                  //PARA PRECIO
-                  if (cellPrecio!=null && cellPrecio.getCellType()==CellType.NUMERIC ){
-                    //double value = cell.getNumericCellValue();
-                    //cast para q acepte float
-                    double value = cellPrecio.getNumericCellValue();
-                    detalle.setPrecioTipoTramite(value);
-                    Messages.create(iRow +"Numero").detail(Double(value).toString()).add();
-                  }
+//                  //PARA PRECIO
+//                  if (cellPrecio!=null && cellPrecio.getCellType()==CellType.NUMERIC ){
+//                    //double value = cell.getNumericCellValue();
+//                    //cast para q acepte float
+//                    double value = cellPrecio.getNumericCellValue();
+//                    detalle.setPrecioTipoTramite(value);
+//                    Messages.create(iRow +"Precio").detail(Double(value).toString()).add();
+//                    
+//                  }
                   
                   //PARA CODIGO
                   
-                  if (cellCodTramite!=null && cellCodTramite.getCellType()==CellType.NUMERIC ){
-                    //double value = cell.getNumericCellValue();
-                    //cast para q acepte INT
-                    
-                    detalle.setCodTipoTramite((int) cellCodTramite.getNumericCellValue());
-                    Messages.create(iRow +"Codigo").detail(Double(cellCodTramite.getNumericCellValue()).toString()).add();
-                  }
-                    System.out.println(detalle); //ver q lee los 2 detalles
+//                  if (cellCodTramite!=null && cellCodTramite.getCellType()==CellType.NUMERIC ){
+//                   int value = (int) Math.round(cellCodTramite.getNumericCellValue());
+//                    //cast para q acepte INT
+//                    
+//                    detalle.setCodTipoTramite(value);
+//                   // Messages.create(iRow +"Numero").detail(Double(cellCodTramite.getNumericCellValue()).toString()).add();
+//                  }
+                   
                    
                    listaPrecioImportarDTO.addDetalleListaPrecioImportar(detalle);
                    
-
                   iRow++;  
                   row = sheet.getRow(iRow);
                  }
               
-             
+             //de ejemplo
+                   listaPrecioImportarDTO.setCodListaPrecio(123);
+                   listaPrecioImportarDTO.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
+                   listaPrecioImportarDTO.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
+
               controladorLP.importarListaPrecio(listaPrecioImportarDTO);
               
         } catch (Exception ex) {

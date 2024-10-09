@@ -13,6 +13,7 @@ import entidades.ListaPrecio;
 import entidades.TipoTramite;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -60,12 +61,17 @@ public class ExpertoLP {
         List<DTOCriterio> lCriterio=new ArrayList<>();
         
         List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterio);
-        
+        List<ListaPrecio> listaPreciosConMayorFechaDesde = new ArrayList<>();
+            Timestamp fechaDesdeMayor = null;
+
+           
         ListaPrecio listaPrecioAnterior = objetoList.stream()
+                
                 .map(x -> (ListaPrecio) x)
                 .max(Comparator.comparing(ListaPrecio::getFechaHoraDesdeListaPrecio))
                 .orElse(null);
-       
+        
+        
         // Modificar instancia de ListaPrecio con fechaHoraHastaListaPrecio igual a fechaHoraDesdeListaPrecio del dto
         listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
 
@@ -134,7 +140,7 @@ public class ExpertoLP {
                             }
                     }
                 }
-                 FachadaPersistencia.getInstance().iniciarTransaccion();;
+                 FachadaPersistencia.getInstance().iniciarTransaccion();
                  FachadaPersistencia.getInstance().guardar(nuevaListaPrecio);
                  FachadaPersistencia.getInstance().finalizarTransaccion();
                 

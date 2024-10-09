@@ -62,6 +62,10 @@ public class UIActualizarLP implements Serializable {
         return "importarLP.xhtml?faces-redirect=true"; // Usa '?faces-redirect=true' para hacer una redirección
     }
     
-    
+//    public String importarListaPrecio(){
+//        
+//    }
+//    
+   
     
 }
