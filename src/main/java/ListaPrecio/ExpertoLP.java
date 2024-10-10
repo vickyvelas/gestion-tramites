@@ -64,6 +64,19 @@ public class ExpertoLP {
                 .orElse(null);
 
         if (listaPrecioAnterior != null) {
+
+            // ver la fecha de la lista anterior por consola
+            System.out.println("Fecha Hora Hasta de la Lista Anterior: " + listaPrecioAnterior.getFechaHoraHastaListaPrecio());
+            System.out.println("Fecha Hora Desde del DTO (Nueva Lista): " + listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
+
+            // comparar las fechas
+            if (listaPrecioAnterior.getFechaHoraHastaListaPrecio().before(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio())) {
+                System.out.println("La nueva lista de precios es válida y posterior a la anterior.");
+            } else {
+                System.out.println("Error: La nueva lista de precios tiene una fecha anterior o igual a la lista anterior.");
+                throw new IllegalArgumentException("La nueva lista tiene una fecha inválida con respecto a la lista anterior.");
+            }
+
             // Modificar la lista de precios anterior para cerrar su periodo de vigencia
             listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
 
@@ -71,11 +84,6 @@ public class ExpertoLP {
             FachadaPersistencia.getInstance().guardar(listaPrecioAnterior);
         }
 
-//        // Modificar instancia de ListaPrecio con fechaHoraHastaListaPrecio igual a fechaHoraDesdeListaPrecio del dto
-//        listaPrecioAnterior.setFechaHoraHastaListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
-//
-//        // Guardar cambios
-//        FachadaPersistencia.getInstance().guardar(listaPrecioAnterior);
         //CREAR NUEVA LISTA PRECIO
         ListaPrecio nuevaListaPrecio = new ListaPrecio();
         nuevaListaPrecio.setFechaHoraDesdeListaPrecio(listaPrecioImportarDTO.getFechaHoraDesdeListaPrecio());
