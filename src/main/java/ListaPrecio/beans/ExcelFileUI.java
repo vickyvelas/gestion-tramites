@@ -3,7 +3,7 @@ package ListaPrecio.beans;
 import ListaPrecio.ControladorLP;
 import ListaPrecio.dtos.DTODetalleListaPrecioExportar;
 import ListaPrecio.dtos.DTOListaPrecioExportar;
-import static com.sun.tools.javac.jvm.PoolConstant.LoadableConstant.Double;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
@@ -153,7 +153,7 @@ public class ExcelFileUI implements Serializable {
                 }
                 if (cell != null && cell.getCellType() == CellType.NUMERIC) {
                     double value = cell.getNumericCellValue();
-                    Messages.create(iRow + "Numero").detail(Double(value).toString()).add();
+                    //Messages.create(iRow + "Numero").detail(Double(value).toString()).add();
                 }
 
                 iRow++;

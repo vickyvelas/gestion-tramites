@@ -220,7 +220,8 @@
                             <p:outputLabel for="archivoExcel" value="Archivo Excel:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11">
-                            <p:fileUpload id="archivoExcel" value="#{uiExcelFile.handleFileUpload(event)}"
+                            <p:fileUpload id="archivoExcel" 
+                                          listener="#{uiExcelFile.handleFileUpload}"
                                           mode="advanced" 
                                           dragDropSupport="true" 
                                           update="@form" 
