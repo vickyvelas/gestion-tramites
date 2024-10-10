@@ -198,11 +198,12 @@ public class ExpertoRC {
         }
         //busca el anterior al anulado
         tramiteEncontrado.getTramiteEstadoList();
+        
         TramiteEstado tramiteEstadoAnterior = tramitesEstados.stream()
                 .filter(tramiteEstado -> tramiteEstado.getFechaHoraBajaTramiteEstado() == null)
                 .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
                 .orElse(null);
-        
+        //EL PROBLEMA ES QUE DEVUELVE NULO
         tramiteEstadoAnterior.setFechaHoraHastaTramiteEstado(null);
         
         FachadaPersistencia.getInstance().guardar(tramiteEstadoMasReciente);
