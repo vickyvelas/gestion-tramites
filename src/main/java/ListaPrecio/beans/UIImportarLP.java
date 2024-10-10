@@ -23,7 +23,6 @@ public class UIImportarLP implements Serializable {
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
-    private ControladorLP controladorLP = new ControladorLP();
 
     public UIImportarLP() {
     }
@@ -57,7 +56,7 @@ public class UIImportarLP implements Serializable {
         return "actualizarLP.xhtml?faces-redirect=true"; // Usa '?faces-redirect=true' para hacer una redirección
     }
 
-    public String importar(){
+    public String importar() {
         DTOListaPrecioImportar listaPrecioImportar = new DTOListaPrecioImportar();
         listaPrecioImportar.setCodListaPrecio(getCodListaPrecio());
         listaPrecioImportar.setFechaHoraDesdeListaPrecio(getFechaHoraDesdeListaPrecio());
