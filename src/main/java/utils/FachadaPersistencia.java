@@ -21,6 +21,7 @@ public class FachadaPersistencia {
     }
 
     public void guardar(Object objeto) {
+        System.out.println("Guardando objeto: " + objeto);
         FachadaInterna.getInstance().guardar(objeto);
     }
 

@@ -35,8 +35,7 @@
 
                 <div class="ui-g ui-fluid">
                     <div class="ui-g-12 ui-md-6">
-                        <p:outputPanel>
-                            <h:outputText value=""/>
+                        <p:outputPanel>                            
                             <p:datePicker id="fechaFilter" 
                                           value="#{uiActualizarLP.fechaDesde}" 
                                           pattern="dd/MM/yyyy"
@@ -52,7 +51,7 @@
                 <p:dataTable id="grid1" widgetVar="listaPrecioTable" value="#{uiActualizarLP.obtenerListaPrecio()}" var="listaPrecio">
                     <p:column>
                         <f:facet name="header">Código</f:facet>
-                            #{listaPrecio.codListaPrecio}
+                        <h:outputText value="#{listaPrecio.codListaPrecio}"/>
                     </p:column>
 
                     <p:column>
@@ -68,8 +67,6 @@
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
                         </h:outputText>
                     </p:column>
-
-
                     <p:column>
                         <f:facet name="header">Acciones</f:facet>
                         <div>
@@ -78,10 +75,7 @@
                                 <p:fileDownload value="#{uiExcelFile.fileD}"/> 
                             </p:commandButton>
                         </div>
-
-
-                    </p:column> 
-
+                    </p:column>
                 </p:dataTable>
             </div>
 

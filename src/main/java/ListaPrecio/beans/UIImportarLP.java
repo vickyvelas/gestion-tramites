@@ -4,10 +4,13 @@
  */
 package ListaPrecio.beans;
 
+import ListaPrecio.ControladorLP;
+import ListaPrecio.dtos.DTOListaPrecioImportar;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import utils.BeansUtils;
 
 @Named("uiImportatLP")
 @ViewScoped
@@ -15,15 +18,14 @@ import java.sql.Timestamp;
  *
  * @author marti
  */
-public class UIImportarLP implements Serializable{
+public class UIImportarLP implements Serializable {
+
     private int codListaPrecio;
     private Timestamp fechaHoraDesdeListaPrecio;
     private Timestamp fechaHoraHastaListaPrecio;
 
     public UIImportarLP() {
     }
-    
-    
 
     public int getCodListaPrecio() {
         return codListaPrecio;
@@ -48,5 +50,18 @@ public class UIImportarLP implements Serializable{
     public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
-    
+
+    public String irAMenuPrincipal() {
+        BeansUtils.guardarUrlAnterior();
+        return "actualizarLP.xhtml?faces-redirect=true"; // Usa '?faces-redirect=true' para hacer una redirección
+    }
+
+    public String importar() {
+        DTOListaPrecioImportar listaPrecioImportar = new DTOListaPrecioImportar();
+        listaPrecioImportar.setCodListaPrecio(getCodListaPrecio());
+        listaPrecioImportar.setFechaHoraDesdeListaPrecio(getFechaHoraDesdeListaPrecio());
+        listaPrecioImportar.setFechaHoraHastaListaPrecio(getFechaHoraHastaListaPrecio());
+        controladorLP.importarListaPrecio(listaPrecioImportar);
+        return BeansUtils.redirectToPreviousPage();
+    }
 }

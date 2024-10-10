@@ -180,37 +180,35 @@
         <h:form id="form" prependId="false">
             <p:panel styleClass="box-primary card">
                 <div class="ui-g ui-fluid">
-                    
-                    <!-- Campo de entrada para la fecha desde -->
-                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">
-                        <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="fechaDesde" value="Fecha Desde:" />
-                        </div>
-                        <div class="ui-sm-12 ui-g-11">
-                            <p:calendar id="fechaDesde" value="#{uiImportatLP.fechaHoraDesdeListaPrecio}" />
-                            
-                        </div>
-                    </div>
 
+                    <!-- Campo de entrada para la fecha desde -->
+                    <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="timeDesde" value="Fecha Desde" />
+                                <p:datePicker id="timeDesde" value="#{uiImportatLP.fechaHoraDesdeListaPrecio}" showTime="true" />
+                            </div>
+                        </p:outputPanel> 
+                    </div>
                     <!-- Campo de entrada para la fecha hasta -->
-                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">
-                        <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="fechaHasta" value="Fecha Hasta:" />
-                        </div>
-                        <div class="ui-sm-12 ui-g-11">
-                            <p:calendar id="fechaHasta" value="#{uiImportatLP.fechaHoraHastaListaPrecio}" />
-                        </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>                          
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="timeHasta" value="Fecha Hasta" />
+                                <p:datePicker id="timeHasta" value="#{uiImportatLP.fechaHoraHastaListaPrecio}" showTime="true" />
+                            </div>
+                        </p:outputPanel> 
                     </div>
 
                     <!-- Campo de entrada para el codigo LP -->
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                         <div class="ui-sm-12 ui-g-11">
-                            <p:outputLabel for="configuracion" value="Código:" />
+                            <p:outputLabel for="codigoLP" value="Código:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11">
-                            <p:inputText id="configuracion" value="#{uiImportatLP.codListaPrecio}" 
+                            <p:inputText id="codigoLP" value="#{uiImportatLP.codListaPrecio}" 
                                          style="width: 150px;" />
-                            <p:message id="configuracionMSG" for="configuracion"/>
+                            <p:message id="codigoLPMSG" for="codigoLP"/>
                         </div>
                     </div>
 
@@ -220,21 +218,18 @@
                             <p:outputLabel for="archivoExcel" value="Archivo Excel:" />
                         </div>
                         <div class="ui-sm-12 ui-g-11">
-                            <p:fileUpload id="archivoExcel" 
-                                          listener="#{uiExcelFile.handleFileUpload}"
-                                          mode="advanced" 
-                                          dragDropSupport="true" 
-                                          update="@form" 
-                                          sizeLimit="1000000" 
-                                          fileLimit="1"
-                                          allowTypes="/(\.|\/)(xls|xlsx)$/" />
+                            <!-- Componente para subir el archivo -->
+                            <p:fileUpload id="archivoExcel" listener="#{uiExcelFile.handleFileUpload}" mode="advanced" update="@form" />
+
+                            <!-- Botón para importar la lista de precios -->
+                            <p:commandButton value="Importar" action="#{uiImportatLP.importar()}" update="@form" />
                         </div>
                     </div>
 
-                    <!-- Botón para confirmar la carga del archivo Excel -->
+                    <!-- Botón para volver al menu principal -->
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">
                         <div class="ui-sm-12 ui-g-4">
-                            <p:commandButton value="Confirmar" action="#{uiImportarLP.confirmarCarga()}" icon="fa fa-check" 
+                            <p:commandButton value="Volver" action="#{uiImportatLP.irAMenuPrincipal()}" icon="fa fa-check" 
                                              styleClass="btn-primary" /> 
                         </div>
                     </div>
