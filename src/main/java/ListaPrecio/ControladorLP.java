@@ -4,7 +4,6 @@
  */
 package ListaPrecio;
 
-import ListaPrecio.dtos.DTODetalleListaPrecioImportar;
 import ListaPrecio.dtos.DTOListaPrecioExportar;
 import ListaPrecio.dtos.DTOListaPrecioImportar;
 import java.sql.Timestamp;
@@ -21,8 +20,8 @@ public class ControladorLP {
         return expertoActualizarListaPrecio.obtenerListaPrecio(fechaActual);
     }
 
-    public DTOListaPrecioImportar importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO, DTODetalleListaPrecioImportar detallesImportar) {
-       return expertoActualizarListaPrecio.importarListaPrecio(listaPrecioImportarDTO, detallesImportar);
+    public void importarListaPrecio( DTOListaPrecioImportar listaPrecioImportarDTO) {
+        expertoActualizarListaPrecio.importarListaPrecio(listaPrecioImportarDTO);
     }
 
    public DTOListaPrecioExportar exportarListaPrecio(int codListaPrecio) {
