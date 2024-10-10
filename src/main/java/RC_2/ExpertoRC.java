@@ -235,11 +235,13 @@ public class ExpertoRC {
         tramiteEstadoMasReciente.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
         
         TramiteEstado tramiteEstadoNuevo = new TramiteEstado();
+            tramiteEstadoNuevo.setNroLineaTramiteEstado((tramiteEstadoMasReciente.getNroLineaTramiteEstado())+1);
             tramiteEstadoNuevo.setFechaHoraDesdeTramiteEstado(tramiteEstadoMasReciente.getFechaHoraHastaTramiteEstado());
             tramiteEstadoNuevo.setFechaHoraHastaTramiteEstado(null);
             tramiteEstadoNuevo.setFechaHoraBajaTramiteEstado(null);
             tramiteEstadoNuevo.setObservacionTramiteEstado(tdto.getObservacion());
             tramiteEncontrado.addTramiteEstadoList(tramiteEstadoNuevo);
+            
         //buscar el estado ingresado en el dto
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         
@@ -249,11 +251,11 @@ public class ExpertoRC {
             unCriterio.setValor(tdto.getCodEstadoTramite());
             lCriterio.add(unCriterio);
           
-          DTOCriterio unCriterio2=new DTOCriterio();
-            unCriterio2.setAtributo("nombreEstadoTramite");
-            unCriterio2.setOperacion("=");
-            unCriterio2.setValor(tdto.getNombreEstadoTramite());
-            lCriterio.add(unCriterio2);
+//          DTOCriterio unCriterio2=new DTOCriterio();
+//            unCriterio2.setAtributo("nombreEstadoTramite");
+//            unCriterio2.setOperacion("=");
+//            unCriterio2.setValor(tdto.getNombreEstadoTramite());
+//            lCriterio.add(unCriterio2);
         
         EstadoTramite estadoTramiteEncontrado = (EstadoTramite) FachadaPersistencia.getInstance().buscar("EstadoTramite", lCriterio).get(0);
         tramiteEstadoNuevo.setEstadoTramite(estadoTramiteEncontrado);
