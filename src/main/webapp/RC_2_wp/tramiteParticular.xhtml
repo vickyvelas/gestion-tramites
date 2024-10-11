@@ -111,11 +111,20 @@
                     </p:column>
                         
                     <p:column>
-                        <p:commandButton  styleClass="btn-material btn-primary ui-confirmdialog-yes"
-                                          icon="pi pi-undo"  action="#{uiTramiteParticular.anularUltimo(uiTramiteParticular.nroTramite)}"
+                        <p:commandButton  styleClass="btn-material btn-primary"
+                                          icon="pi pi-undo"  actionListener="#{uiTramiteParticular.anularUltimo(uiTramiteParticular.nroTramite)}"
+                                          disabled="#{tramiteEstado.fechaBajaTramiteEstado=null}"
                                           update="@form:grid1">
-                            
+                            <p:confirm header="Anulación de #{uiTramiteParticular.nombreEstadoTramite}" message="¿Está seguro?" icon="ui-icon-alert"/>
+                    
                         </p:commandButton>
+                        
+                        <p:confirmDialog global="true"  showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
+                        <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes"
+                                         icon="fa fa-check" update="@form:grid1"/>
+                        <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no"
+                                         icon="fa fa-close" update="@form:grid1"/>
+                    </p:confirmDialog>
                     </p:column> 
                    
                             

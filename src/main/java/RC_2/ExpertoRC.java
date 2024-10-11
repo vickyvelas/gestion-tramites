@@ -191,15 +191,15 @@ public class ExpertoRC {
         if(nroLineaTEA==1){
             System.out.println("No se puede anular el estado Iniciado");
         }
-        
+        //verifica q la fecha fin cel tramite
         Timestamp fechaFinTram = tramiteEncontrado.getFechaHoraFinTramite();
         if(fechaFinTram != null){
            tramiteEncontrado.setFechaHoraFinTramite(null);
         }
         //busca el anterior al anulado
-        tramiteEncontrado.getTramiteEstadoList();
+        List<TramiteEstado> tramEstados = tramiteEncontrado.getTramiteEstadoList();
         
-        TramiteEstado tramiteEstadoAnterior = tramitesEstados.stream()
+        TramiteEstado tramiteEstadoAnterior = tramEstados.stream()
                 .filter(tramiteEstado -> tramiteEstado.getFechaHoraBajaTramiteEstado() == null)
                 .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
                 .orElse(null);
