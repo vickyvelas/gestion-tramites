@@ -99,6 +99,10 @@ public class UIDetalleCliente implements Serializable{
             DetalleClienteDTO  detalleClienteDTO =controladorABMCliente.obtenerDetalleCliente(cuitCliente);
             setNombreApellidoCliente(detalleClienteDTO.getNombreApellidoCliente());
             setCuitCliente(detalleClienteDTO.getCuitCliente());
+            setDireccion(detalleClienteDTO.getDireccion());
+            setMailCliente(detalleClienteDTO.getMailCliente());
+            setTelefonoCliente(detalleClienteDTO.getTelefonoCliente());
+                   
         }
     }
     

@@ -29,15 +29,11 @@ public class UIListaClientes implements Serializable{
     private int cuitClienteFiltro = 0;
     private Timestamp fechaHoraBajaCliente;
     
+    
+    
 //Getter and Setter
 
-    public ControladorABMCliente getControladorABMCliente() {
-        return controladorABMCliente;
-    }
-
-    public void setControladorABMCliente(ControladorABMCliente controladorABMCliente) {
-        this.controladorABMCliente = controladorABMCliente;
-    }
+    
 
     public String getNombreApellidoClienteFiltro() {
         return nombreApellidoClienteFiltro;
@@ -62,6 +58,7 @@ public class UIListaClientes implements Serializable{
     public void setFechaHoraBajaCliente(Timestamp fechaHoraBajaCliente) {
         this.fechaHoraBajaCliente = fechaHoraBajaCliente;
     }
+
     
     
     public void filtrar(){

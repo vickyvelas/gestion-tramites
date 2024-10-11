@@ -26,7 +26,7 @@
             <!-- Campo para NOMBRE Y APELLIDO --> 
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel  value="Apellido y Nombre:" />
+                          <p:outputLabel for="nombre" value="Apellido y Nombre:" />
                         </div>
                 
                     <div class="ui-sm-12 ui-g-11"> 
@@ -36,7 +36,7 @@
              <!-- Campo para CUIT -->
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel  value="CUIT:" />
+                            <p:outputLabel for="cuit"  value="CUIT:" />
                         </div>
                 
                     <div class="ui-sm-12 ui-g-11"> 
@@ -48,7 +48,7 @@
           
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                        <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel  value="Dirección:" />
+                          <p:outputLabel for="direccion" value="Dirección:" />
                        </div>
                     <div class="ui-sm-12 ui-g-11"> 
                          <p:inputText id="direccion" value="#{uiDetalleCliente.direccion}" />
@@ -59,7 +59,7 @@
           
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel  value="Mail:" />
+                            <p:outputLabel for="mail"  value="Mail:" />
                         </div>
                     <div class="ui-sm-12 ui-g-11"> 
                          <p:inputText id="mail" value="#{uiDetalleCliente.mailCliente}" />
@@ -69,7 +69,7 @@
           
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
                         <div class="ui-sm-12 ui-g-11">
-                          <p:outputLabel  value="Teléfono:" />
+                          <p:outputLabel for="telefono" value="Teléfono:" />
                         </div>
                     <div class="ui-sm-12 ui-g-11"> 
                         <p:inputText id="telefono" value="#{uiDetalleCliente.telefonoCliente}" />
