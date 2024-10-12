@@ -1,0 +1,193 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Trabajar con Estado"/>
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        <h1>Trámites</h1>
+    </ui:define>
+
+    <p:separator/>
+    
+    <ui:define name="body">
+        <h:form>
+            <p:focus context="@form">
+                <div class="box box-primary">
+                    <div class="ui-g ui-fluid">
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputText value="Fecha Desde: "/>
+                                <p:spacer height="10"/>
+                                <p:calendar id="fechaDesdeFiltro" style="width:150px"  
+                                            value="#{uimostrarTramitesLista.fechaDesdeFiltro}" 
+                                            pattern="dd/MM/yyyy" required="true"
+                                            onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="dateSelect" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:calendar>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputLabel for="cuitFiltro" value="Número de CUIT: "/>
+                                <p:spacer height="5"/>
+                                <p:inputText id="cuitFiltro" style="width:100px"  
+                                             value="#{uimostrarTramitesLista.cuitFiltro}" 
+                                             onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="keyup" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:inputText>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputText value="Número de Tramite: "/>
+                                <p:spacer height="5"/>
+                                <p:inputText id="nroTramiteFiltro" style="width:150px"  
+                                             value="#{uimostrarTramitesLista.nroTramiteFiltro}" 
+                                             onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="keyup" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:inputText>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputText value="Nombre del Estado:  "/>
+                                <p:spacer height="5"/>
+                                <p:inputText id="estadoFiltro" style="width:150px"  
+                                             value="#{uimostrarTramitesLista.estadoFiltro}" 
+                                             onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="keyup" delay="500" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:inputText>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputText value="Legajo Consultor: "/>
+                                <p:spacer height="5"/>
+                                <p:inputText id="consultorFiltro" style="width:150px"  
+                                             value="#{uimostrarTramitesLista.consultorFiltro}" 
+                                             onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="keyup" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:inputText>
+                            </p:outputPanel>
+                        </div>
+
+                        <div class="ui-g-12 ui-md-6">
+                            <p:outputPanel>
+                                <h:outputText value="Código del Tipo de Trámite: "/>
+                                <p:spacer height="5"/>
+                                <p:inputText id="codigoTTFiltro" style="width:150px"  
+                                             value="#{uimostrarTramitesLista.codigoTTFiltro}" 
+                                             onfocus="this.style.backgroundColor='#f0f0f0';">
+                                    <p:ajax event="keyup" listener="#{uimostrarTramitesLista.filtrar()}" update="@form:grid1"/>
+                                </p:inputText>
+                            </p:outputPanel>
+                        </div>
+                    </div>
+                    
+                    <p:separator />
+                    <p:spacer height="5"/>
+                    
+                     Tabla de Tramites 
+                    <p:dataTable id="grid1" widgetVar="tramiteTable" value="#{uimostrarTramitesLista.mostrarTramites()}" var="tramite">
+                        <p:column>
+                            <f:facet name="header">Número de Trámite</f:facet>
+                            #{tramite.nroTramite}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Fecha Carga de Trámite</f:facet>
+                            #{tramite.fechaCargaTramite}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Tipo de Trámite</f:facet>
+                            #{tramite.nombreTipoTramite}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Estado del Trámite</f:facet>
+                            #{tramite.nombreEstadoTramite}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Cliente</f:facet>
+                            #{tramite.nombreCliente}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">CUIT del Cliente</f:facet>
+                            #{tramite.CUITCliente}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Consultor</f:facet>
+                            #{tramite.nombreConsultor}
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">Documentación</f:facet>
+                            #{tramite.estadoDocumentacion} 
+                        </p:column>
+                        
+<!--                        <p:column>
+                            <f:facet name="header">Fecha de Baja</f:facet>
+                            #{tramite.fechaHoraBajaTramite} 
+                        </p:column>-->
+
+                    <p:column>
+                        <f:facet name="header">Acciones</f:facet>
+
+                        <!-- Botón Anular existente -->
+                        <p:commandButton value="Anular" styleClass="btn-danger"
+                                         oncomplete="PF('confirmDialogWidgetVar').show();" 
+                                         disabled="#{tramite.fechaHoraBajaTramite != null or tramite.nombreEstadoTramite.equalsIgnoreCase('finalizado')}"
+                                         update="@form:grid1">
+                            <p:confirm header="Anulación del trámite número: #{tramite.nroTramite} - #{tramite.nombreTipoTramite}"
+                                       message="¿Está seguro?" icon="ui-icon-alert" />
+                            <p:confirmDialog widgetVar="confirmDialogWidgetVar" global="true">
+                                <button actionListener="#{uimostrarTramitesLista.anularTramite(tramite.nroTramite)}"
+                                        update="@form:grid1"
+                                        oncomplete="PF('confirmDialogWidgetVar').hide();">Sí</button>
+                                <button onclick="PF('confirmDialogWidgetVar').hide();">No</button>
+                            </p:confirmDialog>
+                        </p:commandButton>
+
+                        <!-- Nuevo Botón Visualizar con icono de lupa -->
+                    <p:commandButton icon="pi pi-search" title="Visualizar"
+                                     action="#{uimostrarTramitesLista.irVisualizarTramite(tramite.nroTramite)}"
+                                     process="@this"
+                                     update="@none">
+                    </p:commandButton>
+
+                    </p:column>
+
+                    </p:dataTable>
+                     
+                     <p:separator></p:separator>
+                </div>
+            </p:focus>
+        </h:form>
+        <h:form>
+            <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                <div class="ui-sm-12 ui-g-4">
+                        <p:commandButton value="Cargar Trámite"  
+                         action="#{uimostrarTramitesLista.irBotonCargar()}" 
+                         icon="fa fa-check"
+                         styleClass="btn-primary"
+                         style="text-align: right"
+                         process="@this"/>
+                </div>
+            </div>
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

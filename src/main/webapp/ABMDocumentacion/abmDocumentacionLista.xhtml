@@ -1,0 +1,180 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Trabajar con Documentación"/>
+        <style type="text/css">
+            .centered-column {
+                text-align: center;
+                vertical-align: middle;
+                font-size: 18px; /* Aumenta el tamaño de la fuente en las celdas de la tabla */
+            }
+            .consultor-column {
+                width: 300px;
+                font-size: 18px; /* Aumenta el tamaño de la fuente para los consultores */
+            }
+            .small-column {
+                width: 100px;
+                font-size: 18px; /* Aumenta el tamaño de la fuente para las fechas */
+            }
+            .small-add-button, .small-delete-button {
+                font-size: 14px;
+                padding: 5px 10px; /* Ajusta el tamaño del botón */
+                margin: auto;
+                text-align: center;
+                transition: background-color 0.3s ease, transform 0.7s ease;
+            }
+            .derecha{
+                position: absolute; /* Posiciona el botón de manera absoluta */
+                right: 20px;
+            }
+            .small-add-button {
+                background-color: #00cc00 !important;
+                color: white !important;               
+            }
+            .small-add-button:hover {
+                background-color: #009900 !important;
+            }
+            .small-delete-button {
+                background-color: #ff3333 !important;
+                color: white !important;
+            }
+            .small-delete-button:hover {
+                background-color: darkred !important;
+            }
+            .input-margin {
+                margin-right: 10px;
+            }
+            .search-container {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-right: 30px;
+            }
+            .search-button {
+                min-width: 100px;
+                margin-left: 20px; /* Añade espacio entre el botón de buscar y el campo Mes */
+            }
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .label-large {
+                font-size: 24px; /* Aumenta el tamaño de la letra para los textos Año: y Mes: */
+                font-weight: bold;
+                margin-right: 10px; /* Espaciado entre el texto y el input */
+            }
+            .input-large {
+                font-size: 20px; /* Aumenta el tamaño de los campos de entrada */
+                padding: 5px;
+                width: 120px; /* Aumenta el ancho de los inputs */
+            }
+            /* Nuevo estilo para el contenedor de tablas */
+            .tables-container {
+                display: flex; /* Usamos flexbox para colocar las tablas una al lado de la otra */
+                justify-content: space-between; /* Espacio entre las tablas */
+            }
+            .btn-info {
+                background-color: #17a2b8;
+                border-color: #17a2b8;
+                color: white;
+                font-size: 14px;
+                padding: 5px 10px;
+            }
+            .btn-info:disabled {
+                background-color: gray;
+                border-color: gray;
+                cursor: not-allowed;
+            }
+            /* Estilo para centrar el botón de agregar a la derecha */
+            .add-button-container {
+                display: flex;
+                justify-content: flex-end;
+                margin-bottom: 10px;
+            }
+            /* Estilo para centrar el texto de las columnas de la tabla */
+            .center-text {
+                text-align: center;
+            }
+            /* Estilo para el título y botón dentro de la cabecera */
+            .box-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <p:focus context="@form"/>
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h2>Documentación</h2> <!-- Título a la izquierda -->
+                </div>
+                <div styleClass="derecha">
+                    <p:commandButton value="Agregar" icon="fa fa-plus" 
+                                     action="#{uiabmDocumentacionLista.irAgregarDocumentacion()}" 
+                                     styleClass="small-add-button" global="false"/> <!-- Botón a la derecha -->
+                </div>
+
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>
+                            <h:outputText value="Código:"/>
+                            <p:inputText id="codigoFilter" style="width:150px" value="#{uiabmDocumentacionLista.codDocumentacionFiltro}">
+                                <p:ajax event="keyup" delay="500" listener="#{uiabmDocumentacionLista.buscarDocumentaciones()}" update="@form:grid" global="false"/>
+                            </p:inputText>
+                        </p:outputPanel>
+                    </div>
+
+                    <div class="ui-g-12 ui-md-6">
+                        <p:outputPanel>
+                            <h:outputText value="Nombre:"/>
+                            <p:inputText id="nombreFilter" style="width:150px" value="#{uiabmDocumentacionLista.nombreDocumentacionFiltro}">
+                                <p:ajax event="keyup" delay="500" listener="#{uiabmDocumentacionLista.buscarDocumentaciones()}" update="@form:grid" global="false"/>
+                            </p:inputText>
+                        </p:outputPanel>
+                    </div>
+                </div>
+
+                <!-- Bloqueo de la tabla mientras se carga -->
+                <p:blockUI block="grid" trigger="codigoFilter, nombreFilter" widgetVar="blockGrid" />
+
+                <p:dataTable id="grid" value="#{uiabmDocumentacionLista.buscarDocumentaciones()}" var="documentacion" 
+                             styleClass="center-text"> <!-- Alinea el texto de las columnas al centro -->
+                    <p:column headerText="Código">
+                        #{documentacion.codDocumentacion}
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        #{documentacion.nombreDocumentacion}
+                    </p:column>
+
+                    <p:column headerText="Fecha Baja">
+                        #{documentacion.fechaHoraBajaDocumentacion}
+                    </p:column>
+
+                    <p:column headerText="Acciones" styleClass="center-text">
+                        <!-- Botón Modificar: se deshabilita si el documento tiene fecha de baja -->
+                        <p:commandButton styleClass="btn-info" value="Modificar" 
+                                         action="#{uiabmDocumentacionLista.irModificarDocumentacion(documentacion.codDocumentacion)}" 
+                                         disabled="#{not empty documentacion.fechaHoraBajaDocumentacion}" />
+
+                        <!-- Botón Eliminar -->
+                        <p:commandButton styleClass="small-delete-button" value="Eliminar" 
+                                         action="#{uiabmDocumentacionLista.darDeBajaDocumentacion(documentacion.codDocumentacion)}" 
+                                         update="@form:grid"
+                                         disabled="#{not empty documentacion.fechaHoraBajaDocumentacion}"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
