@@ -1,7 +1,9 @@
-
 package entidades;
 
 import java.sql.Timestamp;
+import java.util.Objects;
+
+
 
 public class Consultor extends Entidad {
     private int legajoConsultor;
@@ -11,6 +13,19 @@ public class Consultor extends Entidad {
     
     // Constructor
     public Consultor() {
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Consultor consultor = (Consultor) obj;
+        return legajoConsultor == consultor.legajoConsultor; // Compara usando ==
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(legajoConsultor); // Asegúrate de usar un atributo único
     }
     
     // Getters y Setters
@@ -44,7 +59,6 @@ public class Consultor extends Entidad {
     
     public void setFechaHoraBajaConsultor(Timestamp fechaHoraBajaConsultor) {
         this.fechaHoraBajaConsultor = fechaHoraBajaConsultor;
-    }
-   
+    }    
 }    
 
