@@ -5,8 +5,7 @@ import entidades.*;
 
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class EjemplosPersistencia {
 
@@ -38,7 +37,6 @@ public class EjemplosPersistencia {
         consultor1.setLegajoConsultor(44902);
         consultor1.setNombreApellidoConsultor("Emilio Amin");
         consultor1.setConsultorNroMaxTramite(10);
-        consultor1.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(consultor1);
 
@@ -46,7 +44,6 @@ public class EjemplosPersistencia {
         consultor2.setLegajoConsultor(44903);
         consultor2.setNombreApellidoConsultor("Marcos");
         consultor2.setConsultorNroMaxTramite(13);
-        consultor2.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(consultor2);
         
@@ -54,7 +51,6 @@ public class EjemplosPersistencia {
         consultor3.setLegajoConsultor(44904);
         consultor3.setNombreApellidoConsultor("Esteban Quito");
         consultor3.setConsultorNroMaxTramite(5);
-        consultor3.setFechaHoraBajaConsultor(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(consultor3);
         
@@ -63,13 +59,44 @@ public class EjemplosPersistencia {
         Agenda agenda = new Agenda();
         agenda.setAnio(2024);
         agenda.setSemana(29);
-        agenda.setFechaDesdeAgenda(new Timestamp(System.currentTimeMillis()));
-        agenda.setFechaHastaAgenda(new Timestamp(System.currentTimeMillis()));
+        agenda.setFechaDesdeAgenda(new Date(2024 - 1900, 6, 1));
+        agenda.setFechaHastaAgenda(new Date(2024 - 1900, 6, 7));
         agenda.addConsultor(consultor1);
         agenda.addConsultor(consultor2);
-        agenda.addConsultor(consultor3); 
+         
         
         FachadaPersistencia.getInstance().guardar(agenda);
+        
+        Agenda agenda1 = new Agenda();
+        agenda1.setAnio(2024);
+        agenda1.setSemana(30);
+        agenda.setFechaDesdeAgenda(new Date(2024 - 1900, 6, 8));
+        agenda.setFechaHastaAgenda(new Date(2024 - 1900, 6, 14));
+        agenda1.addConsultor(consultor3); 
+        
+        FachadaPersistencia.getInstance().guardar(agenda1);
+        
+        FachadaPersistencia.getInstance().guardar(agenda);
+        
+        Agenda agenda2 = new Agenda();
+        agenda2.setAnio(2024);
+        agenda2.setSemana(42);
+        agenda2.setFechaDesdeAgenda(new Date(2024 - 1900, 9, 14));
+        agenda2.setFechaHastaAgenda(new Date(2024 - 1900, 9, 20));
+        agenda2.addConsultor(consultor2);
+        agenda2.addConsultor(consultor3);   
+        
+        FachadaPersistencia.getInstance().guardar(agenda2);
+        
+        Agenda agenda3 = new Agenda();
+        agenda3.setAnio(2024);
+        agenda3.setSemana(41);
+        agenda3.setFechaDesdeAgenda(new Date(2024 - 1900, 9, 7));
+        agenda3.setFechaHastaAgenda(new Date(2024 - 1900, 9, 13));
+        agenda3.addConsultor(consultor2);
+        agenda3.addConsultor(consultor3);   
+        
+        FachadaPersistencia.getInstance().guardar(agenda3);
 
         
         // Clientes -----------------------------------------------------------------------------------
@@ -89,14 +116,12 @@ public class EjemplosPersistencia {
         EstadoTramite estado1 = new EstadoTramite();
         estado1.setCodEstadoTramite(15);
         estado1.setNombreEstadoTramite("Iniciado");
-        estado1.setFechaHoraBajaEstadoTramite(new Timestamp(System.currentTimeMillis()));
         
         FachadaPersistencia.getInstance().guardar(estado1);
         
         EstadoTramite estado2 = new EstadoTramite();
         estado2.setCodEstadoTramite(16);
         estado2.setNombreEstadoTramite("Etapa 1");
-        estado2.setFechaHoraBajaEstadoTramite(new Timestamp(System.currentTimeMillis()));
         
         FachadaPersistencia.getInstance().guardar(estado2);
         
@@ -117,6 +142,13 @@ public class EjemplosPersistencia {
         documentacion1.setFechaHoraBajaDocumentacion(null);
         
         FachadaPersistencia.getInstance().guardar(documentacion1);
+        
+        Documentacion documentacion2 = new Documentacion();
+        documentacion2.setCodDocumentacion(5);
+        documentacion2.setNombreDocumentacion("Pasaporte");
+        documentacion2.setFechaHoraBajaDocumentacion(null);
+        
+        FachadaPersistencia.getInstance().guardar(documentacion2);
         
         
         // TipoTramites -------------------------------------------------------------------------------
@@ -198,8 +230,6 @@ public class EjemplosPersistencia {
         tramite1.setNroTramite(23);
         tramite1.setPrecioTramite(2500);
         tramite1.setFechaHoraCargaTramite(new Timestamp(System.currentTimeMillis()));
-        tramite1.setFechaHoraFinEntregaDocumentacion(new Timestamp(System.currentTimeMillis()));
-        tramite1.setFechaHoraFinTramite(new Timestamp(System.currentTimeMillis()));
         tramite1.setFechaHoraVencimientoDocumentacion(new Timestamp(System.currentTimeMillis()));
         tramite1.setConsultor(consultor1);
         tramite1.setCliente(cliente1);
@@ -214,6 +244,12 @@ public class EjemplosPersistencia {
         tramiteDocumentacion1.setArchivo(null);
         tramiteDocumentacion1.setFechaHoraEntrega(null);
         tramiteDocumentacion1.setDocumentacion(documentacion1);
+        
+        TramiteDocumentacion tramiteDocumentacion2 = new TramiteDocumentacion();
+        tramiteDocumentacion2.setCodTramiteDocumentacion(13);
+        tramiteDocumentacion2.setArchivo(null);
+        tramiteDocumentacion2.setFechaHoraEntrega(new Timestamp(System.currentTimeMillis()));
+        tramiteDocumentacion2.setDocumentacion(documentacion2);
         
         
         // TramiteEstados 
@@ -230,9 +266,13 @@ public class EjemplosPersistencia {
         tramite1.addTramiteDocumentacionList(tramiteDocumentacion1);
         FachadaPersistencia.getInstance().guardar(tramiteDocumentacion1);
         
+        tramite1.addTramiteDocumentacionList(tramiteDocumentacion2);
+        FachadaPersistencia.getInstance().guardar(tramiteDocumentacion2);
+        
         // Guardo los TramiteEstado en Tramite
         tramite1.addTramiteEstadoList(tramiteEstado1);
         FachadaPersistencia.getInstance().guardar(tramiteEstado1);
+        
         
         // Guardo los cambios de Tramite
         FachadaPersistencia.getInstance().guardar(tramite1);
