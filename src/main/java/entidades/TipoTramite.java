@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TipoTramite extends Entidad {
-
-private int codTipoTramite;
+    private int codTipoTramite;
     private String nombreTipoTramite;
     private String descripcionTipoTramite;
     private String descripcionTipoTramiteWeb;
@@ -82,5 +81,9 @@ private int codTipoTramite;
 
     public void setDocumentaciones(List<Documentacion> documentaciones) {
         this.documentaciones = documentaciones;
-    }  
+    }
+    
+    public void addDocumentacion(Documentacion documentacion) {
+        this.documentaciones.add(documentacion);
+    }
 }
