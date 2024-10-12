@@ -56,21 +56,7 @@ public class UIActualizarLP implements Serializable {
     }
 
     public void filtrar() {
-        // Convertir Date a Timestamp antes de usarlo
-        Timestamp fechaDesdeTS = (fechaDesde != null) ? new Timestamp(fechaDesde.getTime()) : null;
 
-        // Obtener la lista de precios filtrada por la fecha seleccionada
-        List<DTOListaPrecioExportar> dtoListasPreciosExportar = controladorLP.obtenerListaPrecio(fechaDesdeTS);
-
-        // Crear una nueva lista para la grilla de UI
-        listaPreciogrillaFiltrada = new ArrayList<>();
-        for (DTOListaPrecioExportar dtoListaPrecioExportar : dtoListasPreciosExportar) {
-            UIActualizarLPGrilla uiActualizarLPGrilla = new UIActualizarLPGrilla();
-            uiActualizarLPGrilla.setCodListaPrecio(dtoListaPrecioExportar.getCodListaPrecio());
-            uiActualizarLPGrilla.setFechaHoraDesdeListaPrecio(dtoListaPrecioExportar.getFechaHoraDesdeListaPrecio());
-            uiActualizarLPGrilla.setFechaHoraHastaListaPrecio(dtoListaPrecioExportar.getFechaHoraHastaListaPrecio());
-            listaPreciogrillaFiltrada.add(uiActualizarLPGrilla);
-        }
     }
 
     private List<UIActualizarLPGrilla> listaPreciogrillaFiltrada;
