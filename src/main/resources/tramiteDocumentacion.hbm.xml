@@ -14,11 +14,10 @@
             <column name="codTramiteDocumentacion"/>
         </property>
         
-        <property name="archivo" type="binary">
-            <column name="archivo"/>
+        <property name="archivo">
+            <column name="archivo" sql-type="BLOB"/>
         </property>
                 
-        
         <property name="fechaHoraEntrega" column="fechaHoraEntrega" type="timestamp"/>
         
         <many-to-one name="documentacion" class="entidades.Documentacion" column="OIDDocumentacion" not-null="true"/>

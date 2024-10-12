@@ -18,14 +18,14 @@
             <column name="semana"/>
         </property>
         
-        <property name="fechaDesdeAgenda" column="fechaDesdeAgenda" type="date" not-null="true"/>
+        <property name="fechaDesdeAgenda" column="fechaDesdeAgenda" type="date"/>
 
-        <property name="fechaHastaAgenda" column="fechaHastaAgenda" type="date" not-null="true"/>
+        <property name="fechaHastaAgenda" column="fechaHastaAgenda" type="date"/>
 
-        <set name="consultores" table="Agenda_Consultor" cascade="all">
-            <key column="OIDAgenda"/>
+        <bag name="consultores" table="Agenda_Consultor" cascade="none">
+            <key column="OIDAgenda"  not-null="true"/>
             <many-to-many column="OIDConsultor" class="entidades.Consultor"/>
-        </set>
+        </bag>
         
     </class>
     

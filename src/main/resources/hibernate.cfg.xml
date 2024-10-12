@@ -6,7 +6,7 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/diseniogt?serverTimezone=UTC</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/disenio?serverTimezone=UTC</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">disenio</property>
         <property name="hibernate.current_session_context_class">thread</property>
@@ -16,20 +16,20 @@
         <property name="hibernate.c3p0.timeout">300</property>
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">3000</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!--Clases a mapear-->
         <mapping resource="tramiteEstado.hbm.xml"/>
         <mapping resource="agenda.hbm.xml"/>
         <mapping resource="consultor.hbm.xml"/>
         <mapping resource="tramite.hbm.xml"/>
-       <mapping resource="cliente.hbm.xml"/>
-       <mapping resource="tipoTramite.hbm.xml"/>
+        <mapping resource="cliente.hbm.xml"/>
+        <mapping resource="tipoTramite.hbm.xml"/>
         <mapping resource="documentacion.hbm.xml"/>
         <mapping resource="tramiteDocumentacion.hbm.xml"/>
         <mapping resource="categoriaTramite.hbm.xml"/>
-       <mapping resource="listaPrecio.hbm.xml"/>
-       <mapping resource="detallePrecioTipoTramite.hbm.xml"/>
+        <mapping resource="listaPrecio.hbm.xml"/>
+        <mapping resource="detallePrecioTipoTramite.hbm.xml"/>
         <mapping resource="transicionEstado.hbm.xml"/>
         <mapping resource="version.hbm.xml"/>
         <mapping resource="estadoTramite.hbm.xml"/>
