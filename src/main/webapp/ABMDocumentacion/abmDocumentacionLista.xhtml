@@ -167,13 +167,27 @@
                                          action="#{uiabmDocumentacionLista.irModificarDocumentacion(documentacion.codDocumentacion)}" 
                                          disabled="#{not empty documentacion.fechaHoraBajaDocumentacion}" />
 
-                        <!-- Botón Eliminar -->
+                        <!-- Botón Eliminar con confirmación -->
                         <p:commandButton styleClass="small-delete-button" value="Eliminar" 
-                                         action="#{uiabmDocumentacionLista.darDeBajaDocumentacion(documentacion.codDocumentacion)}" 
+                                         actionListener="#{uiabmDocumentacionLista.darDeBajaDocumentacion(documentacion.codDocumentacion)}" 
                                          update="@form:grid"
-                                         disabled="#{not empty documentacion.fechaHoraBajaDocumentacion}"/>
+                                         disabled="#{not empty documentacion.fechaHoraBajaDocumentacion}">
+                            <!-- Diálogo de confirmación para la baja -->
+                            <p:confirm header="Anulación de #{documentacion.codDocumentacion}" 
+                                       message="¿Está seguro de dar de baja el documento #{documentacion.nombreDocumentacion}?" 
+                                       icon="ui-icon-alert"/>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
+
+                <!-- Diálogo de confirmación global, similar al ejemplo -->
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-solid box-danger">
+                    <p:commandButton value="Si" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes" 
+                                     icon="fa fa-check" update="@form:grid"/>
+                    <p:commandButton value="No" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no" 
+                                     icon="fa fa-close" update="@form:grid"/>
+                </p:confirmDialog>
+
             </div>
         </h:form>
     </ui:define>
