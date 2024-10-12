@@ -11,6 +11,7 @@ public class Tramite extends Entidad{
     private Timestamp fechaHoraVencimientoDocumentacion;
     private Timestamp fechaHoraFinEntregaDocumentacion;
     private Timestamp fechaHoraFinTramite;
+    private Timestamp fechaHoraBajaTramite;
     private Consultor consultor;
     private Cliente cliente;
     private TipoTramite tipoTramite;
@@ -32,6 +33,16 @@ public class Tramite extends Entidad{
         this.nroTramite = nroTramite;
     }
 
+    public Timestamp getFechaHoraBajaTramite() {
+        return fechaHoraBajaTramite;
+    }
+
+    public void setFechaHoraBajaTramite(Timestamp fechaHoraBajaTramite) {
+        this.fechaHoraBajaTramite = fechaHoraBajaTramite;
+    }
+    
+    
+    
     public float getPrecioTramite() {
         return precioTramite;
     }
