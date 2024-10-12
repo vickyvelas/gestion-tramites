@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:adm="http://github.com/adminfaces"
+                template="#{layoutMB.template}">
+    <ui:define name="metadata">
+        <ui:param name="title" value="Detalle del Cliente"/> <!-- Automatic create breadCrumb and page title when param 'title' is provided. --> 
+        
+        <style type="text/css">
+            .ui-datatable .ui-datatable-header {
+                text-align: right !important;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="description">
+        Datos del Cliente: #{uiDetalleCliente.nombreApellidoCliente}
+    </ui:define>
+
+    <ui:define name="body">
+    <h:form>
+        <p:focus context="@form"/>
+            <div class="box box-primary">
+               
+        <div class="formgrid grid">
+            <!-- Campo para NOMBRE Y APELLIDO --> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel for="nombre" value="Apellido y Nombre:" />
+                        </div>
+                
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="nombre" value="#{uiDetalleCliente.nombreApellidoCliente}" />
+                    </div>
+                    </div>
+             <!-- Campo para CUIT -->
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel for="cuit"  value="CUIT:" />
+                        </div>
+                
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="cuit" value="#{uiDetalleCliente.cuitCliente}" />
+                    </div>
+                    </div>
+             
+          <!-- Campo para DIRECCION -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                       <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel for="direccion" value="Dirección:" />
+                       </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="direccion" value="#{uiDetalleCliente.direccion}" />
+                    </div>
+                    </div>
+          
+          <!-- Campo para MAIL -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                            <p:outputLabel for="mail"  value="Mail:" />
+                        </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                         <p:inputText id="mail" value="#{uiDetalleCliente.mailCliente}" />
+                    </div>
+                    </div>
+          <!-- Campo para TELEFONO -->
+          
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11">
+                          <p:outputLabel for="telefono" value="Teléfono:" />
+                        </div>
+                    <div class="ui-sm-12 ui-g-11"> 
+                        <p:inputText id="telefono" value="#{uiDetalleCliente.telefonoCliente}" />
+                    </div>
+                    </div>
+            </div>
+                   
+                   
+                       
+            
+<!-- BOTONEES -->
+                     <div class="box-header with-border">
+                         <div id="main-buttons">
+
+                            <p:commandButton value="Guardar Cambios"     styleClass="btn-primary"/>
+                         </div>
+                      </div>
+                
+                  <div class="box-header with-border">
+                         <div id="main-buttons">
+
+                            <p:commandButton value="Cancelar"    styleClass="btn-primary"/>
+                         </div>
+                   </div>
+                
+  
+            </div>
+   </h:form>
+
+ </ui:define>
+    </ui:composition>
