@@ -5,6 +5,7 @@
 package ListaPrecio.beans;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -12,8 +13,8 @@ import java.sql.Timestamp;
  */
 public class UIActualizarLPGrilla {
     private int codListaPrecio;
-    private Timestamp fechaHoraDesdeListaPrecio;
-    private Timestamp fechaHoraHastaListaPrecio;
+    private Date fechaHoraDesdeListaPrecio;
+    private Date fechaHoraHastaListaPrecio;
 
     public UIActualizarLPGrilla() {
     }
@@ -26,19 +27,19 @@ public class UIActualizarLPGrilla {
         this.codListaPrecio = codListaPrecio;
     }
 
-    public Timestamp getFechaHoraDesdeListaPrecio() {
+    public Date getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
 
-    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
+    public void setFechaHoraDesdeListaPrecio(Date fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
 
-    public Timestamp getFechaHoraHastaListaPrecio() {
+    public Date getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
 
-    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
+    public void setFechaHoraHastaListaPrecio(Date fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
 }

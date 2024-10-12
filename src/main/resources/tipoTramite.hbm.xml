@@ -27,12 +27,12 @@
         </property>
 
         <property name="nombreTipoTramite" type="string">
-            <column name="nombreTipoTramite" not-null="true"/>
+            <column name="nombreTipoTramite"/>
         </property>
 
         <property name="fechaHoraBajaTipoTramite" column="fechaHoraBajaTipoTramite" type="timestamp"/>
         
-        <many-to-one name="categoriaTramite" class="entidades.CategoriaTramite" column="OIDCategoriaTramite" not-null="true"/>
+        <many-to-one name="categoriaTramite" class="entidades.CategoriaTramite" column="OIDCategoriaTramite"/>
         
         <bag name="documentaciones" table="TipoTramite_Documentacion" cascade="all">
             <key column="OIDTipoTramite"/>

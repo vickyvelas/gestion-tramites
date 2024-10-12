@@ -214,11 +214,19 @@
 
                     <!-- Campo para arrastrar y soltar archivo Excel -->
                     <div>
-                        <p:fileUpload listener="#{uiExcelFile.handleFileUpload}" 
+                        <p:fileUpload listener="#{uiImportatLP.handleFileUpload}" 
                                   dragDropSupport="false" auto="true" onstart="showBar()" oncomplete="hideBar()"
                                    mode="advanced"  multiple="false" update="messages" sizeLimit="100000000" 
                                   />
                     </div>
+                    
+                    <!-- Botón para confirmar la carga del archivo Excel -->
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad">
+                        <div class="ui-sm-12 ui-g-4">
+                            <p:commandButton value="Importar" action="#{uiImportatLP.importar()}" icon="fa fa-check" 
+                                             styleClass="btn-primary" /> 
+                        </div>
+                    </div>
 
                     <!-- Botón para volver al menu principal -->
                     <div class="ui-sm-12 ui-g-6 ui-g-nopad">

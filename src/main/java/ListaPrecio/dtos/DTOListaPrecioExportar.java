@@ -6,6 +6,7 @@ package ListaPrecio.dtos;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ import java.util.List;
  */
 public class DTOListaPrecioExportar {
     private int codListaPrecio;
-    private Timestamp fechaHoraDesdeListaPrecio;
-    private Timestamp fechaHoraHastaListaPrecio;
+    private Date fechaHoraDesdeListaPrecio;
+    private Date fechaHoraHastaListaPrecio;
     private List<DTODetalleListaPrecioExportar> detalleListaPrecioExportar = new ArrayList<>();
 
     public List<DTODetalleListaPrecioExportar> getDetalleListaPrecioExportar() {
@@ -38,19 +39,19 @@ public class DTOListaPrecioExportar {
         this.codListaPrecio = codListaPrecio;
     }
 
-    public Timestamp getFechaHoraDesdeListaPrecio() {
+    public Date getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
 
-    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
+    public void setFechaHoraDesdeListaPrecio(Date fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
 
-    public Timestamp getFechaHoraHastaListaPrecio() {
+    public Date getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
 
-    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
+    public void setFechaHoraHastaListaPrecio(Date fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
     
