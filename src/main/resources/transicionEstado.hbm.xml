@@ -14,7 +14,7 @@
             <column name="nroTransicionEstado"/>
         </property>
         
-        <many-to-one name="estadoActual" class="entidades.EstadoTramite" column="OIDEstadoTramite" not-null="true"/>
+        <many-to-one name="estadoActual" class="entidades.EstadoTramite" column="OIDEstadoTramite"/>
         
         <bag name="estadosDestino" table="Estados_Destino" cascade="all">
             <key column="OIDTransicionEstado"/>
