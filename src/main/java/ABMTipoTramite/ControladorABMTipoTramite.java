@@ -1,5 +1,5 @@
 package ABMTipoTramite;
-
+//fsfdfsvsvdfdw
 import ABMTipoTramite.dtos.DTOModificarTipoTramite;
 import ABMTipoTramite.dtos.DTOModificarTipoTramiteIn;
 import ABMTipoTramite.dtos.DTONuevoTipoTramite;
