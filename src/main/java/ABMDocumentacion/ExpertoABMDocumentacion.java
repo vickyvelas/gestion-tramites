@@ -84,8 +84,6 @@ public class ExpertoABMDocumentacion {
         criterioCod.setOperacion("=");
         criterioCod.setValor(codDocumentacion);
 
-        criterioList.add(criterioCod);
-
         Documentacion documentacion = (Documentacion) FachadaPersistencia.getInstance().buscar("Documentacion", criterioList).get(0);
 
         ModificarDocumentacionDTO modificarDocumentacionDTO = new ModificarDocumentacionDTO();
@@ -95,10 +93,12 @@ public class ExpertoABMDocumentacion {
         return modificarDocumentacionDTO;
     }
 
+    
     // Método para modificar la documentación
-    public void modificarDocumentacion(ModificarDocumentacionDTOIn modificarDocumentacionDTOIn) {
+    public void modificarDocumentacion(ModificarDocumentacionDTOIn modificarDocumentacionDTOIn) throws ABMDocumentacionException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
 
+        // Buscar la documentación actual
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio criterioCod = new DTOCriterio();
         criterioCod.setAtributo("codDocumentacion");
@@ -109,11 +109,32 @@ public class ExpertoABMDocumentacion {
 
         Documentacion documentacion = (Documentacion) FachadaPersistencia.getInstance().buscar("Documentacion", criterioList).get(0);
 
+        // Verificar si el nuevo nombre ya está en uso por otra documentación
+        List<DTOCriterio> criterioNombre = new ArrayList<>();
+        DTOCriterio criterioNombreDoc = new DTOCriterio();
+        criterioNombreDoc.setAtributo("nombreDocumentacion");
+        criterioNombreDoc.setOperacion("=");
+        criterioNombreDoc.setValor(modificarDocumentacionDTOIn.getNombreDocumentacion());
+        criterioNombre.add(criterioNombreDoc);
+
+        List<Object> lDocumentacionConMismoNombre = FachadaPersistencia.getInstance().buscar("Documentacion", criterioNombre);
+
+        if (!lDocumentacionConMismoNombre.isEmpty()) {
+            Documentacion otraDocumentacion = (Documentacion) lDocumentacionConMismoNombre.get(0);
+
+            // Si el nombre ya existe y pertenece a otra documentación
+            if (otraDocumentacion.getCodDocumentacion() != modificarDocumentacionDTOIn.getCodDocumentacion()) {
+                throw new ABMDocumentacionException("El nombre de la documentación ya está en uso por otra documentación.");
+            }
+        }
+
+        // Si el nombre no está en uso o pertenece a la misma documentación, proceder con la modificación
         documentacion.setNombreDocumentacion(modificarDocumentacionDTOIn.getNombreDocumentacion());
 
         FachadaPersistencia.getInstance().guardar(documentacion);
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
+
 
     // Método para dar de baja una documentación
     public void darDeBajaDocumentacion(int codDocumentacion) throws ABMDocumentacionException {

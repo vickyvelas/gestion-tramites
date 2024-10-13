@@ -20,7 +20,7 @@ public class ControladorABMDocumentacion {
        expertoABMDocumentacion.agregarDocumentacion(nuevaDocumentacionDTO);
    }
 
-   public void modificarDocumentacion(ModificarDocumentacionDTOIn modificarDocumentacionDTOIn){
+   public void modificarDocumentacion(ModificarDocumentacionDTOIn modificarDocumentacionDTOIn) throws ABMDocumentacionException{
        expertoABMDocumentacion.modificarDocumentacion(modificarDocumentacionDTOIn);
    }
 

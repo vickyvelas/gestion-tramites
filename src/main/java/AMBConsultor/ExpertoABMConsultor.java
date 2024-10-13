@@ -155,8 +155,7 @@ public class ExpertoABMConsultor  {
         criterioList.add(dtoFecha);
 
         // Buscar agendas activas relacionadas con el consultor
-        List<Object> agendasRelacionadas = FachadaPersistencia.getInstance()
-                                               .buscar("Agenda", criterioList);
+        List<Object> agendasRelacionadas = FachadaPersistencia.getInstance().buscar("Agenda", criterioList);
 
         for (Object obj : agendasRelacionadas) {
             Agenda agenda = (Agenda) obj; // Realizar el cast a Agenda
