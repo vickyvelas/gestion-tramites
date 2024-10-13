@@ -25,6 +25,8 @@
         <property name="fechaHoraFinTramite" column="fechaHoraFinTramite" type="timestamp"/>
         
         <property name="fechaHoraFinEntregaDocumentacion" column="fechaHoraFinEntregaDocumentacion" type="timestamp"/>
+        
+        <property name="fechaHoraBajaTramite" column="fechaHoraBajaTramite" type="timestamp"/>
 
         <many-to-one name="consultor" class="entidades.Consultor" column="OIDConsultor" not-null="true"/>
         
