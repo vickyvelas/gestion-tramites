@@ -59,7 +59,11 @@ public class ExpertoABMConsultor  {
     // Método para agregar un nuevo consultor
     public void agregarConsultor(NuevoConsultorDTO nuevoConsultorDTO) throws ConsultorException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
-
+        
+        // Validación de cantidad máxima de trámites
+    if (nuevoConsultorDTO.getConsultorNroMaxTramite() <= 0) {
+        throw new ConsultorException("La cantidad máxima de trámites debe ser mayor a cero");
+    }
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
         dto.setAtributo("legajoConsultor");
