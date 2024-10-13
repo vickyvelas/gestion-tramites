@@ -40,20 +40,26 @@ public class UIABMDocumentacion implements Serializable {
         }
     }
 
-    public String agregarModificarDocumentacion() throws ABMDocumentacionException {
-        if (insert) {
-            NuevaDocumentacionDTO nuevaDocumentacionDTO = new NuevaDocumentacionDTO();
-            nuevaDocumentacionDTO.setCodDocumentacion(getCodDocumentacion());
-            nuevaDocumentacionDTO.setNombreDocumentacion(getNombreDocumentacion());
-            controladorABMDocumentacion.agregarDocumentacion(nuevaDocumentacionDTO);
-        } else {
-            ModificarDocumentacionDTOIn modificarDocumentacionDTOIn = new ModificarDocumentacionDTOIn();
-            modificarDocumentacionDTOIn.setCodDocumentacion(getCodDocumentacion());
-            modificarDocumentacionDTOIn.setNombreDocumentacion(getNombreDocumentacion());
-            controladorABMDocumentacion.modificarDocumentacion(modificarDocumentacionDTOIn);
+     public String agregarModificarDocumentacion() throws ABMDocumentacionException {
+        try {
+            if (insert) {
+                NuevaDocumentacionDTO nuevaDocumentacionDTO = new NuevaDocumentacionDTO();
+                nuevaDocumentacionDTO.setCodDocumentacion(getCodDocumentacion());
+                nuevaDocumentacionDTO.setNombreDocumentacion(getNombreDocumentacion());
+                controladorABMDocumentacion.agregarDocumentacion(nuevaDocumentacionDTO);
+            } else {
+                ModificarDocumentacionDTOIn modificarDocumentacionDTOIn = new ModificarDocumentacionDTOIn();
+                modificarDocumentacionDTOIn.setCodDocumentacion(getCodDocumentacion());
+                modificarDocumentacionDTOIn.setNombreDocumentacion(getNombreDocumentacion());
+                controladorABMDocumentacion.modificarDocumentacion(modificarDocumentacionDTOIn);
+            }
+             return BeansUtils.redirectToPreviousPage();
+        } catch (Exception e) {  
+            Messages.create(e.getMessage()).fatal().add();
+            return "";
         }
-        return BeansUtils.redirectToPreviousPage();
-}
+    }
+
 
     // Getters y Setters
     public boolean isInsert() {
