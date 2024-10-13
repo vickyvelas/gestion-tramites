@@ -92,7 +92,6 @@ public void agregarDocumentacion(NuevaDocumentacionDTO nuevaDocumentacionDTO) th
     FachadaPersistencia.getInstance().finalizarTransaccion();
 }
 
-
     // Método para buscar una documentación por código para modificar
     public ModificarDocumentacionDTO buscarDocumentacionAModificar(int codDocumentacion) {
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -148,6 +147,7 @@ public void agregarDocumentacion(NuevaDocumentacionDTO nuevaDocumentacionDTO) th
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
 
+
     // Método para dar de baja una documentación
     public void darDeBajaDocumentacion(int codDocumentacion) throws ABMDocumentacionException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -168,3 +168,4 @@ public void agregarDocumentacion(NuevaDocumentacionDTO nuevaDocumentacionDTO) th
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
 }
+
