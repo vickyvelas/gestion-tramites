@@ -43,7 +43,7 @@ public class EjemplosPersistencia {
         Consultor consultor2 = new Consultor();
         consultor2.setLegajoConsultor(44903);
         consultor2.setNombreApellidoConsultor("Marcos");
-        consultor2.setConsultorNroMaxTramite(13);
+        consultor2.setConsultorNroMaxTramite(1);
 
         FachadaPersistencia.getInstance().guardar(consultor2);
         
@@ -107,9 +107,19 @@ public class EjemplosPersistencia {
         cliente1.setMailCliente("lucasperez@hotmail.com");
         cliente1.setTelefonoCliente(26199999);
         cliente1.setFechaHoraAltaCliente(new Timestamp(System.currentTimeMillis()));
-        cliente1.setFechaHoraBajaCliente(new Timestamp(System.currentTimeMillis()));
 
         FachadaPersistencia.getInstance().guardar(cliente1);
+        
+        Cliente cliente2 = new Cliente();
+        cliente2.setCuitCliente(20202051);
+        cliente2.setDireccionCliente("España 575");
+        cliente2.setNombreApellidoCliente("Pedro Sanchez");
+        cliente2.setMailCliente("pedritosanchez@hotmail.com");
+        cliente2.setTelefonoCliente(26200000);
+        cliente2.setFechaHoraAltaCliente(new Timestamp(System.currentTimeMillis()));
+        cliente2.setFechaHoraBajaCliente(new Timestamp(System.currentTimeMillis()));
+
+        FachadaPersistencia.getInstance().guardar(cliente2);
         
         
         // EstadoTramites -----------------------------------------------------------------------------
@@ -128,28 +138,37 @@ public class EjemplosPersistencia {
         
         // CategoriaTramites --------------------------------------------------------------------------
         CategoriaTramite categoriaTramite1 = new CategoriaTramite();
-        categoriaTramite1.setCodCategoriaTramite(23);
+        categoriaTramite1.setCodCategoriaTramite(1);
         categoriaTramite1.setNombreCategoriaTramite("DNIs");
-        categoriaTramite1.setFechaHoraBajaCategoriaTramite(new Timestamp(System.currentTimeMillis()));
         
         FachadaPersistencia.getInstance().guardar(categoriaTramite1);
+        
+        CategoriaTramite categoriaTramite2 = new CategoriaTramite();
+        categoriaTramite2.setCodCategoriaTramite(1);
+        categoriaTramite2.setNombreCategoriaTramite("Ciudadanias");
+        
+        FachadaPersistencia.getInstance().guardar(categoriaTramite2);
         
         
         // Documentaciones ----------------------------------------------------------------------------
         Documentacion documentacion1 = new Documentacion();
         documentacion1.setCodDocumentacion(4);
         documentacion1.setNombreDocumentacion("Partida de Nacimiento");
-        documentacion1.setFechaHoraBajaDocumentacion(null);
         
         FachadaPersistencia.getInstance().guardar(documentacion1);
         
         Documentacion documentacion2 = new Documentacion();
         documentacion2.setCodDocumentacion(5);
         documentacion2.setNombreDocumentacion("Pasaporte");
-        documentacion2.setFechaHoraBajaDocumentacion(null);
         
         FachadaPersistencia.getInstance().guardar(documentacion2);
         
+        Documentacion documentacion3 = new Documentacion();
+        documentacion3.setCodDocumentacion(6);
+        documentacion3.setNombreDocumentacion("DNI impreso");
+        documentacion3.setFechaHoraBajaDocumentacion(new Timestamp(System.currentTimeMillis()));
+        
+        FachadaPersistencia.getInstance().guardar(documentacion2);
         
         // TipoTramites -------------------------------------------------------------------------------
         TipoTramite tipoTramite1 = new TipoTramite();
@@ -158,7 +177,6 @@ public class EjemplosPersistencia {
         tipoTramite1.setDescripcionTipoTramiteWeb("noseWeb");
         tipoTramite1.setMaxDiaEntrega(20);
         tipoTramite1.setNombreTipoTramite("Nuevo DNI");
-        tipoTramite1.setFechaHoraBajaTipoTramite(new Timestamp(System.currentTimeMillis()));
         tipoTramite1.setCategoriaTramite(categoriaTramite1);
         tipoTramite1.addDocumentacion(documentacion1);
         
@@ -170,18 +188,27 @@ public class EjemplosPersistencia {
         tipoTramite2.setDescripcionTipoTramiteWeb("noseWeb");
         tipoTramite2.setMaxDiaEntrega(25);
         tipoTramite2.setNombreTipoTramite("Ciudadania Italiana");
-        tipoTramite2.setFechaHoraBajaTipoTramite(new Timestamp(System.currentTimeMillis()));
         tipoTramite2.setCategoriaTramite(categoriaTramite1);
         tipoTramite2.addDocumentacion(documentacion1);
+        tipoTramite2.addDocumentacion(documentacion2);
+        
+        FachadaPersistencia.getInstance().guardar(tipoTramite2);
+        
+        TipoTramite tipoTramite3 = new TipoTramite();
+        tipoTramite3.setCodTipoTramite(3);
+        tipoTramite3.setDescripcionTipoTramite("nose");
+        tipoTramite3.setDescripcionTipoTramiteWeb("noseWeb");
+        tipoTramite3.setMaxDiaEntrega(25);
+        tipoTramite3.setNombreTipoTramite("EjemploBaja");
+        tipoTramite3.setCategoriaTramite(categoriaTramite1);
         
         FachadaPersistencia.getInstance().guardar(tipoTramite2);
         
         // ListaPrecio --------------------------------------------------------------------------------
         ListaPrecio listaPrecio1 = new ListaPrecio();
         listaPrecio1.setCodListaPrecio(2);
-        listaPrecio1.setFechaHoraDesdeListaPrecio(new Timestamp(System.currentTimeMillis()));
-        listaPrecio1.setFechaHoraHastaListaPrecio(new Timestamp(System.currentTimeMillis()));
-        listaPrecio1.setFechaHoraBajaListaPrecio(new Timestamp(System.currentTimeMillis()));
+        listaPrecio1.setFechaHoraDesdeListaPrecio(Timestamp.valueOf("2024-08-19 12:00:00"));
+        listaPrecio1.setFechaHoraHastaListaPrecio(Timestamp.valueOf("2024-12-15 12:00:00"));
 
         // DetallePrecioTipoTramite
         DetallePrecioTipoTramite detallePrecio1 = new DetallePrecioTipoTramite();
@@ -207,9 +234,8 @@ public class EjemplosPersistencia {
         // Version ------------------------------------------------------------------------------------
         Version version1 = new Version();
         version1.setCodVersion(25);
-        version1.setFechaHoraDesdeVersion(new Timestamp(System.currentTimeMillis()));
-        version1.setFechaHoraHastaVersion(new Timestamp(System.currentTimeMillis()));
-        version1.setFechaHoraBajaVersion(new Timestamp(System.currentTimeMillis()));
+        version1.setFechaHoraDesdeVersion(Timestamp.valueOf("2024-09-15 12:00:00"));
+        version1.setFechaHoraHastaVersion(Timestamp.valueOf("2024-11-15 12:00:00"));
         version1.setTipoTramite(tipoTramite1);
         
         // TransicionEstados
@@ -230,8 +256,8 @@ public class EjemplosPersistencia {
         tramite1.setNroTramite(23);
         tramite1.setPrecioTramite(2500);
         tramite1.setFechaHoraCargaTramite(new Timestamp(System.currentTimeMillis()));
-        tramite1.setFechaHoraVencimientoDocumentacion(new Timestamp(System.currentTimeMillis()));
-        tramite1.setConsultor(consultor1);
+        tramite1.setFechaHoraVencimientoDocumentacion(Timestamp.valueOf("2024-11-11 12:00:00"));
+        tramite1.setConsultor(consultor2);
         tramite1.setCliente(cliente1);
         tramite1.setEstadoTramite(estado1);
         tramite1.setTipoTramite(tipoTramite1);
@@ -241,14 +267,10 @@ public class EjemplosPersistencia {
         // TramiteDocumentaciones 
         TramiteDocumentacion tramiteDocumentacion1 = new TramiteDocumentacion();
         tramiteDocumentacion1.setCodTramiteDocumentacion(12);
-        tramiteDocumentacion1.setArchivo(null);
-        tramiteDocumentacion1.setFechaHoraEntrega(null);
         tramiteDocumentacion1.setDocumentacion(documentacion1);
         
         TramiteDocumentacion tramiteDocumentacion2 = new TramiteDocumentacion();
         tramiteDocumentacion2.setCodTramiteDocumentacion(13);
-        tramiteDocumentacion2.setArchivo(null);
-        tramiteDocumentacion2.setFechaHoraEntrega(new Timestamp(System.currentTimeMillis()));
         tramiteDocumentacion2.setDocumentacion(documentacion2);
         
         
@@ -257,8 +279,6 @@ public class EjemplosPersistencia {
         tramiteEstado1.setNroLineaTramiteEstado(1);
         tramiteEstado1.setObservacionTramiteEstado("Algo");
         tramiteEstado1.setFechaHoraDesdeTramiteEstado(new Timestamp(System.currentTimeMillis()));
-        tramiteEstado1.setFechaHoraHastaTramiteEstado(new Timestamp(System.currentTimeMillis()));
-        tramiteEstado1.setFechaHoraBajaTramiteEstado(new Timestamp(System.currentTimeMillis()));
         tramiteEstado1.setEstadoTramite(estado1);
         
         

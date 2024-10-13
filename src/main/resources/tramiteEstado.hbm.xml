@@ -20,7 +20,7 @@
         
         <property name="fechaHoraDesdeTramiteEstado" column="fechaHoraDesdeTramiteEstado" type="timestamp" not-null="true"/>
 
-        <property name="fechaHoraHastaTramiteEstado" column="fechaHoraHastaTramiteEstado" type="timestamp" not-null="true"/>
+        <property name="fechaHoraHastaTramiteEstado" column="fechaHoraHastaTramiteEstado" type="timestamp"/>
 
         <property name="fechaHoraBajaTramiteEstado" column="fechaHoraBajaTramiteEstado" type="timestamp"/>
         
