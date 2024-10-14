@@ -13,6 +13,7 @@ import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ public class UIAgregarConsultorAgenda implements Serializable {
     
     @PostConstruct
     public void init() {
-        // Obtener los parámetros de anio, mes y semana desde la URL en un solo lugar
+        // Obtener los parámetros de anio y semana desde la URL en un solo lugar
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
@@ -37,22 +38,28 @@ public class UIAgregarConsultorAgenda implements Serializable {
         try {
             // Verificar y obtener los parámetros de la URL
             String anioParam = request.getParameter("anio");
-            String mesParam = request.getParameter("mes");
             String semanaParam = request.getParameter("semana");
 
             // Si los parámetros existen, parsearlos y asignarlos
             if (anioParam != null) {
                 this.anio = Integer.parseInt(anioParam);
-            }
-
-            if (mesParam != null) {
-                this.mes = Integer.parseInt(mesParam);
+                // Validar el año
+                if (this.anio < 2000 || this.anio > 2050) {
+                    throw new NumberFormatException("El año debe estar entre 2000 y 2050.");
+                }
             }
 
             if (semanaParam != null) {
                 this.semana = Integer.parseInt(semanaParam);
+                // Validar la semana
+                if (this.semana < 1 || this.semana > 53) {
+                    throw new NumberFormatException("La semana debe estar entre 1 y 53.");
+                }
             }
-            
+
+            // Calcular el mes a partir de la semana y año
+            this.mes = calcularMesDesdeSemana(anio, semana);
+
             // Llamar al método para cargar los consultores no asignados a la agenda
             this.consultoresNoAsignados = cargarConsultoresNoAsignados(anio, semana);
             // Llamar al método para cargar los consultores asignados a la agenda
@@ -63,9 +70,17 @@ public class UIAgregarConsultorAgenda implements Serializable {
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cargar los consultores", e.getMessage()));
         } catch (NumberFormatException e) {
             FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al parsear los parámetros de la URL", e.getMessage()));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en los parámetros de la URL", e.getMessage()));
         }
     }
+
+    // Método para calcular el mes a partir de la semana y el año
+    private int calcularMesDesdeSemana(int anio, int semana) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setWeekDate(anio, semana, Calendar.MONDAY); // Establecer a lunes de la semana
+        return calendar.get(Calendar.MONTH) + 1; // Mes es 0-indexed, sumar 1
+    }
+
 
     // Getters y setters para los atributos
     public ControladorConfigurarAgenda getControladorConfigurarAgenda() {

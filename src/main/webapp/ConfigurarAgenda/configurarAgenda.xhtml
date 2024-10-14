@@ -84,10 +84,12 @@
                         <!-- Búsqueda de año y mes a la derecha -->
                         <div class="search-container">
                             <h:outputLabel for="anio" value="Año:" class="label-large"/>
-                            <h:inputText id="anio" value="#{uiConfigurarAgenda.anio}" required="true" label="Año" class="input-large input-margin" style="width: 120px;">
-                                <f:validateLongRange minimum="1900" maximum="2100" />
-                            </h:inputText>
-                            <h:message for="anio" />
+                            <h:selectOneMenu id="anio" value="#{uiConfigurarAgenda.anio}" required="true" label="Año" 
+                                            class="input-large input-margin" style="width: 140px ;display: inline-block;">
+                               <f:selectItems value="#{uiConfigurarAgenda.listaAnios}" />
+                               <p:ajax update="@form" listener="#{uiConfigurarAgenda.buscarAgendas()}"/>
+                           </h:selectOneMenu>
+
 
                             <h:outputLabel for="mes" value="Mes:" class="label-large"/>
                             <h:selectOneMenu id="mes" value="#{uiConfigurarAgenda.mes}" required="true" label="Mes" class="input-large" style="width: 140px;">
@@ -103,11 +105,9 @@
                                 <f:selectItem itemLabel="Octubre" itemValue="10" />
                                 <f:selectItem itemLabel="Noviembre" itemValue="11" />
                                 <f:selectItem itemLabel="Diciembre" itemValue="12" />
+                                <p:ajax update="@form" listener="#{uiConfigurarAgenda.buscarAgendas()}"/>
                             </h:selectOneMenu>
                             <h:message for="mes" />
-
-                            <!-- Botón de buscar -->
-                            <p:commandButton value="Buscar" action="#{uiConfigurarAgenda.buscarAgendas()}" update="@form" styleClass="btn-primary search-button" />
                         </div>
                     </div>
 

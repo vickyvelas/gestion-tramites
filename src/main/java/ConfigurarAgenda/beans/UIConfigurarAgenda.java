@@ -31,6 +31,17 @@ public class UIConfigurarAgenda implements Serializable {
     private int mes;
     private int semana;
     private List<AgendaSemanaGrillaUI> agendasSemanaGrilla;
+    private List<Integer> listaAnios;
+
+    public List<Integer> getListaAnios() {
+        if (listaAnios == null) {
+            listaAnios = new ArrayList<>();
+            for (int i = 2000; i <= 2050; i++) {
+                listaAnios.add(i);
+            }
+        }
+        return listaAnios;
+    }
     
     public String getMesNombre() {
         Map<Integer, String> meses = new HashMap<>();
@@ -65,13 +76,22 @@ public class UIConfigurarAgenda implements Serializable {
                 int anio = Integer.parseInt(anioParam);
                 int mes = Integer.parseInt(mesParam);
 
-                // Validar los valores
-                if (anio > 0 && mes > 0 && mes <= 12) {
-                    this.anio = anio;
-                    this.mes = mes;
+                // Validar los valores de anio y mes
+                if (anio >= 2000 && anio <= 2050) {
+                    if (mes >= 1 && mes <= 12) {
+                        this.anio = anio;
+                        this.mes = mes;
+                    } else {
+                        // Mostrar mensaje de error para mes inválido
+                        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                            "Mes inválido", "El mes debe estar entre 1 y 12."));
+                        setDefaultDate(); // Usar la fecha actual como predeterminada
+                    }
                 } else {
-                    // Si los valores no son válidos, usar la fecha actual
-                    setDefaultDate();
+                    // Mostrar mensaje de error para año inválido
+                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                        "Año inválido", "El año debe estar entre 2000 y 2050."));
+                    setDefaultDate(); // Usar la fecha actual como predeterminada
                 }
             } else {
                 // Si no se reciben parámetros, usar la fecha actual
@@ -80,9 +100,12 @@ public class UIConfigurarAgenda implements Serializable {
         } catch (NumberFormatException e) {
             // Manejo de excepción para entradas inválidas
             System.out.println("Error al parsear anio o mes: " + e.getMessage());
-            setDefaultDate();
+            facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                "Entrada inválida", "Año o mes no son números válidos."));
+            setDefaultDate(); // Usar la fecha actual como predeterminada
         }
     }
+
 
     // Método para establecer la fecha por defecto
     private void setDefaultDate() {
