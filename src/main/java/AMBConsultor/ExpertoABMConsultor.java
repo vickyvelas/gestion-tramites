@@ -55,15 +55,14 @@ public class ExpertoABMConsultor  {
 
         return consultoresResultado;
     }
-
     // Método para agregar un nuevo consultor
     public void agregarConsultor(NuevoConsultorDTO nuevoConsultorDTO) throws ConsultorException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
-        
         // Validación de cantidad máxima de trámites
     if (nuevoConsultorDTO.getConsultorNroMaxTramite() <= 0) {
         throw new ConsultorException("La cantidad máxima de trámites debe ser mayor a cero");
     }
+        
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
         dto.setAtributo("legajoConsultor");
@@ -159,8 +158,7 @@ public class ExpertoABMConsultor  {
         criterioList.add(dtoFecha);
 
         // Buscar agendas activas relacionadas con el consultor
-        List<Object> agendasRelacionadas = FachadaPersistencia.getInstance()
-                                               .buscar("Agenda", criterioList);
+        List<Object> agendasRelacionadas = FachadaPersistencia.getInstance().buscar("Agenda", criterioList);
 
         for (Object obj : agendasRelacionadas) {
             Agenda agenda = (Agenda) obj; // Realizar el cast a Agenda
