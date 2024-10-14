@@ -57,40 +57,46 @@ public class ExpertoABMConsultor  {
     }
     // Método para agregar un nuevo consultor
     public void agregarConsultor(NuevoConsultorDTO nuevoConsultorDTO) throws ConsultorException {
-        FachadaPersistencia.getInstance().iniciarTransaccion();
-        // Validación de cantidad máxima de trámites
+    FachadaPersistencia.getInstance().iniciarTransaccion();
+
+    // Validación de que el legajo del consultor sea mayor a 0
+    if (nuevoConsultorDTO.getLegajoConsultor() <= 0) {
+        throw new ConsultorException("El legajo del consultor debe ser mayor a cero");
+    }
+
+    // Validación de la cantidad máxima de trámites
     if (nuevoConsultorDTO.getConsultorNroMaxTramite() <= 0) {
         throw new ConsultorException("La cantidad máxima de trámites debe ser mayor a cero");
     }
-        
-        List<DTOCriterio> criterioList = new ArrayList<>();
-        DTOCriterio dto = new DTOCriterio();
-        dto.setAtributo("legajoConsultor");
-        dto.setOperacion("=");
-        dto.setValor(nuevoConsultorDTO.getLegajoConsultor());
 
-        criterioList.add(dto);
-        DTOCriterio dto2  = new DTOCriterio();
+    List<DTOCriterio> criterioList = new ArrayList<>();
+    DTOCriterio dto = new DTOCriterio();
+    dto.setAtributo("legajoConsultor");
+    dto.setOperacion("=");
+    dto.setValor(nuevoConsultorDTO.getLegajoConsultor());
 
-        dto2.setAtributo("fechaHoraBajaConsultor");
-        dto2.setOperacion("=");
-        dto2.setValor(null);
-        criterioList.add(dto2);
-        
-        List lConsultor = FachadaPersistencia.getInstance().buscar("Consultor", criterioList);
+    criterioList.add(dto);
+    DTOCriterio dto2 = new DTOCriterio();
+    dto2.setAtributo("fechaHoraBajaConsultor");
+    dto2.setOperacion("=");
+    dto2.setValor(null);
+    criterioList.add(dto2);
 
-        if (lConsultor.size() > 0) {
-            throw new ConsultorException("El legajo del consultor ya existe");
-        } else {
-            Consultor consultor = new Consultor();
-            consultor.setLegajoConsultor(nuevoConsultorDTO.getLegajoConsultor());
-            consultor.setNombreApellidoConsultor(nuevoConsultorDTO.getNombreApellidoConsultor());
-            consultor.setConsultorNroMaxTramite(nuevoConsultorDTO.getConsultorNroMaxTramite());
+    List lConsultor = FachadaPersistencia.getInstance().buscar("Consultor", criterioList);
 
-            FachadaPersistencia.getInstance().guardar(consultor);
-            FachadaPersistencia.getInstance().finalizarTransaccion();
-        }
+    if (lConsultor.size() > 0) {
+        throw new ConsultorException("El legajo del consultor ya existe");
+    } else {
+        Consultor consultor = new Consultor();
+        consultor.setLegajoConsultor(nuevoConsultorDTO.getLegajoConsultor());
+        consultor.setNombreApellidoConsultor(nuevoConsultorDTO.getNombreApellidoConsultor());
+        consultor.setConsultorNroMaxTramite(nuevoConsultorDTO.getConsultorNroMaxTramite());
+
+        FachadaPersistencia.getInstance().guardar(consultor);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
     }
+}
+
 
     // Método para buscar un consultor por legajo y obtener el DTO para modificar
     public ModificarConsultorDTO buscarConsultorAModificar(int legajoConsultor) {
