@@ -165,7 +165,7 @@
                         <p:column styleClass="centered-column small-column">
                             <f:facet name="header">Acciones</f:facet>
                             <p:commandButton value="Agregar Consultor" styleClass="btn-info" 
-                                             action="#{uiConfigurarAgenda.irAgregarConsultorAgenda(agenda.anio, uiConfigurarAgenda.mes, agenda.semana)}"
+                                             action="#{uiConfigurarAgenda.irAgregarConsultorAgenda(agenda.anio, agenda.semana)}"
                                              disabled="#{uiConfigurarAgenda.esAgendaPasada(agenda.anio, agenda.semana)}" />
                         </p:column>                        
                     </p:dataTable>

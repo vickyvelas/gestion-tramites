@@ -115,7 +115,10 @@
 
                             <p:column styleClass="centered-column small-column">
                                 <f:facet name="header">Acciones</f:facet>
-                                <p:commandButton value="Agregar" styleClass="small-add-button" action="#{uiAgregarConsultorAgenda.agregarAAgenda(uiAgregarConsultorAgenda.anio, uiAgregarConsultorAgenda.semana, consultor)}" update="@form" title="Agregar consultor a la agenda" />
+                                <p:commandButton value="Agregar" styleClass="small-add-button" 
+                                                 action="#{uiAgregarConsultorAgenda.agregarAAgenda(uiAgregarConsultorAgenda.anio, uiAgregarConsultorAgenda.semana, consultor)}" 
+                                                 update="@form" title="Agregar consultor a la agenda" 
+                                                 disabled="#{uiAgregarConsultorAgenda.esAgendaPasada(uiAgregarConsultorAgenda.anio, uiAgregarConsultorAgenda.semana)}"/>
                             </p:column>                        
                         </p:dataTable>
                     </div>
@@ -133,7 +136,10 @@
 
                             <p:column styleClass="centered-column small-column">
                                 <f:facet name="header">Acciones</f:facet>
-                                <p:commandButton value="Eliminar" styleClass="small-delete-button" action="#{uiAgregarConsultorAgenda.bajaConsultorDeAgenda(uiAgregarConsultorAgenda.semana, uiAgregarConsultorAgenda.anio, consultor2)}" update="@form" title="Eliminar consultor de la agenda" />
+                                <p:commandButton value="Eliminar" styleClass="small-delete-button" 
+                                                 action="#{uiAgregarConsultorAgenda.bajaConsultorDeAgenda(uiAgregarConsultorAgenda.semana, uiAgregarConsultorAgenda.anio, consultor2)}" 
+                                                 update="@form" title="Eliminar consultor de la agenda" 
+                                                 disabled="#{uiAgregarConsultorAgenda.esAgendaPasada(uiAgregarConsultorAgenda.anio, uiAgregarConsultorAgenda.semana)}"/>
                             </p:column>                        
                         </p:dataTable>
                     </div>

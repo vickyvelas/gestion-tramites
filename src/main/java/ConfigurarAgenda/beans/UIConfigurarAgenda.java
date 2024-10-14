@@ -215,7 +215,7 @@ public class UIConfigurarAgenda implements Serializable {
         }
     }
  
-    public String irAgregarConsultorAgenda(int anio, int mes, int semana) {
+    public String irAgregarConsultorAgenda(int anio, int semana) {
         try {
             LocalDate fechaActual = LocalDate.now();
             WeekFields weekFields = WeekFields.of(Locale.getDefault());
@@ -231,7 +231,7 @@ public class UIConfigurarAgenda implements Serializable {
             } else {
                 // Redirigir a la página para agregar un nuevo consultor
                 BeansUtils.guardarUrlAnterior();
-                return "agregarConsultorAgenda.xhtml?faces-redirect=true&anio=" + anio + "&mes=" + mes + "&semana=" + semana;
+                return "agregarConsultorAgenda.xhtml?faces-redirect=true&anio=" + anio + "&semana=" + semana;
             }
         } catch (Exception e) {
             // Manejo de excepciones genéricas

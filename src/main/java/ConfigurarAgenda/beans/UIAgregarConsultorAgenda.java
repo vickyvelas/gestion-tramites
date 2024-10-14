@@ -11,10 +11,14 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
 @Named("uiAgregarConsultorAgenda")
@@ -30,32 +34,40 @@ public class UIAgregarConsultorAgenda implements Serializable {
     
     @PostConstruct
     public void init() {
-        // Obtener los parámetros de anio y semana desde la URL en un solo lugar
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+
+        int anioTemp = 0; // Variable temporal para el año
+        int semanaTemp = 0; // Variable temporal para la semana
+
+        String previousUrl = request.getHeader("referer"); // Obtener la URL anterior
 
         try {
             // Verificar y obtener los parámetros de la URL
             String anioParam = request.getParameter("anio");
             String semanaParam = request.getParameter("semana");
 
-            // Si los parámetros existen, parsearlos y asignarlos
+            // Si los parámetros existen, parsearlos y asignarlos a las variables temporales
             if (anioParam != null) {
-                this.anio = Integer.parseInt(anioParam);
+                anioTemp = Integer.parseInt(anioParam);
                 // Validar el año
-                if (this.anio < 2000 || this.anio > 2050) {
+                if (anioTemp < 2000 || anioTemp > 2050) {
                     throw new NumberFormatException("El año debe estar entre 2000 y 2050.");
                 }
             }
 
             if (semanaParam != null) {
-                this.semana = Integer.parseInt(semanaParam);
+                semanaTemp = Integer.parseInt(semanaParam);
                 // Validar la semana
-                if (this.semana < 1 || this.semana > 53) {
+                if (semanaTemp < 1 || semanaTemp > 53) {
                     throw new NumberFormatException("La semana debe estar entre 1 y 53.");
                 }
             }
+
+            // Si las validaciones pasaron, asignar a las variables de instancia
+            this.anio = anioTemp;
+            this.semana = semanaTemp;
 
             // Calcular el mes a partir de la semana y año
             this.mes = calcularMesDesdeSemana(anio, semana);
@@ -68,11 +80,31 @@ public class UIAgregarConsultorAgenda implements Serializable {
         } catch (ConfigurarAgendaException e) {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cargar los consultores", e.getMessage()));
+            // Redirigir a la URL anterior
+            redirectToUrl(previousUrl);
         } catch (NumberFormatException e) {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en los parámetros de la URL", e.getMessage()));
+            // Redirigir a la URL anterior
+            redirectToUrl(previousUrl);
         }
     }
+
+    // Método para redirigir a la URL proporcionada
+    private void redirectToUrl(String url) {
+        try {
+            if (url != null && !url.isEmpty()) {
+                FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+            } else {
+                // Redirigir a una página predeterminada si no hay URL anterior
+                FacesContext.getCurrentInstance().getExternalContext().redirect("paginaDeInicio.xhtml"); // Cambia por tu página deseada
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Manejar la excepción de redirección
+        }
+    }
+
+
 
     // Método para calcular el mes a partir de la semana y el año
     private int calcularMesDesdeSemana(int anio, int semana) {
@@ -228,5 +260,13 @@ public class UIAgregarConsultorAgenda implements Serializable {
         return "configurarAgenda.xhtml?faces-redirect=true&anio=" + anio + "&mes=" + mes;
     }
 
+    public boolean esAgendaPasada(int anio, int semana) {
+        LocalDate fechaActual = LocalDate.now();
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int semanaActual = fechaActual.get(weekFields.weekOfYear());
+        int anioActual = fechaActual.getYear();
 
+        // Validar si la agenda es actual o pasada
+        return anio < anioActual || (anio == anioActual && semana <= semanaActual);
+    }
 }
