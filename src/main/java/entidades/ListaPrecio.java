@@ -2,15 +2,14 @@ package entidades;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ListaPrecio extends Entidad {
-    
+
     private int codListaPrecio;
-    private Date fechaHoraBajaListaPrecio;
-    private Date fechaHoraDesdeListaPrecio;
-    private Date fechaHoraHastaListaPrecio;
+    private Timestamp fechaHoraBajaListaPrecio;
+    private Timestamp fechaHoraDesdeListaPrecio;
+    private Timestamp fechaHoraHastaListaPrecio;
     private List<DetallePrecioTipoTramite> detallePrecioTipoTramiteList = new ArrayList<>();
 
     // Constructor
@@ -25,27 +24,27 @@ public class ListaPrecio extends Entidad {
         this.codListaPrecio = codListaPrecio;
     }
 
-    public Date getFechaHoraBajaListaPrecio() {
+    public Timestamp getFechaHoraBajaListaPrecio() {
         return fechaHoraBajaListaPrecio;
     }
 
-    public void setFechaHoraBajaListaPrecio(Date fechaHoraBajaListaPrecio) {
+    public void setFechaHoraBajaListaPrecio(Timestamp fechaHoraBajaListaPrecio) {
         this.fechaHoraBajaListaPrecio = fechaHoraBajaListaPrecio;
     }
 
-    public Date getFechaHoraDesdeListaPrecio() {
+    public Timestamp getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
 
-    public void setFechaHoraDesdeListaPrecio(Date fechaHoraDesdeListaPrecio) {
+    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
 
-    public Date getFechaHoraHastaListaPrecio() {
+    public Timestamp getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
 
-    public void setFechaHoraHastaListaPrecio(Date fechaHoraHastaListaPrecio) {
+    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
 

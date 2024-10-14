@@ -1,3 +1,50 @@
+///*
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+// * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+// */
+//package ListaPrecio.beans;
+//
+//import java.sql.Timestamp;
+//import java.util.Date;
+//
+///**
+// *
+// * @author marti
+// */
+//public class UIActualizarLPGrilla {
+//    private int codListaPrecio;
+//    private Date fechaHoraDesdeListaPrecio;
+//    private Date fechaHoraHastaListaPrecio;
+//
+//    public UIActualizarLPGrilla() {
+//    }
+//
+//    public int getCodListaPrecio() {
+//        return codListaPrecio;
+//    }
+//
+//    public void setCodListaPrecio(int codListaPrecio) {
+//        this.codListaPrecio = codListaPrecio;
+//    }
+//
+//    public Date getFechaHoraDesdeListaPrecio() {
+//        return fechaHoraDesdeListaPrecio;
+//    }
+//
+//    public void setFechaHoraDesdeListaPrecio(Date fechaHoraDesdeListaPrecio) {
+//        this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
+//    }
+//
+//    public Date getFechaHoraHastaListaPrecio() {
+//        return fechaHoraHastaListaPrecio;
+//    }
+//
+//    public void setFechaHoraHastaListaPrecio(Date fechaHoraHastaListaPrecio) {
+//        this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
+//    }
+//}
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -5,7 +52,6 @@
 package ListaPrecio.beans;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  *
@@ -13,8 +59,8 @@ import java.util.Date;
  */
 public class UIActualizarLPGrilla {
     private int codListaPrecio;
-    private Date fechaHoraDesdeListaPrecio;
-    private Date fechaHoraHastaListaPrecio;
+    private Timestamp fechaHoraDesdeListaPrecio;
+    private Timestamp fechaHoraHastaListaPrecio;
 
     public UIActualizarLPGrilla() {
     }
@@ -27,19 +73,19 @@ public class UIActualizarLPGrilla {
         this.codListaPrecio = codListaPrecio;
     }
 
-    public Date getFechaHoraDesdeListaPrecio() {
+    public Timestamp getFechaHoraDesdeListaPrecio() {
         return fechaHoraDesdeListaPrecio;
     }
 
-    public void setFechaHoraDesdeListaPrecio(Date fechaHoraDesdeListaPrecio) {
+    public void setFechaHoraDesdeListaPrecio(Timestamp fechaHoraDesdeListaPrecio) {
         this.fechaHoraDesdeListaPrecio = fechaHoraDesdeListaPrecio;
     }
 
-    public Date getFechaHoraHastaListaPrecio() {
+    public Timestamp getFechaHoraHastaListaPrecio() {
         return fechaHoraHastaListaPrecio;
     }
 
-    public void setFechaHoraHastaListaPrecio(Date fechaHoraHastaListaPrecio) {
+    public void setFechaHoraHastaListaPrecio(Timestamp fechaHoraHastaListaPrecio) {
         this.fechaHoraHastaListaPrecio = fechaHoraHastaListaPrecio;
     }
 }

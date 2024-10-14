@@ -9,22 +9,23 @@ package ListaPrecio.dtos;
  * @author marti
  */
 public class DTODetalleListaPrecioImportar {
+
     private int codTipoTramite;
-    private float precioTipoTramite;
-    
-    public int getCodTipotramite(){
+    private double precioTipoTramite;
+
+    public int getCodTipotramite() {
         return codTipoTramite;
     }
-    
-    public void setCodTipoTramite (int codTipoTramite){
+
+    public void setCodTipoTramite(int codTipoTramite) {
         this.codTipoTramite = codTipoTramite;
     }
-    
-    public float getPrecioTipoTramite(){
+
+    public double getPrecioTipoTramite() {
         return precioTipoTramite;
     }
-    
-    public void setPrecioTipoTramite (float precioTipoTramite){
+
+    public void setPrecioTipoTramite(double precioTipoTramite) {
         this.precioTipoTramite = precioTipoTramite;
     }
 }
