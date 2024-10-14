@@ -80,8 +80,9 @@ public class UIABMConsultor implements Serializable  {
         }
     }
 
-     public String agregarConsultor() {
-        try {
+     public String agregarModificarConsultor() {
+    try {
+        if (insert) {
             // Crear un nuevo consultor
             NuevoConsultorDTO nuevoConsultorDTO = new NuevoConsultorDTO();
             nuevoConsultorDTO.setLegajoConsultor(getLegajoConsultor());
@@ -89,37 +90,19 @@ public class UIABMConsultor implements Serializable  {
             nuevoConsultorDTO.setConsultorNroMaxTramite(getConsultorNroMaxTramite());
 
             controladorAMBConsultor.agregarConsultor(nuevoConsultorDTO);
-
-            return BeansUtils.redirectToPreviousPage();
-        } catch (ConsultorException e) {
-            Messages.create(e.getMessage()).fatal().add();
-            return "";
-        }
-    }
-        public String modificarConsultor() {
-        try {
+        } else {
             // Modificar un consultor existente
             ModificarConsultorDTOIn modificarConsultorDTOIn = new ModificarConsultorDTOIn();
             modificarConsultorDTOIn.setLegajoConsultor(getLegajoConsultor());
             modificarConsultorDTOIn.setConsultorNroMaxTramite(getConsultorNroMaxTramite());
-
             controladorAMBConsultor.modificarConsultor(modificarConsultorDTOIn);
-
-            return BeansUtils.redirectToPreviousPage();
-        } catch (Exception e) {  
-            Messages.create(e.getMessage()).fatal().add();
-            return "";
         }
-    }   
-       public void ejecutarAccion() {
-    try {
-        if (insert) {
-            agregarConsultor(); 
-        } else {
-            modificarConsultor();
-        }
-    } catch (Exception e) { // Maneja cualquier excepción
+        return BeansUtils.redirectToPreviousPage();
+    } catch (Exception e) {
         Messages.create(e.getMessage()).fatal().add();
+        return "";
     }
 }
+
+
 }
