@@ -18,7 +18,7 @@ public class ControladorABMConsultor {
     public List<ConsultorDTO> buscarConsultores(int legajoConsultor, String nombreApellidoConsultor){
         return expertoABMConsultor.buscarConsultores (legajoConsultor,nombreApellidoConsultor);
     }
-
+    
     public void agregarConsultor(NuevoConsultorDTO nuevoConsultorDTO) throws ConsultorException{
         expertoABMConsultor.agregarConsultor (nuevoConsultorDTO);
     }
@@ -34,6 +34,6 @@ public class ControladorABMConsultor {
     public void darDeBajaConsultor(int legajoConsultor) throws ConsultorException {
       expertoABMConsultor.darDeBajaConsultor(legajoConsultor);
     }
-    
+
 }
 
