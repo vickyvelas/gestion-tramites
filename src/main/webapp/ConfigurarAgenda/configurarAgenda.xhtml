@@ -115,6 +115,13 @@
 
                     <!-- Agrega lazy="false" -->
                     <p:dataTable id="grid1" value="#{uiConfigurarAgenda.buscarAgendas()}" var="agenda" lazy="false">
+                        
+                        <p:column styleClass="centered-column small-column">
+                            <f:facet name="header">Semana</f:facet>
+                            <h:outputText value="#{agenda.semana}">
+                            </h:outputText>
+                        </p:column>
+                        
                         <p:column styleClass="centered-column small-column">
                             <f:facet name="header">Fecha Desde</f:facet>
                             <h:outputText value="#{agenda.fechaDesdeAgenda}">
