@@ -45,7 +45,7 @@
              <!-- FILTRO POR NOMBRE -->
               <div class="ui-g-12 ui-md-6">
                     <p:outputPanel>
-                        <h:outputText value="Apellido y Nombre:"/>
+                        <h:outputText value="Nombre y Apellido:"/>
                         <p:spacer height="10"/>
                         <p:inputText id="nombreFilter" style="width:150px" value="#{uiListaClientes.nombreApellidoClienteFiltro}">
                             <p:ajax event="keyup" listener="#{uiListaClientes.filtrar()}" update="@form:grid1"/>

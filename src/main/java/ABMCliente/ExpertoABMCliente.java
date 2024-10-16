@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package ABMCliente;
 
 import ABMCliente.dtos.DetalleClienteDTO;
@@ -122,15 +119,7 @@ public class ExpertoABMCliente {
             unCriterio.setValor(cuitCliente);
             lCriterio.add(unCriterio);
         }
-//        if(nombreApellidoCliente.trim().length()>0){
-//            DTOCriterio unCriterio=new DTOCriterio();
-//            unCriterio.setAtributo("nombreApellidoCliente");
-//            unCriterio.setOperacion("like");
-//            unCriterio.setValor(nombreApellidoCliente);
-//            lCriterio.add(unCriterio);
-//        }
-        //falta criterio fecha
-        
+
         //Nos de el primer cliente según lo marcado arriba 
         Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
         
@@ -153,18 +142,18 @@ public class ExpertoABMCliente {
         
         dto.setAtributo("cuitCliente");
         dto.setOperacion("=");
-        dto.setValor(cuitCliente);
+        dto.setValor(detalleClienteDTOIn.getCuitCliente());
         lCriterio.add(dto);
         
-         Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
+        Cliente clienteEncontrado =(Cliente) FachadaPersistencia.getInstance().buscar("Cliente", lCriterio).get(0);
         
-         clienteEncontrado.setDireccionCliente(detalleClienteDTOIn.getDireccion());
-         clienteEncontrado.setMailCliente(detalleClienteDTOIn.getMailCliente());
-         clienteEncontrado.setNombreApellidoCliente(detalleClienteDTOIn.getNombreApellidoCliente());
-         clienteEncontrado.setTelefonoCliente(detalleClienteDTOIn.getTelefonoCliente());
+        clienteEncontrado.setNombreApellidoCliente(detalleClienteDTOIn.getNombreApellidoCliente());
+        clienteEncontrado.setDireccionCliente(detalleClienteDTOIn.getDireccion());
+        clienteEncontrado.setMailCliente(detalleClienteDTOIn.getMailCliente());
+        clienteEncontrado.setTelefonoCliente(detalleClienteDTOIn.getTelefonoCliente());
          
-         FachadaPersistencia.getInstance().guardar(clienteEncontrado);
-         FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().guardar(clienteEncontrado);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
     }
     
 
@@ -189,7 +178,7 @@ public class ExpertoABMCliente {
          List lCliente = FachadaPersistencia.getInstance().buscar("Cliente", criterioList);
 
         if (lCliente.size() > 0) {
-            throw new ExceptionABMCliente ("El cuit es de un cliente existente");
+            throw new ExceptionABMCliente ("El CUIT es de un cliente existente");
         } else {
             Cliente cliente = new Cliente();
             cliente.setCuitCliente(detalleClienteDTO.getCuitCliente());
