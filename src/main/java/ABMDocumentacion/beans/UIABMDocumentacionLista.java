@@ -7,6 +7,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import utils.BeansUtils;
 
@@ -43,7 +44,7 @@ public class UIABMDocumentacionLista implements Serializable {
         this.nombreDocumentacionFiltro = nombreDocumentacionFiltro;
     }
 
-    // Método para buscar documentaciones aplicando filtros
+    // Método para buscar documentaciones aplicando filtros y ordenarlas por codDocumentacion
     public List<DocumentacionGrillaUI> buscarDocumentaciones() {
         List<DocumentacionGrillaUI> documentacionesGrilla = new ArrayList<>();
         List<DocumentacionDTO> documentacionesDTO = controladorABMDocumentacion.buscarDocumentacion(codDocumentacionFiltro, nombreDocumentacionFiltro);
@@ -56,10 +57,14 @@ public class UIABMDocumentacionLista implements Serializable {
                 documentacionGrillaUI.setFechaHoraBajaDocumentacion(documentacionDTO.getFechaHoraBajaDocumentacion());
                 documentacionesGrilla.add(documentacionGrillaUI);
             }
+
+            // Ordenar la lista por codDocumentacion
+            documentacionesGrilla.sort(Comparator.comparing(DocumentacionGrillaUI::getCodDocumentacion));
         }
 
         return documentacionesGrilla;
     }
+
 
     // Redirigir a la página para agregar una nueva documentación
     public String irAgregarDocumentacion() {
