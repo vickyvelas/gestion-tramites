@@ -42,6 +42,12 @@ public class ExpertoRC {
             lCriterio.add(fechaCriterio);
             
         }
+        DTOCriterio fechaFinCriterio=new DTOCriterio();
+            fechaFinCriterio.setAtributo("fechaHoraFinTramite");
+            fechaFinCriterio.setOperacion( "=");
+            fechaFinCriterio.setValor(null);
+            lCriterio.add(fechaFinCriterio);
+            
         if(nombreTipoTramiteFiltro.trim().length()>0)
         {
             
@@ -119,7 +125,7 @@ public class ExpertoRC {
     
 
     
-    public TramiteParticularDTO obtenerTramiteParticular(int nroTramiteFiltro){
+    public TramiteParticularDTO obtenerTramiteParticular(int nroTramiteFiltro) throws exceptionRC{
         
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         
@@ -132,7 +138,11 @@ public class ExpertoRC {
             lCriterio.add(unCriterio);
         }
         Tramite tramiteEncontrado = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
-
+        
+        if(tramiteEncontrado.getFechaHoraFinTramite()!= null){
+            throw new exceptionRC("El trámite se encuentra finalizado");
+            
+        }
         
         TramiteParticularDTO tramiteParticularDTO = new TramiteParticularDTO();
             tramiteParticularDTO.setCodTipoTramite(tramiteEncontrado.getTipoTramite().getCodTipoTramite());
@@ -186,7 +196,7 @@ public class ExpertoRC {
     }
     
   
-    public void anularUltimo(int nroTramite) throws ExceptionRC{
+    public void anularUltimo(int nroTramite) throws exceptionRC{
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
         
@@ -293,7 +303,7 @@ public class ExpertoRC {
     
     
             
-    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws ExceptionRC{
+    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws exceptionRC{
         List<EstadoActualDTO> dtoEA=new ArrayList<>();
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         if(nroTramite>0)
@@ -326,7 +336,7 @@ public class ExpertoRC {
                 List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
                 //CASO QUE LA LISTA ESTE VACIA
                 if(etDestinos.size()<=0){
-                    throw new ExceptionRC("No hay probles transiciones");
+                    throw new exceptionRC("No hay probles transiciones");
                 }
                 for (EstadoTramite etDestino : etDestinos) {
                         // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite

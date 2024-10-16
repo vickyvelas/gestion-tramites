@@ -25,7 +25,7 @@ public class ControladorRC {
     
     
     
-     public void anularUltimo(int nroTramite) throws ExceptionRC{
+     public void anularUltimo(int nroTramite) throws exceptionRC{
         expertoRC.anularUltimo(nroTramite);
     }
             
@@ -46,13 +46,13 @@ public class ControladorRC {
     
     
             
-    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws ExceptionRC{
+    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws exceptionRC{
         return expertoRC.nuevoEstado(nroTramite);
     }
             
     
     
-    public TramiteParticularDTO obtenerTramiteParticular(int nroTramite){
+    public TramiteParticularDTO obtenerTramiteParticular(int nroTramite) throws exceptionRC{
         return expertoRC.obtenerTramiteParticular(nroTramite);
     }
     
