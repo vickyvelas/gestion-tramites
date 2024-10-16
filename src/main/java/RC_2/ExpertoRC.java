@@ -5,7 +5,9 @@
 package RC_2;
 
 import RC_2.dto.*;
+import entidades.DetallePrecioTipoTramite;
 import entidades.EstadoTramite;
+import entidades.ListaPrecio;
 import entidades.TipoTramite;
 import entidades.Tramite;
 import entidades.TramiteEstado;
@@ -38,7 +40,7 @@ public class ExpertoRC {
             fechaCriterio.setOperacion("<");
             fechaCriterio.setValor(fechaFiltro);
             lCriterio.add(fechaCriterio);
-            //List objetoList = FachadaPersistencia.getInstance().buscar("Tramite", lCriterio);
+            
         }
         if(nombreTipoTramiteFiltro.trim().length()>0)
         {
@@ -136,13 +138,34 @@ public class ExpertoRC {
             tramiteParticularDTO.setCodTipoTramite(tramiteEncontrado.getTipoTramite().getCodTipoTramite());
             tramiteParticularDTO.setFechaHoraFinEntregaDoc(tramiteEncontrado.getFechaHoraFinEntregaDocumentacion());
             tramiteParticularDTO.setNombreApellidoCliente(tramiteEncontrado.getCliente().getNombreApellidoCliente());
-            tramiteParticularDTO.setPrecioTipoTramite(2500); //temporalmente
+            //encontrar ultimo TE
             List <TramiteEstado> tramEstados = tramiteEncontrado.getTramiteEstadoList();
             TramiteEstado tramiteEstadoMasReciente = tramEstados.stream()
                 .max(Comparator.comparing(TramiteEstado::getFechaHoraDesdeTramiteEstado))
                 .orElse(null);
+            
             tramiteParticularDTO.setObservaciones(tramiteEstadoMasReciente.getObservacionTramiteEstado());
-         
+            //setear precio
+            List<DTOCriterio> lCriterioLP=new ArrayList<DTOCriterio>();
+            List<Object> objetoList = FachadaPersistencia.getInstance().buscar("ListaPrecio", lCriterioLP);
+
+            ListaPrecio listaPrecioActual = objetoList.stream()
+                    .map(x -> (ListaPrecio) x) // Convertir cada objeto a ListaPrecio     
+                    .max(Comparator.comparing(ListaPrecio::getFechaHoraDesdeListaPrecio)) // Obtener la lista con la fecha más reciente
+                    .orElse(null); 
+            List<DetallePrecioTipoTramite> detallesActuales = listaPrecioActual.getDetallePrecioTipoTramiteList();
+            for(DetallePrecioTipoTramite det : detallesActuales){
+                det.getTipoTramite();
+                int codTTdet = det.getTipoTramite().getCodTipoTramite();
+                int codTT = tramiteEncontrado.getTipoTramite().getCodTipoTramite();
+                
+                if(codTT == codTTdet){
+                    tramiteParticularDTO.setPrecioTipoTramite(det.getPrecioTipoTramite());
+                     
+                }
+                
+            }
+            
          List<DTOCriterio> lCriterio2=new ArrayList<DTOCriterio>();
         
         //List<TramiteEstado> tramitesEst =tramiteEncontrado.getTramiteEstadoList();
@@ -163,7 +186,7 @@ public class ExpertoRC {
     }
     
   
-    public void anularUltimo(int nroTramite) throws exceptionRC{
+    public void anularUltimo(int nroTramite) throws ExceptionRC{
         
         FachadaPersistencia.getInstance().iniciarTransaccion();
         
@@ -270,7 +293,7 @@ public class ExpertoRC {
     
     
             
-    public NuevoEstadoDTO nuevoEstado(int nroTramite){
+    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws ExceptionRC{
         List<EstadoActualDTO> dtoEA=new ArrayList<>();
         List<DTOCriterio> lCriterio=new ArrayList<DTOCriterio>();
         if(nroTramite>0)
@@ -283,8 +306,8 @@ public class ExpertoRC {
         }
         Tramite tramite = (Tramite) FachadaPersistencia.getInstance().buscar("Tramite", lCriterio).get(0);
         
-        EstadoTramite estadoTramite=tramite.getEstadoTramite();
-        int codEstadoTramite = estadoTramite.getCodEstadoTramite();
+        EstadoTramite estadoTramiteActual=tramite.getEstadoTramite();
+        int codEstadoTramite = estadoTramiteActual.getCodEstadoTramite();
         
         Version version = tramite.getVersion();
         List<TransicionEstado> transicionesEstado = version.getTransicionEstadoList();
@@ -293,14 +316,18 @@ public class ExpertoRC {
         estadoActualDTO.setNombreApellidoCliente(tramite.getCliente().getNombreApellidoCliente());
         estadoActualDTO.setNroTramite(tramite.getNroTramite());
         estadoActualDTO.setNombreTipoTramite(tramite.getTipoTramite().getNombreTipoTramite());
-        EstadoTramite estadoTramiteActual = tramite.getEstadoTramite();
+        //EstadoTramite estadoTramiteActual = tramite.getEstadoTramite();
+        
         for(TransicionEstado transicionEstado : transicionesEstado){
-            if(estadoTramiteActual.getCodEstadoTramite()==transicionEstado.getEstadoActual().getCodEstadoTramite())
+            if(codEstadoTramite == transicionEstado.getEstadoActual().getCodEstadoTramite())
             {
             
-            
+                estadoActualDTO.setNombreEstadoTramiteActual(estadoTramiteActual.getNombreEstadoTramite());
                 List<EstadoTramite> etDestinos = transicionEstado.getEstadosDestino();
-
+                //CASO QUE LA LISTA ESTE VACIA
+                if(etDestinos.size()<=0){
+                    throw new ExceptionRC("No hay probles transiciones");
+                }
                 for (EstadoTramite etDestino : etDestinos) {
                         // Crear DTODestinosPosibles con nombreEstadoTramiteDestino y codEstadoTramite
                         DestinosPosiblesDTO destinosDTO = new DestinosPosiblesDTO();

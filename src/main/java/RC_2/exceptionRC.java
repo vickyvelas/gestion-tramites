@@ -8,8 +8,8 @@ package RC_2;
  *
  * @author marti
  */
-public class exceptionRC extends Exception{
-     public exceptionRC( String mensaje) {
+public class ExceptionRC extends Exception{
+     public ExceptionRC( String mensaje) {
         super(mensaje);
     }
 }

@@ -8,7 +8,7 @@ import RC_2.ControladorRC;
 import RC_2.dto.HistoricoDTO;
 import RC_2.dto.TramiteParticularDTO;
 import RC_2.dto.TramitesConsultorDTO;
-import RC_2.exceptionRC;
+import RC_2.ExceptionRC;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -168,7 +168,7 @@ public class UITramiteParticular implements Serializable {
         try{
             controladorRegistrarCambioEstado.anularUltimo(nroTramite);
             Messages.create("Anulado").detail("Anulado").add();
-        }catch(exceptionRC e){
+        }catch(ExceptionRC e){
             Messages.create("Error!").error().detail(e.getMessage()).add();
         }
     }

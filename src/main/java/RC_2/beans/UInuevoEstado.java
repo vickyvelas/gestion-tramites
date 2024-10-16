@@ -6,6 +6,7 @@ package RC_2.beans;
 
 
 import RC_2.ControladorRC;
+import RC_2.ExceptionRC;
 import RC_2.dto.DestinosPosiblesDTO;
 import RC_2.dto.NuevoEstadoDTO;
 import RC_2.dto.TramiteParticularDTO;
@@ -85,7 +86,7 @@ public class UInuevoEstado  implements Serializable{
     }
     
     
-    public UInuevoEstado() {
+    public UInuevoEstado() throws ExceptionRC {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();

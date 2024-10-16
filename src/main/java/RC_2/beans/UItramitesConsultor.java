@@ -78,6 +78,8 @@ public class UItramitesConsultor implements Serializable{
     }
 
     public UItramitesConsultor() {
+        
+        
     }
     
     
@@ -92,8 +94,10 @@ public class UItramitesConsultor implements Serializable{
             tramiteGrillaUI.setFechaInicio(tramiteConsultorDTO.getFechaHoraCargaTramite());
             tramiteGrillaUI.setCuitCliente(tramiteConsultorDTO.getCuitCliente());
             tramiteGrillaUI.setEstado(tramiteConsultorDTO.getNombreEstadoTramite());
+            
             tramitesGrilla.add(tramiteGrillaUI);
         }
+        
         return tramitesGrilla;
     }
     

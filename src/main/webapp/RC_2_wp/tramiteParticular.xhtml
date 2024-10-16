@@ -26,15 +26,13 @@
                         <f:param name="i" value="0"/>
                     </p:menuitem>
 
-                    <p:menuitem value="Etapas" >
-                        <f:param name="i" value="0"/>
-                    </p:menuitem>
+                
                 </p:tabMenu>
                 </div>
                 <div class="card flex justify-content-center">
                     <!-- mostrar datos del tramite -->
-                <p:dataViewGridItem> 
-                    <h:panelGrid id="tramiteDet"  columns="2" style="margin: 30px" cellpadding="10">
+                <p:dataViewGridItem id="tramiteDet"> 
+                    <h:panelGrid   columns="2" style="margin: 30px" cellpadding="10">
                                 <h:outputText value="Nro Tramite:" styleClass="text-secondary"/>
                                 <h:outputText value="#{uiTramiteParticular.nroTramite}"/>
                                 
@@ -66,7 +64,7 @@
                                 <h:outputText value="Observacion: " styleClass="text-secondary"/> 
                                 <p:card style="width: 75rem; margin-bottom: 2em">
                                     <p>#{uiTramiteParticular.observacionTramiteEstado}</p>
-
+                                     
                                 </p:card>
                                 
                         </h:panelGrid>
@@ -84,7 +82,7 @@
 
                     <p:column>
                         <f:facet name="header">Codigo</f:facet>
-                        <!-- {tramiteEstado.codEstadoTramite} -->
+                        #{tramiteEstado.codEstadoTramite}
                     </p:column>
 
                     <p:column>
@@ -127,7 +125,7 @@
                     </p:confirmDialog>
                     </p:column> 
                    
-                            
+                     <p:ajax event="rowEdit" update="@form:tramiteDet" />
                 </p:dataTable>
                 </div>
        

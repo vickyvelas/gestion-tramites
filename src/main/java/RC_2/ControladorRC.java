@@ -25,7 +25,7 @@ public class ControladorRC {
     
     
     
-     public void anularUltimo(int nroTramite) throws exceptionRC{
+     public void anularUltimo(int nroTramite) throws ExceptionRC{
         expertoRC.anularUltimo(nroTramite);
     }
             
@@ -46,7 +46,7 @@ public class ControladorRC {
     
     
             
-    public NuevoEstadoDTO nuevoEstado(int nroTramite){
+    public NuevoEstadoDTO nuevoEstado(int nroTramite) throws ExceptionRC{
         return expertoRC.nuevoEstado(nroTramite);
     }
             
