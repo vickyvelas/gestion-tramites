@@ -203,32 +203,32 @@ public class EjemplosPersistencia {
         FachadaPersistencia.getInstance().guardar(categoriaTramite3);
         // Documentaciones ----------------------------------------------------------------------------
         Documentacion documentacion1 = new Documentacion();
-        documentacion1.setCodDocumentacion(4);
+        documentacion1.setCodDocumentacion(1);
         documentacion1.setNombreDocumentacion("Partida de Nacimiento");
         
         FachadaPersistencia.getInstance().guardar(documentacion1);
         
         Documentacion documentacion2 = new Documentacion();
-        documentacion2.setCodDocumentacion(5);
+        documentacion2.setCodDocumentacion(2);
         documentacion2.setNombreDocumentacion("Pasaporte");
         
         FachadaPersistencia.getInstance().guardar(documentacion2);
         
         Documentacion documentacion3 = new Documentacion();
-        documentacion3.setCodDocumentacion(6);
+        documentacion3.setCodDocumentacion(3);
         documentacion3.setNombreDocumentacion("DNI impreso");
-        documentacion3.setFechaHoraBajaDocumentacion(new Timestamp(System.currentTimeMillis()));
+        documentacion3.setFechaHoraBajaDocumentacion(Timestamp.valueOf("2023-10-14 11:30:00"));
         
-        FachadaPersistencia.getInstance().guardar(documentacion2);
+        FachadaPersistencia.getInstance().guardar(documentacion3);
         
         Documentacion documentacion4 = new Documentacion();
-        documentacion4.setCodDocumentacion(7);
+        documentacion4.setCodDocumentacion(4);
         documentacion4.setNombreDocumentacion("Certificado de Residencia");
 
         FachadaPersistencia.getInstance().guardar(documentacion4);
 
         Documentacion documentacion5 = new Documentacion();
-        documentacion5.setCodDocumentacion(8);
+        documentacion5.setCodDocumentacion(5);
         documentacion5.setNombreDocumentacion("Licencia de Conducir");
 
         FachadaPersistencia.getInstance().guardar(documentacion5);
