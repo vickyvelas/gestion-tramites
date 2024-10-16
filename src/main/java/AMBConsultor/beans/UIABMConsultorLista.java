@@ -10,6 +10,7 @@ import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.omnifaces.util.Messages;
 
@@ -46,14 +47,10 @@ public class UIABMConsultorLista implements Serializable {
         this.nombreApellidoConsultorFiltro = nombreApellidoConsultorFiltro;
     }
 
-    public void filtrar() {
-        // Implementar lógica de filtrado si es necesario
-    }
-
-   // Método para buscar consultores aplicando filtros
+    // Método para buscar consultores aplicando filtros y ordenarlos por legajo
     public List<ConsultorGrillaUI> buscarConsultores() {
-        List<ConsultorGrillaUI> consultoresGrilla = new ArrayList<>(); // Siempre inicializar una lista vacía
-        List<ConsultorDTO> consultoresDTO = controladorAMBConsultor.buscarConsultores(legajoConsultorFiltro, nombreApellidoConsultorFiltro); 
+        List<ConsultorGrillaUI> consultoresGrilla = new ArrayList<>(); // Inicializar lista vacía
+        List<ConsultorDTO> consultoresDTO = controladorAMBConsultor.buscarConsultores(legajoConsultorFiltro, nombreApellidoConsultorFiltro);
 
         if (consultoresDTO != null) {
             for (ConsultorDTO consultorDTO : consultoresDTO) {
@@ -64,6 +61,9 @@ public class UIABMConsultorLista implements Serializable {
                 consultorGrillaUI.setFechaHoraBajaConsultor(consultorDTO.getFechaHoraBajaConsultor());
                 consultoresGrilla.add(consultorGrillaUI);
             }
+            
+            // Ordenar la lista por legajoConsultor
+            consultoresGrilla.sort(Comparator.comparing(ConsultorGrillaUI::getLegajoConsultor));
         }
 
         return consultoresGrilla;
