@@ -65,7 +65,7 @@ public void agregarDocumentacion(NuevaDocumentacionDTO nuevaDocumentacionDTO) th
     List<Object> lDocumentacionConMismoNombre = FachadaPersistencia.getInstance().buscar("Documentacion", criterioNombre);
 
     if (!lDocumentacionConMismoNombre.isEmpty()) {
-        throw new ABMDocumentacionException("El nombre de la documentación ya está en existe.");
+        throw new ABMDocumentacionException("El nombre de la documentación ya existe.");
     }
 
     // Validar si el código ya está en uso
@@ -126,7 +126,7 @@ public void agregarDocumentacion(NuevaDocumentacionDTO nuevaDocumentacionDTO) th
         List<Object> lDocumentacionConMismoNombre = FachadaPersistencia.getInstance().buscar("Documentacion", criterioNombre);
 
         if (!lDocumentacionConMismoNombre.isEmpty()) {
-            throw new ABMDocumentacionException("El nombre de la documentación ya está en existe.");
+            throw new ABMDocumentacionException("El nombre de la documentación ya existe.");
         }
 
         // Si el nombre no está en uso, buscar la documentación actual por código
