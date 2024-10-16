@@ -23,7 +23,7 @@ public class ControladorABMConsultor {
         expertoABMConsultor.agregarConsultor (nuevoConsultorDTO);
     }
 
-    public void modificarConsultor(ModificarConsultorDTOIn modificarConsultorDTOIn){
+    public void modificarConsultor(ModificarConsultorDTOIn modificarConsultorDTOIn)throws ConsultorException {
         expertoABMConsultor.modificarConsultor(modificarConsultorDTOIn);
     }
 
