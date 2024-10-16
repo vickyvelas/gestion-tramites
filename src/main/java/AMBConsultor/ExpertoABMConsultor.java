@@ -119,9 +119,14 @@ public class ExpertoABMConsultor  {
         return modificarConsultorDTO;
     }
 
-    // Método para modificar solo el nroMaxTramite del consultor
-    public void modificarConsultor(ModificarConsultorDTOIn modificarConsultorDTOIn) {
+        // Método para modificar solo el nroMaxTramite del consultor
+        public void modificarConsultor(ModificarConsultorDTOIn modificarConsultorDTOIn) throws ConsultorException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
+
+        // Validación de la cantidad máxima de trámites
+        if (modificarConsultorDTOIn.getConsultorNroMaxTramite() <= 0) {
+            throw new ConsultorException("La cantidad máxima de trámites debe ser mayor a cero");
+        }
 
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -140,6 +145,7 @@ public class ExpertoABMConsultor  {
         FachadaPersistencia.getInstance().guardar(consultorEncontrado);
         FachadaPersistencia.getInstance().finalizarTransaccion();
     }
+
     
     public void darDeBajaConsultor(int legajoConsultor) throws ConsultorException {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -192,7 +198,7 @@ public class ExpertoABMConsultor  {
 
         if (!tramitesRelacionados.isEmpty()) {
             // Si hay trámites no finalizados, lanzar excepción
-            throw new ConsultorException("El consultor no puede darse de baja porque está asignado a trámites.");
+            throw new ConsultorException("El consultor no puede darse de baja porque está asignado a  un trámite activo.");
         }
 
         // Dar de baja al consultor
