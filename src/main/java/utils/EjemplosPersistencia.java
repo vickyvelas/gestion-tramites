@@ -257,7 +257,7 @@ public class EjemplosPersistencia {
         tramite1.setPrecioTramite(2500);
         tramite1.setFechaHoraCargaTramite(new Timestamp(System.currentTimeMillis()));
         tramite1.setFechaHoraVencimientoDocumentacion(Timestamp.valueOf("2024-11-11 12:00:00"));
-        tramite1.setConsultor(consultor2);
+        tramite1.setConsultor(consultor1);
         tramite1.setCliente(cliente1);
         tramite1.setEstadoTramite(estado1);
         tramite1.setTipoTramite(tipoTramite1);
